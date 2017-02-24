@@ -13,25 +13,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cerebro.model.Definition;
 import com.cerebro.service.CerebroService;
-import com.cerebro.util.ServiceFactory;
 
 @RestController
 public class CerebroController {
 
     @Autowired
-    @Qualifier("serviceFactory")
-    private ServiceFactory serviceFactory;
-    private CerebroService cerebroservice;
+    @Qualifier("cerebroServiceImpl")
+    private CerebroService cerebroService;
 
     @RequestMapping(value = "/definitions/{type}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Definition> getDefinitions(@PathVariable("type") String definitionType) {
-	cerebroservice = serviceFactory.getService(definitionType);
-	return cerebroservice.getDefinitions();
+	return cerebroService.getDefinitions(definitionType);
     }
 
     @RequestMapping(value = "/addDefinitions/{type}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addDefinitions(@RequestBody Definition definition, @PathVariable("type") String definitionType) {
-	cerebroservice = serviceFactory.getService(definitionType);
-	cerebroservice.saveDefinition(definition);
+	cerebroService.saveDefinition(definition, definitionType);
     }
 }

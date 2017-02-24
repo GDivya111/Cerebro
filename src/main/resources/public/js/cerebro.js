@@ -1,4 +1,4 @@
-var app = angular.module("cerebro",["ngRoute"]);
+var app = angular.module("cerebro",["ngRoute","ngSanitize"]);
 
 app.config(function($routeProvider){
 	$routeProvider
@@ -115,6 +115,10 @@ app.config(function($routeProvider){
 	.when("/camelUnmarshalCsv",{templateUrl : "camelUnmarshalCsv.html",controller : "cerebroController"})
 	.when("/camelMarshalCsv",{templateUrl : "camelMarshalCsv.html",controller : "cerebroController"})
 	// Apache camel end
+	
+	//REST web services start
+	.when("/jerseyRest",{templateUrl : "jerseyRest.html",controller : "cerebroController"})
+	//RESTful web service end
 	
 	// definitions start
 	.when("/definitions",{templateUrl : "definitions.html",controller : "definitionsController"})

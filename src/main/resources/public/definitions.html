@@ -25,7 +25,7 @@
 	<tbody>
 		<tr ng-repeat="definition in definitionsList">
 			<td>{{definition.description}}</td>
-			<td>{{definition.details}}</td>
+			<td ><div ng-bind-html="definition.details"></div><!-- {{definition.details}} --></td>
 			<td>{{definition.imagePaths}}</td>
 		</tr>
 	</tbody>
