@@ -117,7 +117,11 @@ app.config(function($routeProvider){
 	// Apache camel end
 	
 	//REST web services start
-	.when("/jerseyRest",{templateUrl : "jerseyRest.html",controller : "cerebroController"})
+	.when("/webservices",{templateUrl : "webservices.html",controller : "cerebroController"})
+	.when("/jerseyRestGet",{templateUrl : "jerseyRestGet.html",controller : "cerebroController"})
+	.when("/jerseyRestPost",{templateUrl : "jerseyRestPost.html",controller : "cerebroController"})
+	.when("/jerseyRestPut",{templateUrl : "jerseyRestPut.html",controller : "cerebroController"})
+	.when("/jerseyRestDelete",{templateUrl : "jerseyRestDelete.html",controller : "cerebroController"})
 	//RESTful web service end
 	
 	// definitions start
