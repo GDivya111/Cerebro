@@ -6,4 +6,5 @@ public interface Constants {
     public static final String GROOVY = "Groovy";
     public static final String ENTITY = "entity";
     public static final String REPOSITORY = "repository";
+    public static final String MAVEN = "Maven";
 }

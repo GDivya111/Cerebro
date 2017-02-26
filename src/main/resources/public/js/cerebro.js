@@ -168,7 +168,8 @@ var DefinitionsController = function($scope, $location, $anchorScroll, $http){
 		types : [
 		         {key: "Core Java", value: "Core Java"},	
 		         {key: "Apache Kafka", value: "Apache Kafka"},
-		         {key: "Groovy", value: "Groovy"}]
+		         {key: "Groovy", value: "Groovy"},
+		         {key: "Maven", value: "Maven"}]
 	};
 	
 	var onSuccess = function(response){

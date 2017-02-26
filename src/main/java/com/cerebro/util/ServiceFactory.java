@@ -14,9 +14,11 @@ import com.cerebro.model.ApacheKafkaDefinition;
 import com.cerebro.model.CoreJavaDefinition;
 import com.cerebro.model.Definition;
 import com.cerebro.model.GroovyDefinition;
+import com.cerebro.model.MavenDefinition;
 import com.cerebro.repository.ApacheKafkaDefinitionRepository;
 import com.cerebro.repository.CoreJavaDefinitionJpaRepository;
 import com.cerebro.repository.GroovyDefinitionRepository;
+import com.cerebro.repository.MavenDefinitionRepository;
 
 /**
  * Factory class to get service based definition type
@@ -37,6 +39,10 @@ public class ServiceFactory {
     @Autowired
     @Qualifier("groovyDefinitionRepository")
     private GroovyDefinitionRepository groovyDefinitionRepository;
+
+    @Autowired
+    @Qualifier("mavenDefinitionRepository")
+    private MavenDefinitionRepository mavenDefinitionRepository;
 
     private Map<String, Object> entityRepositoryMap = new HashMap<>();
 
@@ -66,6 +72,13 @@ public class ServiceFactory {
 		entityRepositoryMap.put(Constants.ENTITY, groovyDefinition);
 	    }
 	    break;
+	case Constants.MAVEN:
+	    entityRepositoryMap.put(Constants.REPOSITORY, mavenDefinitionRepository);
+	    if (null != definition) {
+		MavenDefinition mavenDefinition = new MavenDefinition();
+		BeanUtils.copyProperties(definition, mavenDefinition);
+		entityRepositoryMap.put(Constants.ENTITY, mavenDefinition);
+	    }
 	}
 
 	return entityRepositoryMap;
