@@ -195,8 +195,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return &quot;[firstName=&quot; + firstName + &quot;, lastName=&quot; + lastName + &quot;, designation=&quot;
-				+ designation + &quot;, age=&quot; + age + &quot;]&quot;;
+		return &quot;[firstName=&quot; + firstName + &quot;, lastName=&quot; + lastName + &quot;, designation=&quot; + designation + &quot;, age=&quot; + age + &quot;]&quot;;
 	}
 }
 </code></pre>
@@ -314,8 +313,7 @@ public class PostRequestsPracticeClient {
 		Invocation.Builder builder = webTarget.request(MediaType.APPLICATION_JSON);
 		Response response = builder.post(Entity.entity(employee, MediaType.APPLICATION_JSON));
 		System.out.println(&quot;employeeAsObject() -&gt; response.getStatus(): &quot; + response.getStatus());
-		System.out
-				.println(&quot;employeeAsObject() -&gt; employee: &quot; + response.readEntity(Employee.class));
+		System.out.println(&quot;employeeAsObject() -&gt; employee: &quot; + response.readEntity(Employee.class));
 	}
 
 	<em>/**
@@ -337,11 +335,21 @@ public class PostRequestsPracticeClient {
 		WebTarget webTarget = target.path(&quot;posts/employeeAsUrlEncoded&quot;);
 		Invocation.Builder builder = webTarget.request(MediaType.APPLICATION_JSON);
 		Response response = builder.post(Entity.form(map));
-		System.out.println(&quot;employeeAsUrlEncoded() -&gt; response.getStatus(): &quot;
-				+ response.getStatus());
-		System.out.println(&quot;employeeAsUrlEncoded() -&gt; employee: &quot;
-				+ response.readEntity(Employee.class));
+		System.out.println(&quot;employeeAsUrlEncoded() -&gt; response.getStatus(): &quot; + response.getStatus());
+		System.out.println(&quot;employeeAsUrlEncoded() -&gt; employee: &quot; + response.readEntity(Employee.class));
 	}
 }
 </code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="1"><div class="panel-heading">http://localhost:9091/JerseyRestPractice/webapi/posts/employeeAsUrlEncoded</div><div class="panel-body">
+<img ng-src="images/spring/1-jerseyRestPost.jpg"/>
+</div></div>
+
+<div class="panel panel-primary" id="1"><div class="panel-heading">http://localhost:9091/JerseyRestPractice/webapi/posts/employeeAsObject</div><div class="panel-body">
+<img ng-src="images/spring/2-jerseyRestPost.jpg"/>
+</div></div>
+
+<div class="panel panel-primary" id="1"><div class="panel-heading">Source Code</div><div class="panel-body">
+<a ng-href="https://github.com/avinashbabudonthu/JerseyRestPractice/archive/master.zip" target="_blank">Download Source Code from here</a>
 </div></div>
