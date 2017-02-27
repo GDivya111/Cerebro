@@ -335,7 +335,7 @@ public class GetRequestsPractice {
 	}
 
 	<em>/**
-	 * URL: http://localhost:9091/JerseyRestPractice/webapi/gets/getEmployees?firstName=name1&amp;firstName=name2&amp;lastName=nam3&amp;lastName=name4
+	 * URL: http://localhost:9091/JerseyRestPractice/webapi/gets/getEmployees?firstName=name1&amp;firstName=name2&amp;lastName=nam3&amp;lastName=name4&amp;age=25
 	 * @param firstNames
 	 * @param lastNames
 	 * @return
@@ -371,7 +371,7 @@ public class GetRequestsPractice {
 			@HeaderParam(value = &quot;firstName&quot;) List&lt;String&gt; firstNames,
 			@HeaderParam(value = &quot;lastName&quot;) List&lt;String&gt; lastNames,
 			@HeaderParam(&quot;age&quot;) Integer ageValue) {
-		<em>/*if we pass 2 header values with same key, both values will appended as 1 String and passed to List&lt;String&gt; as single value. So we need to */</em>
+		<em>/*if we pass 2 header values with same key, both values will appended as 1 String and passed to List&lt;String&gt; as single value. So we need to split the String by comma(,)*/</em>
 		firstNames = Arrays.asList(firstNames.get(0).split(&quot;,&quot;));
 		lastNames = Arrays.asList(lastNames.get(0).split(&quot;,&quot;));
 
@@ -496,15 +496,13 @@ public class GetRequestsPracticeClient {
 		Invocation.Builder xmlBuilder = webTarget.request(MediaType.APPLICATION_XML);
 		String xmlResponse = xmlBuilder.get(String.class);
 		System.out.println(&quot;employeesXmlOrJson() -&gt; xmlResponse: &quot; + xmlResponse);
-		List&lt;Employee&gt; employeesFromXml = xmlBuilder.get(new GenericType&lt;List&lt;Employee&gt;&gt;() {
-		});
+		List&lt;Employee&gt; employeesFromXml = xmlBuilder.get(new GenericType&lt;List&lt;Employee&gt;&gt;() {});
 		System.out.println(&quot;employeesXmlOrJson() -&gt; employeesFromXml: &quot; + employeesFromXml);
 
 		Invocation.Builder jsonBuilder = webTarget.request(MediaType.APPLICATION_JSON);
 		String jsonResponse = jsonBuilder.get(String.class);
 		System.out.println(&quot;employeesXmlOrJson() -&gt; jsonResponse: &quot; + jsonResponse);
-		List&lt;Employee&gt; employeesFromJson = jsonBuilder.get(new GenericType&lt;List&lt;Employee&gt;&gt;() {
-		});
+		List&lt;Employee&gt; employeesFromJson = jsonBuilder.get(new GenericType&lt;List&lt;Employee&gt;&gt;() {});
 		System.out.println(&quot;employeesXmlOrJson() -&gt; employeesFromJson: &quot; + employeesFromJson);
 	}
 
@@ -550,8 +548,7 @@ public class GetRequestsPracticeClient {
 		Invocation.Builder builder2 = webTarget2.request();
 		Response invalidResponse = builder2.get(Response.class);
 		System.out.println(&quot;employeeWithExceptionHandling() -&gt; invalidResponse: &quot; + invalidResponse);
-		System.out.println(&quot;employeeWithExceptionHandling() -&gt; invalidResponse.getStatus(): &quot;
-				+ invalidResponse.getStatus());
+		System.out.println(&quot;employeeWithExceptionHandling() -&gt; invalidResponse.getStatus(): &quot; + invalidResponse.getStatus());
 	}
 
 	@Ignore
@@ -560,7 +557,8 @@ public class GetRequestsPracticeClient {
 		URI uri = UriBuilder.fromUri(&quot;http://localhost:9091/JerseyRestPractice/webapi/&quot;)
 				.path(&quot;/gets/getEmployees&quot;)
 				.queryParam(&quot;firstName&quot;, &quot;testFirstName1&quot;, &quot;testFirstName2&quot;)
-				.queryParam(&quot;lastName&quot;, &quot;testLastName1&quot;, &quot;testLastName2&quot;).queryParam(&quot;age&quot;, 25)
+				.queryParam(&quot;lastName&quot;, &quot;testLastName1&quot;, &quot;testLastName2&quot;)
+				.queryParam(&quot;age&quot;, 25)
 				.build();
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target(uri);
@@ -642,8 +640,4 @@ public class GetRequestsPracticeClient {
 
 <div class="panel panel-primary" id="1"><div class="panel-heading">http://localhost:9091/JerseyRestPractice/webapi/gets/getEmployeesWithHeaders</div><div class="panel-body">
 <img ng-src="images/spring/10-jerseyRestGet.jpg"/>
-</div></div>
-
-<div class="panel panel-primary" id="1"><div class="panel-heading">Source Code</div><div class="panel-body">
-<a ng-href="https://github.com/avinashbabudonthu/JerseyRestPractice/archive/master.zip" target="_blank">Download Source Code from here</a>
 </div></div>

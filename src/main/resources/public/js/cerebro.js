@@ -72,7 +72,6 @@ app.config(function($routeProvider){
 	.when("/springDIConstructorInjectionXml",{templateUrl : "springDIConstructorInjectionXml.html",controller : "cerebroController"})
 	.when("/springDIAnnotations",{templateUrl : "springDIAnnotations.html",controller : "cerebroController"})
 	.when("/springDIJavaConfig",{templateUrl : "springDIJavaConfig.html",controller : "cerebroController"})
-	
 	// spring end
 	
 	// tools start
@@ -122,6 +121,10 @@ app.config(function($routeProvider){
 	.when("/jerseyRestPost",{templateUrl : "jerseyRestPost.html",controller : "cerebroController"})
 	.when("/jerseyRestPut",{templateUrl : "jerseyRestPut.html",controller : "cerebroController"})
 	.when("/jerseyRestDelete",{templateUrl : "jerseyRestDelete.html",controller : "cerebroController"})
+	.when("/springRestGet",{templateUrl : "springRestGet.html",controller : "cerebroController"})
+	.when("/springRestPost",{templateUrl : "springRestPost.html",controller : "cerebroController"})
+	.when("/springRestPUT",{templateUrl : "springRestPUT.html",controller : "cerebroController"})
+	.when("/springRestDELETE",{templateUrl : "springRestDELETE.html",controller : "cerebroController"})
 	//RESTful web service end
 	
 	// definitions start

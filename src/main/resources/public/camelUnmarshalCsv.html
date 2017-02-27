@@ -177,8 +177,7 @@ public class MyRouteBuilder extends RouteBuilder {
 	public void configure() throws Exception {
 		MyBean myBean = new MyBean();
 		String fromRoute = &quot;file:E:/Backup/JavaPrep/practiceProjects/Camel/CamelCsvToList/src/main/resources?fileName=file1.csv&amp;noop=true&quot;;
-		from(fromRoute).unmarshal().csv().bean(myBean, &quot;method1&quot;)
-				.bean(myBean, &quot;method2&quot;).end();
+		from(fromRoute).unmarshal().csv().bean(myBean, &quot;method1&quot;).bean(myBean, &quot;method2&quot;).end();
 	}
 
 }
