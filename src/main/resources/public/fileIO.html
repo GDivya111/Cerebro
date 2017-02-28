@@ -17,7 +17,15 @@
 		<li><a ng-click="navigate(11)">Create Zip file with single file</a></li>
 		<li><a ng-click="navigate(12)">Create zip file with files present in a folder</a></li>
 		<li><a ng-click="navigate(13)">Method to get current project directory</a></li>
+		<li><a ng-click="navigate(14)">Print file with line numbers</a></li>
 	</ul>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">References</div><div class="panel-body">
+<ul>
+	<li><a ng-href="http://tutorials.jenkov.com/java-io/linenumberreader.html" target="_blank">Jenkov</a></li>
+</ul>
+
 </div></div>
 	
 <div class="panel panel-primary" id="1"><div class="panel-heading">Method to iterate list of files in directories and sub directories</div><div class="panel-body">
@@ -580,5 +588,32 @@ public void getCurrentProjectDirectory() {
 			.replace(&quot;.&quot;, File.separator);
 	System.out.println(&quot;FileIOPractice -&gt; getCurrentDirectory() -&gt; myCurrentDir: &quot; + myCurrentDir);
     }
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="14"><div class="panel-heading">Print file with line numbers</div><div class="panel-body">
+file1.txt
+<pre><code>
+Welcome to file1.txt
+Core Java Practice
+</code></pre>
+<pre ><code>
+public void lineNumberReader() throws IOException {
+	URL url = getClass().getClassLoader().getResource(&quot;file1.txt&quot;);
+	File file = new File(url.getPath());
+
+	Reader reader = new FileReader(file);
+	try (LineNumberReader lineNumberReader = new LineNumberReader(reader)) {
+
+	    String line;
+	    while (null != (line = lineNumberReader.readLine()))
+		System.out.println(lineNumberReader.getLineNumber() + &quot;: &quot; + line);
+	}
+    }
+</code></pre>
+<em>Ouptut</em>
+<pre><code>
+1: Welcome to file1.txt
+2: Core Java Practice
 </code></pre>
 </div></div>

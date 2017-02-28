@@ -19,6 +19,8 @@
 		<li><a ng-click="navigate(13)">Convert java.time.ZonedDateTime to java.util.Date</a></li>
 		<li><a ng-click="navigate(14)">Convert java.time.LocalDateTime to java.time.ZonedDateTime</a></li>
 		<li><a ng-click="navigate(15)">Convert date formats</a></li>
+		<li><a ng-click="navigate(16)">Convert String java.util.Date</a></li>
+		<li><a ng-click="navigate(17)">Convert String java.time.LocalDate</a></li>
 	</ul>
 </div></div>
 
@@ -331,5 +333,102 @@ public void converDateFormat1() throws ParseException {
 convertedDate1: 01/27/2017
 convertedDate2: 27/01/2017
 convertedDate3: 2017-01-27
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="16"><div class="panel-heading">Convert String java.util.Date</div><div class="panel-body">
+<pre><code>
+public void convertStringToUtilDate() throws ParseException {
+	<em>// 20-Jul-2017</em>
+	SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(&quot;dd-MMM-yyyy&quot;);
+	String date1 = &quot;20-Jul-2017&quot;;
+
+	Date convertedDate1 = simpleDateFormat1.parse(date1);
+	System.out.println(&quot;convertedDate1: &quot; + convertedDate1);
+	System.out.println(&quot;simpleDateFormat1.format(convertedDate1): &quot; + simpleDateFormat1.format(convertedDate1));
+
+	<em>// 20/07/2017</em>
+	SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);
+	String date2 = &quot;20/07/2017&quot;;
+	Date convertedDate2 = simpleDateFormat2.parse(date2);
+	System.out.println(&quot;convertedDate2: &quot; + convertedDate2);
+	System.out.println(&quot;simpleDateFormat2.format(convertedDate2): &quot; + simpleDateFormat2.format(convertedDate2));
+
+	<em>//Thu, July 20 2017</em>
+	SimpleDateFormat simpleDateFormat3 = new SimpleDateFormat(&quot;E, MMM dd yyyy&quot;);
+	String date3 = &quot;Thu, July 20 2017&quot;;
+	Date convertedDate3 = simpleDateFormat3.parse(date3);
+	System.out.println(&quot;convertedDate3: &quot; + convertedDate3);
+	System.out.println(&quot;simpleDateFormat3.format(convertedDate3): &quot; + simpleDateFormat3.format(convertedDate3));
+
+	<em>//Thursday, July 10 2017 12:10:08 PM</em>
+	SimpleDateFormat simpleDateFormat4 = new SimpleDateFormat(&quot;EEEE, MMM dd yyyy HH:mm:ss a&quot;);
+	String date4 = &quot;Thursday, July 20 2017 12:10:08 PM&quot;;
+	Date convertedDate4 = simpleDateFormat4.parse(date4);
+	System.out.println(&quot;convertedDate4: &quot; + convertedDate4);
+	System.out.println(&quot;simpleDateFormat4.format(convertedDate4): &quot; + simpleDateFormat4.format(convertedDate4));
+    }
+</code></pre>
+<em>Ouptut</em>
+<pre><code>
+convertedDate1: Thu Jul 20 00:00:00 IST 2017
+simpleDateFormat1.format(convertedDate1): 20-Jul-2017
+convertedDate2: Thu Jul 20 00:00:00 IST 2017
+simpleDateFormat2.format(convertedDate2): 20/07/2017
+convertedDate3: Thu Jul 20 00:00:00 IST 2017
+simpleDateFormat3.format(convertedDate3): Thu, Jul 20 2017
+convertedDate4: Thu Jul 20 12:10:08 IST 2017
+simpleDateFormat4.format(convertedDate4): Thursday, Jul 20 2017 12:10:08 PM
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="17"><div class="panel-heading">Convert String java.time.LocalDate</div><div class="panel-body">
+<pre><code>
+public void convertStrintToLocalDate() {
+	<em>// 10/07/2017</em>
+	String date1 = &quot;20/07/2017&quot;;
+	DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern(&quot;d/MM/yyyy&quot;);
+	LocalDate localDate1 = LocalDate.parse(date1, formatter1);
+	System.out.println(&quot;localDate1: &quot; + localDate1);
+	System.out.println(&quot;formatter1.format(localDate1): &quot; + formatter1.format(localDate1));
+
+	<em>//10-07-2017</em>
+	String date2 = &quot;2017-07-21&quot;;
+	LocalDate localDate2 = LocalDate.parse(date2);
+	System.out.println(&quot;localDate2: &quot; + localDate2);
+
+	<em>// 20-Jul-2017</em>
+	String date3 = &quot;20-Jul-2017&quot;;
+	DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern(&quot;d-MMM-yyyy&quot;);
+	LocalDate localDate3 = LocalDate.parse(date3, formatter2);
+	System.out.println(&quot;localDate3: &quot; + localDate3);
+	System.out.println(&quot;formatter2.format(localDate3): &quot; + formatter2.format(localDate3));
+
+	<em>//Thu, Jul 20 2017</em>
+	String date4 = &quot;Thu, Jul 20 2017&quot;;
+	DateTimeFormatter formatter3 = DateTimeFormatter.ofPattern(&quot;E, MMM d yyyy&quot;);
+	LocalDate localDate4 = LocalDate.parse(date4, formatter3);
+	System.out.println(&quot;localDate4: &quot; + localDate4);
+	System.out.println(&quot;formatter3.format(localDate4): &quot; + formatter3.format(localDate4));
+
+	<em>//Thursday, Jul 10 2017 12:10:08 PM</em>
+	String date5 = &quot;Thursday, Jul 20 2017 12:10:08 PM&quot;;
+	DateTimeFormatter formatter4 = DateTimeFormatter.ofPattern(&quot;EEEE, MMM d yyyy HH:mm:ss a&quot;);
+	LocalDateTime localDate5 = LocalDateTime.parse(date5, formatter4);
+	System.out.println(&quot;localDate5: &quot; + localDate5);
+	System.out.println(&quot;formatter4.format(localDate5): &quot; + formatter4.format(localDate5));
+    }
+</code></pre>
+<em>Ouptut</em>
+<pre><code>
+localDate1: 2017-07-20
+formatter1.format(localDate1): 20/07/2017
+localDate2: 2017-07-21
+localDate3: 2017-07-20
+formatter2.format(localDate3): 20-Jul-2017
+localDate4: 2017-07-20
+formatter3.format(localDate4): Thu, Jul 20 2017
+localDate5: 2017-07-20T12:10:08
+formatter4.format(localDate5): Thursday, Jul 20 2017 12:10:08 PM
 </code></pre>
 </div></div>
