@@ -7,4 +7,5 @@ public interface Constants {
     public static final String ENTITY = "entity";
     public static final String REPOSITORY = "repository";
     public static final String MAVEN = "Maven";
+    public static final String JENKINS = "Jenkins";
 }

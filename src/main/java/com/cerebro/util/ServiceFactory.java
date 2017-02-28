@@ -14,10 +14,12 @@ import com.cerebro.model.ApacheKafkaDefinition;
 import com.cerebro.model.CoreJavaDefinition;
 import com.cerebro.model.Definition;
 import com.cerebro.model.GroovyDefinition;
+import com.cerebro.model.JenkinsDefinition;
 import com.cerebro.model.MavenDefinition;
 import com.cerebro.repository.ApacheKafkaDefinitionRepository;
 import com.cerebro.repository.CoreJavaDefinitionJpaRepository;
 import com.cerebro.repository.GroovyDefinitionRepository;
+import com.cerebro.repository.JenkinsDefinitionRepository;
 import com.cerebro.repository.MavenDefinitionRepository;
 
 /**
@@ -43,6 +45,10 @@ public class ServiceFactory {
     @Autowired
     @Qualifier("mavenDefinitionRepository")
     private MavenDefinitionRepository mavenDefinitionRepository;
+
+    @Autowired
+    @Qualifier("jenkinsDefinitionRepository")
+    private JenkinsDefinitionRepository jenkinsDefinitionRepository;
 
     private Map<String, Object> entityRepositoryMap = new HashMap<>();
 
@@ -79,6 +85,15 @@ public class ServiceFactory {
 		BeanUtils.copyProperties(definition, mavenDefinition);
 		entityRepositoryMap.put(Constants.ENTITY, mavenDefinition);
 	    }
+	    break;
+	case Constants.JENKINS:
+	    entityRepositoryMap.put(Constants.REPOSITORY, jenkinsDefinitionRepository);
+	    if (null != definition) {
+		JenkinsDefinition jenkinsDefinition = new JenkinsDefinition();
+		BeanUtils.copyProperties(definition, jenkinsDefinition);
+		entityRepositoryMap.put(Constants.ENTITY, jenkinsDefinition);
+	    }
+	    break;
 	}
 
 	return entityRepositoryMap;
