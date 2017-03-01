@@ -38,4 +38,15 @@ public class CerebroServiceImpl implements CerebroService {
 	repository.save(object);
     }
 
+    @Override
+    public void saveDefinitions(List<Definition> definitions, String definitionType) {
+	for (Definition definition : definitions) {
+	    Map<String, Object> map = serviceFactory.getDomainAndRepository(definitionType, definition);
+	    JpaRepository<Object, Long> repository = (JpaRepository<Object, Long>) map.get(Constants.REPOSITORY);
+	    Object object = map.get(Constants.ENTITY);
+	    repository.save(object);
+	}
+
+    }
+
 }
