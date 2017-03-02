@@ -74,8 +74,13 @@ public class CerebroController {
 		    break;
 		}
 
+		String cell1String = cell1.getStringCellValue();
+		if (cell1String.startsWith("http")) {
+		    cell1String = "<a href='" + cell1String + "' target='_blank'>" + cell1String + "</a>";
+		}
+
 		definition.setDescription(cell0.getStringCellValue());
-		definition.setDetails(cell1.getStringCellValue());
+		definition.setDetails(cell1String);
 
 		definitions.add(definition);
 	    }
