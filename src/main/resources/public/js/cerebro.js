@@ -142,6 +142,14 @@ var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsSe
 		$anchorScroll();
 	};
 	
+	$(window).scroll(function(){
+		if($(this).scrollTop() > 0){
+			$('#back-to-top').fadeIn();
+		}else{
+			$('#back-to-top').fadeOut();
+		}
+	});
+	
 	$scope.scrollUp = function(){
 		$('body,html').animate({scrollTop: 0}, 800);
         return false;

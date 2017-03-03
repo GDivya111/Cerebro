@@ -59,6 +59,7 @@ public class ServiceFactory {
 	    if (null != definition) {
 		CoreJavaDefinition coreJavaDefinition = new CoreJavaDefinition();
 		BeanUtils.copyProperties(definition, coreJavaDefinition);
+		coreJavaDefinition.setDetails(coreJavaDefinition.getDetails().replaceAll(Constants.NEW_LINE_CHAR, Constants.BR_TAG));
 		entityRepositoryMap.put(Constants.ENTITY, coreJavaDefinition);
 	    }
 	    break;
@@ -67,6 +68,7 @@ public class ServiceFactory {
 	    if (null != definition) {
 		ApacheKafkaDefinition apacheKafkaDefinition = new ApacheKafkaDefinition();
 		BeanUtils.copyProperties(definition, apacheKafkaDefinition);
+		apacheKafkaDefinition.setDetails(apacheKafkaDefinition.getDetails().replaceAll(Constants.NEW_LINE_CHAR, Constants.BR_TAG));
 		entityRepositoryMap.put(Constants.ENTITY, apacheKafkaDefinition);
 	    }
 	    break;
@@ -75,6 +77,7 @@ public class ServiceFactory {
 	    if (null != definition) {
 		GroovyDefinition groovyDefinition = new GroovyDefinition();
 		BeanUtils.copyProperties(definition, groovyDefinition);
+		groovyDefinition.setDetails(groovyDefinition.getDetails().replaceAll(Constants.NEW_LINE_CHAR, Constants.BR_TAG));
 		entityRepositoryMap.put(Constants.ENTITY, groovyDefinition);
 	    }
 	    break;
@@ -83,6 +86,7 @@ public class ServiceFactory {
 	    if (null != definition) {
 		MavenDefinition mavenDefinition = new MavenDefinition();
 		BeanUtils.copyProperties(definition, mavenDefinition);
+		mavenDefinition.setDetails(mavenDefinition.getDetails().replaceAll(Constants.NEW_LINE_CHAR, Constants.BR_TAG));
 		entityRepositoryMap.put(Constants.ENTITY, mavenDefinition);
 	    }
 	    break;
@@ -91,11 +95,11 @@ public class ServiceFactory {
 	    if (null != definition) {
 		JenkinsDefinition jenkinsDefinition = new JenkinsDefinition();
 		BeanUtils.copyProperties(definition, jenkinsDefinition);
+		jenkinsDefinition.setDetails(jenkinsDefinition.getDetails().replaceAll(Constants.NEW_LINE_CHAR, Constants.BR_TAG));
 		entityRepositoryMap.put(Constants.ENTITY, jenkinsDefinition);
 	    }
 	    break;
 	}
-
 	return entityRepositoryMap;
     }
 
