@@ -125,6 +125,8 @@ app.config(function($routeProvider){
 	.when("/springRestPost",{templateUrl : "springRestPost.html",controller : "cerebroController"})
 	.when("/springRestPUT",{templateUrl : "springRestPUT.html",controller : "cerebroController"})
 	.when("/springRestDELETE",{templateUrl : "springRestDELETE.html",controller : "cerebroController"})
+	.when("/jerseyFileUpload",{templateUrl : "jerseyFileUpload.html",controller : "cerebroController"})
+	.when("/jerseyFileDownload",{templateUrl : "jerseyFileDownload.html",controller : "cerebroController"})
 	//RESTful web service end
 	
 	// definitions start
