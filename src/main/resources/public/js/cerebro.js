@@ -39,11 +39,11 @@ app.config(function($routeProvider){
 	
 	// spring - start
 	.when("/spring",{templateUrl : "spring.html",controller : "cerebroController"})
-	.when("/springAopJavaConfig",{templateUrl : "springAopJavaConfig.html",controller : "cerebroController"})
+	/*.when("/springAopJavaConfig",{templateUrl : "springAopJavaConfig.html",controller : "cerebroController"})*/
 	.when("/springAOPJavaConfigHelloWorld",{templateUrl : "springAOPJavaConfigHelloWorld.html",controller : "cerebroController"})
-	.when("/springSecurityJavaConfig",{templateUrl : "springSecurityJavaConfig.html",controller : "cerebroController"})
+	/*.when("/springSecurityJavaConfig",{templateUrl : "springSecurityJavaConfig.html",controller : "cerebroController"})*/
 	.when("/springSecurityFlow",{templateUrl : "springSecurityFlow.html",controller : "cerebroController"})
-	.when("/springMVC",{templateUrl : "springMVC.html",controller : "cerebroController"})
+	/*.when("/springMVC",{templateUrl : "springMVC.html",controller : "cerebroController"})*/
 	.when("/springMVCHelloWorldXml",{templateUrl : "springMVCHelloWorldXml.html",controller : "cerebroController"})
 	.when("/springMVCPropertiesFileXml",{templateUrl : "springMVCPropertiesFileXml.html",controller : "cerebroController"})
 	.when("/springMVCFormXml",{templateUrl : "springMVCFormXml.html",controller : "cerebroController"})
@@ -55,15 +55,15 @@ app.config(function($routeProvider){
 	.when("/springMVCContentNegotiationXml",{templateUrl : "springMVCContentNegotiationXml.html",controller : "cerebroController"})
 	.when("/springMVCXmlJunitTesting",{templateUrl : "springMVCXmlJunitTesting.html",controller : "cerebroController"})
 	.when("/springMVCCustomConfigXml",{templateUrl : "springMVCCustomConfigXml.html",controller : "cerebroController"})
-	.when("/springCore",{templateUrl : "springCore.html",controller : "cerebroController"})
-	.when("/springORM",{templateUrl : "springORM.html",controller : "cerebroController"})
+	/*.when("/springCore",{templateUrl : "springCore.html",controller : "cerebroController"})*/
+	/*.when("/springORM",{templateUrl : "springORM.html",controller : "cerebroController"})*/
 	.when("/springORMHelloWorldXml",{templateUrl : "springORMHelloWorldXml.html",controller : "cerebroController"})
 	.when("/springMVCMultiConfigXml",{templateUrl : "springMVCMultiConfigXml.html",controller : "cerebroController"})
-	.when("/springBoot",{templateUrl : "springBoot.html",controller : "cerebroController"})
+	/*.when("/springBoot",{templateUrl : "springBoot.html",controller : "cerebroController"})*/
 	.when("/springBootHelloWorld",{templateUrl : "springBootHelloWorld.html",controller : "cerebroController"})
 	.when("/springBootJsonAndXml",{templateUrl : "springBootJsonAndXml.html",controller : "cerebroController"})
 	.when("/springBootJetty",{templateUrl : "springBootJetty.html",controller : "cerebroController"})
-	.when("/springJpa",{templateUrl : "springJpa.html",controller : "cerebroController"})
+	/*.when("/springJpa",{templateUrl : "springJpa.html",controller : "cerebroController"})*/
 	.when("/springMvcDataJpa",{templateUrl : "springMvcDataJpa.html",controller : "cerebroController"})
 	.when("/springMvcJpa",{templateUrl : "springMvcJpa.html",controller : "cerebroController"})
 	.when("/springBootFileUpload",{templateUrl : "springBootFileUpload.html",controller : "cerebroController"})
