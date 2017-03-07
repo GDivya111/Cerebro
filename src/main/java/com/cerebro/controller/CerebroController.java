@@ -32,11 +32,6 @@ public class CerebroController {
     @Qualifier("cerebroServiceImpl")
     private CerebroService cerebroService;
 
-    @RequestMapping(value = "/definitions/{type}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Definition> getDefinitions(@PathVariable("type") String definitionType) {
-	return cerebroService.getDefinitions(definitionType);
-    }
-
     @RequestMapping(value = "/addDefinitions/{type}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addDefinitions(@RequestBody Definition definition, @PathVariable("type") String definitionType) {
 	cerebroService.saveDefinition(definition, definitionType);

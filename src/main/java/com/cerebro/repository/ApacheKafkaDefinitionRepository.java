@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.cerebro.model.ApacheKafkaDefinition;
 
 @Repository(value = "apacheKafkaDefinitionRepository")
-@RepositoryRestResource(collectionResourceRel = "apacheKafkaDefinitionsList", path = "/apacheKafkaDefs")
+@RepositoryRestResource(collectionResourceRel = "definitionsList", path = "/apacheKafkaDefs")
 public interface ApacheKafkaDefinitionRepository extends JpaRepository<ApacheKafkaDefinition, Long> {
 
 }

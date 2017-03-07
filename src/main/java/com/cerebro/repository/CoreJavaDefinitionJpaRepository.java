@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.cerebro.model.CoreJavaDefinition;
 
 @Repository(value = "coreJavaDefinitionRepository")
-@RepositoryRestResource(collectionResourceRel = "coreJavaDefinitionsList", path = "/coreJavaDefs")
+@RepositoryRestResource(collectionResourceRel = "definitionsList", path = "/coreJavaDefs")
 public interface CoreJavaDefinitionJpaRepository extends JpaRepository<CoreJavaDefinition, Long> {
 
 }

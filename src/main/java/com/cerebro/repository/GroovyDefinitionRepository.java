@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.cerebro.model.GroovyDefinition;
 
 @Repository("groovyDefinitionRepository")
-@RepositoryRestResource(collectionResourceRel = "groovyDefinitionsList", path = "/groovyDefs")
+@RepositoryRestResource(collectionResourceRel = "definitionsList", path = "/groovyDefs")
 public interface GroovyDefinitionRepository extends JpaRepository<GroovyDefinition, Long> {
 
 }

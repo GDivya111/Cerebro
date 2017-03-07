@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.cerebro.model.JenkinsDefinition;
 
 @Repository("jenkinsDefinitionRepository")
-@RepositoryRestResource(collectionResourceRel = "jenkinsDefinitionsList", path = "/jenkinsDefs")
+@RepositoryRestResource(collectionResourceRel = "definitionsList", path = "/jenkinsDefs")
 public interface JenkinsDefinitionRepository extends JpaRepository<JenkinsDefinition, Long> {
 
 }

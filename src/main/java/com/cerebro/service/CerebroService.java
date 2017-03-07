@@ -6,8 +6,6 @@ import com.cerebro.model.Definition;
 
 public interface CerebroService {
 
-    public abstract List<Definition> getDefinitions(String definitionType);
-
     public abstract void saveDefinition(Definition definition, String definitionType);
 
     public abstract void saveDefinitions(List<Definition> definitions, String definitionType);

@@ -1,6 +1,5 @@
 package com.cerebro.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,20 +22,6 @@ public class CerebroServiceImpl implements CerebroService {
     private ServiceFactory serviceFactory;
 
     @Override
-    public List<Definition> getDefinitions(String definitionType) {
-	Map<String, Object> map = serviceFactory.getDomainAndRepository(definitionType, null);
-	JpaRepository<Object, Long> repository = (JpaRepository<Object, Long>) map.get(Constants.REPOSITORY);
-
-	List<Definition> definitionsList = new ArrayList<>();
-	if (null != repository) {
-	    List<Object> definitionsFromDB = repository.findAll();
-	    definitionsList = serviceFactory.getDefinitions(definitionsFromDB);
-	}
-
-	return definitionsList;
-    }
-
-    @Override
     public void saveDefinition(Definition definition, String definitionType) {
 	Map<String, Object> map = serviceFactory.getDomainAndRepository(definitionType, definition);
 	JpaRepository<Object, Long> repository = (JpaRepository<Object, Long>) map.get(Constants.REPOSITORY);
@@ -52,7 +37,5 @@ public class CerebroServiceImpl implements CerebroService {
 	    Object object = map.get(Constants.ENTITY);
 	    repository.save(object);
 	}
-
     }
-
 }

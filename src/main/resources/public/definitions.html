@@ -1,12 +1,18 @@
-<div class="page-header">
+<!-- <div class="page-header">
     <h3>{{message}}</h3>      
-</div>
+</div> -->
 
 <div class="form-group col-xs-4">
+      <!-- <label for="sel1">Definition Types:</label>
+      <select class="form-control" id="definitionType" name="definitionType" ng-model="definitionType.selected" ng-change="getDefinitions()">
+      	<option ng-repeat="type in definitionType.types" value="{{type.value}}">{{type.key}}</option>
+      </select> -->
+      <form class="form-inline">
       <label for="sel1">Definition Types:</label>
       <select class="form-control" id="definitionType" name="definitionType" ng-model="definitionType.selected" ng-change="getDefinitions()">
-      	<option ng-repeat="type in definitionType.types" value="{{type.key}}">{{type.value}}</option>
+      	<option ng-repeat="type in definitionType.types" value="{{type.value}}">{{type.key}}</option>
       </select>
+      </form>
 </div>
 
 <!-- <button type="button" class="btn btn-info" ng-click="getDefinitions()">Get Definitions</button> 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.cerebro.model.MavenDefinition;
 
 @Repository("mavenDefinitionRepository")
-@RepositoryRestResource(collectionResourceRel = "mavenDefinitionsList", path = "/mavenDefs")
+@RepositoryRestResource(collectionResourceRel = "definitionsList", path = "/mavenDefs")
 public interface MavenDefinitionRepository extends JpaRepository<MavenDefinition, Long> {
 
 }

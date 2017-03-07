@@ -179,16 +179,16 @@ var DefinitionsController = function($scope, $location, $anchorScroll, $http){
 	$scope.definitionType = {
 		selected: null,
 		types : [
-		         {key: "Core Java", value: "Core Java"},	
-		         {key: "Apache Kafka", value: "Apache Kafka"},
-		         {key: "Groovy", value: "Groovy"},
-		         {key: "Maven", value: "Maven"},
-		         {key: "Jenkins", value: "Jenkins"}]
+		         {key: "Core Java", value: "coreJavaDefs"},	
+		         {key: "Apache Kafka", value: "apacheKafkaDefs"},
+		         {key: "Groovy", value: "groovyDefs"},
+		         {key: "Maven", value: "mavenDefs"},
+		         {key: "Jenkins", value: "jenkinsDefs"},
+		         {key: "MongoDB", value: "mongodbDefs"}]
 	};
 	
 	var onSuccess = function(response){
-		console.log("onSuccess()");
-		$scope.definitionsList = response.data;
+		$scope.definitionsList = response.data._embedded.definitionsList;
 	};
 	
 	var onError = function(){
@@ -207,7 +207,9 @@ var DefinitionsController = function($scope, $location, $anchorScroll, $http){
 	
 	var getDefinitions = function(){
 		var defType = $scope.definitionType.selected;
-		$http.get("/definitions/"+defType).then(onSuccess, onError);
+		console.log("defType: "+defType);
+		/*$http.get("/definitions/"+defType).then(onSuccess, onError);*/
+		$http.get("/api/"+defType).then(onSuccess, onError);
 		$scope.message = defType + definitionsMessage;
 	};
 	
