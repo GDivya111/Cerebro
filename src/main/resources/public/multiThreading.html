@@ -5,31 +5,184 @@
 <div class="panel panel-primary"><div class="panel-heading">Contents</div><div class="panel-body">
 	<ul>
 		<li><a ng-click="navigate(1)">Creating threads - using Thread class, using Runnable class, using anonymous inner class, using lambda expressions</a></li>
-		<li><a ng-click="navigate(2)">Starting the threads</a></li>
-		<li><a ng-click="navigate(3)">Thread Name</a></li>
-		<li><a ng-click="navigate(4)">ThreadLocal</a></li>
-		<li><a ng-click="navigate(5)">Making current thread to wait - based on time</a></li>
-		<li><a ng-click="navigate(6)">Making current thread to wait - based on execution of other threads</a></li>
-		
+		<li><a ng-click="navigate(2)">Thread Name</a></li>
+		<li><a ng-click="navigate(3)">Thread Name Another Example</a></li>
 	</ul>
 </div></div>
 	
-<div class="panel panel-primary" id="1"><div class="panel-heading">Code Content Header</div><div class="panel-body">
+<div class="panel panel-primary" id="1"><div class="panel-heading">Creating threads - using Thread class, using Runnable class, using anonymous inner class, using lambda expressions</div><div class="panel-body">
+<em>Thread1.java</em>
+<pre><code>
+package core.java.threads.model;
+
+public class Thread1 extends Thread {
+
+    @Override
+    public void run() {
+	for (int i = 0; i &lt; 10; i++) {
+	    System.out.println(&quot;Thread1 -&gt; run(): &quot; + i);
+	}
+    }
+}
+</code></pre>
+<em>Thread2.java</em>
+<pre><code>
+package core.java.threads.model;
+
+public class Thread2 implements Runnable {
+
+    @Override
+    public void run() {
+	for (int i = 10; i &lt; 20; i++) {
+	    System.out.println(&quot;Thread2 -&gt; run(): &quot; + i);
+	}
+    }
+
+}
+</code></pre>
+<em>Test Method:</em>
 <pre ><code>
-Code Content
+public void createThread() {
+	<em>// method 1 - create sub class of java.lang.Thread class and override run() method</em>
+	Thread thread = new Thread1();
+	thread.start();
+
+	<em>// method 2 - create class implementing java.lang.Runnable interface and implement run() method</em>
+	Thread thread2 = new Thread(new Thread2());
+	thread2.start();
+
+	<em>// method 3 - using anonymous inner class</em>
+	Thread thread3 = new Thread(new Runnable() {
+	    @Override
+	    public void run() {
+		for (int i = 20; i &lt; 30; i++) {
+		    System.out.println(&quot;Anonymous inner class: &quot; + i);
+		}
+	    }
+	});
+	thread3.start();
+
+	<em>// method 4 - from java 8 using Lambda expressions</em>
+	Thread thread4 = new Thread(() -&gt; {
+	    for (int i = 30; i &lt; 40; i++) {
+		System.out.println(&quot;Java 8 -&gt; Labmda expression: &quot; + i);
+	    }
+	});
+	thread4.start();
+    }
 </code></pre>
 <em>Output</em>
 <pre><code>
-Output content
+Thread1 -&gt; run(): 0
+Thread1 -&gt; run(): 1
+Thread1 -&gt; run(): 2
+Thread1 -&gt; run(): 3
+Thread1 -&gt; run(): 4
+Thread1 -&gt; run(): 5
+Thread1 -&gt; run(): 6
+Thread1 -&gt; run(): 7
+Thread1 -&gt; run(): 8
+Thread1 -&gt; run(): 9
+Thread2 -&gt; run(): 10
+Thread2 -&gt; run(): 11
+Thread2 -&gt; run(): 12
+Thread2 -&gt; run(): 13
+Thread2 -&gt; run(): 14
+Thread2 -&gt; run(): 15
+Thread2 -&gt; run(): 16
+Thread2 -&gt; run(): 17
+Thread2 -&gt; run(): 18
+Thread2 -&gt; run(): 19
+Anonymous inner class: 20
+Anonymous inner class: 21
+Anonymous inner class: 22
+Anonymous inner class: 23
+Anonymous inner class: 24
+Anonymous inner class: 25
+Anonymous inner class: 26
+Anonymous inner class: 27
+Anonymous inner class: 28
+Anonymous inner class: 29
+Java 8 -&gt; Labmda expression: 30
+Java 8 -&gt; Labmda expression: 31
+Java 8 -&gt; Labmda expression: 32
+Java 8 -&gt; Labmda expression: 33
+Java 8 -&gt; Labmda expression: 34
+Java 8 -&gt; Labmda expression: 35
+Java 8 -&gt; Labmda expression: 36
+Java 8 -&gt; Labmda expression: 37
+Java 8 -&gt; Labmda expression: 38
+Java 8 -&gt; Labmda expression: 39
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary" id="1"><div class="panel-heading">Code Content Header</div><div class="panel-body">
+<div class="panel panel-primary" id="2"><div class="panel-heading">Thread Name</div><div class="panel-body">
+<em>Thread4.java</em>
 <pre ><code>
-Code Content
+package core.java.threads.model;
+
+public class Thread4 extends Thread {
+
+    public Thread4(String name) {
+	super(name);
+    }
+
+    @Override
+    public void run() {
+	System.out.println(&quot;Thread Name: &quot; + getName());
+    }
+}
+</code></pre>
+<em>Test Method:</em>
+<pre><code>
+public void threadName() {
+	Thread thread = new Thread4(&quot;My Thread&quot;);
+	thread.start();
+    }
 </code></pre>
 <em>Output</em>
 <pre><code>
-Output content
+Thread Name: My Thread
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="3"><div class="panel-heading">Thread Name Another Example</div><div class="panel-body">
+<em>Thread4.java</em>
+<pre><code>
+package core.java.threads.model;
+
+public class Thread4 extends Thread {
+
+    public Thread4(String name) {
+	super(name);
+    }
+
+    @Override
+    public void run() {
+	System.out.println(&quot;Thread Name: &quot; + getName());
+    }
+}
+</code></pre>
+<em>Test Method:</em>
+<pre><code>
+public void threadName2() {
+	for (int i = 0; i &lt; 10; i++) {
+	    Thread thread = new Thread4(&quot;Thread&quot; + i);
+	    thread.start();
+	}
+    }
+</code></pre>
+<em>Output</em>
+<pre><code>
+Thread Name: Thread0
+Thread Name: Thread2
+Thread Name: Thread1
+Thread Name: Thread3
+Thread Name: Thread5
+Thread Name: Thread4
+Thread Name: Thread6
+Thread Name: Thread7
+Thread Name: Thread8
+Thread Name: Thread9
 </code></pre>
 </div></div>
