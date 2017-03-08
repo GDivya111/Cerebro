@@ -129,6 +129,12 @@ app.config(function($routeProvider){
 	.when("/jerseyFileDownload",{templateUrl : "jerseyFileDownload.html",controller : "cerebroController"})
 	//RESTful web service end
 	
+	// mongo db start
+	.when("/mongoDB",{templateUrl : "mongoDB.html",controller : "cerebroController"})
+	.when("/mongodbHelloworld",{templateUrl : "mongodbHelloworld.html",controller : "cerebroController"})
+	
+	// mongo db end
+	
 	// definitions start
 	.when("/definitions",{templateUrl : "definitions.html",controller : "definitionsController"})
 	.when("/addDefinitions",{templateUrl : "addDefinitions.html",controller : "definitionsController"});

@@ -4,17 +4,6 @@
 
 <div class="row">
 
-<!-- <div class="col-sm-4"><a ng-href="#coreJava" ng-click="buildBreadCrumbs('Core Java', '#coreJava')">Core Java</a></div>
-<div class="col-sm-4"><a ng-href="#hibernate" ng-click="buildBreadCrumbs('Hibernate', '#hibernate')">Hibernate</a></div>
-<div class="col-sm-4"><a ng-href="#spring" ng-click="buildBreadCrumbs('Spring', '#spring')">Spring</a></div>
-<div class="col-sm-4"><a ng-href="#ant"  ng-click="buildBreadCrumbs('Ant', '#ant')">Ant (Another Neat Tool)</a></div>
-<div class="col-sm-4"><a ng-href="#maven"  ng-click="buildBreadCrumbs('Maven', '#maven')">Maven</a></div>
-<div class="col-sm-4"><a ng-href="#gradle"  ng-click="buildBreadCrumbs('Gradle', '#gradle')">Gradle</a></div>
-<div class="col-sm-4"><a ng-href="#tools"  ng-click="buildBreadCrumbs('Tools', '#tools')">Tools</a></div>
-<div class="col-sm-4"><a ng-href="#unitTesting"  ng-click="buildBreadCrumbs('Unit Testing', '#unitTesting')">Unit Testing</a></div>
-<div class="col-sm-4"><a ng-href="#db"  ng-click="buildBreadCrumbs('DB', '#db')">DB</a></div>
-<div class="col-sm-4"><a ng-href="#camel"  ng-click="buildBreadCrumbs('Camel', '#camel')">Apache Camel</a></div> -->
-
 <div class="container">
 <div class="list-group">
   <a ng-href="#coreJava" ng-click="buildBreadCrumbs('Core Java', '#coreJava')" class="list-group-item">
@@ -61,99 +50,12 @@
       <h4 class="list-group-item-heading">Web Services</h4>
       <p class="list-group-item-text">Examples on SOAP Web Services and RESTful Web Services</p>
   </a>
+  <a ng-href="#mongoDB" ng-click="buildBreadCrumbs('MongoDB', '#mongoDB')" class="list-group-item">
+  	<h4 class="list-group-item-heading">Mongo DB</h4>
+      <p class="list-group-item-text">Mongo DB with Mongo shell, MongoDB with Java, Spring Data MongoDB</p>
+  </a>
 </div></div>
 
-  <!-- <div class="col-sm-4"><div class="panel panel-primary">
-  <div class="panel-heading">Core Java</div>
-  <div class="panel-body">
-  	<ul>
-  		<li>Core Java Definitions</li>
-  		<li>String Practice</li>
-  		<li>Date Practice</li>
-  		<li>Collections Practice</li>
-  		<li>Annotations Practice</li>
-  		<li><a ng-href="#coreJava" ng-click="buildBreadCrumbs('Core Java', '#coreJava')">More</a></li>
-  	</ul>
-  </div></div>
-  </div>
-  
-  <div class="col-sm-4"><div class="panel panel-primary">
-  <div class="panel-heading">Hibernate</div>
-  <div class="panel-body">
-  	<ul>
-  		<li>Hibernate Hello World</li>
-  		<li>Criteria</li>
-  		<li>HQL</li>
-  		<li>Native SQL</li>
-  		<li>Named Queries</li>
-  		<li><a ng-href="#hibernate" ng-click="buildBreadCrumbs('Hibernate', '#hibernate')">More</a></li>
-  	</ul>
-  </div></div>
-  </div>
-  
-  <div class="col-sm-4"><div class="panel panel-primary"><div class="panel-heading">Spring</div><div class="panel-body">
-  	<ul>
-  		<li>Spring Core</li>
-  		<li>Spring MVC</li>
-  		<li>Spring AOP</li>
-  		<li>Spring Boot</li>
-  		<li>Spring Data JPA</li>
-  		<li><a ng-href="#spring" ng-click="buildBreadCrumbs('Spring', '#spring')">More</a></li>
-  	</ul>
-  </div></div>	
-  </div>
-  
-  <div class="col-sm-4"><div class="panel panel-primary">
-  <div class="panel-heading">Build Tools</div>
-  <div class="panel-body">
-  	<ul>
-  		<li><a ng-href="#ant"  ng-click="buildBreadCrumbs('Ant', '#ant')">Ant (Another Neat Tool)</a></li>
-  		<li><a ng-href="#maven"  ng-click="buildBreadCrumbs('Maven', '#maven')">Maven</a></li>
-  		<li><a ng-href="#gradle"  ng-click="buildBreadCrumbs('Gradle', '#gradle')">Gradle</a></li>
-  	</ul>
-  </div></div>
-  </div>
-  
-  <div class="col-sm-4"><div class="panel panel-primary">
-  <div class="panel-heading">Tools</div>
-  <div class="panel-body">
-  	<ul>
-  		<li>CSV</li>
-  		<li>JSON</li>
-  		<li>Dozer</li>
-  		<li><a ng-href="#tools"  ng-click="buildBreadCrumbs('Tools', '#tools')">More</a></li>
-  	</ul>
-  </div></div>
-  </div>
-  
-<div class="col-sm-4"><div class="panel panel-primary"><div class="panel-heading">Unit Testing</div><div class="panel-body">
-  <ul>
-  		<li>JUnit</li>
-  		<li>Easy Mock</li>
-  		<li>Mockito</li>
-  		<li>Power Mock</li>
-  		<li>Spring + Junit </li>
-		<li><a ng-href="#unitTesting"  ng-click="buildBreadCrumbs('Unit Testing', '#unitTesting')">More</a></li>
- 	</ul>
-</div></div></div>
-
-<div class="col-sm-4"><div class="panel panel-primary"><div class="panel-heading">DB</div><div class="panel-body">
-<ul>
-	<li>H2</li>
-	<li><a ng-href="#db"  ng-click="buildBreadCrumbs('DB', '#db')">More</a></li>
-</ul>
-</div></div></div>  
-
-<div class="col-sm-4"><div class="panel panel-primary"><div class="panel-heading">Apache Camel</div><div class="panel-body">
-<ul>
-	<li>Apache Camel Hello World</li>
-	<li>Using bean in the Router</li>
-	<li>Using Processor and Bean in the Router</li>
-	<li>Camel with Spring Bean</li>
-	<li><a ng-href="#camel"  ng-click="buildBreadCrumbs('Camel', '#camel')">More</a></li>
-</ul>
-</div></div></div>   -->
- 
 </div>
 
 <!-- Pagination start-->
