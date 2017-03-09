@@ -165,10 +165,6 @@ var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsSe
 		breadCrumbsService.addBreadCrumb(name, link);
 	};
 	
-	/*$scope.resetBreadCrumbs = function(){
-		breadCrumbsService.resetBreadCrumbs();
-	}*/
-	
 	$scope.popBreadCrumb = function(index){
 		breadCrumbsService.popBreadCrumb(index);
 	}
@@ -214,8 +210,6 @@ var DefinitionsController = function($scope, $location, $anchorScroll, $http){
 	
 	var getDefinitions = function(){
 		var defType = $scope.definitionType.selected;
-		console.log("defType: "+defType);
-		/*$http.get("/definitions/"+defType).then(onSuccess, onError);*/
 		$http.get("/api/"+defType).then(onSuccess, onError);
 		$scope.message = defType + definitionsMessage;
 	};
@@ -223,7 +217,6 @@ var DefinitionsController = function($scope, $location, $anchorScroll, $http){
 	var addDefintions = function(){
 		console.log($scope.definitionType.selected);
 		var defType = $scope.definitionType.selected;
-		/*$http.post("/addDefinitions/"+defType,$scope.definition,config).then(onAddSuccess, onAddError);*/
 		$http.post("/api/"+defType,$scope.definition,config).then(onAddSuccess, onAddError);
 	}
 	
@@ -234,32 +227,19 @@ var DefinitionsController = function($scope, $location, $anchorScroll, $http){
 app.service('breadCrumbsService', function(){
 	var navigations = new Array();
 	var keys = new Array();
-	/*var isHomeAdded = false;*/
 	var prefix = "cerebro.html";
-	/*var homeKey = "Home";
-	var homeLink = prefix+"#home"*/
 	
 	this.addBreadCrumb = function(name, link){
-		/*if(!isHomeAdded){
-			navigations.push({"name": homeKey,"link": homeLink});
-			keys.push(homeKey);
-		}*/
 		link = prefix + link;
 		if(keys.indexOf(name) == -1){
 			navigations.push({name, link});
 			keys.push(name);
 		}
-		/*isHomeAdded = true;*/
 	}
 	
 	this.getNavigations = function(){
 		return navigations; 
 	};
-	
-	/*this.resetBreadCrumbs = function(){
-		navigations = new Array();
-		isHomeAdded = false;
-	}*/
 	
 	this.popBreadCrumb = function(index){
 		index = index + 1;

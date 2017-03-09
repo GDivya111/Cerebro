@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,11 +30,6 @@ public class CerebroController {
     @Autowired
     @Qualifier("cerebroServiceImpl")
     private CerebroService cerebroService;
-
-    @RequestMapping(value = "/addDefinitions/{type}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addDefinitions(@RequestBody Definition definition, @PathVariable("type") String definitionType) {
-	cerebroService.saveDefinition(definition, definitionType);
-    }
 
     @RequestMapping(value = "/uploadDefinitions/{sheetName}/{definitionType}/{fileName}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
     public String uploadDefinitions(@PathVariable("sheetName") String sheetName, @PathVariable("definitionType") String definitionType,
