@@ -190,7 +190,8 @@ var DefinitionsController = function($scope, $location, $anchorScroll, $http){
 		         {key: "Groovy", value: "groovyDefs"},
 		         {key: "Maven", value: "mavenDefs"},
 		         {key: "Jenkins", value: "jenkinsDefs"},
-		         {key: "MongoDB", value: "mongodbDefs"}]
+		         {key: "MongoDB", value: "mongodbDefs"},
+		         {key: "Docker", value: "dockerDefs"}]
 	};
 	
 	var onSuccess = function(response){
@@ -222,7 +223,8 @@ var DefinitionsController = function($scope, $location, $anchorScroll, $http){
 	var addDefintions = function(){
 		console.log($scope.definitionType.selected);
 		var defType = $scope.definitionType.selected;
-		$http.post("/addDefinitions/"+defType,$scope.definition,config).then(onAddSuccess, onAddError);
+		/*$http.post("/addDefinitions/"+defType,$scope.definition,config).then(onAddSuccess, onAddError);*/
+		$http.post("/api/"+defType,$scope.definition,config).then(onAddSuccess, onAddError);
 	}
 	
 	$scope.getDefinitions = getDefinitions;
