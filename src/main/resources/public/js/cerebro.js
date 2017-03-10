@@ -187,7 +187,8 @@ var DefinitionsController = function($scope, $location, $anchorScroll, $http){
 		         {key: "Maven", value: "mavenDefs"},
 		         {key: "Jenkins", value: "jenkinsDefs"},
 		         {key: "MongoDB", value: "mongodbDefs"},
-		         {key: "Docker", value: "dockerDefs"}]
+		         {key: "Docker", value: "dockerDefs"},
+		         {key: "Mockito", value: "mockitoDefs"}]
 	};
 	
 	var onSuccess = function(response){
