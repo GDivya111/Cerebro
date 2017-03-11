@@ -1,47 +1,18 @@
-<div class="page-header">
+<div class="page-header" id="1">
     <h3>Spring MVC Form Validation with Xml</h3>      
 </div>
 
-<div class="panel panel-primary" id="1"><div class="panel-heading">Create Web project using Maven</div><div class="panel-body">
+<div class="panel panel-primary" ><div class="panel-heading">Create Web project using Maven from cmd</div><div class="panel-body">
 <pre ><code>
-E:\Backup\JavaPrep\practiceProjects\Spring\SpringMVCProjects&gt;mvn archetype:generate -DgroupId=mvc.form.validation -DartifactId=MVCFormValidation -Dversion=1.0-SNAPSHOT -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
-[INFO] Scanning for projects...
-[INFO]
-[INFO] ------------------------------------------------------------------------
-[INFO] Building Maven Stub Project (No POM) 1
-[INFO] ------------------------------------------------------------------------
-[INFO]
-[INFO] &gt;&gt;&gt; maven-archetype-plugin:2.4:generate (default-cli) &gt; generate-sources @ standalone-pom &gt;&gt;&gt;
-[INFO]
-[INFO] &lt;&lt;&lt; maven-archetype-plugin:2.4:generate (default-cli) &lt; generate-sources @ standalone-pom &lt;&lt;&lt;
-[INFO]
-[INFO] --- maven-archetype-plugin:2.4:generate (default-cli) @ standalone-pom ---
-[INFO] Generating project in Batch mode
-[INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Old (1.x) Archetype: maven-archetype-webapp:1.0
-[INFO] ----------------------------------------------------------------------------
-[INFO] Parameter: basedir, Value: E:\Backup\JavaPrep\practiceProjects\Spring\SpringMVCProjects
-[INFO] Parameter: package, Value: mvc.form.validation
-[INFO] Parameter: groupId, Value: mvc.form.validation
-[INFO] Parameter: artifactId, Value: MVCFormValidation
-[INFO] Parameter: packageName, Value: mvc.form.validation
-[INFO] Parameter: version, Value: 1.0-SNAPSHOT
-[INFO] project created from Old (1.x) Archetype in dir: E:\Backup\JavaPrep\practiceProjects\Spring\SpringMVCProjects\MVCFormValidation
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time: 12.415 s
-[INFO] Finished at: 2017-01-29T23:01:41+05:30
-[INFO] Final Memory: 13M/245M
-[INFO] ------------------------------------------------------------------------
+mvn archetype:generate -DgroupId=mvc.form.validation -DartifactId=MVCFormValidation -Dversion=1.0-SNAPSHOT -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary" id="1"><div class="panel-heading">Project Structure</div><div class="panel-body">
+<div class="panel panel-primary" ><div class="panel-heading">Project Structure</div><div class="panel-body">
 <img ng-src="images/spring/1-springMVCFormValidationXml.jpg"/>
 </div></div>
 
-<div class="panel panel-primary" id="1"><div class="panel-heading">pom.xml</div><div class="panel-body">
+<div class="panel panel-primary" ><div class="panel-heading">pom.xml</div><div class="panel-body">
 <pre ><code>
 &lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
 	xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
@@ -150,7 +121,7 @@ E:\Backup\JavaPrep\practiceProjects\Spring\SpringMVCProjects&gt;mvn archetype:ge
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary" id="1"><div class="panel-heading">web.xml</div><div class="panel-body">
+<div class="panel panel-primary" ><div class="panel-heading">web.xml</div><div class="panel-body">
 <pre ><code>
 &lt;web-app xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
  xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd&quot;
@@ -170,7 +141,7 @@ E:\Backup\JavaPrep\practiceProjects\Spring\SpringMVCProjects&gt;mvn archetype:ge
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary" id="1"><div class="panel-heading">springConfig-servlet.xml</div><div class="panel-body">
+<div class="panel panel-primary" ><div class="panel-heading">springConfig-servlet.xml</div><div class="panel-body">
 <pre ><code>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
@@ -197,7 +168,7 @@ E:\Backup\JavaPrep\practiceProjects\Spring\SpringMVCProjects&gt;mvn archetype:ge
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary" id="1"><div class="panel-heading">messages.properties</div><div class="panel-body">
+<div class="panel panel-primary" ><div class="panel-heading">messages.properties</div><div class="panel-body">
 <pre ><code>
 NotEmpty.employeeModel.firstName=First Name should not be empty
 NotEmpty.employeeModel.lastName=Last Name should not be empty
@@ -206,7 +177,7 @@ Range.employeeModel.age=Age should be in range 21 to 60
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary" id="1"><div class="panel-heading">MyController.java</div><div class="panel-body">
+<div class="panel panel-primary" ><div class="panel-heading">MyController.java</div><div class="panel-body">
 <pre ><code>
 package mvc.form.validation.controller;
 
@@ -251,7 +222,7 @@ public class MyController {
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary" id="1"><div class="panel-heading">Employee.java</div><div class="panel-body">
+<div class="panel panel-primary" ><div class="panel-heading">Employee.java</div><div class="panel-body">
 <pre ><code>
 package mvc.form.validation.model;
 
@@ -313,7 +284,7 @@ public class Employee {
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary" id="1"><div class="panel-heading">myForm.jsp</div><div class="panel-body">
+<div class="panel panel-primary" ><div class="panel-heading">myForm.jsp</div><div class="panel-body">
 <pre ><code>
 &lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=ISO-8859-1&quot; pageEncoding=&quot;ISO-8859-1&quot;%&gt;
 &lt;%@taglib prefix=&quot;form&quot; uri=&quot;http://www.springframework.org/tags/form&quot; %&gt;
@@ -361,7 +332,7 @@ public class Employee {
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary" id="1"><div class="panel-heading">empDetails.jsp</div><div class="panel-body">
+<div class="panel panel-primary" ><div class="panel-heading">empDetails.jsp</div><div class="panel-body">
 <pre ><code>
 &lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=ISO-8859-1&quot;
     pageEncoding=&quot;ISO-8859-1&quot;%&gt;
@@ -396,7 +367,7 @@ public class Employee {
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary" id="1"><div class="panel-heading">output</div><div class="panel-body">
+<div class="panel panel-primary" ><div class="panel-heading">output</div><div class="panel-body">
 <ul>
 	<li class="noBullet"><img ng-src="images/spring/2-springMVCFormValidationXml.jpg"/></li>
 	<li class="noBullet"><img ng-src="images/spring/3-springMVCFormValidationXml.jpg"/></li>
