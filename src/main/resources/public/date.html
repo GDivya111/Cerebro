@@ -21,6 +21,7 @@
 		<li><a ng-click="navigate(15)">Convert date formats</a></li>
 		<li><a ng-click="navigate(16)">Convert String java.util.Date</a></li>
 		<li><a ng-click="navigate(17)">Convert String java.time.LocalDate</a></li>
+		<li><a ng-click="navigate(18)">Print day from date</a></li>
 	</ul>
 </div></div>
 
@@ -431,4 +432,24 @@ formatter3.format(localDate4): Thu, Jul 20 2017
 localDate5: 2017-07-20T12:10:08
 formatter4.format(localDate5): Thursday, Jul 20 2017 12:10:08 PM
 </code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="18"><div class="panel-heading">Print day from date</div><div class="panel-body">
+<pre><code>
+public void getDayOfWeek() {
+	int year = 2015;
+	int month = 8;
+	int day = 5;
+
+	Calendar calendar = Calendar.getInstance();
+	calendar.set(year, month - 1, day);
+	Date date = calendar.getTime();
+	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&quot;EEEE&quot;);
+	System.out.println(simpleDateFormat.format(date).toUpperCase());
+    }
+</code></pre>
+<em>Output:</em>
+<pre>
+WEDNESDAY
+</pre>
 </div></div>
