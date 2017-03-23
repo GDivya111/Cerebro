@@ -12,6 +12,7 @@
       <select class="form-control" id="definitionType" name="definitionType" ng-model="definitionType.selected" ng-change="getDefinitions()">
       	<option ng-repeat="type in definitionType.types" value="{{type.value}}">{{type.key}}</option>
       </select>
+      <a ng-click="getDefinitions()"><span class="glyphicon glyphicon-refresh"></span></a>
       </form>
 </div>
 

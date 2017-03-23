@@ -185,7 +185,8 @@ var DefinitionsController = function($scope, $location, $anchorScroll, $http){
 		         {key: "MongoDB", value: "mongodbDefs"},
 		         {key: "Docker", value: "dockerDefs"},
 		         {key: "Mockito", value: "mockitoDefs"},
-		         {key: "Scala", value: "scalaDefs"}]
+		         {key: "Scala", value: "scalaDefs"},
+		         {key: "Multithreading", value: "concurrencyDefs"}]
 	};
 	
 	var onSuccess = function(response){
