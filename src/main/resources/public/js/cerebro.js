@@ -128,8 +128,11 @@ app.config(function($routeProvider){
 	// mongo db start
 	.when("/mongoDB",{templateUrl : "mongoDB.html",controller : "cerebroController"})
 	.when("/mongodbHelloworld",{templateUrl : "mongodbHelloworld.html",controller : "cerebroController"})
-	
 	// mongo db end
+	
+	// design patterns start
+	.when("/designPatterns",{templateUrl : "designPatterns.html",controller : "cerebroController"})
+	// design patterns end
 	
 	// definitions start
 	.when("/definitions",{templateUrl : "definitions.html",controller : "definitionsController"})
