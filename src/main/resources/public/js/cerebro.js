@@ -123,6 +123,7 @@ app.config(function($routeProvider){
 	.when("/springRestDELETE",{templateUrl : "springRestDELETE.html",controller : "cerebroController"})
 	.when("/jerseyFileUpload",{templateUrl : "jerseyFileUpload.html",controller : "cerebroController"})
 	.when("/jerseyFileDownload",{templateUrl : "jerseyFileDownload.html",controller : "cerebroController"})
+	.when("/jerseyExceptionHandling",{templateUrl : "jerseyExceptionHandling.html",controller : "cerebroController"})
 	//RESTful web service end
 	
 	// mongo db start
