@@ -135,6 +135,11 @@ app.config(function($routeProvider){
 	.when("/designPatterns",{templateUrl : "designPatterns.html",controller : "cerebroController"})
 	// design patterns end
 	
+	// design patterns start
+	.when("/jdkTools",{templateUrl : "jdkTools.html",controller : "cerebroController"})
+	.when("/native2ascii",{templateUrl : "native2ascii.html",controller : "cerebroController"})
+	// design patterns end
+	
 	// definitions start
 	.when("/definitions",{templateUrl : "definitions.html",controller : "definitionsController"})
 	.when("/addDefinitions",{templateUrl : "addDefinitions.html",controller : "definitionsController"});
