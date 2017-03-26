@@ -17,6 +17,7 @@ app.config(function($routeProvider){
 	.when("/multiThreading",{templateUrl : "multiThreading.html",controller : "cerebroController"})
 	.when("/dynamicProxies",{templateUrl : "dynamicProxies.html",controller : "cerebroController"})
 	.when("/java8CollectionStreams",{templateUrl : "java8CollectionStreams.html",controller : "cerebroController"})
+	.when("/java8Function",{templateUrl : "java8Function.html",controller : "cerebroController"})
 	// core java end
 	
 	// hibernate start
