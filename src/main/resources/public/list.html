@@ -14,6 +14,7 @@
 		<li><a ng-click="navigate(6)">Prepare sorted list sort by date using java 8 collection streams</a></li>
 		<li><a ng-click="navigate(9)">Get another list using properties of main object</a></li>
 		<li><a ng-click="navigate(10)">Prepare new list with unique elements in two lists</a></li>
+		<li><a ng-click="navigate(11)">Create an immutable List</a></li>
 	</ul>
 </div></div>
 
@@ -399,5 +400,39 @@ public void prepareNewListWithUniqueValues() {
 <em>Output</em>
 <pre><code>
 [a, b, c, d, e, f, g, h]
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="10"><div class="panel-heading" >Prepare new list with unique elements in two lists</div><div class="panel-body">
+<pre><code>
+	<em>
+	/**
+	 * Create immutable list
+	 */
+	</em>
+	public void immutableList() {
+		List&lt;String&gt; list = new ArrayList&lt;&gt;();
+		list.add(&quot;a&quot;);
+		list.add(&quot;b&quot;);
+		list.add(&quot;c&quot;);
+
+		System.out.println(&quot;list: &quot; + list);
+		List&lt;String&gt; immutableList = Collections.unmodifiableList(list);
+		System.out.println(&quot;immutableList: &quot; + immutableList);
+
+		try {
+			immutableList.add(&quot;d&quot;);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+</code></pre>
+<em>Output:</em>
+<pre><code>
+list: [a, b, c]
+immutableList: [a, b, c]
+java.lang.UnsupportedOperationException
+	at java.util.Collections$UnmodifiableCollection.add(Collections.java:1055)
+	at core.java.collections.ListPractice.immutableList(ListPractice.java:243)
 </code></pre>
 </div></div>
