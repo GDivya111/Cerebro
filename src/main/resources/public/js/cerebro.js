@@ -69,6 +69,8 @@ app.config(function($routeProvider){
 	.when("/springMVCHelloWorldJavaConfig",{templateUrl : "springMVCHelloWorldJavaConfig.html",controller : "cerebroController"})
 	.when("/springJavaMultiConfig",{templateUrl : "springJavaMultiConfig.html",controller : "cerebroController"})
 	.when("/springResourceBundleXml",{templateUrl : "springResourceBundleXml.html",controller : "cerebroController"})
+	.when("/beanPostProcessorXml",{templateUrl : "beanPostProcessorXml.html",controller : "cerebroController"})
+	.when("/propertiesInjectionXml",{templateUrl : "propertiesInjectionXml.html",controller : "cerebroController"})
 	// spring end
 	
 	// tools start
