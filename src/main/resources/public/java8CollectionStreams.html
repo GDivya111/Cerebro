@@ -32,6 +32,11 @@
 		<li><a ng-click="navigate(25)">Sort of list of Employee objects</a></li>
 		<li><a ng-click="navigate(26)">flatMap()</a></li>
 		<li><a ng-click="navigate(27)">Remove duplicates in a list</a></li>
+		<li><a ng-click="navigate(28)">Print Random numbers</a></li>
+		<li><a ng-click="navigate(29)">Unique Squares</a></li>
+		<li><a ng-click="navigate(30)">Count Empty Strings</a></li>
+		<li><a ng-click="navigate(31)">Print Non Empty Strings</a></li>
+		<li><a ng-click="navigate(32)">Print 2 Non Empty Strings</a></li>
 		<li><a ng-href="https://github.com/avinashbabudonthu/CoreJavaPractice/raw/master/src/main/java/core/java/java8/collections/streams/CollectionsStreamsListPractice.java" target="_blank">Soure Code</a></li>
 	</ul>
 </div></div>
@@ -1970,4 +1975,147 @@ public void removeDuplicatesInList() {
 <pre><code>
 list1Result: abcde
 </code></pre>  	
+</div></div>
+
+<div class="panel panel-primary" id="28"><div class="panel-heading">Print Random numbers</div><div class="panel-body">
+<pre ><code>
+<em>
+/** Print 10 random numbers */
+</em>
+public void printRandomNumbers() {
+		Random random = new Random(10);
+
+		// print 10 random numbers
+		System.out.println(&quot;----- 10 random numbers ---------- &quot;);
+		random.ints().limit(10).forEach(System.out::println);
+
+		// 10 random numbers where value &gt; 10
+		System.out.println(&quot;---------10 random numbers and number &gt; 10 ---------------------------&quot;);
+		random.ints().limit(10).filter(e -&gt; e &gt; 10).forEach(System.out::println);
+
+		// 10 random numbers in sorted order
+		System.out.println(&quot;----- 10 random numbers in sorted order ------------------&quot;);
+		random.ints().limit(10).sorted().forEach(System.out::println);
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+----- 10 random numbers ---------- 
+-1157793070
+1913984760
+1107254586
+1773446580
+254270492
+-1408064384
+1048475594
+1581279777
+-778209333
+1532292428
+---------10 random numbers and number &gt; 10 ---------------------------
+1591762646
+1762380960
+1233758972
+1504499906
+183138476
+----- 10 random numbers in sorted order ------------------
+-1339421797
+-347474078
+-331953347
+-162763079
+35545786
+134578271
+498897016
+772426541
+813611501
+1892459190
+</code></pre> 
+</div></div>
+
+<div class="panel panel-primary" id="29"><div class="panel-heading">Unique Squares</div><div class="panel-body">
+<pre ><code>
+<em>
+/** Unique squares of numbers */
+</em>
+public void uniqueSquares() {
+		List&lt;Integer&gt; numbers = Arrays.asList(1, 2, 2, 3, 3, 4, 4, 5, 6);
+		// squares
+		numbers.stream().map(number -&gt; number * number).forEach(System.out::println);
+
+		// distinct squares
+		System.out.println(&quot;------- distinct numbers -----------&quot;);
+		numbers.stream().map(num -&gt; num * num).distinct().forEach(System.out::println);
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+1
+4
+4
+9
+9
+16
+16
+25
+36
+------- distinct numbers -----------
+1
+4
+9
+16
+25
+36
+</code></pre> 
+</div></div>
+
+<div class="panel panel-primary" id="30"><div class="panel-heading">Count Empty Strings</div><div class="panel-body">
+<pre ><code>
+<em>
+/** print no.of empty strings */
+</em>
+public void countEmptyStrings() {
+		List&lt;String&gt; strings = Arrays.asList(&quot;a&quot;, &quot;&quot;, &quot;b&quot;, &quot;&quot;, &quot;c&quot;, &quot;&quot;, &quot;d&quot;);
+		System.out.println(&quot;number of empty strings: &quot;
+				+ strings.stream().filter(str -&gt; str.isEmpty()).count());
+
+		// using parallel stream
+		System.out.println(&quot;number of empty string using parallel stream: &quot; + strings.parallelStream().filter(e -&gt; e.isEmpty()).count());
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+number of empty strings: 3
+number of empty string using parallel stream: 3
+</code></pre> 
+</div></div>
+
+<div class="panel panel-primary" id="31"><div class="panel-heading">Print Non Empty Strings</div><div class="panel-body">
+<pre ><code>
+<em>
+/** print non empty strings */
+</em>
+public void printNonEmptyStrings() {
+		List&lt;String&gt; strings = Arrays.asList(&quot;a&quot;, &quot;&quot;, &quot;b&quot;, &quot;&quot;, &quot;c&quot;, &quot;&quot;, &quot;d&quot;);
+		System.out.println(&quot;non empty strings list: &quot; + strings.stream().filter(str -&gt; !str.isEmpty()).collect(Collectors.toList()));
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+non empty strings list: [a, b, c, d]
+</code></pre> 
+</div></div>
+
+<div class="panel panel-primary" id="32"><div class="panel-heading">Print 2 Non Empty Strings</div><div class="panel-body">
+<pre ><code>
+<em>
+/** print non empty strings and limit the output to 2 strings */
+</em>
+public void printTwoNonEmptyStrings() {
+		List&lt;String&gt; strings = Arrays.asList(&quot;a&quot;, &quot;&quot;, &quot;b&quot;, &quot;&quot;, &quot;c&quot;, &quot;&quot;, &quot;d&quot;);
+		System.out.println(&quot;First two non empty strings: &quot; + strings.stream().filter(str -&gt; !str.isEmpty()).limit(2).collect(Collectors.toList()));
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+First two non empty strings: [a, b]
+</code></pre> 
 </div></div>
