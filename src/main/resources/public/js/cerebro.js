@@ -138,10 +138,15 @@ app.config(function($routeProvider){
 	.when("/designPatterns",{templateUrl : "designPatterns.html",controller : "cerebroController"})
 	// design patterns end
 	
-	// design patterns start
+	// JDK tools start
 	.when("/jdkTools",{templateUrl : "jdkTools.html",controller : "cerebroController"})
 	.when("/native2ascii",{templateUrl : "native2ascii.html",controller : "cerebroController"})
-	// design patterns end
+	// JDK tools end
+
+	// JVM, Garbage Collection (GC) start
+	.when("/jvm",{templateUrl : "jvm.html",controller : "cerebroController"})
+	.when("/gc",{templateUrl : "gc.html",controller : "cerebroController"})
+	// JVM, Garbage Collection (GC)  end
 	
 	// definitions start
 	.when("/definitions",{templateUrl : "definitions.html",controller : "definitionsController"})
