@@ -327,6 +327,19 @@ public void converDateFormat1() throws ParseException {
 	Date date3 = fromFormat3.parse(&quot;27/01/2017&quot;);
 	String convertedDate3 = toFormat3.format(date3);
 	System.out.println(&quot;convertedDate3: &quot; + convertedDate3);
+	
+	<em> /*convert Thu Apr 20 22:52:16 IST 2017 to 2017/04/20*/</em>
+	SimpleDateFormat fromFormat4 = new SimpleDateFormat(&quot;E MMM dd HH:mm:ss Z yyyy&quot;);
+	SimpleDateFormat toFormat4 = new SimpleDateFormat(&quot;yyyy/MM/dd&quot;);
+	Date date4 = fromFormat4.parse(&quot;Thu Apr 20 22:52:16 IST 2017&quot;);
+	String convertedDate4 = toFormat4.format(date4);
+	System.out.println(&quot;convertedDate4: &quot; + convertedDate4);
+
+	<em>/* convert new Date to yyyy/MM/dd*/</em>
+	Date date5 = new Date();
+	DateFormat toFormat5 = new SimpleDateFormat(&quot;yyyy/MM/dd&quot;);
+	String convertedDate5 = toFormat5.format(date5);
+	System.out.println(&quot;convertedDate5: &quot; + convertedDate5);
     }
 </code></pre>
 <em>Ouptut</em>
@@ -334,6 +347,8 @@ public void converDateFormat1() throws ParseException {
 convertedDate1: 01/27/2017
 convertedDate2: 27/01/2017
 convertedDate3: 2017-01-27
+convertedDate4: 2017/04/20
+convertedDate5: 2017/04/24
 </code></pre>
 </div></div>
 
