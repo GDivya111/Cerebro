@@ -36,6 +36,7 @@ app.config(function($routeProvider){
 	.when("/javadocPlugin",{templateUrl : "javadocPlugin.html",controller : "cerebroController"})
 	.when("/warPlugin",{templateUrl : "warPlugin.html",controller : "cerebroController"})
 	.when("/pmdPlugin",{templateUrl : "pmdPlugin.html",controller : "cerebroController"})
+	.when("/mavenJacoco",{templateUrl : "mavenJacoco.html",controller : "cerebroController"})
 	// maven end
 	
 	// spring - start
