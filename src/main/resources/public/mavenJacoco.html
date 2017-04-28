@@ -5,11 +5,18 @@
 <div class="panel panel-primary"><div class="panel-heading">Steps</div><div class="panel-body">
 	<ul>
 		<li>Create Core Java project with Maven</li>
-		<li>Add src classes and test classes</li>
 		<li>update maven-compiler-plugin, jacoco-maven-plugin, maven-surefire-plugin in pom.xml</li>
+		<li>Add src classes and test classes</li>
 		<li>Run mvn clean test</li>
 		<li>Open target/site/jacoco-ut/index.html</li>
 	</ul>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Create core java project using maven from cmd</div><div class="panel-body">
+<pre ><code>
+mvn archetype:generate -DgroupId=com.maven.jacoco.integration -DartifactId=MavenJacocoIntegration -Dversion=1.0 
+-DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+</code></pre>
 </div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">Project in Eclipse</div><div class="panel-body">
@@ -175,6 +182,10 @@ public class AppTest {
 	}
 }
 </code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">run mvn clean test</div><div class="panel-body">
+<img ng-src="images/maven/mavenJacoco3.jpg"/>
 </div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">Output</div><div class="panel-body">
