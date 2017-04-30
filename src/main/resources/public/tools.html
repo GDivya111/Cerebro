@@ -58,7 +58,12 @@
 <div class="panel panel-primary"><div class="panel-heading">Code Coverage Tools</div><div class="panel-body">
 <ul>
 	<li>EclEmma</li>
-	<li>Jacoco</li>
+	<li>Jacoco
+		<ul>
+			<li><a ng-href="#mavenJacoco" ng-click="buildBreadCrumbs('Maven Jacoco Integration', '#mavenJacoco')">Maven Jacoco Integration</a></li>
+			<li><a ng-href="#sonarqubeCodeCoverage" ng-click="buildBreadCrumbs('Code Coverage report in Sonarqube with Jacoco', '#sonarqubeCodeCoverage')">Jacoco + Maven + Sonarqube</a></li>
+		</ul>
+	</li>
 	<li>Cobertura</li>
 </ul>
 </div></div>
@@ -68,6 +73,7 @@
 	<li>Sonarqube
 		<ul>
 			<li><a ng-href="#sonarSetup" ng-click="buildBreadCrumbs('Setup Sonarqube to run with Sonar Scanner', '#sonarSetup')">Setup Sonarqube to run with Sonar Scanner</a></li>
+			<li><a ng-href="#sonarqubeCodeCoverage" ng-click="buildBreadCrumbs('Code Coverage report in Sonarqube with Jacoco', '#sonarqubeCodeCoverage')">Code Coverage report in Sonarqube with Jacoco</a></li>
 		</ul>
 	</li>
 	<li>Sonarlint</li>

@@ -78,7 +78,8 @@ app.config(function($routeProvider){
 	.when("/tools",{templateUrl : "tools.html",controller : "cerebroController"})
 	.when("/jacksonReadJson",{templateUrl : "readJson.html",controller : "cerebroController"})
 	.when("/openCSV",{templateUrl : "openCSV.html",controller : "cerebroController"})
-	.when("/sonarSetup",{templateUrl : "sonarSetup.html",controller : "cerebroController"})	
+	.when("/sonarSetup",{templateUrl : "sonarSetup.html",controller : "cerebroController"})
+	.when("/sonarqubeCodeCoverage",{templateUrl : "sonarqubeCodeCoverage.html",controller : "cerebroController"})
 	// tools end
 	
 	// unit testing start
