@@ -20,6 +20,7 @@ app.config(function($routeProvider){
 	.when("/java8Function",{templateUrl : "java8Function.html",controller : "cerebroController"})
 	.when("/immutableObject",{templateUrl : "immutableObject.html",controller : "cerebroController"})
 	.when("/singletonObject",{templateUrl : "singletonObject.html",controller : "cerebroController"})
+	.when("/hashMapInternals",{templateUrl : "hashMapInternals.html",controller : "cerebroController"})
 	// core java end
 	
 	// hibernate start
