@@ -75,6 +75,18 @@ app.config(function($routeProvider){
 	.when("/springResourceBundleXml",{templateUrl : "springResourceBundleXml.html",controller : "cerebroController"})
 	.when("/beanPostProcessorXml",{templateUrl : "beanPostProcessorXml.html",controller : "cerebroController"})
 	.when("/propertiesInjectionXml",{templateUrl : "propertiesInjectionXml.html",controller : "cerebroController"})
+	
+	.when("/springBootStaticFiles",{templateUrl : "springBootStaticFiles.html",controller : "cerebroController"})
+	.when("/springBootAngularJs",{templateUrl : "springBootAngularJs.html",controller : "cerebroController"})
+	.when("/springBootMultiplePropsFiles",{templateUrl : "springBootMultiplePropsFiles.html",controller : "cerebroController"})
+	.when("/injectPropertyAsString",{templateUrl : "injectPropertyAsString.html",controller : "cerebroController"})
+	.when("/injectStringFromPropsFile",{templateUrl : "injectStringFromPropsFile.html",controller : "cerebroController"})
+	.when("/springBootDataSource",{templateUrl : "springBootDataSource.html",controller : "cerebroController"})
+	.when("/springBootFlywayDB",{templateUrl : "springBootFlywayDB.html",controller : "cerebroController"})
+	.when("/springBootMultipleDataSources",{templateUrl : "springBootMultipleDataSources.html",controller : "cerebroController"})
+	.when("/springBootMockito",{templateUrl : "springBootMockito.html",controller : "cerebroController"})
+	.when("/springBootIT",{templateUrl : "springBootIT.html",controller : "cerebroController"})
+	.when("/springBootWebIT",{templateUrl : "springBootWebIT.html",controller : "cerebroController"})
 	// spring end
 	
 	// tools start
