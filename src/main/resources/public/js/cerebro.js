@@ -18,6 +18,8 @@ app.config(function($routeProvider){
 	.when("/dynamicProxies",{templateUrl : "dynamicProxies.html",controller : "cerebroController"})
 	.when("/java8CollectionStreams",{templateUrl : "java8CollectionStreams.html",controller : "cerebroController"})
 	.when("/java8Function",{templateUrl : "java8Function.html",controller : "cerebroController"})
+	.when("/immutableObject",{templateUrl : "immutableObject.html",controller : "cerebroController"})
+	.when("/singletonObject",{templateUrl : "singletonObject.html",controller : "cerebroController"})
 	// core java end
 	
 	// hibernate start
@@ -100,6 +102,7 @@ app.config(function($routeProvider){
 	// DB start
 	.when("/db",{templateUrl : "db.html",controller : "cerebroController"})
 	.when("/h2DB",{templateUrl : "h2DB.html",controller : "cerebroController"})
+	.when("/practiceDBScripts",{templateUrl : "practiceDBScripts.html",controller : "cerebroController"})
 	// DB end
 	
 	// Scala start
