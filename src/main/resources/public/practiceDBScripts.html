@@ -8,6 +8,9 @@
 <li>DEPT table and Insert scripts</li>
 <li>EMP table and Insert scripts</li>
 <li>SALGRADE table and Insert scripts</li>
+<li>Department.java to map DEPT table</li>
+<li>Employee.java to map EMP table</li>
+<li>SalaryGrade.java to map SALGRADE table</li>
 </ul>
 </div></div>
 
@@ -124,5 +127,275 @@ INSERT INTO SALGRADE (HISAL, LOSAL, GRADE)
 VALUES (5, 3001, 9999);
 
 COMMIT;
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Department.java</div><div class="panel-body">
+<pre><code>
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = &quot;DEPT&quot;)
+public class Department {
+
+    private Integer id;
+    private String deptName;
+    private String location;
+    private Set&lt;Employee&gt; employees;
+
+    public Department(Integer id, String deptName, String location, Set&lt;Employee&gt; employees) {
+	this.id = id;
+	this.deptName = deptName;
+	this.location = location;
+	this.employees = employees;
+    }
+
+    public Department() {
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = &quot;DEPTNO&quot;)
+    public Integer getId() {
+	return id;
+    }
+
+    public void setId(Integer id) {
+	this.id = id;
+    }
+
+    @Column(name = &quot;DNAME&quot;)
+    public String getDeptName() {
+	return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+	this.deptName = deptName;
+    }
+
+    @Column(name = &quot;LOC&quot;)
+    public String getLocation() {
+	return location;
+    }
+
+    public void setLocation(String location) {
+	this.location = location;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = &quot;DEPTNO&quot;, referencedColumnName = &quot;DEPTNO&quot;)
+    public Set&lt;Employee&gt; getEmployees() {
+	return employees;
+    }
+
+    public void setEmployees(Set&lt;Employee&gt; employees) {
+	this.employees = employees;
+    }
+
+    @Override
+    public String toString() {
+	return &quot;Department [id=&quot; + id + &quot;, deptName=&quot; + deptName + &quot;, location=&quot; + location + &quot;, employees=&quot; + employees + &quot;]&quot;;
+    }
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Employee.java</div><div class="panel-body">
+<pre><code>
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = &quot;EMP&quot;)
+public class Employee {
+
+    private Integer id;
+    private String name;
+    private String job;
+    private Long salary;
+    private Long comm;
+    private Integer manager;
+    private Date hiredate;
+    private Boolean active;
+    private Department department;
+
+    public Employee() {
+    }
+
+    public Employee(Integer id, String name, String job, Long salary, Long comm, Integer manager, Date hiredate) {
+	super();
+	this.id = id;
+	this.name = name;
+	this.job = job;
+	this.salary = salary;
+	this.comm = comm;
+	this.manager = manager;
+	this.hiredate = hiredate;
+    }
+
+    @Id
+    @Column(name = &quot;EMPNO&quot;)
+    public Integer getId() {
+	return id;
+    }
+
+    public void setId(Integer id) {
+	this.id = id;
+    }
+
+    @Column(name = &quot;ENAME&quot;)
+    public String getName() {
+	return name;
+    }
+
+    public void setName(String name) {
+	this.name = name;
+    }
+
+    @Column(name = &quot;JOB&quot;)
+    public String getJob() {
+	return job;
+    }
+
+    public void setJob(String job) {
+	this.job = job;
+    }
+
+    @Column(name = &quot;SAL&quot;)
+    public Long getSalary() {
+	return salary;
+    }
+
+    public void setSalary(Long salary) {
+	this.salary = salary;
+    }
+
+    @Column(name = &quot;COMM&quot;)
+    public Long getComm() {
+	return comm;
+    }
+
+    public void setComm(Long comm) {
+	this.comm = comm;
+    }
+
+    @Column(name = &quot;MGR&quot;)
+    public Integer getManager() {
+	return manager;
+    }
+
+    public void setManager(Integer manager) {
+	this.manager = manager;
+    }
+
+    @Column(name = &quot;HIREDATE&quot;)
+    public Date getHiredate() {
+	return hiredate;
+    }
+
+    public void setHiredate(Date hiredate) {
+	this.hiredate = hiredate;
+    }
+
+    @Column(name = &quot;ACTIVE&quot;)
+    public Boolean getActive() {
+	return active;
+    }
+
+    public void setActive(Boolean active) {
+	this.active = active;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = &quot;DEPTNO&quot;, referencedColumnName = &quot;DEPTNO&quot;)
+    public Department getDepartment() {
+	return department;
+    }
+
+    public void setDepartment(Department department) {
+	this.department = department;
+    }
+
+    @Override
+    public String toString() {
+    return &quot;Employee [id=&quot; + id + &quot;, name=&quot; + name + &quot;, job=&quot; + job + &quot;, salary=&quot; + salary + &quot;, comm=&quot; + comm + &quot;, manager=&quot; + manager
+    	+ &quot;, hiredate=&quot; + hiredate + &quot;, active=&quot; + active + &quot;, department=&quot; + department + &quot;]&quot;;
+    }
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">SalaryGrade.java</div><div class="panel-body">
+<pre><code>
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = &quot;SALGRADE&quot;)
+public class SalaryGrade {
+
+    private Long highSalary;
+    private Long lowSalary;
+    private Long grade;
+
+    public SalaryGrade(Long highSalary, Long lowSalary, Long grade) {
+	this.highSalary = highSalary;
+	this.lowSalary = lowSalary;
+	this.grade = grade;
+    }
+
+    public SalaryGrade() {
+    }
+
+    @Id
+    @Column(name = &quot;GRADE&quot;)
+    public Long getGrade() {
+	return grade;
+    }
+
+    public void setGrade(Long grade) {
+	this.grade = grade;
+    }
+
+    @Column(name = &quot;HISAL&quot;)
+    public Long getHighSalary() {
+	return highSalary;
+    }
+
+    public void setHighSalary(Long highSalary) {
+	this.highSalary = highSalary;
+    }
+
+    @Column(name = &quot;LOSAL&quot;)
+    public Long getLowSalary() {
+	return lowSalary;
+    }
+
+    public void setLowSalary(Long lowSalary) {
+	this.lowSalary = lowSalary;
+    }
+
+}
 </code></pre>
 </div></div>
