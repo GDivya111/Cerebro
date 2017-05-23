@@ -101,6 +101,7 @@ app.config(function($routeProvider){
 	.when("/unitTesting",{templateUrl : "unitTesting.html",controller : "cerebroController"})
 	.when("/junit",{templateUrl : "junit.html",controller : "cerebroController"})
 	.when("/junitHelloWorld",{templateUrl : "junitHelloWorld.html",controller : "cerebroController"})
+	.when("/mockito",{templateUrl : "mockito.html",controller : "cerebroController"})
 	// unit testing end
 	
 	// ant start
