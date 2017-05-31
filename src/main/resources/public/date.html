@@ -4,6 +4,7 @@
 
 <div class="panel panel-primary"><div class="panel-heading">Topics</div><div class="panel-body">
 	<ul>
+		<li><a ng-click="navigate(20)">Conventions for date format conversion</a></li>
 		<li><a ng-click="navigate(1)">Creating java.time.Clock object</a></li>
 		<li><a ng-click="navigate(2)">java.time.LocalDate</a></li>
 		<li><a ng-click="navigate(3)">java.time.LocalTime</a></li>
@@ -22,7 +23,85 @@
 		<li><a ng-click="navigate(16)">Convert String java.util.Date</a></li>
 		<li><a ng-click="navigate(17)">Convert String java.time.LocalDate</a></li>
 		<li><a ng-click="navigate(18)">Print day from date</a></li>
+		<li><a ng-click="navigate(19)">Convert java.time.LocalDateTime to java.sql.Timestamp</a></li>
 	</ul>
+</div></div>
+
+<div class="panel panel-primary" id="20"><div class="panel-heading">Conventions for date format conversion</div><div class="panel-body">
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Symbol (or) method call</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>java.util.Date to String conversion</td>
+        <td>java.text.DateFormat.format</td>
+      </tr>
+      <tr>
+        <td>String to java.util.Date conversion</td>
+        <td>java.text.DateFormat.parse</td>
+      </tr>
+      <tr>
+        <td>String to java.time.LocalDate conversion</td>
+        <td>java.time.LocalDate.parse(stringDate, java.time.format.DateTimeFormatter.ofPattern(input-date-format))</td>
+      </tr>
+      <tr>
+      	<td>MM</td>
+      	<td>Month in Number format</td>
+      </tr>
+      <tr>
+      	<td>MMM</td>
+      	<td>Month in English in shot (or) full form </td>
+      </tr>
+      <tr>
+      	<td>dd</td>
+      	<td>Date in 2 digits</td>
+      </tr>
+      <tr>
+      	<td>d</td>
+      	<td>Date in single digit</td>
+      </tr>
+      <tr>
+      	<td>E</td>
+      	<td>Day in shot form</td>
+      </tr>
+      <tr>
+      	<td>EEEE</td>
+      	<td>Day in full form</td>
+      </tr>
+      <tr>
+      	<td>yyyy</td>
+      	<td>Four digit year</td>
+      </tr>
+      <tr>
+      	<td>HH</td>
+      	<td>24 hours timeline</td>
+      </tr>
+      <tr>
+      	<td>hh</td>
+      	<td>12 hours timeline</td>
+      </tr>
+      <tr>
+      	<td>mm</td>
+      	<td>Minutes</td>
+      </tr>
+      <tr>
+      	<td>ss</td>
+      	<td>Seconds</td>
+      </tr>
+      <tr>
+      	<td>a</td>
+      	<td>AM/PM</td>
+      </tr>
+      <tr>
+      	<td>Z</td>
+      	<td>Time Zone</td>
+      </tr>
+    </tbody>
+  </table>
 </div></div>
 
 <div class="panel panel-primary" id="1"><div class="panel-heading">Creating java.time.Clock object</div><div class="panel-body"><pre><code>
@@ -400,7 +479,10 @@ simpleDateFormat4.format(convertedDate4): Thursday, Jul 20 2017 12:10:08 PM
 
 <div class="panel panel-primary" id="17"><div class="panel-heading">Convert String java.time.LocalDate</div><div class="panel-body">
 <pre><code>
-public void convertStrintToLocalDate() {
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+
+public void convertStringToLocalDate() {
 	<em>// 10/07/2017</em>
 	String date1 = &quot;20/07/2017&quot;;
 	DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern(&quot;d/MM/yyyy&quot;);
@@ -451,6 +533,10 @@ formatter4.format(localDate5): Thursday, Jul 20 2017 12:10:08 PM
 
 <div class="panel panel-primary" id="18"><div class="panel-heading">Print day from date</div><div class="panel-body">
 <pre><code>
+import java.util.Calendar;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 public void getDayOfWeek() {
 	int year = 2015;
 	int month = 8;
@@ -466,5 +552,26 @@ public void getDayOfWeek() {
 <em>Output:</em>
 <pre>
 WEDNESDAY
+</pre>
+</div></div>
+
+<div class="panel panel-primary" id="19"><div class="panel-heading">Convert java.time.LocalDateTime to java.sql.Timestamp</div><div class="panel-body">
+<pre><code>
+import java.time.LocalDateTime;
+import java.time.Clock;
+import java.sql.Timestamp;
+import java.time.ZoneOffset;
+
+public void convertLocalDateTimeToTimestamp() {
+ LocalDateTime localDateTime = LocalDateTime.now(Clock.systemDefaultZone());
+ System.out.println(&quot;localDateTime: &quot; + localDateTime);
+ Timestamp timestamp = Timestamp.from(localDateTime.toInstant(ZoneOffset.ofHours(0)));
+ System.out.println(&quot;timestamp: &quot; + timestamp);
+}
+</code></pre>
+<em>Output:</em>
+<pre>
+localDateTime: 2017-05-30T21:29:25.097
+timestamp: 2017-05-31 02:59:25.097
 </pre>
 </div></div>

@@ -146,6 +146,7 @@ app.config(function($routeProvider){
 	.when("/jerseyFileUpload",{templateUrl : "jerseyFileUpload.html",controller : "cerebroController"})
 	.when("/jerseyFileDownload",{templateUrl : "jerseyFileDownload.html",controller : "cerebroController"})
 	.when("/jerseyExceptionHandling",{templateUrl : "jerseyExceptionHandling.html",controller : "cerebroController"})
+	.when("/springRestPostPolymorphism",{templateUrl : "springRestPostPolymorphism.html",controller : "cerebroController"})
 	//RESTful web service end
 	
 	// mongo db start
