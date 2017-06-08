@@ -40,6 +40,8 @@ app.config(function($routeProvider){
 	.when("/warPlugin",{templateUrl : "warPlugin.html",controller : "cerebroController"})
 	.when("/pmdPlugin",{templateUrl : "pmdPlugin.html",controller : "cerebroController"})
 	.when("/mavenJacoco",{templateUrl : "mavenJacoco.html",controller : "cerebroController"})
+	.when("/mavenAssemblyPlugin",{templateUrl : "mavenAssemblyPlugin.html",controller : "cerebroController"})
+	.when("/mavenJarPlugin",{templateUrl : "mavenJarPlugin.html",controller : "cerebroController"})
 	// maven end
 	
 	// spring - start
@@ -83,6 +85,13 @@ app.config(function($routeProvider){
 	.when("/springBootMockito",{templateUrl : "springBootMockito.html",controller : "cerebroController"})
 	.when("/springBootIT",{templateUrl : "springBootIT.html",controller : "cerebroController"})
 	.when("/springBootWebIT",{templateUrl : "springBootWebIT.html",controller : "cerebroController"})
+	.when("/springBootCustomDataSource",{templateUrl : "springBootCustomDataSource.html",controller : "cerebroController"})
+	.when("/springRestExceptionHandling1",{templateUrl : "springRestExceptionHandling1.html",controller : "cerebroController"})
+	.when("/springRestExceptionHandling2",{templateUrl : "springRestExceptionHandling2.html",controller : "cerebroController"})
+	.when("/springRestExceptionHandling3",{templateUrl : "springRestExceptionHandling3.html",controller : "cerebroController"})
+	.when("/springRestExceptionHandling4",{templateUrl : "springRestExceptionHandling4.html",controller : "cerebroController"})
+	.when("/springRestExceptionHandling5",{templateUrl : "springRestExceptionHandling5.html",controller : "cerebroController"})
+	.when("/springRestExceptionHandling6",{templateUrl : "springRestExceptionHandling6.html",controller : "cerebroController"})
 	
 	.when("/springBootFlywayDB",{templateUrl : "springBootFlywayDB.html",controller : "cerebroController"})
 	.when("/springBootMultipleDataSources",{templateUrl : "springBootMultipleDataSources.html",controller : "cerebroController"})

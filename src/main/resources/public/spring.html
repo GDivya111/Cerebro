@@ -73,7 +73,16 @@
 				<li><a ng-href="#springRestPostPolymorphism" ng-click="buildBreadCrumbs('Spring REST Post Polymorphism', '#springRestPostPolymorphism')">Spring REST POST Polymorphism</a></li>
 				<li><a ng-href="#springRestPUT" ng-click="buildBreadCrumbs('Spring REST PUT', '#springRestPUT')">Spring REST PUT</a></li>
 				<li><a ng-href="#springRestDELETE" ng-click="buildBreadCrumbs('Spring REST DELETE', '#springRestDELETE')">Spring REST DELETE</a></li>
-				<li>Spring REST Exception Handling</li>
+				<li>Spring REST Exception Handling
+					<ul>
+						<li><a ng-href="#springRestExceptionHandling1" ng-click="buildBreadCrumbs('Spring Rest Exception Hanlding using ResponseEntity and simply return status code', '#springRestExceptionHandling1')">Using ResponseEntity and simply return status code</a></li>
+						<li><a ng-href="#springRestExceptionHandling2" ng-click="buildBreadCrumbs('Spring Rest Exception Hanlding using ResponseEntity and return Error object as JSON', '#springRestExceptionHandling2')">Using ResponseEntity and return Error object as JSON</a></li>
+						<li><a ng-href="#springRestExceptionHandling3" ng-click="buildBreadCrumbs('Spring Rest Exception Hanlding using custom exception handler with @ResponseStatus annotation, '#springRestExceptionHandling3')">Using custom exception handler with @ResponseStatus annotation</a></li>
+						<li><a ng-href="#springRestExceptionHandling4" ng-click="buildBreadCrumbs('Spring Rest Exception Hanlding using handler method', '#springRestExceptionHandling4')">Using handler method</a></li>
+						<li><a ng-href="#springRestExceptionHandling5" ng-click="buildBreadCrumbs('Spring Rest Exception Hanlding using handler method but returning error pojo as json', '#springRestExceptionHandling5')">Using handler method but returning error pojo as json</a></li>
+						<li><a ng-href="#springRestExceptionHandling6" ng-click="buildBreadCrumbs('Spring Rest Exception Hanlding global exception handling using ControlLerAdvice annotation', '#springRestExceptionHandling6')">Global exception handling using ControlLerAdvice annotation</a></li>
+					</ul>
+				</li>
 				
 			</ul>
 		</li>
@@ -102,6 +111,7 @@
 	<li><a ng-href="#springBootMockito" ng-click="buildBreadCrumbs('Spring Boot + Unit Testing + Mockito', '#springBootMockito')">Spring Boot + Unit Testing + Mockito</a></li>
 	<li><a ng-href="#springBootIT" ng-click="buildBreadCrumbs('Spring Boot Integration Test', '#springBootIT')">Spring Boot Integration Test</a></li>
 	<li><a ng-href="#springBootWebIT" ng-click="buildBreadCrumbs('Spring Boot Web Integration Test', '#springBootWebIT')">Spring Boot Web Integration Test</a></li>
+	<li><a ng-href="#springBootCustomDataSource" ng-click="buildBreadCrumbs('Creating Custom Data Source in Spring Boot', '#springBootCustomDataSource')">Creating Custom Data Source in Spring Boot</a></li>
 	
 	<li><a ng-href="#springBootFlywayDB" ng-click="buildBreadCrumbs('Spring Boot + Flyway DB', '#springBootFlywayDB')">Spring Boot + Flyway DB</a></li>
 	<li><a ng-href="#springBootMultipleDataSources" ng-click="buildBreadCrumbs('Spring Boot + Multiple Datasources', '#springBootMultipleDataSources')">Spring Boot + Multiple Datasources</a></li>
