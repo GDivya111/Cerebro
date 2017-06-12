@@ -117,7 +117,9 @@ public class App {
 <pre><code>
 package inject.with.custom.properties.file.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -132,9 +134,14 @@ public class AppController {
 	@Value(&quot;${age}&quot;)
 	private Integer age;
 
+	@Autowired
+	private Environment environment;
+
 	@RequestMapping(value = &quot;/&quot;, method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
 	public String defaultUrl() {
 		System.out.println(&quot;name: &quot; + name + &quot;, age: &quot; + age);
+		System.out.println(&quot;name from environment: &quot; + environment.getProperty(&quot;name&quot;)
+				+ &quot;, age from environment: &quot; + environment.getProperty(&quot;age&quot;));
 		return name + &quot;-&quot; + age;
 	}
 }
@@ -144,5 +151,6 @@ public class AppController {
 <div class="panel panel-primary"><div class="panel-heading">Output</div><div class="panel-body">
 <pre><code>
 name: Jack, age: 21
+name from environment: Jack, age from environment: 21
 </code></pre>
 </div></div>
