@@ -34,7 +34,11 @@
  <hr/>
 </div></div>
 
-<div ng-view></div>
+<div ng-view>
+<script type="text/javascript">
+$(this).scrollTop(0)
+</script>
+</div>
 
 </div>
 
@@ -42,4 +46,5 @@
 <a id="back-to-top" ng-click="scrollUp()" ng-controller="cerebroController" class="up btn btn-primary btn-lg" role="button" title="Click to return to top of the page">
 	<span  class="glyphicon glyphicon-chevron-up"></span>
 </a>
+
 </body></html>
