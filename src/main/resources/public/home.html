@@ -2,400 +2,689 @@
 	<h3>Cerebro</h3>
 </div>
 
+<h4 class="text-center"><em>Languages</em></h4>
 <div class="row">
-<div class="col-sm-4">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Core Java</div>
-		<div class="panel-body">
-			<ul>
-				<li><a ng-href="#string" ng-click="buildBreadCrumbs('Core Java String examples', '#string')">String Practice</a></li>
-  				<li><a ng-href="#date" ng-click="buildBreadCrumbs('Core Java Date examples', '#date')">Date Practice</a></li>
-  				<li><a ng-href="#list" ng-click="buildBreadCrumbs('Core Java List examples', '#list')">List</a></li>
-  				<li><a ng-href="#coreJava" ng-click="buildBreadCrumbs('Core Java', '#coreJava')">More...</a></li>
-			</ul>		
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Core Java</div>
+			<div class="panel-body">
+				<ul>
+					<li><a ng-href="#string" ng-click="buildBreadCrumbs('Core Java String examples', '#string')">String	Practice</a></li>
+					<li><a ng-href="#date"ng-click="buildBreadCrumbs('Core Java Date examples', '#date')">Date Practice</a></li>
+					<li><a ng-href="#list" ng-click="buildBreadCrumbs('Core Java List examples', '#list')">List</a></li>
+					<li><a ng-href="#coreJava" ng-click="buildBreadCrumbs('Core Java', '#coreJava')">More...</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Scala</div>
+			<div class="panel-body">
+				<ul>
+					<li><a ng-href="#installScala" ng-click="buildBreadCrumbs('Install Scala', '#installScala')">Installing Scala and Install SBT and Scala IDE (Eclipse based)</a></li>
+					<li><a ng-href="#scalaHelloWorldWithSbt" ng-click="buildBreadCrumbs('Scala Hello World with SBT', '#scalaHelloWorldWithSbt')">Scala Hello World with sbt</a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
 
-<div class="col-sm-4">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Scala</div>
-		<div class="panel-body">
-			<ul>
-				<li><a ng-href="#installScala" ng-click="buildBreadCrumbs('Install Scala', '#installScala')">Installing Scala and Install SBT and Scala IDE (Eclipse based)</a></li>
-				<li><a ng-href="#scalaHelloWorldWithSbt" ng-click="buildBreadCrumbs('Scala Hello World with SBT', '#scalaHelloWorldWithSbt')">Scala Hello World with sbt</a></li>
-			</ul>		
-		</div>
-	</div>
-</div>
-</div>
+<hr />
 
-<hr/>
-
+<h4 class="text-center"><em>Spring</em></h4>
 <div class="row">
-<div class="col-sm-4">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Spring</div>
-		<div class="panel-body">
-			<ul>
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Spring Core</div>
+			<div class="panel-body">
+				<!-- <ul>
 				<li>Spring Core</li>
 				<li>Spring MVC</li>
 				<li>Spring REST</li>
   				<li><a ng-href="#spring" ng-click="buildBreadCrumbs('Spring', '#spring')">More...</a></li>
   				
-			</ul>		
+			</ul> -->
+
+				<ul>
+					<li><em>Examples with Xml</em>
+						<ul>
+							<li><a ng-href="#springDIHelloWorldXml"
+								ng-click="buildBreadCrumbs('Spring DI Hello World using setter injection', '#springDIHelloWorldXml')">Spring
+									DI Hello World using setter injection</a></li>
+							<li><a ng-href="#springDIConstructorInjectionXml"
+								ng-click="buildBreadCrumbs('Spring DI Hello World using constructor injection', '#springDIConstructorInjectionXml')">Spring
+									DI Hello World using constructor injection</a></li>
+							<li><a ng-href="#springInjectCollectionsXml"
+								ng-click="buildBreadCrumbs('Spring Injecting collections', '#springInjectCollectionsXml')">Spring
+									Injecting collections</a></li>
+							<li><a ng-href="#springResourceBundleXml"
+								ng-click="buildBreadCrumbs('Spring Resource Bundle Message Source', '#springResourceBundleXml')">Spring
+									Resource Bundle Message Source</a></li>
+							<li><a ng-href="#beanPostProcessorXml"
+								ng-click="buildBreadCrumbs('Spring Bean Post Processor with xml', '#beanPostProcessorXml')">Bean
+									Post Processor</a></li>
+							<li><a ng-href="#propertiesInjectionXml"
+								ng-click="buildBreadCrumbs('Properties injection in spring using xml', '#propertiesInjectionXml')">Properties
+									Injection</a></li>
+						</ul></li>
+				</ul>
+				<ul>
+					<li><em>Examples with Annotations</em>
+						<ul>
+							<li><a ng-href="#springDIAnnotations"
+								ng-click="buildBreadCrumbs('Spring DI Hello World using Annotations', '#springDIAnnotations')">Spring
+									DI Hello World using Annotations</a></li>
+							<li>Injecting collections</li>
+							<li>Setter Injection</li>
+							<li>Constructor Injection</li>
+							<li>BeanPostProcessor</li>
+						</ul></li>
+				</ul>
+
+				<ul>
+					<li><em>Examples with Java Config</em>
+						<ul>
+							<li><a ng-href="#springDIJavaConfig"
+								ng-click="buildBreadCrumbs('Spring Dependency Injection Hello World using Java Configuration', '#springDIJavaConfig')">Spring
+									Dependency Injection Hello World using Java Configuration</a></li>
+							<li><a ng-href="#springJavaMultiConfig"
+								ng-click="buildBreadCrumbs('Spring Dependency Injection With Multiple Java Configuration files', '#springJavaMultiConfig')">Spring
+									Dependency Injection With Multiple Java Configuration files</a></li>
+							<li>Injecting collections</li>
+							<li>Setter Injection</li>
+							<li>Constructor Injection</li>
+							<li>BeanPostProcessor</li>
+						</ul></li>
+				</ul>
+			</div>
 		</div>
 	</div>
-</div>
+
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Spring Core</div>
+			<div class="panel-body">
+				<ul>
+					<li><em>Examples with Xml</em>
+						<ul>
+							<li><a ng-href="#springMVCHelloWorldXml"
+								ng-click="buildBreadCrumbs('Spring MVC Hello World', '#springMVCHelloWorldXml')">Spring
+									MVC Hello World</a></li>
+							<li><a ng-href="#springMVCCustomConfigXml"
+								ng-click="buildBreadCrumbs('Spring MVC using custom spring config file', '#springMVCCustomConfigXml')">Spring
+									MVC using custom spring config file</a></li>
+							<li><a ng-href="#springMVCMultiConfigXml"
+								ng-click="buildBreadCrumbs('Spring MVC with multi config files', '#springMVCMultiConfigXml')">Spring
+									MVC with multi config files</a></li>
+							<li><a ng-href="#springMVCPropertiesFileXml"
+								ng-click="buildBreadCrumbs('Spring MVC using properties file for labels', '#springMVCPropertiesFileXml')">Spring
+									MVC using properties file for labels</a></li>
+							<li><a ng-href="#springMVCFormXml"
+								ng-click="buildBreadCrumbs('Spring MVC Form', '#springMVCFormXml')">Spring
+									MVC Form</a></li>
+							<li><a ng-href="#springMVCFormValidationXml"
+								ng-click="buildBreadCrumbs('Spring MVC Form Validation', '#springMVCFormValidationXml')">Spring
+									MVC Form Validation</a></li>
+							<li>Spring MVC Form Validation Using Custom Validator</li>
+							<li><a ng-href="#springMVCFwdXml"
+								ng-click="buildBreadCrumbs('Spring MVC forward', '#springMVCFwdXml')">Spring
+									MVC forward</a></li>
+							<li><a ng-href="#springMVCI18NXml"
+								ng-click="buildBreadCrumbs('Spring MVC I18N', '#springMVCI18NXml')">Spring
+									MVC I18N</a></li>
+							<li><a ng-href="#springMVCRedirectXml"
+								ng-click="buildBreadCrumbs('Spring MVC Redirect', '#springMVCRedirectXml')">Spring
+									MVC Redirect</a></li>
+							<li><a ng-href="#springMVCStaticFilesXml"
+								ng-click="buildBreadCrumbs('Spring MVC using static files', '#springMVCStaticFilesXml')">Spring
+									MVC using static files</a></li>
+							<li><a ng-href="#springMVCContentNegotiationXml"
+								ng-click="buildBreadCrumbs('Spring MVC Content Negotiation Resolver', '#springMVCContentNegotiationXml')">Spring
+									MVC Content Negotiation Resolver</a></li>
+							<li><a ng-href="#springMVCXmlJunitTesting"
+								ng-click="buildBreadCrumbs('Spring MVC With Xml Junit Testing', '#springMVCXmlJunitTesting')">Spring
+									MVC With Xml Junit Testing</a></li>
+							<li><a ng-href="#springMvcJpa"
+								ng-click="buildBreadCrumbs('Spring MVC with JPA Hibernate', '#springMvcJpa')">Spring
+									MVC with JPA Hibernate</a></li>
+							<li><a ng-href="#springMvcDataJpa"
+								ng-click="buildBreadCrumbs('Spring MVC with Data Jpa', '#springMvcDataJpa')">Spring
+									MVC with Data Jpa</a></li>
+						</ul></li>
+				</ul>
+
+				<ul>
+					<li><em>Examples with Java Config</em>
+						<ul>
+							<li><a ng-href="#springMVCHelloWorldJavaConfig"
+								ng-click="buildBreadCrumbs('Spring MVC Hello World Java Config', '#springMVCHelloWorldJavaConfig')">Spring
+									MVC Hello World</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
 </div>
 
-<hr/>
+<hr />
 
+<h4 class="text-center">
+	<em>Build Tools</em>
+</h4>
 <div class="row">
-<div class="col-sm-4">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Maven</div>
-		<div class="panel-body">
-			<ul>
-				<li><a ng-href="#installMaven" ng-click="buildBreadCrumbs('Install Maven', '#installMaven')">Install Maven</a></li>
-				<li><a ng-href="#repositoriesTag" ng-click="buildBreadCrumbs('repositories tag in pom.xml', '#repositoriesTag')">repositories tag in pom.xml</a></li>
-				<li><a ng-href="#coreJavaProjectWithMaven" ng-click="buildBreadCrumbs('Create Core Java Project', '#coreJavaProjectWithMaven')">Create Core Java Project using Maven</a></li>
-  				<li><a ng-href="#maven" ng-click="buildBreadCrumbs('Maven', '#maven')">More...</a></li>
-			</ul>		
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Maven</div>
+			<div class="panel-body">
+				<ul>
+					<li><a ng-href="#installMaven"
+						ng-click="buildBreadCrumbs('Install Maven', '#installMaven')">Install
+							Maven</a></li>
+					<li><a ng-href="#repositoriesTag"
+						ng-click="buildBreadCrumbs('repositories tag in pom.xml', '#repositoriesTag')">repositories
+							tag in pom.xml</a></li>
+					<li><a ng-href="#coreJavaProjectWithMaven"
+						ng-click="buildBreadCrumbs('Create Core Java Project', '#coreJavaProjectWithMaven')">Create
+							Core Java Project using Maven</a></li>
+					<li><a ng-href="#maven"
+						ng-click="buildBreadCrumbs('Maven', '#maven')">More...</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Ant (Another Neat Tool)</div>
+			<div class="panel-body">
+				<ul>
+					<li><a ng-href="#antJacoco">Ant - Jacoco Integration</a></li>
+					<li><a ng-href="#ant"
+						ng-click="buildBreadCrumbs('Ant', '#ant')">More...</a></li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Gradle</div>
+			<div class="panel-body">
+				<ul>
+					<li><a ng-href="https://docs.gradle.org/current/dsl/"
+						target="_blank"">Gradle Documentation</a></li>
+					<li><a ng-href="#gradle"
+						ng-click="buildBreadCrumbs('Gradle', '#gradle')">More...</a></li>
+
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
 
-<div class="col-sm-4">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Ant (Another Neat Tool)</div>
-		<div class="panel-body">
-			<ul>
-				<li><a ng-href="#antJacoco">Ant - Jacoco Integration</a></li>
-  				<li><a ng-href="#ant" ng-click="buildBreadCrumbs('Ant', '#ant')">More...</a></li>
-  				
-			</ul>		
-		</div>
-	</div>
-</div>
+<hr />
 
-<div class="col-sm-4">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Gradle</div>
-		<div class="panel-body">
-			<ul>
-				<li><a ng-href="https://docs.gradle.org/current/dsl/" target="_blank"">Gradle Documentation</a></li>
-  				<li><a ng-href="#gradle" ng-click="buildBreadCrumbs('Gradle', '#gradle')">More...</a></li>
-  				
-			</ul>		
-		</div>
-	</div>
-</div>
-</div>
-
-<hr/>
-
+<h4 class="text-center">
+	<em>REST Web Services</em>
+</h4>
 <div class="row">
-<div class="col-sm-4">
-<div class="panel panel-primary"><div class="panel-heading">RESTful Web Services with Jersey Implementation</div><div class="panel-body">
-	<ul>
-		<li><em>Examples:</em>
-			<ul>
-				<li><a ng-href="#jerseyRestGet" ng-click="buildBreadCrumbs('GET requests in Jersey Implementation', '#jerseyRestGet')">GET requests</a></li>
-				<li><a ng-href="#jerseyRestPost" ng-click="buildBreadCrumbs('POST requests in Jersey Implementation', '#jerseyRestPost')">POST requests</a></li>
-				<li><a ng-href="#jerseyRestPut" ng-click="buildBreadCrumbs('PUT requests in Jersey Implementation', '#jerseyRestPut')">PUT requests</a></li>
-				<li><a ng-href="#jerseyRestDelete" ng-click="buildBreadCrumbs('DELETE requests in Jersey Implementation', '#jerseyRestDelete')">DELETE requests</a></li>
-				<li><a ng-href="#jerseyFileUpload" ng-click="buildBreadCrumbs('File upload in Jersey Implementation', '#jerseyFileUpload')">Jersey File Upload</a></li>
-				<li><a ng-href="#jerseyFileDownload" ng-click="buildBreadCrumbs('File download in Jersey Implementation', '#jerseyFileDownload')">Jersey File Download</a></li>
-				<li><a ng-href="#jerseyExceptionHandling" ng-click="buildBreadCrumbs('Exception Handling in Jersey Implementation', '#jerseyExceptionHandling')">Exception Handling</a></li>
-			</ul>
-		</li>		
-		<li><em>Source Code</em>
-			<ul>
-				<li>Download Source Code from <a ng-href="https://github.com/avinashbabudonthu/JerseyRestPractice/archive/master.zip">here</a></li>
-			</ul>
-		</li>
-		<li><em>References</em>
-		<ul>
-			<li><a ng-href="http://www.mkyong.com/tutorials/jax-rs-tutorials/" target="_blank">References</a></li>
-		</ul>
-	</ul>
-</div></div>
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">RESTful Web Services with Jersey
+				Implementation</div>
+			<div class="panel-body">
+				<ul>
+					<li><em>Examples:</em>
+						<ul>
+							<li><a ng-href="#jerseyRestGet"
+								ng-click="buildBreadCrumbs('GET requests in Jersey Implementation', '#jerseyRestGet')">GET
+									requests</a></li>
+							<li><a ng-href="#jerseyRestPost"
+								ng-click="buildBreadCrumbs('POST requests in Jersey Implementation', '#jerseyRestPost')">POST
+									requests</a></li>
+							<li><a ng-href="#jerseyRestPut"
+								ng-click="buildBreadCrumbs('PUT requests in Jersey Implementation', '#jerseyRestPut')">PUT
+									requests</a></li>
+							<li><a ng-href="#jerseyRestDelete"
+								ng-click="buildBreadCrumbs('DELETE requests in Jersey Implementation', '#jerseyRestDelete')">DELETE
+									requests</a></li>
+							<li><a ng-href="#jerseyFileUpload"
+								ng-click="buildBreadCrumbs('File upload in Jersey Implementation', '#jerseyFileUpload')">Jersey
+									File Upload</a></li>
+							<li><a ng-href="#jerseyFileDownload"
+								ng-click="buildBreadCrumbs('File download in Jersey Implementation', '#jerseyFileDownload')">Jersey
+									File Download</a></li>
+							<li><a ng-href="#jerseyExceptionHandling"
+								ng-click="buildBreadCrumbs('Exception Handling in Jersey Implementation', '#jerseyExceptionHandling')">Exception
+									Handling</a></li>
+						</ul></li>
+					<li><em>Source Code</em>
+						<ul>
+							<li>Download Source Code from <a
+								ng-href="https://github.com/avinashbabudonthu/JerseyRestPractice/archive/master.zip">here</a></li>
+						</ul></li>
+					<li><em>References</em>
+						<ul>
+							<li><a
+								ng-href="http://www.mkyong.com/tutorials/jax-rs-tutorials/"
+								target="_blank">References</a></li>
+						</ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">RESTful Web Services with Spring
+				Implementation</div>
+			<div class="panel-body">
+				<ul>
+					<li><em>Examples:</em>
+						<ul>
+							<li><a ng-href="#springRestGet"
+								ng-click="buildBreadCrumbs('Spring REST Get', '#springRestGet')">Spring
+									REST GET</a></li>
+							<li><a ng-href="#springRestPost"
+								ng-click="buildBreadCrumbs('Spring REST Post', '#springRestPost')">Spring
+									REST POST</a></li>
+							<li><a ng-href="#springRestPostPolymorphism"
+								ng-click="buildBreadCrumbs('Spring REST Post Polymorphism', '#springRestPostPolymorphism')">Spring
+									REST POST Polymorphism</a></li>
+							<li><a ng-href="#springRestPUT"
+								ng-click="buildBreadCrumbs('Spring REST PUT', '#springRestPUT')">Spring
+									REST PUT</a></li>
+							<li><a ng-href="#springRestDELETE"
+								ng-click="buildBreadCrumbs('Spring REST DELETE', '#springRestDELETE')">Spring
+									REST DELETE</a></li>
+							<li>Spring REST Exception Handling
+								<ul>
+									<li><a ng-href="#springRestExceptionHandling1"
+										ng-click="buildBreadCrumbs('Spring Rest Exception Hanlding using ResponseEntity and simply return status code', '#springRestExceptionHandling1')">Using
+											ResponseEntity and simply return status code</a></li>
+									<li><a ng-href="#springRestExceptionHandling2"
+										ng-click="buildBreadCrumbs('Spring Rest Exception Hanlding using ResponseEntity and return Error object as JSON', '#springRestExceptionHandling2')">Using
+											ResponseEntity and return Error object as JSON</a></li>
+									<li><a ng-href="#springRestExceptionHandling3"
+										ng-click="buildBreadCrumbs('Spring Rest Exception Hanlding using custom exception handler with @ResponseStatus annotation', '#springRestExceptionHandling3')">Using
+											custom exception handler with @ResponseStatus annotation</a></li>
+									<li><a ng-href="#springRestExceptionHandling4"
+										ng-click="buildBreadCrumbs('Spring Rest Exception Hanlding using handler method', '#springRestExceptionHandling4')">Using
+											handler method</a></li>
+									<li><a ng-href="#springRestExceptionHandling5"
+										ng-click="buildBreadCrumbs('Spring Rest Exception Hanlding using handler method but returning error pojo as json', '#springRestExceptionHandling5')">Using
+											handler method but returning error pojo as json</a></li>
+									<li><a ng-href="#springRestExceptionHandling6"
+										ng-click="buildBreadCrumbs('Spring Rest Exception Hanlding global exception handling using ControllerAdvice annotation', '#springRestExceptionHandling6')">Global
+											exception handling using ControlLerAdvice annotation</a></li>
+								</ul>
+							</li>
+
+						</ul></li>
+					<li><em>Source Code</em>
+						<ul>
+							<li>Download Source Code from <a
+								ng-href="https://github.com/avinashbabudonthu/SpringRest/archive/master.zip">here</a></li>
+						</ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">RESTful Web Services with Dropwizard
+				implementation</div>
+			<div class="panel-body">
+				<ul>
+					<li><em>References:</em>
+						<ul>
+							<li><a
+								ng-href="http://www.dropwizard.io/1.0.6/docs/getting-started.html"
+								target="_blank">Getting Started</a></li>
+							<li><a
+								ng-href="http://www.dropwizard.io/1.0.6/docs/manual/index.html#manual-index"
+								target="_blank">Docs</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">RESTful Clients</div>
+			<div class="panel-body">
+				<ul>
+					<li>java.net.URL</li>
+					<li>Apache HTTP Client</li>
+					<li>RestEasy</li>
+					<li>Jersey</li>
+					<li>Spring RestTemplate</li>
+					<li>cURL</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
 
-<div class="col-sm-4">
-<div class="panel panel-primary"><div class="panel-heading">RESTful Web Services with Spring Implementation</div><div class="panel-body">
-	<ul>
-		<li><em>Examples:</em>
-			<ul>
-				<li><a ng-href="#springRestGet" ng-click="buildBreadCrumbs('Spring REST Get', '#springRestGet')">Spring REST GET</a></li>
-				<li><a ng-href="#springRestPost" ng-click="buildBreadCrumbs('Spring REST Post', '#springRestPost')">Spring REST POST</a></li>
-				<li><a ng-href="#springRestPostPolymorphism" ng-click="buildBreadCrumbs('Spring REST Post Polymorphism', '#springRestPostPolymorphism')">Spring REST POST Polymorphism</a></li>
-				<li><a ng-href="#springRestPUT" ng-click="buildBreadCrumbs('Spring REST PUT', '#springRestPUT')">Spring REST PUT</a></li>
-				<li><a ng-href="#springRestDELETE" ng-click="buildBreadCrumbs('Spring REST DELETE', '#springRestDELETE')">Spring REST DELETE</a></li>
-				<li>Spring REST Exception Handling
-					<ul>
-						<li><a ng-href="#springRestExceptionHandling1" ng-click="buildBreadCrumbs('Spring Rest Exception Hanlding using ResponseEntity and simply return status code', '#springRestExceptionHandling1')">Using ResponseEntity and simply return status code</a></li>
-						<li><a ng-href="#springRestExceptionHandling2" ng-click="buildBreadCrumbs('Spring Rest Exception Hanlding using ResponseEntity and return Error object as JSON', '#springRestExceptionHandling2')">Using ResponseEntity and return Error object as JSON</a></li>
-						<li><a ng-href="#springRestExceptionHandling3" ng-click="buildBreadCrumbs('Spring Rest Exception Hanlding using custom exception handler with @ResponseStatus annotation', '#springRestExceptionHandling3')">Using custom exception handler with @ResponseStatus annotation</a></li>
-						<li><a ng-href="#springRestExceptionHandling4" ng-click="buildBreadCrumbs('Spring Rest Exception Hanlding using handler method', '#springRestExceptionHandling4')">Using handler method</a></li>
-						<li><a ng-href="#springRestExceptionHandling5" ng-click="buildBreadCrumbs('Spring Rest Exception Hanlding using handler method but returning error pojo as json', '#springRestExceptionHandling5')">Using handler method but returning error pojo as json</a></li>
-						<li><a ng-href="#springRestExceptionHandling6" ng-click="buildBreadCrumbs('Spring Rest Exception Hanlding global exception handling using ControllerAdvice annotation', '#springRestExceptionHandling6')">Global exception handling using ControlLerAdvice annotation</a></li>
-					</ul>
-				</li>
-				
-			</ul>
-		</li>
-		<li><em>Source Code</em>
-		<ul>
-			<li>Download Source Code from <a ng-href="https://github.com/avinashbabudonthu/SpringRest/archive/master.zip">here</a></li>
-		</ul>
-</ul>
-</div></div>
-</div>
+<hr />
 
-<div class="col-sm-4">
-<div class="panel panel-primary"><div class="panel-heading">RESTful Web Services with Dropwizard implementation</div><div class="panel-body">
-<ul>
-	<li><em>References:</em>
-		<ul>
-			<li><a ng-href="http://www.dropwizard.io/1.0.6/docs/getting-started.html" target="_blank">Getting Started</a></li>
-			<li><a ng-href="http://www.dropwizard.io/1.0.6/docs/manual/index.html#manual-index" target="_blank">Docs</a></li>
-		</ul>
-	</li>
-</ul>
-</div></div>
-</div>
-
-<div class="col-sm-4">
-<div class="panel panel-primary"><div class="panel-heading">RESTful Clients</div><div class="panel-body">
-<ul>
-	<li>java.net.URL</li>
-	<li>Apache HTTP Client</li>
-	<li>RestEasy</li>
-	<li>Jersey</li>
-	<li>Spring RestTemplate</li>
-	<li>cURL</li>
-</ul>
-</div></div>
-</div>
-</div>
-
-<hr/>
-
+<h4 class="text-center">
+	<em>SQL</em>
+</h4>
 <div class="row">
-<div class="col-sm-4">
-	<div class="panel panel-primary">
-		<div class="panel-heading">MongoDB</div>
-		<div class="panel-body">
-			<ul>
-				<li>MongoDB Installation in Windows</li>
-				<li>MongoDB with Java</li>
-				<li>Spring Data MongoDB</li>
-  				<li><a ng-href="#mongoDB" ng-click="buildBreadCrumbs('MongoDB', '#mongoDB')">More...</a></li>
-  				
-			</ul>		
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">General Tables for Practice</div>
+			<div class="panel-body">
+				<ul>
+					<li><a ng-href="#practiceDBScripts">DB Scripts to create
+							practice DB</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">H2</div>
+			<div class="panel-body">
+				<ul>
+					<li><a ng-href="#practiceDBScripts">DB Scripts to create
+							practice DB</a></li>
+					<li><a ng-href="#h2DB">H2</a></li>
+					<li><a ng-href="#dbJoins"
+						ng-click="buildBreadCrumbs('SQL Joins', '#dbJoins')">Joins</a></li>
+					<li><a ng-href="#db" ng-click="buildBreadCrumbs('DB', '#db')">More...</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Oracle</div>
+			<div class="panel-body">
+				<ul>
+					<li><a ng-href="#practiceDBScripts">DB Scripts to create
+							practice DB</a></li>
+					<li><a ng-href="#dbJoins"
+						ng-click="buildBreadCrumbs('SQL Joins', '#dbJoins')">Joins</a></li>
+					<li><a ng-href="#db" ng-click="buildBreadCrumbs('DB', '#db')">More...</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">SQL Server</div>
+			<div class="panel-body">
+				<ul>
+					<li><a ng-href="#practiceDBScripts">DB Scripts to create
+							practice DB</a></li>
+					<li><a ng-href="#dbJoins"
+						ng-click="buildBreadCrumbs('SQL Joins', '#dbJoins')">Joins</a></li>
+					<li><a ng-href="#db" ng-click="buildBreadCrumbs('DB', '#db')">More...</a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
 
-<div class="col-sm-4">
-	<div class="panel panel-primary">
-		<div class="panel-heading">DB</div>
-		<div class="panel-body">
-			<ul>
-				<li><a ng-href="#practiceDBScripts">DB Scripts to create practice DB</a></li>
-				<li><a ng-href="#h2DB">H2</a></li>
-				<li><a ng-href="#dbJoins" ng-click="buildBreadCrumbs('SQL Joins', '#dbJoins')">Joins</a></li>
-  				<li><a ng-href="#db" ng-click="buildBreadCrumbs('DB', '#db')">More...</a></li>
-  				
-			</ul>		
-		</div>
-	</div>
-</div>
-</div>
+<hr />
 
-<hr/>
-
+<h4 class="text-center">
+	<em>No SQL DB</em>
+</h4>
 <div class="row">
-<div class="col-sm-4">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Java Virtual Machine</div>
-		<div class="panel-body">
-			<ul>
-				<li>Inside Java Virtual Machine</li>
-				<li>Java Application Performance Tuning</li>
-  				<li><a ng-href="#jvm" ng-click="buildBreadCrumbs('JVM', '#jvm')">More...</a></li>
-  				
-			</ul>		
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">MongoDB</div>
+			<div class="panel-body">
+				<ul>
+					<li>MongoDB Installation in Windows</li>
+					<li>MongoDB with Java</li>
+					<li>Spring Data MongoDB</li>
+					<li><a ng-href="#mongoDB"
+						ng-click="buildBreadCrumbs('MongoDB', '#mongoDB')">More...</a></li>
+
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
 
-<div class="col-sm-4">
-	<div class="panel panel-primary">
-		<div class="panel-heading">JDK Tools</div>
-		<div class="panel-body">
-			<ul>
-				<li><a ng-href="#native2ascii" ng-click="buildBreadCrumbs('Convert characters to Unicode', '#native2ascii')">native2ascii</a></li>
-				<li>jps</li>
-				<li>javap</li>
-  				<li><a ng-href="#jdkTools" ng-click="buildBreadCrumbs('JDK Tools', '#jdkTools')">More...</a></li>
-  				
-			</ul>		
-		</div>
-	</div>
-</div>
+<hr />
 
-<div class="col-sm-4">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Java Garbage Collection</div>
-		<div class="panel-body">
-			<ul>
-				<li>Garbage Collection by Plumbr</li>
-				<li>How to monitor Java Garbage Collection</li>
-				<li>Java application performance tuning</li>
-  				<li><a ng-href="#gc" ng-click="buildBreadCrumbs('Garbage Collection', '#gc')">More...</a></li>
-  				
-			</ul>		
-		</div>
-	</div>
-</div>
-</div>
-
-<hr/>
-
+<h4 class="text-center">
+	<em>Java Virtual Machine (JVM)</em>
+</h4>
 <div class="row">
-<div class="col-sm-4">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Hibernate</div>
-		<div class="panel-body">
-			<ul>
-				<li><a ng-href="#hibernate5HelloWorld">Hibernate 5 Hello World</a></li>
-  				<li><a ng-href="#hibernate" ng-click="buildBreadCrumbs('Hibernate', '#hibernate')">More...</a></li>
-  				
-			</ul>		
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Java Virtual Machine</div>
+			<div class="panel-body">
+				<ul>
+					<li>Inside Java Virtual Machine</li>
+					<li>Java Application Performance Tuning</li>
+					<li><a ng-href="#jvm"
+						ng-click="buildBreadCrumbs('JVM', '#jvm')">More...</a></li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">JDK Tools</div>
+			<div class="panel-body">
+				<ul>
+					<li><a ng-href="#native2ascii"
+						ng-click="buildBreadCrumbs('Convert characters to Unicode', '#native2ascii')">native2ascii</a></li>
+					<li>jps</li>
+					<li>javap</li>
+					<li><a ng-href="#jdkTools"
+						ng-click="buildBreadCrumbs('JDK Tools', '#jdkTools')">More...</a></li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Java Garbage Collection</div>
+			<div class="panel-body">
+				<ul>
+					<li>Garbage Collection by Plumbr</li>
+					<li>How to monitor Java Garbage Collection</li>
+					<li>Java application performance tuning</li>
+					<li><a ng-href="#gc"
+						ng-click="buildBreadCrumbs('Garbage Collection', '#gc')">More...</a></li>
+
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
-</div>
 
-<hr/>
+<hr />
 
+<h4 class="text-center">
+	<em>ORM</em>
+</h4>
 <div class="row">
-<div class="col-sm-4">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Unit Testing</div>
-		<div class="panel-body">
-			<ul>
-				<li><a ng-href="#junit">JUnit</a></li>
-				<li>Mockito</li>
-				<li>PowerMock</li>
-  				<li><a ng-href="#unitTesting" ng-click="buildBreadCrumbs('Unit Testing', '#unitTesting')">More...</a></li>
-			</ul>		
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Hibernate</div>
+			<div class="panel-body">
+				<ul>
+					<li><a ng-href="#hibernate5HelloWorld">Hibernate 5 Hello
+							World</a></li>
+					<li><a ng-href="#hibernate"
+						ng-click="buildBreadCrumbs('Hibernate', '#hibernate')">More...</a></li>
+
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
-</div>
 
-<hr/>
+<hr />
 
+<h4 class="text-center">
+	<em>Unit Testing</em>
+</h4>
 <div class="row">
-<div class="col-sm-4">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Creational Design Patterns - FABSP</div>
-		<div class="panel-body">
-			<ul>
-				<li>Factory Pattern</li>
-				<li>Abstract Factory  Pattern</li>
-				<li>Builder  Pattern</li>
-				<li>Singleton  Pattern</li>
-				<li>Prototype  Pattern</li>
-			</ul>		
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Unit Testing</div>
+			<div class="panel-body">
+				<ul>
+					<li><a ng-href="#junit">JUnit</a></li>
+					<li>Mockito</li>
+					<li>PowerMock</li>
+					<li><a ng-href="#unitTesting"
+						ng-click="buildBreadCrumbs('Unit Testing', '#unitTesting')">More...</a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
 
-<div class="col-sm-4">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Structural Design Patterns - ABCDF3P</div>
-		<div class="panel-body">
-			<ul>
-				<li>Adapter Pattern</li>
-				<li>Bridge Pattern</li>
-				<li>Composite Pattern</li>
-				<li>Decorator Pattern</li>
-				<li>Filter or Criteria Pattern</li>
-				<li>Facade Pattern</li>
-				<li>Fly weight Pattern</li>
-				<li>Proxy Pattern</li>
-			</ul>		
-		</div>
-	</div>
-</div>
+<hr />
 
-<div class="col-sm-4">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Behavioral Design Patterns - C2I2M2NOS2TV</div>
-		<div class="panel-body">
-			<ul>
-				<li>Chain of Responsibility Pattern</li>
-				<li>Command Pattern</li>
-				<li>Iterator Pattern</li>
-				<li>Interpreter Pattern</li>
-				<li>Memento Pattern</li>
-				<li>Mediator Pattern</li>
-				<li>Null check Pattern</li>
-				<li>Observer Pattern</li>
-				<li>State Pattern</li>
-				<li>Strategy Pattern</li>
-				<li>Template Pattern</li>
-				<li>Visitor Pattern</li> 
-			</ul>		
-		</div>
-	</div>
-</div>
-</div>
-
-<hr/>
-
+<h4 class="text-center">
+	<em>Design Patterns</em>
+</h4>
 <div class="row">
-<div class="col-sm-4">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Tools</div>
-		<div class="panel-body">
-			<ul>
-				<li>JSON</li>
-				<li>Dozer</li>
-				<li>Code Coverage Tools</li>
-  				<li><a ng-href="#tools" ng-click="buildBreadCrumbs('Tools', '#tools')">More...</a></li>
-  				
-			</ul>		
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Creational Design Patterns - FABSP</div>
+			<div class="panel-body">
+				<ul>
+					<li>Factory Pattern</li>
+					<li>Abstract Factory Pattern</li>
+					<li>Builder Pattern</li>
+					<li>Singleton Pattern</li>
+					<li>Prototype Pattern</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Structural Design Patterns - ABCDF3P</div>
+			<div class="panel-body">
+				<ul>
+					<li>Adapter Pattern</li>
+					<li>Bridge Pattern</li>
+					<li>Composite Pattern</li>
+					<li>Decorator Pattern</li>
+					<li>Filter or Criteria Pattern</li>
+					<li>Facade Pattern</li>
+					<li>Fly weight Pattern</li>
+					<li>Proxy Pattern</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Behavioral Design Patterns -
+				C2I2M2NOS2TV</div>
+			<div class="panel-body">
+				<ul>
+					<li>Chain of Responsibility Pattern</li>
+					<li>Command Pattern</li>
+					<li>Iterator Pattern</li>
+					<li>Interpreter Pattern</li>
+					<li>Memento Pattern</li>
+					<li>Mediator Pattern</li>
+					<li>Null check Pattern</li>
+					<li>Observer Pattern</li>
+					<li>State Pattern</li>
+					<li>Strategy Pattern</li>
+					<li>Template Pattern</li>
+					<li>Visitor Pattern</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
 
-<div class="col-sm-4">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Camel</div>
-		<div class="panel-body">
-			<ul>
-				<li>Apache Camel Hello World</li>
-				<li>Using bean in the Router</li>
-				<li>Using Processor and Bean in the Router</li>
-  				<li><a ng-href="#camel" ng-click="buildBreadCrumbs('Camel', '#camel')">More...</a></li>
-  				
-			</ul>		
+<hr />
+
+<h4 class="text-center">
+	<em>Tools</em>
+</h4>
+<div class="row">
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Tools</div>
+			<div class="panel-body">
+				<ul>
+					<li>JSON</li>
+					<li>Dozer</li>
+					<li>Code Coverage Tools</li>
+					<li><a ng-href="#tools"
+						ng-click="buildBreadCrumbs('Tools', '#tools')">More...</a></li>
+
+				</ul>
+			</div>
 		</div>
 	</div>
+
 </div>
 
+<hr />
+
+<h4 class="text-center">
+	<em>Enterprise Integration Patterns (EIP)</em>
+</h4>
+<div class="row">
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Camel</div>
+			<div class="panel-body">
+				<ul>
+					<li>Apache Camel Hello World</li>
+					<li>Using bean in the Router</li>
+					<li>Using Processor and Bean in the Router</li>
+					<li><a ng-href="#camel"
+						ng-click="buildBreadCrumbs('Camel', '#camel')">More...</a></li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Mule</div>
+			<div class="panel-body">
+				<ul>
+					<li>Mule Hello World</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
 
 <!-- Pagination start-->
 <nav aria-label="Page navigation">
 	<ul class="pagination">
-		<li><a href="#" aria-label="Previous"><span	aria-hidden="true">&laquo;</span></a></li>
+		<li><a href="#" aria-label="Previous"><span
+				aria-hidden="true">&laquo;</span></a></li>
 		<li><a href="#">1 <span class="sr-only">(current)</span></a></li>
 		<li><a href="#">2</a></li>
 		<li><a href="#">3</a></li>
