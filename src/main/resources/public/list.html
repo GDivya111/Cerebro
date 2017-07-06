@@ -1,7 +1,3 @@
-<div class="page-header">
-    <h3>List</h3> 
-</div>
-
 <div class="panel panel-primary"><div class="panel-heading">Topics</div><div class="panel-body">
 	<ul>
 		<li><a ng-click="navigate(1)">Split List into sub lists of specified size</a></li>
@@ -15,6 +11,9 @@
 		<li><a ng-click="navigate(9)">Get another list using properties of main object</a></li>
 		<li><a ng-click="navigate(10)">Prepare new list with unique elements in two lists</a></li>
 		<li><a ng-click="navigate(11)">Create an immutable List</a></li>
+		<li><a ng-click="navigate(12)">Changes to sub list will reflect in main list</a></li>
+		<li><a ng-click="navigate(13)">Sort list by java.util.Date</a></li>
+		<li><a ng-click="navigate(14)">Sort list by java.time.LocalDate</a></li>
 	</ul>
 </div></div>
 
@@ -434,5 +433,168 @@ immutableList: [a, b, c]
 java.lang.UnsupportedOperationException
 	at java.util.Collections$UnmodifiableCollection.add(Collections.java:1055)
 	at core.java.collections.ListPractice.immutableList(ListPractice.java:243)
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="12"><div class="panel-heading" >Changes to sub list will reflect in main list</div><div class="panel-body">
+<pre><code>
+<em>
+/**
+* Changes to sub list will reflect in main list
+*/
+</em>
+public void subListChangesReflectToMainList() {
+		List&lt;String&gt; mainList = new ArrayList&lt;&gt;();
+		mainList.add(&quot;one&quot;);
+		mainList.add(&quot;two&quot;);
+		mainList.add(&quot;three&quot;);
+		mainList.add(&quot;four&quot;);
+		List&lt;String&gt; subList = mainList.subList(0, 2);
+
+		System.out.println(&quot;---Before-----&quot;);
+		System.out.println(&quot;mainList size: &quot; + mainList.size() + &quot;, mainList: &quot; + mainList);
+		System.out.println(&quot;subList size: &quot; + subList.size() + &quot;, subList: &quot; + subList);
+
+		subList.add(&quot;five&quot;);
+		System.out.println(&quot;---Before-----&quot;);
+		System.out.println(&quot;mainList size: &quot; + mainList.size() + &quot;, mainList: &quot; + mainList);
+		System.out.println(&quot;subList size: &quot; + subList.size() + &quot;, subList: &quot; + subList);
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+---Before-----
+mainList size: 4, mainList: [one, two, three, four]
+subList size: 2, subList: [one, two]
+---Before-----
+mainList size: 5, mainList: [one, two, five, three, four]
+subList size: 3, subList: [one, two, five]
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="13"><div class="panel-heading">Sort list by java.util.Date</div><div class="panel-body">
+<pre><code>
+public void sortListByJavaUtilDate() {
+		List&lt;List&lt;Object&gt;&gt; list = new ArrayList&lt;&gt;();
+		Calendar calendar = Calendar.getInstance();
+
+		List&lt;Object&gt; row1 = new ArrayList&lt;&gt;();
+		row1.add(1);
+		row1.add(calendar.getTime());
+
+		List&lt;Object&gt; row2 = new ArrayList&lt;&gt;();
+		row2.add(1);
+		calendar.add(Calendar.DAY_OF_MONTH, 3);
+		row2.add(calendar.getTime());
+
+		List&lt;Object&gt; row3 = new ArrayList&lt;&gt;();
+		row3.add(1);
+		calendar.add(Calendar.DAY_OF_MONTH, 3);
+		row3.add(calendar.getTime());
+
+		List&lt;Object&gt; row4 = new ArrayList&lt;&gt;();
+		row4.add(1);
+		calendar.add(Calendar.DAY_OF_MONTH, 3);
+		row4.add(calendar.getTime());
+
+		List&lt;Object&gt; row5 = new ArrayList&lt;&gt;();
+		row5.add(1);
+		calendar.add(Calendar.DAY_OF_MONTH, 3);
+		row5.add(calendar.getTime());
+
+		List&lt;Object&gt; row6 = new ArrayList&lt;&gt;();
+		row6.add(1);
+		calendar.add(Calendar.DAY_OF_MONTH, 3);
+		row6.add(calendar.getTime());
+
+		list.add(row6);
+		list.add(row5);
+		list.add(row4);
+		list.add(row3);
+		list.add(row2);
+		list.add(row1);
+
+		Comparator&lt;List&lt;Object&gt;&gt; dateComparator = (list1, list2) -&gt; {
+			Date date1 = (Date) list1.get(1);
+			Date date2 = (Date) list2.get(1);
+
+			return date1.compareTo(date2);
+		};
+		System.out.println(&quot;------------- Before -------------&quot;);
+		System.out.println(list);
+
+		list.sort(dateComparator);
+
+		System.out.println(&quot;------------- After -------------&quot;);
+		System.out.println(list);
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+------------- Before -------------
+[[1, Fri Jul 21 20:46:57 IST 2017], [1, Tue Jul 18 20:46:57 IST 2017], [1, Sat Jul 15 20:46:57 IST 2017], [1, Wed Jul 12 20:46:57 IST 2017], [1, Sun Jul 09 20:46:57 IST 2017], [1, Thu Jul 06 20:46:57 IST 2017]]
+------------- After -------------
+[[1, Thu Jul 06 20:46:57 IST 2017], [1, Sun Jul 09 20:46:57 IST 2017], [1, Wed Jul 12 20:46:57 IST 2017], [1, Sat Jul 15 20:46:57 IST 2017], [1, Tue Jul 18 20:46:57 IST 2017], [1, Fri Jul 21 20:46:57 IST 2017]]
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="14"><div class="panel-heading">Sort list by java.time.LocalDate</div><div class="panel-body">
+<pre><code>
+public void sortListByJavaTimeLocalDate() {
+		List&lt;List&lt;Object&gt;&gt; list = new ArrayList&lt;&gt;();
+		LocalDate localDate = LocalDate.now(Clock.systemDefaultZone());
+
+		List&lt;Object&gt; row1 = new ArrayList&lt;&gt;();
+		row1.add(1);
+		row1.add(localDate);
+
+		List&lt;Object&gt; row2 = new ArrayList&lt;&gt;();
+		row2.add(2);
+		row2.add(localDate.plusDays(1));
+
+		List&lt;Object&gt; row3 = new ArrayList&lt;&gt;();
+		row3.add(3);
+		row3.add(localDate.plusDays(2));
+
+		List&lt;Object&gt; row4 = new ArrayList&lt;&gt;();
+		row4.add(4);
+		row4.add(localDate.plusDays(3));
+
+		List&lt;Object&gt; row5 = new ArrayList&lt;&gt;();
+		row5.add(5);
+		row5.add(localDate.plusDays(4));
+
+		List&lt;Object&gt; row6 = new ArrayList&lt;&gt;();
+		row6.add(6);
+		row6.add(localDate.plusDays(5));
+
+		list.add(row6);
+		list.add(row5);
+		list.add(row4);
+		list.add(row3);
+		list.add(row2);
+		list.add(row1);
+
+		Comparator&lt;List&lt;Object&gt;&gt; dateComparator = (list1, list2) -&gt; {
+			LocalDate date1 = (LocalDate) list1.get(1);
+			LocalDate date2 = (LocalDate) list2.get(1);
+
+			return date1.compareTo(date2);
+		};
+		System.out.println(&quot;------------- Before -------------&quot;);
+		System.out.println(list);
+
+		list.sort(dateComparator);
+
+		System.out.println(&quot;------------- After -------------&quot;);
+		System.out.println(list);
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+------------- Before -------------
+[[6, 2017-07-11], [5, 2017-07-10], [4, 2017-07-09], [3, 2017-07-08], [2, 2017-07-07], [1, 2017-07-06]]
+------------- After -------------
+[[1, 2017-07-06], [2, 2017-07-07], [3, 2017-07-08], [4, 2017-07-09], [5, 2017-07-10], [6, 2017-07-11]]
 </code></pre>
 </div></div>

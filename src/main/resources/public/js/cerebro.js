@@ -185,6 +185,18 @@ app.config(function($routeProvider){
 });
 
 var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsService){
+
+	$(document).ready(function(e){
+	    $('.search-panel .dropdown-menu').find('a').click(function(e) {
+			var param = $(this).attr("href");
+			var concept = $(this).text();
+			
+			console.log("param: "+param+", concept: "+concept);
+			
+			$('.search-panel span#search_concept').text(concept);
+			$('.input-group #search_param').val(param);
+		});
+	});
 	
 	$scope.navigate = function(id){
 		$location.hash(id);

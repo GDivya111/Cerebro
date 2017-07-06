@@ -40,3 +40,7 @@ table tr:nth-child(even) {
 	
 }
 /* id styles */
+
+body{
+    margin-top:60px;
+}

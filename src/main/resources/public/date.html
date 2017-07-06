@@ -24,6 +24,7 @@
 		<li><a ng-click="navigate(17)">Convert String java.time.LocalDate</a></li>
 		<li><a ng-click="navigate(18)">Print day from date</a></li>
 		<li><a ng-click="navigate(19)">Convert java.time.LocalDateTime to java.sql.Timestamp</a></li>
+		<li><a ng-click="navigate(21)">Add days, months and years to java.util.Date</a></li>
 	</ul>
 </div></div>
 
@@ -54,7 +55,11 @@
       </tr>
       <tr>
       	<td>MMM</td>
-      	<td>Month in English in shot (or) full form </td>
+      	<td>Month in English in short form </td>
+      </tr>
+      <tr>
+      	<td>MMMM</td>
+      	<td>Month in English in full form </td>
       </tr>
       <tr>
       	<td>dd</td>
@@ -574,4 +579,41 @@ public void convertLocalDateTimeToTimestamp() {
 localDateTime: 2017-05-30T21:29:25.097
 timestamp: 2017-05-31 02:59:25.097
 </pre>
+</div></div>
+
+<div class="panel panel-primary" id="21"><div class="panel-heading">Add days, months and years to java.util.Date</div><div class="panel-body">
+<pre><code>
+public void addDayMonthYearToJavaUtilDate() {
+		Calendar calendar = Calendar.getInstance();
+		System.out.println(&quot;Current Date: &quot; + calendar.getTime());
+
+		calendar.add(Calendar.DAY_OF_MONTH, 10);
+		System.out.println(&quot;Add 10 days: &quot; + calendar.getTime());
+
+		calendar.add(Calendar.MONTH, 1);
+		System.out.println(&quot;Add 1 month: &quot; + calendar.getTime());
+
+		calendar.add(Calendar.YEAR, 3);
+		System.out.println(&quot;Add 3 years: &quot; + calendar.getTime());
+
+		calendar.add(Calendar.DAY_OF_MONTH, -5);
+		System.out.println(&quot;Reduce 5 days: &quot; + calendar.getTime());
+
+		calendar.add(Calendar.MONTH, -2);
+		System.out.println(&quot;Reduce 2 months: &quot; + calendar.getTime());
+
+		calendar.add(Calendar.YEAR, -4);
+		System.out.println(&quot;Reduce 4 years: &quot; + calendar.getTime());
+	}
+</code></pre>
+<em>Output: Output may change based on execution date and time</em>
+<pre><code>
+Current Date: Thu Jul 06 20:31:54 IST 2017
+Add 10 days: Sun Jul 16 20:31:54 IST 2017
+Add 1 month: Wed Aug 16 20:31:54 IST 2017
+Add 3 years: Sun Aug 16 20:31:54 IST 2020
+Reduce 5 days: Tue Aug 11 20:31:54 IST 2020
+Reduce 2 months: Thu Jun 11 20:31:54 IST 2020
+Reduce 4 years: Sat Jun 11 20:31:54 IST 2016
+</code></pre>
 </div></div>
