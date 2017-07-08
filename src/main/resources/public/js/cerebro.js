@@ -222,6 +222,10 @@ var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsSe
 	
 	$scope.popBreadCrumb = function(index){
 		breadCrumbsService.popBreadCrumb(index);
+		
+		// Rest Search box - drop down
+		$('.search-panel span#search_concept').text("All");
+		$('.input-group #search_param').val("All");
 	}
 	
 	$scope.breadCrumbs = breadCrumbsService.getNavigations();

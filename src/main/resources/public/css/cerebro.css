@@ -44,3 +44,9 @@ table tr:nth-child(even) {
 body{
     margin-top:60px;
 }
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
