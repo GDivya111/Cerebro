@@ -42,15 +42,17 @@
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     	<span id="search_concept">All</span> <span class="caret"></span>
                     </button>
-                    <ul class="dropdown-menu  scrollable-menu" role="menu">
+                    <ul class="dropdown-menu scrollable-menu" role="menu">
                       <li><a ng-href="#coreJava"  ng-click="buildBreadCrumbs('Core Java', '#coreJava')">Core Java</a></li>
                       <li><a ng-href="#scala" ng-click="buildBreadCrumbs('Scala', '#scala')">Scala</a></li>
                       <li><a ng-href="#spring" ng-click="buildBreadCrumbs('Spring', '#spring')">Spring</a></li>
+                      <li class="divider"></li>
                       <li><a ng-href="#ant" ng-click="buildBreadCrumbs('Ant', '#ant')">Ant</a></li>
                       <li><a ng-href="#maven" ng-click="buildBreadCrumbs('Maven', '#maven')">Maven</a></li>
                       <li><a ng-href="#gradle" ng-click="buildBreadCrumbs('Gradle', '#gradle')">Gradle</a></li>
                       <li class="divider"></li>
                       <li><a href="">All</a></li>
+                      <li>
                     </ul>
                 </div>
                 <input type="hidden" name="search_param" value="all" id="search_param">         

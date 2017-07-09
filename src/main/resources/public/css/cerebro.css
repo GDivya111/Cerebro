@@ -1,4 +1,4 @@
-/* Element styles */
+/* Element styles start */
 em{
 	color: green;
 	font-weight: bold;
@@ -7,6 +7,11 @@ em{
 a{
 	cursor: pointer;
 }
+
+body{
+    margin-top:60px;
+}
+/* Element styles end */
 
 /* table, th , td  {
   border: 1px solid grey;
@@ -20,7 +25,7 @@ table tr:nth-child(even) {
   background-color: #ffffff;
 } */
 
-/* class styles */
+/* class styles start */
 .output , .contentHeading {
 	font-weight: bold;
 	font-style: italic;
@@ -39,14 +44,12 @@ table tr:nth-child(even) {
 .notActive{
 	
 }
-/* id styles */
-
-body{
-    margin-top:60px;
-}
 
 .scrollable-menu {
     height: auto;
     max-height: 200px;
     overflow-x: hidden;
 }
+/* class styles end */
+
+/* id styles */
