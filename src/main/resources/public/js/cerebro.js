@@ -141,6 +141,9 @@ app.config(function($routeProvider){
 	.when("/camel",{templateUrl : "camel.html",controller : "cerebroController"})
 	.when("/camelUnmarshalCsv",{templateUrl : "camelUnmarshalCsv.html",controller : "cerebroController"})
 	.when("/camelMarshalCsv",{templateUrl : "camelMarshalCsv.html",controller : "cerebroController"})
+	.when("/camelHelloWorld",{templateUrl : "camelHelloWorld.html",controller : "cerebroController"})
+	.when("/camelWithBean",{templateUrl : "camelWithBean.html",controller : "cerebroController"})
+	
 	// Apache camel end
 	
 	//REST web services start
