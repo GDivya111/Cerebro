@@ -143,6 +143,9 @@ app.config(function($routeProvider){
 	.when("/camelMarshalCsv",{templateUrl : "camelMarshalCsv.html",controller : "cerebroController"})
 	.when("/camelHelloWorld",{templateUrl : "camelHelloWorld.html",controller : "cerebroController"})
 	.when("/camelWithBean",{templateUrl : "camelWithBean.html",controller : "cerebroController"})
+	.when("/camelWithBeanAndProcessor",{templateUrl : "camelWithBeanAndProcessor.html",controller : "cerebroController"})
+	.when("/camelWithSpring",{templateUrl : "camelWithSpring.html",controller : "cerebroController"})
+	.when("/camelSpringProcessorBean",{templateUrl : "camelSpringProcessorBean.html",controller : "cerebroController"})
 	
 	// Apache camel end
 	
