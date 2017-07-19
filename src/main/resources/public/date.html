@@ -21,6 +21,7 @@
 		<li><a ng-click="navigate(18)">Print day from date</a></li>
 		<li><a ng-click="navigate(19)">Convert java.time.LocalDateTime to java.sql.Timestamp</a></li>
 		<li><a ng-click="navigate(21)">Add days, months and years to java.util.Date</a></li>
+		<li><a ng-click="navigate(22)">Check the date is past date or not</a></li>
 	</ul>
 </div></div>
 
@@ -611,5 +612,31 @@ Add 3 years: Sun Aug 16 20:31:54 IST 2020
 Reduce 5 days: Tue Aug 11 20:31:54 IST 2020
 Reduce 2 months: Thu Jun 11 20:31:54 IST 2020
 Reduce 4 years: Sat Jun 11 20:31:54 IST 2016
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="22"><div class="panel-heading">Check the date is past date or not</div><div class="panel-body">
+<pre><code>
+public void dateFormatPractice() throws ParseException {
+		String inputDate = &quot;20170710&quot;;
+		DateFormat dateFormat = new SimpleDateFormat(&quot;yyyyMMdd&quot;);
+		Date convertDate = dateFormat.parse(inputDate);
+		System.out.println(&quot;convertDate: &quot; + convertDate);
+
+		Instant instant = convertDate.toInstant();
+		ZoneId systemDefaultZoneId = ZoneId.systemDefault();
+		LocalDate localDate = instant.atZone(systemDefaultZoneId).toLocalDate();
+		System.out.println(&quot;localDate: &quot; + localDate);
+
+		LocalDate today = LocalDate.now(Clock.systemDefaultZone());
+		boolean isPast = localDate.isBefore(today);
+		System.out.println(&quot;isPast: &quot; + isPast);
+	}
+</code></pre>
+<em>Output:</em>
+<pre><code>
+convertDate: Mon Jul 10 00:00:00 IST 2017
+localDate: 2017-07-10
+isPast: true
 </code></pre>
 </div></div>
