@@ -22,6 +22,7 @@ app.config(function($routeProvider){
 	.when("/singletonObject",{templateUrl : "singletonObject.html",controller : "cerebroController"})
 	.when("/hashMapInternals",{templateUrl : "hashMapInternals.html",controller : "cerebroController"})
 	.when("/java8Predicate",{templateUrl : "java8Predicate.html",controller : "cerebroController"})
+	.when("/regex",{templateUrl : "regex.html",controller : "cerebroController"})
 	// core java end
 	
 	// hibernate start
