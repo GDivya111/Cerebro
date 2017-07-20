@@ -25,10 +25,10 @@ app.config(function($routeProvider){
 	.when("/regex",{templateUrl : "regex.html",controller : "cerebroController"})
 	// core java end
 	
-	// hibernate start
+	// orm start
 	.when("/hibernate",{templateUrl : "hibernate.html",controller : "cerebroController"})
 	.when("/hibernate5HelloWorld",{templateUrl : "hibernate5HelloWorld.html",controller : "cerebroController"})
-	// hibernate end
+	// orm end
 	
 	// maven start
 	.when("/maven",{templateUrl : "maven.html",controller : "cerebroController"})
