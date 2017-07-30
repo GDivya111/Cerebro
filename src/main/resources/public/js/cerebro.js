@@ -187,8 +187,12 @@ app.config(function($routeProvider){
 	
 	// definitions start
 	.when("/definitions",{templateUrl : "definitions.html",controller : "definitionsController"})
-	.when("/addDefinitions",{templateUrl : "addDefinitions.html",controller : "definitionsController"});
+	.when("/addDefinitions",{templateUrl : "addDefinitions.html",controller : "definitionsController"})
 	// definitions end
+	
+	// Angular JS 1
+	.when("/angular1HelloWorld",{templateUrl : "angular1HelloWorld.html",controller : "definitionsController"});
+	
 });
 
 var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsService){
