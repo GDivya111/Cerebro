@@ -1,11 +1,11 @@
 <div class="panel panel-primary"><div class="panel-heading">Steps</div><div class="panel-body">
 	<ul>
-		<li>Create .html file</li>
-		<li>Add angular.js file in script src</li>
-		<li>Write printMessage.js</li>
-		<li>Add printMessage.js to html</li>
-		<li>Create message variable in scope</li>
-		<li>Print message in html using angular directive</li>
+		<li>Create printMessage.html file</li>
+		<li>Add angular.js file in script tag</li>
+		<li>Create printMessage.js file</li>
+		<li>Add printMessage.js to printMessage.html in script tag</li>
+		<li>Create message variable. Add it to $scope in printMessage.js</li>
+		<li>Print message in printMessage.html</li>
 	</ul>
 </div></div>
 
@@ -20,7 +20,7 @@
 &lt;script type=&quot;text/javascript&quot; src=&quot;printMessage.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body ng-controller=&quot;mainController&quot;&gt;
-&lt;h3&gt;{{message}}&lt;/h3&gt;
+&lt;h3&gt;&#123;&#123;message&#125; &#125;&lt;/h3&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>

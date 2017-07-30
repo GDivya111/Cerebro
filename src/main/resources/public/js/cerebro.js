@@ -164,37 +164,33 @@ app.config(function($routeProvider){
 	.when("/jerseyFileDownload",{templateUrl : "jerseyFileDownload.html",controller : "cerebroController"})
 	.when("/jerseyExceptionHandling",{templateUrl : "jerseyExceptionHandling.html",controller : "cerebroController"})
 	.when("/springRestPostPolymorphism",{templateUrl : "springRestPostPolymorphism.html",controller : "cerebroController"})
-	//RESTful web service end
 	
 	// mongo db start
 	.when("/mongoDB",{templateUrl : "mongoDB.html",controller : "cerebroController"})
 	.when("/mongodbHelloworld",{templateUrl : "mongodbHelloworld.html",controller : "cerebroController"})
-	// mongo db end
 	
 	// design patterns start
 	.when("/designPatterns",{templateUrl : "designPatterns.html",controller : "cerebroController"})
-	// design patterns end
 	
 	// JDK tools start
 	.when("/jdkTools",{templateUrl : "jdkTools.html",controller : "cerebroController"})
 	.when("/native2ascii",{templateUrl : "native2ascii.html",controller : "cerebroController"})
-	// JDK tools end
 
 	// JVM, Garbage Collection (GC) start
 	.when("/jvm",{templateUrl : "jvm.html",controller : "cerebroController"})
 	.when("/gc",{templateUrl : "gc.html",controller : "cerebroController"})
-	// JVM, Garbage Collection (GC)  end
 	
 	// Angular JS 1
 	.when("/angular1",{templateUrl : "angular1.html",controller : "cerebroController"})
 	.when("/angular1HelloWorld",{templateUrl : "angular1HelloWorld.html",controller : "cerebroController"})
 	.when("/printMessage",{templateUrl : "printMessage.html",controller : "cerebroController"})
 	.when("/printMessageWithIIFY",{templateUrl : "printMessageWithIIFY.html",controller : "cerebroController"})
+	.when("/controller1",{templateUrl : "controller1.html",controller : "cerebroController"})
+	
 	
 	// definitions start
 	.when("/definitions",{templateUrl : "definitions.html",controller : "definitionsController"})
 	.when("/addDefinitions",{templateUrl : "addDefinitions.html",controller : "definitionsController"});
-	// definitions end
 });
 
 var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsService){

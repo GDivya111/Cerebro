@@ -1,11 +1,11 @@
 <div class="panel panel-primary"><div class="panel-heading">Steps</div><div class="panel-body">
 	<ul>
-		<li>Create .html file</li>
+		<li>Create printMessageWithIIFY.html file</li>
 		<li>Add angular.js file in script src</li>
-		<li>Write printMessageWithIIFY.js</li>
-		<li>Add printMessageWithIIFY.js to html</li>
-		<li>Create message variable in scope</li>
-		<li>Print message in html using angular directive</li>
+		<li>Create printMessageWithIIFY.js file</li>
+		<li>Add printMessageWithIIFY.js to html in script tag</li>
+		<li>Create message variable. Add it to $scope in printMessageWithIIFY.js</li>
+		<li>Print message in printMessageWithIIFY.html using angular directive</li>
 	</ul>
 </div></div>
 
@@ -22,7 +22,7 @@
 &lt;body ng-controller=&quot;controllerName&quot;&gt;
 We are using Angular 1.5.6 for this example.&lt;br/&gt;
 Angular 1.4.x is giving an error if we use IIFY
-&lt;h3&gt;{{message}}&lt;/h3&gt;
+&lt;h3&gt;&#123;&#123;message&#125; &#125;&lt;/h3&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
