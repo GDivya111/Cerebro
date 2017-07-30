@@ -185,14 +185,16 @@ app.config(function($routeProvider){
 	.when("/gc",{templateUrl : "gc.html",controller : "cerebroController"})
 	// JVM, Garbage Collection (GC)  end
 	
+	// Angular JS 1
+	.when("/angular1",{templateUrl : "angular1.html",controller : "cerebroController"})
+	.when("/angular1HelloWorld",{templateUrl : "angular1HelloWorld.html",controller : "cerebroController"})
+	.when("/printMessage",{templateUrl : "printMessage.html",controller : "cerebroController"})
+	.when("/printMessageWithIIFY",{templateUrl : "printMessageWithIIFY.html",controller : "cerebroController"})
+	
 	// definitions start
 	.when("/definitions",{templateUrl : "definitions.html",controller : "definitionsController"})
-	.when("/addDefinitions",{templateUrl : "addDefinitions.html",controller : "definitionsController"})
+	.when("/addDefinitions",{templateUrl : "addDefinitions.html",controller : "definitionsController"});
 	// definitions end
-	
-	// Angular JS 1
-	.when("/angular1HelloWorld",{templateUrl : "angular1HelloWorld.html",controller : "definitionsController"});
-	
 });
 
 var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsService){
