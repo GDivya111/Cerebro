@@ -98,7 +98,7 @@ app.config(function($routeProvider){
 	.when("/springBootFlywayDB",{templateUrl : "springBootFlywayDB.html",controller : "cerebroController"})
 	.when("/springBootMultipleDataSources",{templateUrl : "springBootMultipleDataSources.html",controller : "cerebroController"})
 	.when("/springBootCli",{templateUrl : "springBootCli.html",controller : "cerebroController"})
-	.when("/springBootAngularJs",{templateUrl : "springBootAngularJs.html",controller : "cerebroController"})
+//	.when("/springBootAngularJs",{templateUrl : "springBootAngularJs.html",controller : "cerebroController"})
 	// spring end
 	
 	// tools start
@@ -186,7 +186,7 @@ app.config(function($routeProvider){
 	.when("/printMessage",{templateUrl : "printMessage.html",controller : "cerebroController"})
 	.when("/printMessageWithIIFY",{templateUrl : "printMessageWithIIFY.html",controller : "cerebroController"})
 	.when("/controller1",{templateUrl : "controller1.html",controller : "cerebroController"})
-	
+	.when("/httpGet",{templateUrl : "httpGet.html",controller : "cerebroController"})
 	
 	// definitions start
 	.when("/definitions",{templateUrl : "definitions.html",controller : "definitionsController"})
