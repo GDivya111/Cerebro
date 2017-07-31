@@ -98,8 +98,6 @@ app.config(function($routeProvider){
 	.when("/springBootFlywayDB",{templateUrl : "springBootFlywayDB.html",controller : "cerebroController"})
 	.when("/springBootMultipleDataSources",{templateUrl : "springBootMultipleDataSources.html",controller : "cerebroController"})
 	.when("/springBootCli",{templateUrl : "springBootCli.html",controller : "cerebroController"})
-//	.when("/springBootAngularJs",{templateUrl : "springBootAngularJs.html",controller : "cerebroController"})
-	// spring end
 	
 	// tools start
 	.when("/tools",{templateUrl : "tools.html",controller : "cerebroController"})
@@ -107,36 +105,30 @@ app.config(function($routeProvider){
 	.when("/openCSV",{templateUrl : "openCSV.html",controller : "cerebroController"})
 	.when("/sonarSetup",{templateUrl : "sonarSetup.html",controller : "cerebroController"})
 	.when("/sonarqubeCodeCoverage",{templateUrl : "sonarqubeCodeCoverage.html",controller : "cerebroController"})
-	// tools end
 	
 	// unit testing start
 	.when("/unitTesting",{templateUrl : "unitTesting.html",controller : "cerebroController"})
 	.when("/junit",{templateUrl : "junit.html",controller : "cerebroController"})
 	.when("/junitHelloWorld",{templateUrl : "junitHelloWorld.html",controller : "cerebroController"})
 	.when("/mockito",{templateUrl : "mockito.html",controller : "cerebroController"})
-	// unit testing end
 	
 	// ant start
 	.when("/ant",{templateUrl : "ant.html",controller : "cerebroController"})
 	.when("/antJacoco",{templateUrl : "antJacoco.html",controller : "cerebroController"})
-	// ant end
 	
 	// gradle start
 	.when("/gradle",{templateUrl : "gradle.html",controller : "cerebroController"})
-	//gradle end
 	
 	// DB start
 	.when("/db",{templateUrl : "db.html",controller : "cerebroController"})
 	.when("/h2DB",{templateUrl : "h2DB.html",controller : "cerebroController"})
 	.when("/practiceDBScripts",{templateUrl : "practiceDBScripts.html",controller : "cerebroController"})
 	.when("/dbJoins",{templateUrl : "dbJoins.html",controller : "cerebroController"})
-	// DB end
 	
 	// Scala start
 	.when("/scala",{templateUrl : "scala.html",controller : "cerebroController"})
 	.when("/installScala",{templateUrl : "installScala.html",controller : "cerebroController"})
 	.when("/scalaHelloWorldWithSbt",{templateUrl : "scalaHelloWorldWithSbt.html",controller : "cerebroController"})
-	// Scala end
 	
 	// Apache camel start
 	.when("/camel",{templateUrl : "camel.html",controller : "cerebroController"})
@@ -147,8 +139,6 @@ app.config(function($routeProvider){
 	.when("/camelWithBeanAndProcessor",{templateUrl : "camelWithBeanAndProcessor.html",controller : "cerebroController"})
 	.when("/camelWithSpring",{templateUrl : "camelWithSpring.html",controller : "cerebroController"})
 	.when("/camelSpringProcessorBean",{templateUrl : "camelSpringProcessorBean.html",controller : "cerebroController"})
-	
-	// Apache camel end
 	
 	//REST web services start
 	.when("/webservices",{templateUrl : "webservices.html",controller : "cerebroController"})
@@ -187,6 +177,8 @@ app.config(function($routeProvider){
 	.when("/printMessageWithIIFY",{templateUrl : "printMessageWithIIFY.html",controller : "cerebroController"})
 	.when("/controller1",{templateUrl : "controller1.html",controller : "cerebroController"})
 	.when("/httpGet",{templateUrl : "httpGet.html",controller : "cerebroController"})
+	.when("/ngModel",{templateUrl : "ngModel.html",controller : "cerebroController"})
+	
 	
 	// definitions start
 	.when("/definitions",{templateUrl : "definitions.html",controller : "definitionsController"})
