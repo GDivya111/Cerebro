@@ -178,6 +178,8 @@ app.config(function($routeProvider){
 	.when("/controller1",{templateUrl : "controller1.html",controller : "cerebroController"})
 	.when("/httpGet",{templateUrl : "httpGet.html",controller : "cerebroController"})
 	.when("/ngModel",{templateUrl : "ngModel.html",controller : "cerebroController"})
+	.when("/ngClick",{templateUrl : "ngClick.html",controller : "cerebroController"})
+	
 	
 	
 	// definitions start
