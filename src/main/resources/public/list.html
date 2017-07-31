@@ -152,12 +152,17 @@ C
 	listToString3.append(&quot;]&quot;);
 	System.out.println(&quot;listToString3: &quot; + listToString3.toString());
     }
+    
+    <em>// method 4</em>
+	String listToString4 = String.join(&quot;-&quot;, list);
+	System.out.println(&quot;listToString4: &quot; + listToString4);
 </code></pre>
 <em>Output</em>
 <pre><code>
 listToString1: A,B,C,D,E
 listToString2: A,B,C,D,E
 listToString3: [A,B,C,D,E]
+listToString4: A-B-C-D-E
 </code></pre>
 </div></div>
 
