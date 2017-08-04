@@ -23,6 +23,8 @@ app.config(function($routeProvider){
 	.when("/hashMapInternals",{templateUrl : "hashMapInternals.html",controller : "cerebroController"})
 	.when("/java8Predicate",{templateUrl : "java8Predicate.html",controller : "cerebroController"})
 	.when("/regex",{templateUrl : "regex.html",controller : "cerebroController"})
+	.when("/set",{templateUrl : "set.html",controller : "cerebroController"})
+	
 	// core java end
 	
 	// orm start
