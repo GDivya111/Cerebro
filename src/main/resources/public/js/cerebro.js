@@ -25,12 +25,13 @@ app.config(function($routeProvider){
 	.when("/regex",{templateUrl : "regex.html",controller : "cerebroController"})
 	.when("/set",{templateUrl : "set.html",controller : "cerebroController"})
 	
-	// core java end
-	
-	// orm start
+	// hibernate 5 start
 	.when("/hibernate",{templateUrl : "hibernate.html",controller : "cerebroController"})
 	.when("/hibernate5HelloWorld",{templateUrl : "hibernate5HelloWorld.html",controller : "cerebroController"})
-	// orm end
+
+	// hibernate 4 start
+	.when("/hibernate4Crud",{templateUrl : "hibernate4Crud.html",controller : "cerebroController"})
+	
 	
 	// maven start
 	.when("/maven",{templateUrl : "maven.html",controller : "cerebroController"})
@@ -46,7 +47,6 @@ app.config(function($routeProvider){
 	.when("/mavenJacoco",{templateUrl : "mavenJacoco.html",controller : "cerebroController"})
 	.when("/mavenAssemblyPlugin",{templateUrl : "mavenAssemblyPlugin.html",controller : "cerebroController"})
 	.when("/mavenJarPlugin",{templateUrl : "mavenJarPlugin.html",controller : "cerebroController"})
-	// maven end
 	
 	// spring - start
 	.when("/spring",{templateUrl : "spring.html",controller : "cerebroController"})
