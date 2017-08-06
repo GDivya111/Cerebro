@@ -4,14 +4,33 @@
 
 <div class="panel panel-primary"><div class="panel-heading">Topics</div><div class="panel-body">
 	<ul>
+		<li><a ng-click="navigate(7)">Create HashMap</a></li>
 		<li><a ng-click="navigate(1)">Sort Map by Key method1</a></li>
 		<li><a ng-click="navigate(2)">Sort Map by Key with java.util.Comparator</a></li>
 		<li><a ng-click="navigate(3)">Sort Map by value</a></li>
 		<li><a ng-click="navigate(4)">Iterate Map</a></li>
 		<li><a ng-click="navigate(5)">Check if key exists in a Map</a></li>
 		<li><a ng-click="navigate(6)">Map - Get default value if key is not found</a></li>
+		<li><a ng-click="navigate(8)">Get All Keys</a></li>
+		<li><a ng-click="navigate(9)">Get All Values</a></li>
 	</ul>
-	</div></div>
+</div></div>
+	
+<div class="panel panel-primary" id="7"><div class="panel-heading">Create HashMap</div><div class="panel-body">
+<pre><code>
+public void createHashMap() {
+		Map&lt;String, String&gt; map = new HashMap&lt;&gt;();
+		for (int i = 0; i &lt; 10; i++) {
+			map.put(&quot;&quot; + i, &quot;value&quot; + i);
+		}
+		System.out.println(&quot;map: &quot; + map);
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+map: {0=value0, 1=value1, 2=value2, 3=value3, 4=value4, 5=value5, 6=value6, 7=value7, 8=value8, 9=value9}
+</code></pre>
+</div></div>	
 	
 <div class="panel panel-primary" id="1"><div class="panel-heading">Sort Map by Key method1</div><div class="panel-body">
   	<pre><code>
@@ -225,5 +244,39 @@ System.out.println(map.getOrDefault(0, &quot;No mapping Found&quot;));
 <pre><code>
 one
 No mapping Found
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="8"><div class="panel-heading">Get All Keys</div><div class="panel-body">
+<pre><code>
+public void getAllKeys() {
+		Map&lt;Integer, String&gt; map = new HashMap&lt;&gt;();
+		for (int i = 0; i &lt; 10; i++) {
+			map.put(i, &quot;value&quot; + i);
+		}
+		Set&lt;Integer&gt; keys = map.keySet();
+		System.out.println(&quot;keys: &quot; + keys);
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+keys: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="9"><div class="panel-heading">Get All Values</div><div class="panel-body">
+<pre><code>
+public void getAllValues() {
+		Map&lt;Integer, String&gt; map = new HashMap&lt;&gt;();
+		for (int i = 0; i &lt; 10; i++) {
+			map.put(i, &quot;value&quot; + i);
+		}
+		Collection&lt;String&gt; values = map.values();
+		System.out.println(&quot;values: &quot; + values);
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+values: [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9]
 </code></pre>
 </div></div>
