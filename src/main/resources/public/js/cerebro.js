@@ -34,6 +34,10 @@ app.config(function($routeProvider){
 	.when("/hibernate4Merge",{templateUrl : "hibernate4Merge.html",controller : "cerebroController"})
 	.when("/hibernate4Hql",{templateUrl : "hibernate4Hql.html",controller : "cerebroController"})
 	
+	// mybatis
+	.when("/myBatis",{templateUrl : "myBatis.html",controller : "cerebroController"})
+	.when("/myBatisCrud",{templateUrl : "myBatisCrud.html",controller : "cerebroController"})
+	
 	// maven start
 	.when("/maven",{templateUrl : "maven.html",controller : "cerebroController"})
 	.when("/installMaven",{templateUrl : "installMaven.html",controller : "cerebroController"})
