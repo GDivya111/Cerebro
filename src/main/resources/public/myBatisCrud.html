@@ -375,13 +375,110 @@ public class InsertPractice {
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary"><div class="panel-heading">ReadPractice.java</div><div class="panel-body">
+<div class="panel panel-primary"><div class="panel-heading">getAll - select * from student</div><div class="panel-body">
 <pre><code>
+public void read() throws IOException {
+		Reader reader = Resources.getResourceAsReader(&quot;MyBatisConfiguration.xml&quot;);
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 
+		try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+			List&lt;Student&gt; list = sqlSession.selectList(&quot;Student.getAll&quot;);
+			list.stream().forEach(System.out::println);
+		}
+	}
 </code></pre>
 <em>Output</em>
 <pre><code>
+Student (id=5, name=Scott, course=Spock, courseStartDate=Sun Jan 01 00:00:00 IST 2017, courseEndDate=Sun Jan 01 00:00:00 IST 2017)
+Student (id=6, name=Mike, course=H20, courseStartDate=Sun Jan 01 00:00:00 IST 2017, courseEndDate=Sun Jan 01 00:00:00 IST 2017)
+Student (id=7, name=Rick, course=Spark, courseStartDate=Sun Jan 01 00:00:00 IST 2017, courseEndDate=Sun Jan 01 00:00:00 IST 2017)
+Student (id=8, name=Rich, course=Kafka, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+Student (id=9, name=Emy, course=Spring, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+Student (id=11, name=Mahesh, course=Hibernate, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+Student (id=12, name=Suresh, course=Hibernate, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+Student (id=13, name=Ramesh, course=Hibernate, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+Student (id=10, name=Stott, course=MyBatis2, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+</code></pre>
+</div></div>
 
+<div class="panel panel-primary"><div class="panel-heading">getById - select * from student where id = #{id}</div><div class="panel-body">
+<pre><code>
+public void read2() throws IOException {
+		Reader reader = Resources.getResourceAsReader(&quot;MyBatisConfiguration.xml&quot;);
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+		try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+			List&lt;Student&gt; list = sqlSession.selectList(&quot;Student.getById&quot;, 10);
+			list.stream().forEach(System.out::println);
+		}
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+Student (id=10, name=Stott, course=MyBatis2, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">getByNameLike - select * from student where name like #{inputName}</div><div class="panel-body">
+<pre><code>
+public void read3() throws IOException {
+		Reader reader = Resources.getResourceAsReader(&quot;MyBatisConfiguration.xml&quot;);
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+		try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+			List&lt;Student&gt; list = sqlSession.selectList(&quot;Student.getByNameLike&quot;, &quot;S%&quot;);
+			list.stream().forEach(System.out::println);
+		}
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+Student (id=5, name=Scott, course=Spock, courseStartDate=Sun Jan 01 00:00:00 IST 2017, courseEndDate=Sun Jan 01 00:00:00 IST 2017)
+Student (id=12, name=Suresh, course=Hibernate, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+Student (id=10, name=Stott, course=MyBatis2, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">getByNameAndCourse - select * from student where name like #{inputName} and course like #{inputCourse}</div><div class="panel-body">
+<pre><code>
+public void read4() throws IOException {
+		Reader reader = Resources.getResourceAsReader(&quot;MyBatisConfiguration.xml&quot;);
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+		try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+			Map&lt;String, String&gt; inputMap = new HashMap&lt;&gt;();
+			inputMap.put(&quot;inputName&quot;, &quot;R%&quot;);
+			inputMap.put(&quot;inputCourse&quot;, &quot;S%&quot;);
+			List&lt;Student&gt; list = sqlSession.selectList(&quot;Student.getByNameAndCourse&quot;, inputMap);
+			list.stream().forEach(System.out::println);
+		}
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+Student (id=7, name=Rick, course=Spark, courseStartDate=Sun Jan 01 00:00:00 IST 2017, courseEndDate=Sun Jan 01 00:00:00 IST 2017)
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">getNameAndCourse - select name, course from student</div><div class="panel-body">
+<pre><code>
+public void read5() throws IOException {
+		Reader reader = Resources.getResourceAsReader(&quot;MyBatisConfiguration.xml&quot;);
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+		try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+			List&lt;Student2&gt; list = sqlSession.selectList(&quot;Student.getNameAndCourse&quot;);
+			list.stream().forEach(System.out::println);
+		}
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+Student2 (name=Scott, course=Spock)
+Student2 (name=Mike, course=H20)
+Student2 (name=Rick, course=Spark)
+Student2 (name=Rich, course=Kafka)
+Student2 (name=Emy, course=Spring)
+Student2 (name=Mahesh, course=Hibernate)
+Student2 (name=Suresh, course=Hibernate)
+Student2 (name=Ramesh, course=Hibernate)
+Student2 (name=Stott, course=MyBatis2)
 </code></pre>
 </div></div>
 
