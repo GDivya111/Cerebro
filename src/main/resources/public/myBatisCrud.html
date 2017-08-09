@@ -484,20 +484,84 @@ Student2 (name=Stott, course=MyBatis2)
 
 <div class="panel panel-primary"><div class="panel-heading">UpdatePractice.java</div><div class="panel-body">
 <pre><code>
+public void update1() throws IOException {
+		Reader reader = Resources.getResourceAsReader(&quot;MyBatisConfiguration.xml&quot;);
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+		try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+			Map&lt;String, String&gt; inputMap = new HashMap&lt;&gt;();
+			inputMap.put(&quot;inputCourse&quot;, &quot;MyBatis2&quot;);
+			inputMap.put(&quot;inputName&quot;, &quot;Stott&quot;);
 
+			// read records
+			List&lt;Student&gt; list = sqlSession.selectList(&quot;Student.getByNameLike&quot;, &quot;Stott&quot;);
+			System.out.println(&quot;----- Before -------&quot;);
+			list.stream().forEach(System.out::println);
+
+			// execute update
+			sqlSession.update(&quot;Student.updateQuery&quot;, inputMap);
+			sqlSession.commit();
+
+			// read records
+			list = sqlSession.selectList(&quot;Student.getByNameLike&quot;, &quot;Stott&quot;);
+			System.out.println(&quot;----- After -------&quot;);
+			list.stream().forEach(System.out::println);
+		}
+	}
 </code></pre>
 <em>Output</em>
 <pre><code>
-
+----- Before -------
+Student (id=10, name=Stott, course=Hibernate, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+----- After -------
+Student (id=10, name=Stott, course=MyBatis2, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
 </code></pre>
 </div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">DeletePractice.java</div><div class="panel-body">
 <pre><code>
+public void delete1() throws IOException {
+		Reader reader = Resources.getResourceAsReader(&quot;MyBatisConfiguration.xml&quot;);
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+		try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+			List&lt;Student&gt; allStudents = sqlSession.selectList(&quot;Student.getAll&quot;);
+			System.out.println(&quot;----- Before ------&quot;);
+			allStudents.stream().forEach(System.out::println);
 
+			// execute update
+			sqlSession.delete(&quot;Student.deleteQuery&quot;, &quot;J%&quot;);
+			sqlSession.commit();
+
+			allStudents = sqlSession.selectList(&quot;Student.getAll&quot;);
+			System.out.println(&quot;----- After ------&quot;);
+			allStudents.stream().forEach(System.out::println);
+		}
+	}
 </code></pre>
 <em>Output</em>
 <pre><code>
-
+----- Before ------
+Student (id=1, name=Jack, course=Java, courseStartDate=Sun Jan 01 00:00:00 IST 2017, courseEndDate=Sun Jan 01 00:00:00 IST 2017)
+Student (id=2, name=Jill, course=Groovy, courseStartDate=Sun Jan 01 00:00:00 IST 2017, courseEndDate=Sun Jan 01 00:00:00 IST 2017)
+Student (id=3, name=Jim, course=Scala, courseStartDate=Sun Jan 01 00:00:00 IST 2017, courseEndDate=Sun Jan 01 00:00:00 IST 2017)
+Student (id=4, name=John, course=Python, courseStartDate=Sun Jan 01 00:00:00 IST 2017, courseEndDate=Sun Jan 01 00:00:00 IST 2017)
+Student (id=5, name=Scott, course=Spock, courseStartDate=Sun Jan 01 00:00:00 IST 2017, courseEndDate=Sun Jan 01 00:00:00 IST 2017)
+Student (id=6, name=Mike, course=H20, courseStartDate=Sun Jan 01 00:00:00 IST 2017, courseEndDate=Sun Jan 01 00:00:00 IST 2017)
+Student (id=7, name=Rick, course=Spark, courseStartDate=Sun Jan 01 00:00:00 IST 2017, courseEndDate=Sun Jan 01 00:00:00 IST 2017)
+Student (id=8, name=Rich, course=Kafka, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+Student (id=9, name=Emy, course=Spring, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+Student (id=10, name=Stott, course=Hibernate, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+Student (id=11, name=Mahesh, course=Hibernate, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+Student (id=12, name=Suresh, course=Hibernate, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+Student (id=13, name=Ramesh, course=Hibernate, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+----- After ------
+Student (id=5, name=Scott, course=Spock, courseStartDate=Sun Jan 01 00:00:00 IST 2017, courseEndDate=Sun Jan 01 00:00:00 IST 2017)
+Student (id=6, name=Mike, course=H20, courseStartDate=Sun Jan 01 00:00:00 IST 2017, courseEndDate=Sun Jan 01 00:00:00 IST 2017)
+Student (id=7, name=Rick, course=Spark, courseStartDate=Sun Jan 01 00:00:00 IST 2017, courseEndDate=Sun Jan 01 00:00:00 IST 2017)
+Student (id=8, name=Rich, course=Kafka, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+Student (id=9, name=Emy, course=Spring, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+Student (id=10, name=Stott, course=Hibernate, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+Student (id=11, name=Mahesh, course=Hibernate, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+Student (id=12, name=Suresh, course=Hibernate, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
+Student (id=13, name=Ramesh, course=Hibernate, courseStartDate=Mon Jan 01 00:00:00 IST 2018, courseEndDate=Mon Jan 01 00:00:00 IST 2018)
 </code></pre>
 </div></div>
