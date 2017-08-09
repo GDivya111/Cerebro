@@ -12,6 +12,12 @@
 
 <div class="panel panel-primary"><div class="panel-heading">DEPT table and Insert scripts</div><div class="panel-body">
 <pre><code>
+CREATE SEQUENCE DEPT_SEQ
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
 CREATE TABLE DEPT
 (
  DEPTNO NUMBER(32)
@@ -38,6 +44,12 @@ COMMIT;
 
 <div class="panel panel-primary"><div class="panel-heading">EMP table and Insert scripts</div><div class="panel-body">
 <pre><code>
+CREATE SEQUENCE EMP_SEQ
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
 CREATE TABLE EMP
 (
  EMPNO NUMBER(32)
@@ -100,6 +112,12 @@ COMMIT;
 
 <div class="panel panel-primary"><div class="panel-heading">SALGRADE table and Insert scripts</div><div class="panel-body">
 <pre><code>
+CREATE SEQUENCE SALGRADE_SEQ
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
 CREATE TABLE SALGRADE
 (
  HISAL NUMBER(32)
