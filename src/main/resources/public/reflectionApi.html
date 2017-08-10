@@ -1,5 +1,127 @@
 <div class="panel panel-primary"><div class="panel-heading">Contents</div><div class="panel-body">
 	<ul>
-		<li>Create Object using reflection API - class has zero argument constructor</li>
+		<li><a ng-click="navigate(1)">Create Object using reflection API - class has zero argument constructor</a></li>
+		<li><a ng-click="navigate(2)">Calling method with zero arguments</a></li>
+		<li><a ng-click="navigate(3)">Calling method with String array as arguments</a></li>
 	</ul>
+</div></div>
+
+<div class="panel panel-primary" id="1"><div class="panel-heading">Create Object using reflection API - class has zero argument constructor</div><div class="panel-body">
+<pre><code>
+package core.java.reflection.api.model;
+
+import java.util.Arrays;
+
+public class ReflectionAPIModel1 {
+
+	public void method1(String arg1) {
+		System.out.println(&quot;method1 argument: &quot; + arg1);
+	}
+
+}
+</code></pre>
+<pre><code>
+public void method3() {
+		try {
+			Class&lt;?&gt; klass = Class.forName(&quot;core.java.reflection.api.model.ReflectionAPIModel1&quot;);
+			System.out.println(klass);
+
+			Object object = klass.newInstance();
+			System.out.println(object);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+class core.java.reflection.api.model.ReflectionAPIModel1
+core.java.reflection.api.model.ReflectionAPIModel1@6276ae34
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="2"><div class="panel-heading">Calling method with zero arguments</div><div class="panel-body">
+<pre><code>
+package core.java.reflection.api.model;
+
+import java.util.Arrays;
+
+public class ReflectionAPIModel1 {
+
+	public void method1(String arg1) {
+		System.out.println(&quot;method1 argument: &quot; + arg1);
+	}
+
+}
+</code></pre>
+<pre><code>
+import java.lang.reflect.Array;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
+
+public void method1() {
+		try {
+			Class&lt;?&gt; klass = Class.forName(&quot;core.java.reflection.api.model.ReflectionAPIModel1&quot;);
+			System.out.println(klass);
+
+			Method method1 = klass.getMethod(&quot;method1&quot;, String.class);
+			System.out.println(method1);
+			method1.invoke(klass.newInstance(), &quot;Hello Reflection API&quot;);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+class core.java.reflection.api.model.ReflectionAPIModel1
+public void core.java.reflection.api.model.ReflectionAPIModel1.method1(java.lang.String)
+method1 argument: Hello Reflection API
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="3"><div class="panel-heading">Calling method with String array as arguments</div><div class="panel-body">
+<pre ><code>
+package core.java.reflection.api.model;
+
+import java.util.Arrays;
+
+public class ReflectionAPIModel1 {
+
+	public void method2(String[] arg1) {
+		Arrays.stream(arg1).forEach(System.out::println);
+	}
+}
+</code></pre>
+<pre><code>
+import java.lang.reflect.Array;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
+
+public void method2() {
+		try {
+			Class&lt;?&gt; klass = Class.forName(&quot;core.java.reflection.api.model.ReflectionAPIModel1&quot;);
+			System.out.println(klass);
+
+			Method method2 = klass.getMethod(&quot;method2&quot;, Array.newInstance(String.class, 1).getClass());
+			System.out.println(method2);
+
+			List&lt;String&gt; values = Arrays.asList(&quot;Hello&quot;, &quot;reflection&quot;, &quot;api&quot;);
+			method2.invoke(klass.newInstance(), new Object[] { values.toArray() });
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+class core.java.reflection.api.model.ReflectionAPIModel1
+public void core.java.reflection.api.model.ReflectionAPIModel1.method2(java.lang.String[])
+Hello
+reflection
+api
+</code></pre>
 </div></div>
