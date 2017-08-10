@@ -24,6 +24,8 @@ app.config(function($routeProvider){
 	.when("/java8Predicate",{templateUrl : "java8Predicate.html",controller : "cerebroController"})
 	.when("/regex",{templateUrl : "regex.html",controller : "cerebroController"})
 	.when("/set",{templateUrl : "set.html",controller : "cerebroController"})
+	.when("/reflectionApi",{templateUrl : "reflectionApi.html",controller : "cerebroController"})
+	.when("/messageFormat",{templateUrl : "messageFormat.html",controller : "cerebroController"})
 	
 	// hibernate 5 start
 	.when("/hibernate",{templateUrl : "hibernate.html",controller : "cerebroController"})
