@@ -618,25 +618,35 @@ Reduce 4 years: Sat Jun 11 20:31:54 IST 2016
 <div class="panel panel-primary" id="22"><div class="panel-heading">Check the date is past date or not</div><div class="panel-body">
 <pre><code>
 public void dateFormatPractice() throws ParseException {
+		<em>// method 1</em>
 		String inputDate = &quot;20170710&quot;;
 		DateFormat dateFormat = new SimpleDateFormat(&quot;yyyyMMdd&quot;);
 		Date convertDate = dateFormat.parse(inputDate);
-		System.out.println(&quot;convertDate: &quot; + convertDate);
 
 		Instant instant = convertDate.toInstant();
 		ZoneId systemDefaultZoneId = ZoneId.systemDefault();
 		LocalDate localDate = instant.atZone(systemDefaultZoneId).toLocalDate();
-		System.out.println(&quot;localDate: &quot; + localDate);
 
 		LocalDate today = LocalDate.now(Clock.systemDefaultZone());
 		boolean isPast = localDate.isBefore(today);
-		System.out.println(&quot;isPast: &quot; + isPast);
+		boolean isFuture = localDate.isAfter(today);
+		System.out.println(&quot;inputDate: &quot; + localDate + &quot;, today: &quot; + today + &quot;, isPast: &quot; + isPast
+				+ &quot;, isFuture: &quot; + isFuture);
+
+		<em>// method 2</em>
+		String inputDate2 = &quot;20190814&quot;;
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);
+		LocalDate localDate2 = LocalDate.parse(inputDate2, dateTimeFormatter);
+		LocalDate today2 = LocalDate.now(Clock.systemDefaultZone());
+		boolean isPast2 = localDate2.isBefore(today2);
+		boolean isFuture2 = localDate2.isAfter(today2);
+		System.out.println(&quot;inputDate2: &quot; + localDate2 + &quot;, today2: &quot; + today2 + &quot;, isPast2: &quot; + isPast2
+				+ &quot;, isFuture: &quot; + isFuture2);
 	}
 </code></pre>
 <em>Output:</em>
 <pre><code>
-convertDate: Mon Jul 10 00:00:00 IST 2017
-localDate: 2017-07-10
-isPast: true
+inputDate: 2017-07-10, today: 2017-08-14, isPast: true, isFuture: false
+inputDate2: 2019-08-14, today2: 2017-08-14, isPast2: false, isFuture: true
 </code></pre>
 </div></div>
