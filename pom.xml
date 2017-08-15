@@ -26,8 +26,14 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Due to below dependency some features with below URLs will be available to application: 1. http://localhost:portNumber/health 2. http://localhost:portNumber/beans 
-			3. http://localhost:portNumber/env 4. http://localhost:portNumber/metrics 5. http://localhost:portNumber/mappings 6. http://localhost:portNumber/trace -->
+		<!-- Due to below dependency some features with below URLs will be available to application: 
+			1. http://localhost:portNumber/health 
+			2. http://localhost:portNumber/beans 
+			3. http://localhost:portNumber/env 
+			4. http://localhost:portNumber/metrics 
+			5. http://localhost:portNumber/mappings 
+			6. http://localhost:portNumber/trace 
+		-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>

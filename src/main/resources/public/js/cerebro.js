@@ -103,6 +103,7 @@ app.config(function($routeProvider){
 	.when("/springRestExceptionHandling4",{templateUrl : "springRestExceptionHandling4.html",controller : "cerebroController"})
 	.when("/springRestExceptionHandling5",{templateUrl : "springRestExceptionHandling5.html",controller : "cerebroController"})
 	.when("/springRestExceptionHandling6",{templateUrl : "springRestExceptionHandling6.html",controller : "cerebroController"})
+	.when("/springRestLog4J",{templateUrl : "springRestLog4J.html",controller : "cerebroController"})
 	
 	.when("/springBootFlywayDB",{templateUrl : "springBootFlywayDB.html",controller : "cerebroController"})
 	.when("/springBootMultipleDataSources",{templateUrl : "springBootMultipleDataSources.html",controller : "cerebroController"})
