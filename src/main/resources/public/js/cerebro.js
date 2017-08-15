@@ -190,8 +190,9 @@ app.config(function($routeProvider){
 	.when("/httpGet",{templateUrl : "httpGet.html",controller : "cerebroController"})
 	.when("/ngModel",{templateUrl : "ngModel.html",controller : "cerebroController"})
 	.when("/ngClick",{templateUrl : "ngClick.html",controller : "cerebroController"})
-	
-	
+	.when("/ngSubmit",{templateUrl : "ngSubmit.html",controller : "cerebroController"})
+	.when("/ngRepeat",{templateUrl : "ngRepeat.html",controller : "cerebroController"})
+	.when("/intervalService",{templateUrl : "intervalService.html",controller : "cerebroController"})
 	
 	// definitions start
 	.when("/definitions",{templateUrl : "definitions.html",controller : "definitionsController"})
