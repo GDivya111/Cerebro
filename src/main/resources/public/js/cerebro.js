@@ -193,6 +193,12 @@ app.config(function($routeProvider){
 	.when("/ngSubmit",{templateUrl : "ngSubmit.html",controller : "cerebroController"})
 	.when("/ngRepeat",{templateUrl : "ngRepeat.html",controller : "cerebroController"})
 	.when("/intervalService",{templateUrl : "intervalService.html",controller : "cerebroController"})
+	.when("/windowService",{templateUrl : "windowService.html",controller : "cerebroController"})
+	.when("/ngInclude",{templateUrl : "ngInclude.html",controller : "cerebroController"})
+	.when("/customService",{templateUrl : "customService.html",controller : "cerebroController"})
+	.when("/navigateToSpecificIdInPage",{templateUrl : "navigateToSpecificIdInPage.html",controller : "cerebroController"})
+	.when("/ngRouteTemplate",{templateUrl : "ngRouteTemplate.html",controller : "cerebroController"})
+	.when("/logService",{templateUrl : "logService.html",controller : "cerebroController"})
 	
 	// definitions start
 	.when("/definitions",{templateUrl : "definitions.html",controller : "definitionsController"})
