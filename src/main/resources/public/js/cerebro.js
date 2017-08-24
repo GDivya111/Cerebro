@@ -26,6 +26,8 @@ app.config(function($routeProvider){
 	.when("/set",{templateUrl : "set.html",controller : "cerebroController"})
 	.when("/reflectionApi",{templateUrl : "reflectionApi.html",controller : "cerebroController"})
 	.when("/messageFormat",{templateUrl : "messageFormat.html",controller : "cerebroController"})
+	.when("/enumLookupMap",{templateUrl : "enumLookupMap.html",controller : "cerebroController"})
+	
 	
 	// hibernate 5 start
 	.when("/hibernate",{templateUrl : "hibernate.html",controller : "cerebroController"})
