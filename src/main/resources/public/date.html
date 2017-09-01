@@ -22,6 +22,8 @@
 		<li><a ng-click="navigate(19)">Convert java.time.LocalDateTime to java.sql.Timestamp</a></li>
 		<li><a ng-click="navigate(21)">Add days, months and years to java.util.Date</a></li>
 		<li><a ng-click="navigate(22)">Check the date is past date or not</a></li>
+		<li><a ng-click="navigate(23)">Date Validation</a></li>
+		<li><a ng-click="navigate(24)">Convert LocalDate to String</a></li>
 	</ul>
 </div></div>
 
@@ -648,5 +650,131 @@ public void dateFormatPractice() throws ParseException {
 <pre><code>
 inputDate: 2017-07-10, today: 2017-08-14, isPast: true, isFuture: false
 inputDate2: 2019-08-14, today2: 2017-08-14, isPast2: false, isFuture: true
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="23"><div class="panel-heading">Date Validation</div><div class="panel-body">
+<em>Validate using java.util.Date</em>
+<pre><code>
+import java.text.SimpleDateFormat;
+import java.lang.String;
+import java.util.Date;
+import java.text.ParseException;
+
+public void validateUsingUtilDate() {
+		<em>// 20170999 - using java.util.Date</em>
+		try {
+			SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(&quot;yyyyMMdd&quot;);
+			simpleDateFormat1.setLenient(false);
+			String date1 = &quot;20170999&quot;;
+			Date convertedDate1 = simpleDateFormat1.parse(date1);
+			System.out.println(&quot;convertedDate1: &quot; + convertedDate1);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		<em>// 20170999 - using java.util.Date</em>
+		try {
+			SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(&quot;yyyyMMdd&quot;);
+			String date2 = &quot;20170999&quot;;
+			Date convertedDate2 = simpleDateFormat2.parse(date2);
+			System.out.println(&quot;convertedDate2: &quot; + convertedDate2);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+<span class="errorOutput">java.text.ParseException: Unparseable date: &quot;20170999&quot;
+	at java.text.DateFormat.parse(DateFormat.java:366)
+	at core.java.DatePractice.validateUsingUtilDate(DatePractice.java:463)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)</span>
+convertedDate2: Fri Dec 08 00:00:00 IST 2017
+</code></pre>
+
+<em>Validate using java.time.LocalDate</em>
+<pre><code>
+import java.lang.String;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.lang.Exception;
+
+public void validateUsingLocalDate() {
+		<em>//  20170999 - using java.time.LocalDate</em>
+		try {
+			String date1 = &quot;20170999&quot;;
+			DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;);
+			LocalDate localDate1 = LocalDate.parse(date1, formatter1);
+			System.out.println(&quot;localDate1: &quot; + localDate1);
+			System.out.println(&quot;formatter1.format(localDate1): &quot; + formatter1.format(localDate1));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+</code></pre>
+<em>Output</em>
+<pre><code class="errorOutput">
+java.time.format.DateTimeParseException: Text '20170999' could not be parsed: Invalid value for DayOfMonth (valid values 1 - 28/31): 99
+	at java.time.format.DateTimeFormatter.createError(DateTimeFormatter.java:1920)
+	at java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:1855)
+	at java.time.LocalDate.parse(LocalDate.java:400)
+	at core.java.DatePractice.validateUsingLocalDate(DatePractice.java:487)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+Caused by: java.time.DateTimeException: Invalid value for DayOfMonth (valid values 1 - 28/31): 99
+	at java.time.temporal.ValueRange.checkValidIntValue(ValueRange.java:330)
+	at java.time.temporal.ChronoField.checkValidIntValue(ChronoField.java:722)
+	at java.time.chrono.IsoChronology.resolveYMD(IsoChronology.java:551)
+	at java.time.chrono.IsoChronology.resolveYMD(IsoChronology.java:123)
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="24"><div class="panel-heading">Convert LocalDate to String</div><div class="panel-body">
+<pre><code>
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public void convertLocalDateToString() {
+ <em>//MMM-yy</em>
+ LocalDate localDate = LocalDate.now(Clock.systemDefaultZone());
+ DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(&quot;MMM-yy&quot;);
+ System.out.println(&quot;localDate: &quot; + localDate + &quot;, convertedDate: &quot; + dateTimeFormatter.format(localDate));
+ 
+ <em>//dd-MM-yy</em>
+ LocalDate localDate2 = LocalDate.now(Clock.systemDefaultZone());
+ DateTimeFormatter dateTimeFormatter2 = DateTimeFormatter.ofPattern(&quot;dd-MMM-yy&quot;);
+ System.out.println(&quot;localDate2: &quot; + localDate2 + &quot;, convertedDate2: &quot; + dateTimeFormatter2.format(localDate2));
+}
+</code></pre>
+<em>Output</em>
+<pre><code>
+localDate: 2017-09-01, convertedDate: Sep-17
+localDate2: 2017-09-01, convertedDate2: 01-Sep-17
 </code></pre>
 </div></div>

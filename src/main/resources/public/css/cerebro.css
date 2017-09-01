@@ -41,6 +41,10 @@ table tr:nth-child(even) {
 	list-style-type: none;
 }
 
+.errorOutput{
+	color: red;
+}
+
 .notActive{
 	
 }
