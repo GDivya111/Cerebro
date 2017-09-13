@@ -24,6 +24,7 @@
 		<li><a ng-click="navigate(22)">Check the date is past date or not</a></li>
 		<li><a ng-click="navigate(23)">Date Validation</a></li>
 		<li><a ng-click="navigate(24)">Convert LocalDate to String</a></li>
+		<li><a ng-click="navigate(25)">Calculate number of weekends between 2 dates</a></li>
 	</ul>
 </div></div>
 
@@ -776,5 +777,74 @@ public void convertLocalDateToString() {
 <pre><code>
 localDate: 2017-09-01, convertedDate: Sep-17
 localDate2: 2017-09-01, convertedDate2: 01-Sep-17
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="25"><div class="panel-heading">Calculate number of weekends between 2 dates</div><div class="panel-body">
+<em>Using java.time.LocalDate in JDK 8</em>
+<pre><code>
+import java.time.LocalDate;
+import java.time.DayOfWeek;
+import java.time.format.TextStyle;
+import java.util.Locale;
+
+public void calculateNoOfWeekendsBetweenTwoDays() {
+ LocalDate fromDate = LocalDate.of(2017, 9, 12);
+ LocalDate toDate = LocalDate.of(2017, 9, 15);
+ calculateNoOfWeekends(fromDate, toDate);
+
+ fromDate = LocalDate.of(2017, 9, 12);
+ toDate = LocalDate.of(2017, 9, 18);
+ calculateNoOfWeekends(fromDate, toDate);
+
+ fromDate = LocalDate.of(2017, 9, 16);
+ toDate = LocalDate.of(2017, 9, 25);
+ calculateNoOfWeekends(fromDate, toDate);
+}
+
+private void calculateNoOfWeekends(LocalDate fromDate, LocalDate toDate) {
+ System.out.println(&quot;Input -&gt; fromDate: &quot; + fromDate + &quot;, toDate: &quot; + toDate);
+
+ int noOfWeekends = 0;
+ do {
+  DayOfWeek dayOfWeek = fromDate.getDayOfWeek();
+  String weekName = dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+  System.out.println(&quot;fromDate: &quot; + fromDate + &quot;, weekName: &quot; + weekName);
+
+  if (&quot;saturday&quot;.equalsIgnoreCase(weekName) || &quot;sunday&quot;.equalsIgnoreCase(weekName)) {
+   noOfWeekends++;
+  }
+  fromDate = fromDate.plusDays(1);
+ } while (fromDate.isBefore(toDate));
+
+ System.out.println(&quot;number of weekends: &quot; + noOfWeekends);
+}
+</code></pre>
+<em>Output</em>
+<pre><code>
+Input -&gt; fromDate: 2017-09-12, toDate: 2017-09-15
+fromDate: 2017-09-12, weekName: Tuesday
+fromDate: 2017-09-13, weekName: Wednesday
+fromDate: 2017-09-14, weekName: Thursday
+number of weekends: 0
+Input -&gt; fromDate: 2017-09-12, toDate: 2017-09-18
+fromDate: 2017-09-12, weekName: Tuesday
+fromDate: 2017-09-13, weekName: Wednesday
+fromDate: 2017-09-14, weekName: Thursday
+fromDate: 2017-09-15, weekName: Friday
+fromDate: 2017-09-16, weekName: Saturday
+fromDate: 2017-09-17, weekName: Sunday
+number of weekends: 2
+Input -&gt; fromDate: 2017-09-16, toDate: 2017-09-25
+fromDate: 2017-09-16, weekName: Saturday
+fromDate: 2017-09-17, weekName: Sunday
+fromDate: 2017-09-18, weekName: Monday
+fromDate: 2017-09-19, weekName: Tuesday
+fromDate: 2017-09-20, weekName: Wednesday
+fromDate: 2017-09-21, weekName: Thursday
+fromDate: 2017-09-22, weekName: Friday
+fromDate: 2017-09-23, weekName: Saturday
+fromDate: 2017-09-24, weekName: Sunday
+number of weekends: 4
 </code></pre>
 </div></div>
