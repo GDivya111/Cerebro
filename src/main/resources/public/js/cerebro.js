@@ -28,6 +28,8 @@ app.config(function($routeProvider){
 	.when("/messageFormat",{templateUrl : "messageFormat.html",controller : "cerebroController"})
 	.when("/enumLookupMap",{templateUrl : "enumLookupMap.html",controller : "cerebroController"})
 	
+	// interview questions
+	.when("/interviewQuestions",{templateUrl : "interviewQuestions.html",controller : "cerebroController"})
 	
 	// hibernate 5 start
 	.when("/hibernate",{templateUrl : "hibernate.html",controller : "cerebroController"})
