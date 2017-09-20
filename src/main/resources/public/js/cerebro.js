@@ -27,6 +27,10 @@ app.config(function($routeProvider){
 	.when("/reflectionApi",{templateUrl : "reflectionApi.html",controller : "cerebroController"})
 	.when("/messageFormat",{templateUrl : "messageFormat.html",controller : "cerebroController"})
 	.when("/enumLookupMap",{templateUrl : "enumLookupMap.html",controller : "cerebroController"})
+	.when("/javaUtilOptional",{templateUrl : "javaUtilOptional.html",controller : "cerebroController"})
+	
+	// testing
+	.when("/affixAndScrollSpy",{templateUrl : "affixAndScrollSpy.html",controller : "cerebroController"})
 	
 	// interview questions
 	.when("/interviewQuestions",{templateUrl : "interviewQuestions.html",controller : "cerebroController"})
