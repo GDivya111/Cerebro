@@ -25,6 +25,8 @@
 		<li><a ng-click="navigate(23)">Date Validation</a></li>
 		<li><a ng-click="navigate(24)">Convert LocalDate to String</a></li>
 		<li><a ng-click="navigate(25)">Calculate number of weekends between 2 dates</a></li>
+		<li><a ng-click="navigate(26)">Convert java.time.LocalDateTime to java.time.LocalDate</a></li>
+		<li><a ng-click="navigate(27)">Convert java.time.LocalDateTime to java.time.LocalTime</a></li>
 	</ul>
 </div></div>
 
@@ -70,7 +72,7 @@
       	<td>Date in single digit</td>
       </tr>
       <tr>
-      	<td>E</td>
+      	<td>E (or) EEE</td>
       	<td>Day in shot form</td>
       </tr>
       <tr>
@@ -541,22 +543,41 @@ formatter4.format(localDate5): Thursday, Jul 20 2017 12:10:08 PM
 import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public void getDayOfWeek() {
-	int year = 2015;
-	int month = 8;
-	int day = 5;
+		int year = 2015;
+		int month = 8;
+		int day = 5;
 
-	Calendar calendar = Calendar.getInstance();
-	calendar.set(year, month - 1, day);
-	Date date = calendar.getTime();
-	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&quot;EEEE&quot;);
-	System.out.println(simpleDateFormat.format(date).toUpperCase());
-    }
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(year, month - 1, day);
+		Date date = calendar.getTime();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&quot;EEEE&quot;);
+		System.out.println(simpleDateFormat.format(date));
+
+		SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(&quot;E&quot;);
+		System.out.println(simpleDateFormat2.format(date));
+
+		SimpleDateFormat simpleDateFormat3 = new SimpleDateFormat(&quot;EEE&quot;);
+		System.out.println(simpleDateFormat3.format(date));
+
+		// JDK 8
+		LocalDateTime localDateTime = LocalDateTime.of(2017, 9, 27, 8, 24);
+		System.out.println(localDateTime.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+
+		LocalDate localDate = LocalDate.of(2017, 9, 27);
+		System.out.println(localDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+	}
 </code></pre>
 <em>Output:</em>
 <pre>
-WEDNESDAY
+Wednesday
+Wed
+Wed
+Wednesday
+Wednesday
 </pre>
 </div></div>
 
@@ -846,5 +867,33 @@ fromDate: 2017-09-22, weekName: Friday
 fromDate: 2017-09-23, weekName: Saturday
 fromDate: 2017-09-24, weekName: Sunday
 number of weekends: 4
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="26"><div class="panel-heading">Convert java.time.LocalDateTime to java.time.LocalDate</div><div class="panel-body">
+<pre><code>
+public void convertLocalDateTimeToLocalDate() {
+		LocalDateTime localDateTime = LocalDateTime.of(2017, 9, 27, 8, 29);
+		LocalDate localDate = localDateTime.toLocalDate();
+		System.out.println(&quot;localDate: &quot; + localDate);
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+localDate: 2017-09-27
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="27"><div class="panel-heading">Convert java.time.LocalDateTime to java.time.LocalTime</div><div class="panel-body">
+<pre><code>
+public void convertLocalDateTimeToLocalTime() {
+		LocalDateTime localDateTime = LocalDateTime.of(2017, 9, 27, 8, 29);
+		LocalTime localTime = localDateTime.toLocalTime();
+		System.out.println(&quot;localDate: &quot; + localTime);
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+localTime: 08:29
 </code></pre>
 </div></div>
