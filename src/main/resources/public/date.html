@@ -27,6 +27,7 @@
 		<li><a ng-click="navigate(25)">Calculate number of weekends between 2 dates</a></li>
 		<li><a ng-click="navigate(26)">Convert java.time.LocalDateTime to java.time.LocalDate</a></li>
 		<li><a ng-click="navigate(27)">Convert java.time.LocalDateTime to java.time.LocalTime</a></li>
+		<li><a ng-click="navigate(28)">Get Date based of year</a></li>
 	</ul>
 </div></div>
 
@@ -895,5 +896,34 @@ public void convertLocalDateTimeToLocalTime() {
 <em>Output</em>
 <pre><code>
 localTime: 08:29
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="28"><div class="panel-heading">Get Date based of year</div><div class="panel-body">
+<pre><code>
+public void getYearBaseValue() {
+		LocalDate localDate = LocalDate.now(Clock.systemDefaultZone());
+		System.out.println(&quot;date: &quot; + localDate.getDayOfMonth() + &quot;, month: &quot; + localDate.getMonthValue()
+				+ &quot;, year: &quot; + localDate.getYear() + &quot;, dayOfYear: &quot; + localDate.getDayOfYear()
+				+ &quot;, weekOfTheYear: &quot; + localDate.get(WeekFields.of(Locale.ENGLISH).weekOfWeekBasedYear())
+				+ &quot;, weekOfTheMonth: &quot; + localDate.get(WeekFields.of(Locale.ENGLISH).weekOfMonth()));
+
+		ZoneId zoneId = ZoneId.systemDefault();
+		Date date = Date.from(localDate.atStartOfDay(zoneId).toInstant());
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+
+		System.out.println(&quot;date: &quot; + calendar.get(Calendar.DATE) + &quot;, month: &quot;
+				+ (calendar.get(Calendar.MONTH) + 1) + &quot;, year: &quot; + calendar.get(Calendar.YEAR)
+				+ &quot;, dayOfTheYear: &quot; + calendar.get(Calendar.DAY_OF_YEAR) + &quot;, weekOfTheYear: &quot;
+				+ calendar.get(Calendar.WEEK_OF_YEAR) + &quot;, monthOfTheYear: &quot;
+				+ (calendar.get(Calendar.MONTH) + 1) + &quot;, weekOfTheMonth: &quot;
+				+ calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH));
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+date: 27, month: 9, year: 2017, dayOfYear: 270, weekOfTheYear: 39, weekOfTheMonth: 5
+date: 27, month: 9, year: 2017, dayOfTheYear: 270, weekOfTheYear: 39, monthOfTheYear: 9, weekOfTheMonth: 4
 </code></pre>
 </div></div>
