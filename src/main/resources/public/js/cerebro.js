@@ -345,14 +345,43 @@ app.service('breadCrumbsService', function(){
 	
 });
 
-var searchController = function($scope, $http, $location){
-	$scope.searchText = "Enter text to Search";
-	$scope.search = function(){
-		console.log("search text: "+$scope.searchText);
-		$location.url("search");
-	}
+var searchController = function($scope, $http, $location, $log, searchService){
+	var config = {"Content-Type": "application/json"};
+//	$scope.searchText = "Enter text to Search";
+		
+		
+		$scope.search = function(){
+			console.log("search text: "+$scope.searchText);
+			$log.info("search text: "+$scope.searchText);
+			$http.post("/cerebroSearch",$scope.searchText,config)
+				 .then(function(response){
+					 $log.info("inside sucess response: "+response);
+					 searchService.setSearchResults(response.data);
+					 $scope.searchResults = searchService.getSearchResults();
+					 $log.info($scope.searchResults);
+					 $location.url("search");
+				 }, function(){
+					 $log.info("inside error response");
+				 });
+			
+//			$location.url("search");
+		}
+		
+		$scope.searchResults = searchService.getSearchResults();
 }
+
+app.service("searchService", function(){
+	var searchResults;
+	
+	this.setSearchResults = function(data){
+		searchResults = data;
+	}
+	
+	this.getSearchResults = function(){
+		return searchResults;
+	}
+});
 
 app.controller("cerebroController",["$scope", "$location", "$anchorScroll", "breadCrumbsService", CerebroController] );
 app.controller("definitionsController",["$scope", "$location", "$anchorScroll","$http", DefinitionsController]);
-app.controller("searchController", ["$scope", "$http", "$location", searchController]);
+app.controller("searchController", ["$scope", "$http", "$location", "$log", "searchService", searchController]);

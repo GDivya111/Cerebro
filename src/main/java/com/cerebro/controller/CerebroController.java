@@ -5,11 +5,16 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.lucene.document.Document;
+import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TopDocs;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -18,12 +23,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cerebro.model.Definition;
+import com.cerebro.search.Searcher;
 import com.cerebro.service.CerebroService;
+import com.cerebro.util.Constants;
 
 @RestController
 public class CerebroController {
@@ -86,10 +94,36 @@ public class CerebroController {
 		return status;
 	}
 
+	/**
+	 * Rest API to search in cerebro
+	 * @param searchText
+	 * @return
+	 */
 	@RequestMapping(value = "/cerebroSearch", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<String> search() {
+	public List<String> search(@RequestBody String searchText) {
+		System.out.println("searchText: " + searchText);
+		List<String> files = new ArrayList<>();
+		try {
+			Searcher searcher = new Searcher(Constants.indexDirectory);
+			LocalDateTime startTiime = LocalDateTime.now(Clock.systemDefaultZone());
+			TopDocs hits = searcher.search(searchText);
+			LocalDateTime endTiime = LocalDateTime.now(Clock.systemDefaultZone());
 
-		return Arrays.asList("welcome to cerebro search");
+			System.out.println(hits.totalHits + " documents found. Time Taken: "
+					+ Duration.between(startTiime, endTiime).getSeconds());
+			for (ScoreDoc scoreDoc : hits.scoreDocs) {
+				Document document = searcher.getDocument(scoreDoc);
+				String fileName = document.get("filename");
+				System.out.println("Filename: " + fileName.substring(0, fileName.indexOf(".html")));
+				files.add(fileName.substring(0, fileName.indexOf(".html")));
+			}
+
+			searcher.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return files;
 
 	}
 }

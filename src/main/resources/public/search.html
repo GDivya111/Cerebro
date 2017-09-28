@@ -1,1 +1,17 @@
-<h2>Welcome to Search</h2>
+<div class="page-header">
+    <h3>Search Results</h3>      
+</div>
+
+<table class="table table-hover table-bordered table-striped" ng-controller="searchController">
+	<thead>
+		<tr>
+		<th>Link</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="searchResult in searchResults">
+			<!-- <td><a ng-href="#{{searchResult}}" ng-click="buildBreadCrumbs({{searchResult}}, #{{searchResult}})">{{searchResult}}</a></td> -->
+			<td><a ng-href="#{{searchResult}}">{{searchResult}}</a></td>
+		</tr>
+	</tbody>
+</table>
