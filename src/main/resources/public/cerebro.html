@@ -34,7 +34,7 @@
 <div style="margin-top: 65px; margin-left: 10px; margin-right: 15px;">
 
 <!-- Search Box -->
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="searchController">
     <div class="row">    
         <div class="col-xs-8 col-xs-offset-2">
     	    <div class="input-group">
@@ -56,9 +56,9 @@
                     </ul>
                 </div>
                 <input type="hidden" name="search_param" value="all" id="search_param">         
-                <input type="text" class="form-control" name="x" placeholder="Search">
+                <input type="text" class="form-control" placeholder="Search" ng-model="searchText">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                    <button class="btn btn-default" type="button" ng-click="search()"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
             </div>
         </div>

@@ -208,9 +208,14 @@ app.config(function($routeProvider){
 	.when("/ngRouteTemplate",{templateUrl : "ngRouteTemplate.html",controller : "cerebroController"})
 	.when("/logService",{templateUrl : "logService.html",controller : "cerebroController"})
 	
+	// search
+	.when("/search",{templateUrl : "search.html",controller : "cerebroController"})
+	
 	// definitions start
 	.when("/definitions",{templateUrl : "definitions.html",controller : "definitionsController"})
-	.when("/addDefinitions",{templateUrl : "addDefinitions.html",controller : "definitionsController"});
+	.when("/addDefinitions",{templateUrl : "addDefinitions.html",controller : "definitionsController"})
+	
+	;
 });
 
 var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsService){
@@ -340,5 +345,14 @@ app.service('breadCrumbsService', function(){
 	
 });
 
+var searchController = function($scope, $http, $location){
+	$scope.searchText = "Enter text to Search";
+	$scope.search = function(){
+		console.log("search text: "+$scope.searchText);
+		$location.url("search");
+	}
+}
+
 app.controller("cerebroController",["$scope", "$location", "$anchorScroll", "breadCrumbsService", CerebroController] );
 app.controller("definitionsController",["$scope", "$location", "$anchorScroll","$http", DefinitionsController]);
+app.controller("searchController", ["$scope", "$http", "$location", searchController]);
