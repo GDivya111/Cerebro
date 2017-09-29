@@ -7,6 +7,8 @@
 		<li><a ng-click="navigate(4)">java.time.LocalDateTime</a></li>
 		<li><a ng-click="navigate(5)">java.time.ZonedDateTime</a></li>
 		<li><a ng-click="navigate(6)">java.time.Duration</a></li>
+		<li><a ng-click="navigate(31)">java.time.Period</a></li>
+		<li><a ng-click="navigate(32)">java.time.temporal.ChronoUnit</a></li>
 		<li><a ng-click="navigate(7)">Convert java.util.Date to java.time.LocalDate</a></li>
 		<li><a ng-click="navigate(8)">Convert java.time.LocalDate to java.util.Date</a></li>
 		<li><a ng-click="navigate(9)">Convert java.util.Date to java.time.LocalDateTime</a></li>
@@ -28,6 +30,8 @@
 		<li><a ng-click="navigate(26)">Convert java.time.LocalDateTime to java.time.LocalDate</a></li>
 		<li><a ng-click="navigate(27)">Convert java.time.LocalDateTime to java.time.LocalTime</a></li>
 		<li><a ng-click="navigate(28)">Get Date based of year</a></li>
+		<li><a ng-click="navigate(29)">Number of days in a month</a></li>
+		<li><a ng-click="navigate(30)">Get Dates of all mondays of specific month</a></li>
 	</ul>
 </div></div>
 
@@ -236,6 +240,93 @@ minutes: 1052640
 seconds: 63158400
 </code></pre>
  </div></div>
+ 
+<div class="panel panel-primary" id="31"><div class="panel-heading">java.time.Period</div><div class="panel-body">
+<pre><code>
+import java.time.Period;
+import java.time.LocalDate;
+
+public void javaTimePeriod() {
+		Period tenDays = Period.ofDays(10);
+		System.out.println(&quot;tenDays.getDays(): &quot; + tenDays.getDays());
+
+		Period yearsMonthsDays = Period.of(5, 3, 15);
+		System.out.println(yearsMonthsDays.getYears() + &quot; years, &quot; + yearsMonthsDays.getMonths()
+				+ &quot; months, &quot; + yearsMonthsDays.getDays() + &quot; days&quot;);
+
+		System.out.println(&quot;--- calculation duration --- &quot;);
+		LocalDate oldDate = LocalDate.of(1987, Month.JULY, 20);
+		LocalDate newDate = LocalDate.of(2017, Month.SEPTEMBER, 29);
+
+		System.out.println(&quot;oldDate: &quot; + oldDate);
+		System.out.println(&quot;newDate: &quot; + newDate);
+
+		// check period between dates
+		Period period = Period.between(oldDate, newDate);
+
+		System.out.println(period.getYears() + &quot; years,&quot; + period.getMonths() + &quot; months,&quot; + period.getDays()
+				+ &quot; days&quot;);
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+tenDays.getDays(): 10
+5 years, 3 months, 15 days
+--- calculation duration --- 
+oldDate: 1987-07-20
+newDate: 2017-09-29
+30 years,2 months,9 days
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="32"><div class="panel-heading">java.time.temporal.ChronoUnit</div><div class="panel-body">
+<pre><code>
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+
+public void javaTimeTemporalChronoUnit() {
+		LocalDateTime oldDate = LocalDateTime.of(1987, Month.JULY, 20, 4, 05, 00);
+		LocalDateTime newDate = LocalDateTime.of(2017, Month.SEPTEMBER, 29, 10, 05, 15);
+
+		System.out.println(&quot;oldDate: &quot; + oldDate + &quot;, newDate: &quot; + newDate);
+
+		<em>// calculate duration</em>
+		long years = ChronoUnit.YEARS.between(oldDate, newDate);
+		long months = ChronoUnit.MONTHS.between(oldDate, newDate);
+		long weeks = ChronoUnit.WEEKS.between(oldDate, newDate);
+		long days = ChronoUnit.DAYS.between(oldDate, newDate);
+		long hours = ChronoUnit.HOURS.between(oldDate, newDate);
+		long minutes = ChronoUnit.MINUTES.between(oldDate, newDate);
+		long seconds = ChronoUnit.SECONDS.between(oldDate, newDate);
+		long milis = ChronoUnit.MILLIS.between(oldDate, newDate);
+		long nano = ChronoUnit.NANOS.between(oldDate, newDate);
+
+		System.out.println(years + &quot; years&quot;);
+		System.out.println(months + &quot; months&quot;);
+		System.out.println(weeks + &quot; weeks&quot;);
+		System.out.println(days + &quot; days&quot;);
+		System.out.println(hours + &quot; hours&quot;);
+		System.out.println(minutes + &quot; minutes&quot;);
+		System.out.println(seconds + &quot; seconds&quot;);
+		System.out.println(milis + &quot; milis&quot;);
+		System.out.println(nano + &quot; nano&quot;);
+
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+oldDate: 1987-07-20T04:05, newDate: 2017-09-29T10:05:15
+30 years
+362 months
+1575 weeks
+11029 days
+264702 hours
+15882120 minutes
+952927215 seconds
+952927215000 milis
+952927215000000000 nano
+</code></pre>
+</div></div>
  
  <div class="panel panel-primary" id="7"><div class="panel-heading">Convert java.util.Date to java.time.LocalDate</div><div class="panel-body"><pre><code>
 public void convertUtilDateToLocalDate() {
@@ -925,5 +1016,81 @@ public void getYearBaseValue() {
 <pre><code>
 date: 27, month: 9, year: 2017, dayOfYear: 270, weekOfTheYear: 39, weekOfTheMonth: 5
 date: 27, month: 9, year: 2017, dayOfTheYear: 270, weekOfTheYear: 39, monthOfTheYear: 9, weekOfTheMonth: 4
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="29"><div class="panel-heading">Number of days in a month</div><div class="panel-body">
+<pre><code>
+import java.util.Calendar;
+import java.time.YearMonth;
+
+public void lengthOfTheMonth() {
+		<em>// until JDK 7</em>
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(2017, Calendar.SEPTEMBER, 29);
+		int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+		System.out.println(&quot;September: no.of days: &quot; + daysInMonth);
+
+		calendar.set(2017, Calendar.FEBRUARY, 10);
+		daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+		System.out.println(&quot;February: no.of days: &quot; + daysInMonth);
+
+		<em>// JDK 8</em>
+		YearMonth yearMonth = YearMonth.of(2017, 9);
+		daysInMonth = yearMonth.lengthOfMonth();
+		System.out.println(&quot;JDK 8: September: no.of days: &quot; + daysInMonth);
+
+		yearMonth = YearMonth.of(2017, 2);
+		daysInMonth = yearMonth.lengthOfMonth();
+		System.out.println(&quot;JDK 8: February: no.of days: &quot; + daysInMonth);
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+September: no.of days: 30
+February: no.of days: 28
+JDK 8: September: no.of days: 30
+JDK 8: February: no.of days: 28
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="30"><div class="panel-heading">Get Dates of all mondays of specific month</div><div class="panel-body">
+<ul>
+	<li>Get all Monday dates of September 2017</li>
+	<li>Get all Sunday dates of February 2017</li>
+</ul>
+<pre><code>
+import java.util.List;
+import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.YearMonth;
+
+private List&lt;String&gt; getDatesOfDayOfWeekOfMonth(int year, int month, String day) {
+ List&lt;String&gt; dates = new ArrayList&lt;&gt;();
+
+ LocalDate monthFirstDate = LocalDate.of(year, month, 1);
+ LocalDate monthLastDate = LocalDate.of(year, month, YearMonth.of(year, month).lengthOfMonth());
+
+ System.out.println(&quot;monthFirstDate: &quot; + monthFirstDate + &quot;, monthLastDate: &quot; + monthLastDate);
+
+ for (; monthFirstDate.isBefore(monthLastDate); monthFirstDate = monthFirstDate.plusDays(1)) {
+  if (day.equalsIgnoreCase(monthFirstDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH))) {
+				dates.add(monthFirstDate.toString());
+   }
+  }
+ return dates;
+}
+	
+public void getDayOfWeekOfMonth() {
+ System.out.println(&quot;All mondays of september 2017: &quot; + getDatesOfDayOfWeekOfMonth(2017, 9, &quot;monday&quot;));
+ System.out.println(&quot;All sundays of february 2017: &quot; + getDatesOfDayOfWeekOfMonth(2017, 2, &quot;sunday&quot;));
+}
+</code></pre>
+<em>Output</em>
+<pre><code>
+monthFirstDate: 2017-09-01, monthLastDate: 2017-09-30
+All mondays of september 2017: [2017-09-04, 2017-09-11, 2017-09-18, 2017-09-25]
+monthFirstDate: 2017-02-01, monthLastDate: 2017-02-28
+All sundays of february 2017: [2017-02-05, 2017-02-12, 2017-02-19, 2017-02-26]
 </code></pre>
 </div></div>

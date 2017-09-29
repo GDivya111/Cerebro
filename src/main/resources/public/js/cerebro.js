@@ -347,24 +347,18 @@ app.service('breadCrumbsService', function(){
 
 var searchController = function($scope, $http, $location, $log, searchService){
 	var config = {"Content-Type": "application/json"};
-//	$scope.searchText = "Enter text to Search";
-		
 		
 		$scope.search = function(){
-			console.log("search text: "+$scope.searchText);
 			$log.info("search text: "+$scope.searchText);
 			$http.post("/cerebroSearch",$scope.searchText,config)
 				 .then(function(response){
-					 $log.info("inside sucess response: "+response);
+					 $log.info("response data: " + response.data);
 					 searchService.setSearchResults(response.data);
-					 $scope.searchResults = searchService.getSearchResults();
-					 $log.info($scope.searchResults);
 					 $location.url("search");
+//					 $scope.searchResults = response.data;
 				 }, function(){
 					 $log.info("inside error response");
 				 });
-			
-//			$location.url("search");
 		}
 		
 		$scope.searchResults = searchService.getSearchResults();
@@ -380,6 +374,7 @@ app.service("searchService", function(){
 	this.getSearchResults = function(){
 		return searchResults;
 	}
+	
 });
 
 app.controller("cerebroController",["$scope", "$location", "$anchorScroll", "breadCrumbsService", CerebroController] );
