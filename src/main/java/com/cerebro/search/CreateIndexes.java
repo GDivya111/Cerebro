@@ -9,11 +9,12 @@ import com.cerebro.util.Constants;
 
 public class CreateIndexes {
 
-	public static void main(String[] args) {
+	//	@Test
+	public void createLuceneIndexes() {
 		try {
-			Indexer indexer = new Indexer(Constants.indexDirectory);
+			Indexer indexer = new Indexer(Constants.INDEX_DIRECTORY);
 			LocalDateTime startTime = LocalDateTime.now(Clock.systemDefaultZone());
-			int numIndexed = indexer.createIndex(Constants.dataDirectory, new CerebroFilter());
+			int numIndexed = indexer.createIndex(Constants.DATA_DIRECTORY, new CerebroFilter());
 			LocalDateTime endTime = LocalDateTime.now(Clock.systemDefaultZone());
 
 			indexer.close();

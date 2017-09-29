@@ -104,7 +104,7 @@ public class CerebroController {
 		System.out.println("searchText: " + searchText);
 		List<String> files = new ArrayList<>();
 		try {
-			Searcher searcher = new Searcher(Constants.indexDirectory);
+			Searcher searcher = new Searcher(Constants.INDEX_DIRECTORY);
 			LocalDateTime startTiime = LocalDateTime.now(Clock.systemDefaultZone());
 			TopDocs hits = searcher.search(searchText);
 			LocalDateTime endTiime = LocalDateTime.now(Clock.systemDefaultZone());
@@ -126,4 +126,5 @@ public class CerebroController {
 		return files;
 
 	}
+
 }
