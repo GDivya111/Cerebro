@@ -32,6 +32,7 @@
 		<li><a ng-click="navigate(28)">Get Date based of year</a></li>
 		<li><a ng-click="navigate(29)">Number of days in a month</a></li>
 		<li><a ng-click="navigate(30)">Get Dates of all mondays of specific month</a></li>
+		<li><a ng-click="navigate(33)">Convert 12 hours date time format to 24 hours date time format</a></li>
 	</ul>
 </div></div>
 
@@ -1092,5 +1093,39 @@ monthFirstDate: 2017-09-01, monthLastDate: 2017-09-30
 All mondays of september 2017: [2017-09-04, 2017-09-11, 2017-09-18, 2017-09-25]
 monthFirstDate: 2017-02-01, monthLastDate: 2017-02-28
 All sundays of february 2017: [2017-02-05, 2017-02-12, 2017-02-19, 2017-02-26]
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="33"><div class="panel-heading">Convert 12 hours date time format to 24 hours date time format</div><div class="panel-body">
+<pre><code>
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public void convert12HoursDateTimeTo24Hours() throws ParseException {
+<em>// Java 7</em>
+ String date = &quot;10-Aug-2017 07:56:12 PM&quot;;
+ System.out.println(&quot;String: inputDate: &quot; + date);
+ SimpleDateFormat fromFormat = new SimpleDateFormat(&quot;dd-MMM-yyyy hh:mm:ss a&quot;);
+ SimpleDateFormat toFormat = new SimpleDateFormat(&quot;dd-MMM-yyyy HH:mm:ss&quot;);
+
+ Date inputDate = fromFormat.parse(date);
+ System.out.println(&quot;Date: inputDate: &quot; + inputDate);
+
+ String outputDate = toFormat.format(inputDate);
+ System.out.println(&quot;JDK7: outputDate: &quot; + outputDate);
+
+<em>// Java 8</em>
+ String outputDate2 = LocalDateTime.parse(date, DateTimeFormatter.ofPattern(&quot;dd-MMM-yyyy hh:mm:ss a&quot;)).format(DateTimeFormatter.ofPattern(&quot;dd-MMM-yyyy HH:mm:ss&quot;));
+ System.out.println(&quot;JDK8: outputDate: &quot; + outputDate2);
+}
+</code></pre>
+<em>Output</em>
+<pre><code>
+String: inputDate: 10-Aug-2017 07:56:12 PM
+Date: inputDate: Thu Aug 10 19:56:12 IST 2017
+JDK7: outputDate: 10-Aug-2017 19:56:12
+JDK8: outputDate: 10-Aug-2017 19:56:12
 </code></pre>
 </div></div>
