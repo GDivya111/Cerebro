@@ -143,6 +143,7 @@ app.config(function($routeProvider){
 	.when("/h2DB",{templateUrl : "h2DB.html",controller : "cerebroController"})
 	.when("/practiceDBScripts",{templateUrl : "practiceDBScripts.html",controller : "cerebroController"})
 	.when("/dbJoins",{templateUrl : "dbJoins.html",controller : "cerebroController"})
+	.when("/oracleSql",{templateUrl : "oracleSql.html",controller : "cerebroController"})
 	
 	// Scala start
 	.when("/scala",{templateUrl : "scala.html",controller : "cerebroController"})
