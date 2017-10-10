@@ -1,4 +1,4 @@
-<div class="panel panel-primary" id="20"><div class="panel-heading">SQL Queries</div><div class="panel-body table-responsive">
+<!-- <div class="panel panel-primary" id="20"><div class="panel-heading">SQL Queries</div><div class="panel-body table-responsive"> -->
 <table class="table table-hover">
 <thead>
 	<tr>
@@ -15,6 +15,15 @@
 	<td>Add 30 seconds to current date</td>
 	<td><pre>select sysdate NOW, sysdate+30/(24*60*60) NOW_PLUS_30_SECS from dual</pre></td>
 </tr>
+<tr>
+	<td>Convert 24 Hour time to 12 Hour plus AM/PM indication Oracle SQL</td>
+	<td><pre>
+SELECT invoice_date,
+ TO_CHAR(invoice_date, 'DD-MM-YYYY HH24:MI:SS') "Date 24Hr",
+ TO_CHAR(invoice_date, 'DD-MM-YYYY HH:MI:SS AM') "Date 12Hr"
+FROM invoices
+  	</pre></td>
+</tr>
 </tbody>
 </table>
-</div></div>
+<!-- </div></div> -->
