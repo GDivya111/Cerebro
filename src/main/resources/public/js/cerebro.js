@@ -63,7 +63,7 @@ app.config(function($routeProvider){
 	.when("/mavenAssemblyPlugin",{templateUrl : "mavenAssemblyPlugin.html",controller : "cerebroController"})
 	.when("/mavenJarPlugin",{templateUrl : "mavenJarPlugin.html",controller : "cerebroController"})
 	
-	// spring - start
+	// spring
 	.when("/spring",{templateUrl : "spring.html",controller : "cerebroController"})
 	.when("/springAOPJavaConfigHelloWorld",{templateUrl : "springAOPJavaConfigHelloWorld.html",controller : "cerebroController"})
 	.when("/springSecurityFlow",{templateUrl : "springSecurityFlow.html",controller : "cerebroController"})
@@ -113,10 +113,7 @@ app.config(function($routeProvider){
 	.when("/springRestExceptionHandling6",{templateUrl : "springRestExceptionHandling6.html",controller : "cerebroController"})
 	.when("/springRestLog4J",{templateUrl : "springRestLog4J.html",controller : "cerebroController"})
 	.when("/springRestHibernate4",{templateUrl : "springRestHibernate4.html",controller : "cerebroController"})
-	
-	.when("/springBootFlywayDB",{templateUrl : "springBootFlywayDB.html",controller : "cerebroController"})
-	.when("/springBootMultipleDataSources",{templateUrl : "springBootMultipleDataSources.html",controller : "cerebroController"})
-	.when("/springBootCli",{templateUrl : "springBootCli.html",controller : "cerebroController"})
+	.when("/springIntegration",{templateUrl : "springIntegration.html",controller : "cerebroController"})
 	
 	// tools start
 	.when("/tools",{templateUrl : "tools.html",controller : "cerebroController"})
@@ -139,7 +136,6 @@ app.config(function($routeProvider){
 	.when("/gradle",{templateUrl : "gradle.html",controller : "cerebroController"})
 	
 	// DB start
-	.when("/db",{templateUrl : "db.html",controller : "cerebroController"})
 	.when("/h2DB",{templateUrl : "h2DB.html",controller : "cerebroController"})
 	.when("/practiceDBScripts",{templateUrl : "practiceDBScripts.html",controller : "cerebroController"})
 	.when("/dbJoins",{templateUrl : "dbJoins.html",controller : "cerebroController"})
@@ -159,6 +155,9 @@ app.config(function($routeProvider){
 	.when("/camelWithBeanAndProcessor",{templateUrl : "camelWithBeanAndProcessor.html",controller : "cerebroController"})
 	.when("/camelWithSpring",{templateUrl : "camelWithSpring.html",controller : "cerebroController"})
 	.when("/camelSpringProcessorBean",{templateUrl : "camelSpringProcessorBean.html",controller : "cerebroController"})
+	
+	// Mule
+	.when("/mule",{templateUrl : "mule.html",controller : "cerebroController"})
 	
 	//REST web services start
 	.when("/webservices",{templateUrl : "webservices.html",controller : "cerebroController"})
