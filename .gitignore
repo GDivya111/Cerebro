@@ -68,3 +68,5 @@ $RECYCLE.BIN/
 *.project
 target/classes/
 *.original
+cerebro.h2.db
+/src/main/resources/cerebro.h2.db
