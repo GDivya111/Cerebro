@@ -266,10 +266,16 @@ public void readContentsOfFile() throws FileNotFoundException, IOException {
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
+	
+	System.out.println(&quot;---------- method 5 using JDK 8 Collection streams ------------&quot;);
+	final Path path = new File(getClass().getClassLoader().getResource(&quot;file1.txt&quot;).getPath()).toPath();
+	try (Stream&lt;String&gt; lines = Files.lines(path, StandardCharsets.UTF_8)) {
+		lines.onClose(() -&gt; System.out.println(&quot;Done&quot;)).forEach(System.out::println);
+	}
 }
 </code></pre>
 <em>Output</em>
-<pre><code>
+<pre>
 -------------method 1 using java.io.BufferedReader with relative path--------------------------
 readContentsOfFile() -&gt; file.getAbsolutePath(): E:\Backup\JavaPrep\practiceProjects\CoreJavaPractice\target\classes\file1.txt
 Welcome to file1.txt
@@ -284,7 +290,12 @@ Core Java Practice
 ----------method 4 - read file using java.io.InputStream --------------
 stringBuffer: Welcome to file1.txt
 Core Java Practice
-</code></pre>
+
+---------- method 5 using JDK 8 Collection streams ------------
+Welcome to file1.txt
+Core Java Practice
+Done
+</pre>
 </div></div>
 
 <div class="panel panel-primary" id="7"><div class="panel-heading">Delete file</div><div class="panel-body">
