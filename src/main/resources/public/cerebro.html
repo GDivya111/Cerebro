@@ -56,7 +56,7 @@
                     </ul>
                 </div>
                 <input type="hidden" name="search_param" value="all" id="search_param">         
-                <input type="text" class="form-control" placeholder="Search" ng-model="searchText">
+                <input type="text" class="form-control" placeholder="Search" ng-model="searchText" ng-keypress="checkIfEnterKeyWasPressed($event)">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" ng-click="search()"><span class="glyphicon glyphicon-search"></span></button>
                 </span>

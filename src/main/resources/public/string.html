@@ -1,6 +1,17 @@
-<div class="panel panel-primary"><div class="panel-heading">Contents</div><div class="panel-body">
-	<ul>
-		<li><a ng-click="navigate(1)">Get byte array from String</a></li>
+<div class="navbar navbar-inverse navbar-fixed-left" style="position: fixed; max-height: 500px; height: auto; overflow-x: hidden;">
+  <a class="navbar-brand" href="#">Brand</a>
+  <ul class="nav navbar-nav">
+   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+     <ul class="dropdown-menu" role="menu">
+      <li><a href="#">Sub Menu1</a></li>
+      <li><a href="#">Sub Menu2</a></li>
+      <li><a href="#">Sub Menu3</a></li>
+      <li class="divider"></li>
+      <li><a href="#">Sub Menu4</a></li>
+      <li><a href="#">Sub Menu5</a></li>
+     </ul>
+   </li>
+   <li><a ng-click="navigate(1)">Get byte array from String</a></li>
 		<li><a ng-click="navigate(2)">Get Asci value of each Character in a String</a></li>
 		<li><a ng-click="navigate(3)">Convert byte array to String</a></li>
 		<li><a ng-click="navigate(4)">Divide String based on delimeter</a></li>
@@ -8,10 +19,11 @@
 		<li><a ng-click="navigate(6)">Capitalize first character</a></li>
 		<li><a ng-click="navigate(7)">String Characters left shift and right shift</a></li>
 		<li><a ng-click="navigate(8)">Print all substrings of specified length of a given String</a></li>
-	</ul>
-</div></div>
-	
-<div class="panel panel-primary" id="1"><div class="panel-heading">Get byte array from String</div><div class="panel-body">
+  </ul>
+</div>
+<div class="container">
+ <div class="row">
+   <div class="panel panel-primary" id="1"><div class="panel-heading">Get byte array from String</div><div class="panel-body">
 <pre ><code>
 public void getbyteArrayFromString() {
 	String string = &quot;Hello World&quot;;
@@ -211,3 +223,18 @@ public void printAllSubStringsOfSpecifiedLength() {
 [welco, elcom, lcome, comet, ometo, metoj, etoja, tojav, ojava]
 </pre>
 </div></div>
+ </div>
+</div>
+
+<!-- <div class="panel panel-primary"><div class="panel-heading">Contents</div><div class="panel-body">
+	<ul>
+		<li><a ng-click="navigate(1)">Get byte array from String</a></li>
+		<li><a ng-click="navigate(2)">Get Asci value of each Character in a String</a></li>
+		<li><a ng-click="navigate(3)">Convert byte array to String</a></li>
+		<li><a ng-click="navigate(4)">Divide String based on delimeter</a></li>
+		<li><a ng-click="navigate(5)">Convert asci number to String</a></li>
+		<li><a ng-click="navigate(6)">Capitalize first character</a></li>
+		<li><a ng-click="navigate(7)">String Characters left shift and right shift</a></li>
+		<li><a ng-click="navigate(8)">Print all substrings of specified length of a given String</a></li>
+	</ul>
+</div></div> -->

@@ -29,9 +29,6 @@ app.config(function($routeProvider){
 	.when("/enumLookupMap",{templateUrl : "enumLookupMap.html",controller : "cerebroController"})
 	.when("/javaUtilOptional",{templateUrl : "javaUtilOptional.html",controller : "cerebroController"})
 	
-	// testing
-	.when("/affixAndScrollSpy",{templateUrl : "affixAndScrollSpy.html",controller : "cerebroController"})
-	
 	// interview questions
 	.when("/interviewQuestions",{templateUrl : "interviewQuestions.html",controller : "cerebroController"})
 	
@@ -360,6 +357,15 @@ var searchController = function($scope, $http, $location, $log, searchService){
 					 $log.info("inside error response");
 				 });
 		}
+		
+		$scope.checkIfEnterKeyWasPressed = function($event){
+		    var keyCode = $event.which || $event.keyCode;
+		    if (keyCode === 13) {
+		        // Do that thing you finally wanted to do
+		    	$scope.search();
+		    }
+
+		  };
 		
 		$scope.searchResults = searchService.getSearchResults();
 }
