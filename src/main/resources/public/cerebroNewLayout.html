@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html ng-app="cerebro">
+<head>
+<meta charset="ISO-8859-1">
+<title>Cerebro</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-sanitize.js"></script>
+<script src="js/cerebro.js"></script>
+<script type="text/javascript" src="js/navigation.js"></script>
+<link rel="stylesheet" href="css/cerebro.css">
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-default" ng-controller="cerebroController">
+  <div class="container-fluid">
+  	<ul class="nav navbar-nav navbar-right">
+		<li ng-controller="cerebroController"><a class="navbar-brand" ng-href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span></a></li>
+      	<li><a ng-href="#coreJava" ng-click="buildBreadCrumbs('Core Java', '#coreJava')">Core Java</a></li>
+      	<li><a ng-href="#spring" ng-click="buildBreadCrumbs('Spring', '#spring')">Spring</a></li>
+      	<li><a ng-href="#hibernate" ng-click="buildBreadCrumbs('Hibernate', '#hibernate')">Hibernate</a></li>
+      	<li><a ng-href="#tools" ng-click="buildBreadCrumbs('Tools', '#tools')">Tools</a></li>
+	 	<li><a ng-href="#unitTesting" ng-click="buildBreadCrumbs('Unit Testing', '#unitTesting')">Unit Testing</a></li>
+		<li><a ng-href="#scala" ng-click="buildBreadCrumbs('Scala', '#scala')">Scala</a></li>
+		<li class="dropdown"><a class="dropdown-toggle"	data-toggle="dropdown">Build Tools <span class="caret"></span></a>
+		<ul class="dropdown-menu">
+			<li><a ng-href="#ant" ng-click="buildBreadCrumbs('Ant', '#ant')">Ant</a></li>
+			<li><a ng-href="#maven" ng-click="buildBreadCrumbs('Maven', '#maven')">Maven</a></li>
+			<li><a ng-href="#gradle" ng-click="buildBreadCrumbs('Gradle', '#gradle')">Graddle</a></li>
+		</ul>
+		</li>
+		<li><a ng-href="#definitions" ng-click="buildBreadCrumbs('Definitions', '#definitions')">Definitions</a></li>
+		<li><a ng-href="#interviewQuestions" ng-click="buildBreadCrumbs('InterviewQuestions', '#interviewQuestions')">Interview Questions</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Search Box -->
+<div class="container-fluid" ng-controller="searchController">
+    <div class="row">    
+        <div class="col-xs-8 col-xs-offset-2">
+    	    <div class="input-group">
+                <div class="input-group-btn search-panel" ng-controller="cerebroController">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    	<span id="search_concept">All</span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu scrollable-menu" role="menu">
+                      <li><a ng-href="#coreJava"  ng-click="buildBreadCrumbs('Core Java', '#coreJava')">Core Java</a></li>
+                      <li><a ng-href="#scala" ng-click="buildBreadCrumbs('Scala', '#scala')">Scala</a></li>
+                      <li><a ng-href="#spring" ng-click="buildBreadCrumbs('Spring', '#spring')">Spring</a></li>
+                      <li class="divider"></li>
+                      <li><a ng-href="#ant" ng-click="buildBreadCrumbs('Ant', '#ant')">Ant</a></li>
+                      <li><a ng-href="#maven" ng-click="buildBreadCrumbs('Maven', '#maven')">Maven</a></li>
+                      <li><a ng-href="#gradle" ng-click="buildBreadCrumbs('Gradle', '#gradle')">Gradle</a></li>
+                      <li class="divider"></li>
+                      <li><a href="">All</a></li>
+                      <li>
+                    </ul>
+                </div>
+                <input type="hidden" name="search_param" value="all" id="search_param">         
+                <input type="text" class="form-control" placeholder="Search" ng-model="searchText" ng-keypress="checkIfEnterKeyWasPressed($event)">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="search()"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+            </div>
+        </div>
+	</div>
+</div>
+
+<hr/> 
+
+<!-- Bread Crumbs -->
+<div ng-controller="cerebroController"><div ng-if="breadCrumbs.length > 0">
+<ol class="breadcrumb">
+	<li ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+</ol>
+<hr/>
+</div></div>
+			
+<div id="wrapper">
+	<!-- Page Content -->
+    <div id="page-content-wrapper">
+    	<button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+        	<span class="hamb-top"></span>
+    		<span class="hamb-middle"></span>
+			<span class="hamb-bottom"></span>
+		</button>
+        <div class="container">
+			<!-- <div class="row"> -->
+            <!-- Page Content -->
+				<div ng-view>
+					<script type="text/javascript">$(this).scrollTop(0)</script>
+				</div>
+			<!-- </div> -->
+		</div>
+	</div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<a id="back-to-top" ng-click="scrollUp()" ng-controller="cerebroController" class="up btn btn-primary btn-lg" role="button" title="Click to return to top of the page">
+	<span  class="glyphicon glyphicon-chevron-up"></span>
+</a>
+
+</body>
+</html>

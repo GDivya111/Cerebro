@@ -320,7 +320,7 @@ var DefinitionsController = function($scope, $location, $anchorScroll, $http){
 app.service('breadCrumbsService', function(){
 	var navigations = new Array();
 	var keys = new Array();
-	var prefix = "cerebro.html";
+	var prefix = "cerebroNewLayout.html";
 	
 	this.addBreadCrumb = function(name, link){
 		link = prefix + link;
