@@ -164,6 +164,28 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Apache Camel implementation</div>
+			<div class="panel-body">
+				<ul>
+					<li>REST API with Apache Camel</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Mule implementation</div>
+			<div class="panel-body">
+				<ul>
+					<li>REST API with Mule</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 
 	<div class="col-sm-4">
 		<div class="panel panel-primary">
@@ -380,8 +402,9 @@
 			<div class="panel-heading">Unit Testing</div>
 			<div class="panel-body">
 				<ul>
-					<li><a ng-href="#junit">JUnit</a></li>
-					<li>Mockito</li>
+					<li><a ng-href="#junit" ng-click="buildBreadCrumbs('Junit', '#junit')">JUnit</a></li>
+					<li><a ng-href="#easymock" ng-click="buildBreadCrumbs('Easymock', '#easymock')">Easymock</a></li>
+					<li><a ng-href="#mockito" ng-click="buildBreadCrumbs('Mockito', '#mockito')">Mockito</a></li>
 					<li>PowerMock</li>
 					<a ng-href="#unitTesting" ng-click="buildBreadCrumbs('Unit Testing', '#unitTesting')" class="btn btn-info btn-sm" role="button" style="border-radius: 25px;float: right;">SEE MORE</a>
 				</ul>

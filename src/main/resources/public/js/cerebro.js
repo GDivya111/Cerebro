@@ -124,6 +124,7 @@ app.config(function($routeProvider){
 	.when("/junit",{templateUrl : "junit.html",controller : "cerebroController"})
 	.when("/junitHelloWorld",{templateUrl : "junitHelloWorld.html",controller : "cerebroController"})
 	.when("/mockito",{templateUrl : "mockito.html",controller : "cerebroController"})
+	.when("/easymock",{templateUrl : "easymock.html",controller : "cerebroController"})
 	
 	// ant start
 	.when("/ant",{templateUrl : "ant.html",controller : "cerebroController"})
@@ -143,7 +144,7 @@ app.config(function($routeProvider){
 	.when("/installScala",{templateUrl : "installScala.html",controller : "cerebroController"})
 	.when("/scalaHelloWorldWithSbt",{templateUrl : "scalaHelloWorldWithSbt.html",controller : "cerebroController"})
 	
-	// Apache camel start
+	// Apache camel
 	.when("/camel",{templateUrl : "camel.html",controller : "cerebroController"})
 	.when("/camelUnmarshalCsv",{templateUrl : "camelUnmarshalCsv.html",controller : "cerebroController"})
 	.when("/camelMarshalCsv",{templateUrl : "camelMarshalCsv.html",controller : "cerebroController"})
@@ -232,6 +233,9 @@ var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsSe
 	$scope.navigate = function(id){
 		$location.hash(id);
 		$anchorScroll();
+		/*$('html, body').animate({
+	        scrollTop: $(id).offset().top
+	    }, 2000);*/
 	};
 	
 	$(window).scroll(function(){
@@ -320,7 +324,8 @@ var DefinitionsController = function($scope, $location, $anchorScroll, $http){
 app.service('breadCrumbsService', function(){
 	var navigations = new Array();
 	var keys = new Array();
-	var prefix = "cerebroNewLayout.html";
+	/*var prefix = "cerebroNewLayout.html";*/
+	var prefix = "cerebro.html";
 	
 	this.addBreadCrumb = function(name, link){
 		link = prefix + link;

@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/cerebro.css">
+<!-- <link rel="stylesheet" href="css/leftNav.css"> -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -28,10 +29,10 @@
 <body>
 
 <!-- Top Navigation bar -->
-<div ng-include=" 'topNavigation.html'"></div>
+<!-- <div ng-include=" 'topNavigation.html'"></div> -->
 
 <!-- Body Content -->
-<div style="margin-top: 65px; margin-left: 10px; margin-right: 15px;">
+<div style="margin-top: 10px; margin-left: 10px; margin-right: 15px;">
 
 <!-- Search Box -->
 <div class="container-fluid" ng-controller="searchController">
@@ -68,12 +69,12 @@
 <hr/> 
 
 <!-- Bread Crumbs -->
-<div ng-controller="cerebroController"><div ng-if="breadCrumbs.length > 0">
+<!-- <div ng-controller="cerebroController"><div ng-if="breadCrumbs.length > 0">
 <ol class="breadcrumb">
 	<li ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
 </ol>
 <hr/>
-</div></div>
+</div></div> -->
 
 <!-- Page Content -->
 <div ng-view>
