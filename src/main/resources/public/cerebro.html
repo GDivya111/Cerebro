@@ -34,12 +34,17 @@
 <!-- Body Content -->
 <div style="margin-top: 10px; margin-left: 10px; margin-right: 15px;">
 
-<!-- Search Box -->
-<div class="container-fluid" ng-controller="searchController">
-    <div class="row">    
-        <div class="col-xs-8 col-xs-offset-2">
-    	    <div class="input-group">
-                <div class="input-group-btn search-panel" ng-controller="cerebroController">
+<div class="row">
+	<div class="col-md-4">
+		<a ng-href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;Cerebro</a>
+	</div>
+  	<div class="col-md-8">
+  		<!-- Search Box -->
+		<div class="container-fluid" ng-controller="searchController">
+    	<div class="row">
+        	<div class="col-xs-9 col-xs-offset-2">
+    	    	<div class="input-group">
+                	<div class="input-group-btn search-panel" ng-controller="cerebroController">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     	<span id="search_concept">All</span> <span class="caret"></span>
                     </button>
@@ -61,10 +66,13 @@
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" ng-click="search()"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
-            </div>
-        </div>
+            	</div>
+        	</div>
+		</div>
+		</div>
 	</div>
 </div>
+
 
 <hr/> 
 

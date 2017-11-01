@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+        <!-- <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
             <ul class="nav sidebar-nav">
                 <li><a ng-click="navigate(1)">Split List into sub lists of specified size</a></li>
 				<li><a ng-click="navigate(2)">Convert Array to List</a></li>
@@ -16,10 +16,29 @@
 				<li><a ng-click="navigate(13)">Sort list by java.util.Date</a></li>
 				<li><a ng-click="navigate(14)">Sort list by java.time.LocalDate</a></li>
             </ul>
-        </nav>
+        </nav> -->
         <!-- /#sidebar-wrapper -->
+        
+<link rel="stylesheet" href="css/leftNav.css">
+<ul>
+	<li><a class="active" ng-href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a></li>
+	<li><a ng-click="navigate(1)">Split List into sub lists of specified size</a></li>
+	<li><a ng-click="navigate(2)">Convert Array to List</a></li>
+	<li><a ng-click="navigate(3)">Convert List to Array</a></li>
+	<li><a ng-click="navigate(4)">Convert List to Comma Separated String</a></li>
+	<li><a ng-click="navigate(5)">Remove all nulls from list</a></li>
+	<li><a ng-click="navigate(7)">List1 Minus List2</a></li>
+	<li><a ng-click="navigate(8)">List1 Intersection List2</a></li>
+	<li><a ng-click="navigate(6)">Prepare sorted list sort by date using java 8 collection streams</a></li>
+	<li><a ng-click="navigate(9)">Get another list using properties of main object</a></li>
+	<li><a ng-click="navigate(10)">Prepare new list with unique elements in two lists</a></li>
+	<li><a ng-click="navigate(11)">Create an immutable List</a></li>
+	<li><a ng-click="navigate(12)">Changes to sub list will reflect in main list</a></li>
+	<li><a ng-click="navigate(13)">Sort list by java.util.Date</a></li>
+	<li><a ng-click="navigate(14)">Sort list by java.time.LocalDate</a></li>
+</ul>
 
-<div class="panel panel-primary"><div class="panel-heading">Topics</div><div class="panel-body">
+<!-- <div class="panel panel-primary"><div class="panel-heading">Topics</div><div class="panel-body">
 	<ul>
 		<li><a ng-click="navigate(1)">Split List into sub lists of specified size</a></li>
 		<li><a ng-click="navigate(2)">Convert Array to List</a></li>
@@ -36,7 +55,9 @@
 		<li><a ng-click="navigate(13)">Sort list by java.util.Date</a></li>
 		<li><a ng-click="navigate(14)">Sort list by java.time.LocalDate</a></li>
 	</ul>
-</div></div>
+</div></div> -->
+
+<div style="margin-left:30%;padding:1px 16px;">
 
 <div class="panel panel-primary" id="1"><div class="panel-heading">Split List into sub lists of specified size</div><div class="panel-body">
 <pre><code>

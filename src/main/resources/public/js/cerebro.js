@@ -233,9 +233,6 @@ var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsSe
 	$scope.navigate = function(id){
 		$location.hash(id);
 		$anchorScroll();
-		/*$('html, body').animate({
-	        scrollTop: $(id).offset().top
-	    }, 2000);*/
 	};
 	
 	$(window).scroll(function(){
@@ -324,7 +321,6 @@ var DefinitionsController = function($scope, $location, $anchorScroll, $http){
 app.service('breadCrumbsService', function(){
 	var navigations = new Array();
 	var keys = new Array();
-	/*var prefix = "cerebroNewLayout.html";*/
 	var prefix = "cerebro.html";
 	
 	this.addBreadCrumb = function(name, link){
