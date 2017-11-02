@@ -9,6 +9,8 @@
 	<li><a ng-click="navigate(6)">Capitalize first character</a></li>
 	<li><a ng-click="navigate(7)">String Characters left shift and right shift</a></li>
 	<li><a ng-click="navigate(8)">Print all substrings of specified length of a given String</a></li>
+	<li><a ng-click="navigate(9)">Convert the case of String</a></li>
+	<li><a ng-click="navigate(10)">Find the substring in a String</a></li>
 </ul>
 
 <div style="margin-left:30%;padding:1px 16px;">
@@ -86,6 +88,13 @@ public void divideString() {
  for (String s : strs) {
    System.out.println(s);
  }
+ 
+ // using StringTokenizer
+ System.out.println(&quot;------- Using StringTokenizer -------- &quot;);
+ StringTokenizer stringTokenizer = new StringTokenizer(str, &quot;-&quot;);
+ for (;; stringTokenizer.hasMoreTokens()) {
+  System.out.println(stringTokenizer.nextToken());
+ }
 }
 </code></pre>
 <em>Output</em>
@@ -96,7 +105,49 @@ World
 Welcome
 to
 Java
+------- Using StringTokenizer -------- 
+Hello
+Java
+World
+Welcome
+to
+Java
 </code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="9"><div class="panel-heading">Convert the case of String</div><div class="panel-body">
+<pre ><code>
+public void convertCase() {
+ String str = &quot;hello world&quot;;
+ String capitalStr = str.toUpperCase();
+ System.out.println(&quot;capitalStr: &quot; + capitalStr);
+
+ String lowerStr = capitalStr.toLowerCase();
+ System.out.println(&quot;lowerStr: &quot; + lowerStr);
+}
+</code></pre>
+<em>Output</em>
+<pre>
+capitalStr: HELLO WORLD
+lowerStr: hello world
+</pre>
+</div></div>
+
+<div class="panel panel-primary" id="10"><div class="panel-heading">Find the substring in a String</div><div class="panel-body">
+<pre ><code>
+public void stringSubString() {
+ String str = &quot;Hello World&quot;;
+
+ String substr1 = str.substring(6);
+ String substr2 = str.substring(0, 6);
+
+ System.out.println(&quot;substr1: &quot; + substr1 + &quot;, substr2: &quot; + substr2);
+}
+</code></pre>
+<em>Output</em>
+<pre>
+substr1: World, substr2: Hello 
+</pre>
 </div></div>
 
 <div class="panel panel-primary" id="5"><div class="panel-heading">Convert asci number to String</div><div class="panel-body">
