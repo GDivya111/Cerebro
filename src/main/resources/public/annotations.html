@@ -1,15 +1,19 @@
-<div class="page-header">
-    <h3>Annotations</h3>      
-</div>
+<link rel="stylesheet" href="css/leftNav.css">
+<ul>
+	<li><a class="active" ng-href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a></li>
+	
+	<!-- Bread Crumbs -->
+	<li class="subGroupHeading" ng-if="breadCrumbs.length > 0">Navigation</li>
+	<li ng-controller="cerebroController" ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+	
+	<li class="subGroupHeading">Examples</li>
+	<li><a ng-click="navigate(1)">class Level Annotations</a></li>
+	<li><a ng-click="navigate(2)">Field Level Annotations</a></li>
+	<li><a ng-click="navigate(3)">Method Level Annotations</a></li>
+	<li><a ng-click="navigate(4)">Parameter Level Annotations</a></li>
+</ul>
 
-<div class="panel panel-primary"><div class="panel-heading">Contents</div><div class="panel-body">
-	<ul>
-		<li><a ng-click="navigate(1)">class Level Annotations</a></li>
-		<li><a ng-click="navigate(2)">Field Level Annotations</a></li>
-		<li><a ng-click="navigate(3)">Method Level Annotations</a></li>
-		<li><a ng-click="navigate(4)">Parameter Level Annotations</a></li>
-	</ul>
-</div></div>
+<div style="margin-left:30%;padding:1px 16px;">
 	
 <div class="panel panel-primary" id="1"><div class="panel-heading">class Level Annotations</div><div class="panel-body">
 <pre><code>
@@ -307,3 +311,5 @@ parameter level annotation string value
 1.23
 </code></pre>
 </div></div>
+
+</div>

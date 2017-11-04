@@ -111,6 +111,7 @@ app.config(function($routeProvider){
 	.when("/springRestLog4J",{templateUrl : "springRestLog4J.html",controller : "cerebroController"})
 	.when("/springRestHibernate4",{templateUrl : "springRestHibernate4.html",controller : "cerebroController"})
 	.when("/springIntegration",{templateUrl : "springIntegration.html",controller : "cerebroController"})
+	.when("/springBootHelloWorldGradle",{templateUrl : "springBootHelloWorldGradle.html",controller : "cerebroController"})
 	
 	// tools start
 	.when("/tools",{templateUrl : "tools.html",controller : "cerebroController"})

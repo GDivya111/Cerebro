@@ -1,13 +1,21 @@
-<div class="panel panel-primary"><div class="panel-heading">Contents</div><div class="panel-body">
-	<ul>
-		<li><a ng-click="navigate(1)">Accessing Enum</a></li>
-		<li><a ng-click="navigate(2)">Enum in if condition</a></li>
-		<li><a ng-click="navigate(3)">Enum in switch condition</a></li>
-		<li><a ng-click="navigate(4)">Iterate Enum</a></li>
-		<li><a ng-click="navigate(5)">Iterate Enum which has argumented constructor</a></li>
-		<li><a ng-href="#enumLookupMap" ng-click="buildBreadCrumbs('Reading enum using lookup map', '#enumLookupMap')">Reading enum using lookup map</a></li>
-	</ul>
-</div></div>
+<link rel="stylesheet" href="css/leftNav.css">
+<ul>
+	<li><a class="active" ng-href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a></li>
+	
+	<!-- Bread Crumbs -->
+	<li class="subGroupHeading" ng-if="breadCrumbs.length > 0">Navigation</li>
+	<li ng-controller="cerebroController" ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+	
+	<li class="subGroupHeading">Examples</li>
+	<li><a ng-click="navigate(1)">Accessing Enum</a></li>
+	<li><a ng-click="navigate(2)">Enum in if condition</a></li>
+	<li><a ng-click="navigate(3)">Enum in switch condition</a></li>
+	<li><a ng-click="navigate(4)">Iterate Enum</a></li>
+	<li><a ng-click="navigate(5)">Iterate Enum which has argumented constructor</a></li>
+	<li><a ng-href="#enumLookupMap" ng-click="buildBreadCrumbs('Reading enum using lookup map', '#enumLookupMap')">Reading enum using lookup map</a></li>
+</ul>
+
+<div style="margin-left:30%;padding:1px 16px;">
 	
 <div class="panel panel-primary" id="1"><div class="panel-heading">Accessing Enum</div><div class="panel-body">
 <pre ><code>
@@ -156,3 +164,5 @@ public void iterateEnumWithArgumentedConstructor() {
 6
 </code></pre>
 </div></div>
+
+</div>

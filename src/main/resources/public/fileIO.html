@@ -1,29 +1,31 @@
-<div class="panel panel-primary"><div class="panel-heading">Contents</div><div class="panel-body">
-	<ul>
-		<li><a ng-click="navigate(1)">Method to iterate list of files in directories and sub directories</a></li>
-		<li><a ng-click="navigate(2)">Prepare java.io.File object using string path</a></li>
-		<li><a ng-click="navigate(3)">Read file using relative path</a></li>
-		<li><a ng-click="navigate(4)">Read file with relative path from static method</a></li>
-		<li><a ng-click="navigate(5)">convert file to java.io.InputStream</a></li>
-		<li><a ng-click="navigate(6)">Read contents of the file</a></li>
-		<li><a ng-click="navigate(7)">Delete file</a></li>
-		<li><a ng-click="navigate(8)">Copy file</a></li>
-		<li><a ng-click="navigate(9)">Create file</a></li>
-		<li><a ng-click="navigate(10)">Reading Zip file</a></li>
-		<li><a ng-click="navigate(11)">Create Zip file with single file</a></li>
-		<li><a ng-click="navigate(12)">Create zip file with files present in a folder</a></li>
-		<li><a ng-click="navigate(13)">Method to get current project directory</a></li>
-		<li><a ng-click="navigate(14)">Print file with line numbers</a></li>
-	</ul>
-</div></div>
-
-<div class="panel panel-primary"><div class="panel-heading">References</div><div class="panel-body">
+<link rel="stylesheet" href="css/leftNav.css">
 <ul>
-	<li><a ng-href="http://tutorials.jenkov.com/java-io/linenumberreader.html" target="_blank">Jenkov</a></li>
+	<li><a class="active" ng-href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a></li>
+	
+	<!-- Bread Crumbs -->
+	<li class="subGroupHeading" ng-if="breadCrumbs.length > 0">Navigation</li>
+	<li ng-controller="cerebroController" ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+	
+	<li class="subGroupHeading">Examples</li>
+	<li><a ng-click="navigate(1)">Method to iterate list of files in directories and sub directories</a></li>
+	<li><a ng-click="navigate(2)">Prepare java.io.File object using string path</a></li>
+	<li><a ng-click="navigate(3)">Read file using relative path</a></li>
+	<li><a ng-click="navigate(4)">Read file with relative path from static method</a></li>
+	<li><a ng-click="navigate(5)">convert file to java.io.InputStream</a></li>
+	<li><a ng-click="navigate(6)">Read contents of the file</a></li>
+	<li><a ng-click="navigate(7)">Delete file</a></li>
+	<li><a ng-click="navigate(8)">Copy file</a></li>
+	<li><a ng-click="navigate(9)">Create file</a></li>
+	<li><a ng-click="navigate(10)">Reading Zip file</a></li>
+	<li><a ng-click="navigate(11)">Create Zip file with single file</a></li>
+	<li><a ng-click="navigate(12)">Create zip file with files present in a folder</a></li>
+	<li><a ng-click="navigate(13)">Method to get current project directory</a></li>
+	<li><a ng-click="navigate(14)">Print file with line numbers</a></li>
+	<li><a ng-href="http://tutorials.jenkov.com/java-io/index.html" target="_blank">Reference: Jenkov</a></li>
 </ul>
 
-</div></div>
-	
+<div style="margin-left:30%;padding:1px 16px;">
+
 <div class="panel panel-primary" id="1"><div class="panel-heading">Method to iterate list of files in directories and sub directories</div><div class="panel-body">
 <pre ><code>
 import java.io.File;
@@ -624,3 +626,5 @@ public void lineNumberReader() throws IOException {
 2: Core Java Practice
 </code></pre>
 </div></div>
+
+</div>

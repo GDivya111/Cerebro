@@ -1,6 +1,12 @@
 <link rel="stylesheet" href="css/leftNav.css">
 <ul>
 	<li><a class="active" ng-href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a></li>
+	
+	<!-- Bread Crumbs -->
+	<li class="subGroupHeading" ng-if="breadCrumbs.length > 0">Navigation</li>
+	<li ng-controller="cerebroController" ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+	
+	<li class="subGroupHeading">Examples</li>
 	<li><a ng-click="navigate(1)">Get byte array from String</a></li>
 	<li><a ng-click="navigate(2)">Get Asci value of each Character in a String</a></li>
 	<li><a ng-click="navigate(3)">Convert byte array to String</a></li>
