@@ -19,26 +19,8 @@
 	<li><a ng-click="navigate(12)">Changes to sub list will reflect in main list</a></li>
 	<li><a ng-click="navigate(13)">Sort list by java.util.Date</a></li>
 	<li><a ng-click="navigate(14)">Sort list by java.time.LocalDate</a></li>
+	<li><a ng-click="navigate(15)">Sort list using Comparable and Comparator</a></li>
 </ul>
-
-<!-- <div class="panel panel-primary"><div class="panel-heading">Topics</div><div class="panel-body">
-	<ul>
-		<li><a ng-click="navigate(1)">Split List into sub lists of specified size</a></li>
-		<li><a ng-click="navigate(2)">Convert Array to List</a></li>
-		<li><a ng-click="navigate(3)">Convert List to Array</a></li>
-		<li><a ng-click="navigate(4)">Convert List to Comma Separated String</a></li>
-		<li><a ng-click="navigate(5)">Remove all nulls from list</a></li>
-		<li><a ng-click="navigate(7)">List1 Minus List2</a></li>
-		<li><a ng-click="navigate(8)">List1 Intersection List2</a></li>
-		<li><a ng-click="navigate(6)">Prepare sorted list sort by date using java 8 collection streams</a></li>
-		<li><a ng-click="navigate(9)">Get another list using properties of main object</a></li>
-		<li><a ng-click="navigate(10)">Prepare new list with unique elements in two lists</a></li>
-		<li><a ng-click="navigate(11)">Create an immutable List</a></li>
-		<li><a ng-click="navigate(12)">Changes to sub list will reflect in main list</a></li>
-		<li><a ng-click="navigate(13)">Sort list by java.util.Date</a></li>
-		<li><a ng-click="navigate(14)">Sort list by java.time.LocalDate</a></li>
-	</ul>
-</div></div> -->
 
 <div style="margin-left:30%;padding:1px 16px;">
 
@@ -628,3 +610,100 @@ public void sortListByJavaTimeLocalDate() {
 [[1, 2017-07-06], [2, 2017-07-07], [3, 2017-07-08], [4, 2017-07-09], [5, 2017-07-10], [6, 2017-07-11]]
 </code></pre>
 </div></div>
+
+<div class="panel panel-primary" id="15"><div class="panel-heading">Sort list using Comparable and Comparator</div><div class="panel-body">
+<em>Student.java</em>
+<pre>
+package core.java.collections.model;
+
+public class Student implements Comparable&lt;Student&gt; {
+
+	private Integer id;
+	private String name;
+
+	public Student() {
+	}
+
+	public Student(Integer id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public int compareTo(Student o) {
+		return this.name.compareTo(o.getName());
+	}
+
+	@Override
+	public String toString() {
+		return &quot;(id=&quot; + id + &quot;, name=&quot; + name + &quot;)&quot;;
+	}
+
+}
+</pre>
+<em>sort method:</em>
+<pre>
+import java.util.List;
+import java.util.ArrayList;
+import core.java.collections.model.Student;
+import java.util.Collections;
+import java.util.Comparator;
+
+public void sortList() {
+		List&lt;Student&gt; students = new ArrayList&lt;&gt;();
+		Student student1 = new Student(15, &quot;g&quot;);
+		Student student2 = new Student(57, &quot;a&quot;);
+		Student student3 = new Student(45, &quot;d&quot;);
+
+		students.add(student1);
+		students.add(student2);
+		students.add(student3);
+
+		System.out.println(&quot;unsorted list: &quot; + students);
+
+		Collections.sort(students);
+		System.out.println(&quot;default sort as per comparable: &quot; + students);
+
+		<em>// Until JDK 7
+		/*Comparator&lt;Student&gt; idComparator = new Comparator&lt;Student&gt;() {
+
+			@Override
+			public int compare(Student o1, Student o2) {
+				return o1.getId().compareTo(o2.getId());
+			}
+		};*/ </em>
+
+		<em>// using JDK 8 - Lambda Expression</em>
+		Comparator&lt;Student&gt; idComparator = (Student o1, Student o2) -&gt; {
+			return o1.getId().compareTo(o2.getId());
+		};
+
+		Collections.sort(students, idComparator);
+		System.out.println(&quot;sort by id: &quot; + students);
+	}
+</pre>
+<em>Output</em>
+<pre>
+unsorted list: [(id=15, name=g), (id=57, name=a), (id=45, name=d)]
+default sort as per comparable: [(id=57, name=a), (id=45, name=d), (id=15, name=g)]
+sort by id: [(id=15, name=g), (id=45, name=d), (id=57, name=a)]
+</pre>
+</div></div>
+
+</div>

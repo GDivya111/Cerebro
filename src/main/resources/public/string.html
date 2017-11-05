@@ -17,6 +17,7 @@
 	<li><a ng-click="navigate(8)">Print all substrings of specified length of a given String</a></li>
 	<li><a ng-click="navigate(9)">Convert the case of String</a></li>
 	<li><a ng-click="navigate(10)">Find the substring in a String</a></li>
+	<li><a ng-click="navigate(11)">Sort words in Sentence by length</a></li>
 </ul>
 
 <div style="margin-left:30%;padding:1px 16px;">
@@ -267,6 +268,40 @@ public void printAllSubStringsOfSpecifiedLength() {
 [wel, elc, lco, com, ome, met, eto, toj, oja, jav, ava]
 [welc, elco, lcom, come, omet, meto, etoj, toja, ojav, java]
 [welco, elcom, lcome, comet, ometo, metoj, etoja, tojav, ojava]
+</pre>
+</div></div>
+
+<div class="panel panel-primary" id="11"><div class="panel-heading">Sort words in Sentence by length</div><div class="panel-body">
+<pre >
+import java.util.List;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Collections;
+
+public void sortStringsInSentnceByLength() {
+		String str = &quot;Welcome to hacker rank test&quot;;
+		String[] strs = str.split(&quot; &quot;);
+
+		List&lt;String&gt; strList = Arrays.asList(strs);
+
+		System.out.println(&quot;strList: &quot; + strList);
+
+		Comparator&lt;String&gt; lengthComparator = new Comparator&lt;String&gt;() {
+
+			@Override
+			public int compare(String o1, String o2) {
+				return Integer.valueOf(o1.length()).compareTo(Integer.valueOf(o2.length()));
+			}
+		};
+
+		Collections.sort(strList, lengthComparator);
+		System.out.println(&quot;sort by length: &quot; + strList);
+	}
+</pre>
+<em>Output</em>
+<pre>
+strList: [Welcome, to, hacker, rank, test]
+sort by length: [to, rank, test, hacker, Welcome]
 </pre>
 </div></div>
 
