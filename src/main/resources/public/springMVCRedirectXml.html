@@ -1,6 +1,9 @@
-<div class="page-header">
-    <h3>Spring MVC Redirect with Xml</h3>      
-</div>
+<div ng-controller="cerebroController"><div ng-if="breadCrumbs.length > 0">
+<ol class="breadcrumb">
+	<li ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+</ol>
+<hr/>
+</div></div>
 
 <div class="panel panel-primary" id="1"><div class="panel-heading">Create Web project using Maven from cmd</div><div class="panel-body">
 <pre ><code>
