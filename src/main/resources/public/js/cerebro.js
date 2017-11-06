@@ -129,6 +129,8 @@ app.config(function($routeProvider){
 	.when("/easymockHelloWorld",{templateUrl : "easymockHelloWorld.html",controller : "cerebroController"})
 	.when("/easymockAnnotations",{templateUrl : "easymockAnnotations.html",controller : "cerebroController"})
 	.when("/easymockStrictmock",{templateUrl : "easymockStrictmock.html",controller : "cerebroController"})
+	.when("/mockitoHelloWorld",{templateUrl : "mockitoHelloWorld.html",controller : "cerebroController"})
+	.when("/mockitoAnnotations",{templateUrl : "mockitoAnnotations.html",controller : "cerebroController"})
 	
 	// ant start
 	.when("/ant",{templateUrl : "ant.html",controller : "cerebroController"})
