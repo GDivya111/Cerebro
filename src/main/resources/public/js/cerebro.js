@@ -120,18 +120,23 @@ app.config(function($routeProvider){
 	.when("/sonarSetup",{templateUrl : "sonarSetup.html",controller : "cerebroController"})
 	.when("/sonarqubeCodeCoverage",{templateUrl : "sonarqubeCodeCoverage.html",controller : "cerebroController"})
 	
-	// unit testing start
+	// Junit
 	.when("/unitTesting",{templateUrl : "unitTesting.html",controller : "cerebroController"})
 	.when("/junit",{templateUrl : "junit.html",controller : "cerebroController"})
 	.when("/junitHelloWorld",{templateUrl : "junitHelloWorld.html",controller : "cerebroController"})
+
+	// Mockito
 	.when("/mockito",{templateUrl : "mockito.html",controller : "cerebroController"})
+	.when("/mockitoHelloWorld",{templateUrl : "mockitoHelloWorld.html",controller : "cerebroController"})
+	.when("/mockitoAnnotations",{templateUrl : "mockitoAnnotations.html",controller : "cerebroController"})
+	
+	// Easymock
 	.when("/easymock",{templateUrl : "easymock.html",controller : "cerebroController"})
 	.when("/easymockHelloWorld",{templateUrl : "easymockHelloWorld.html",controller : "cerebroController"})
 	.when("/easymockAnnotations",{templateUrl : "easymockAnnotations.html",controller : "cerebroController"})
 	.when("/easymockStrictmock",{templateUrl : "easymockStrictmock.html",controller : "cerebroController"})
-	.when("/mockitoHelloWorld",{templateUrl : "mockitoHelloWorld.html",controller : "cerebroController"})
-	.when("/mockitoAnnotations",{templateUrl : "mockitoAnnotations.html",controller : "cerebroController"})
-	
+	.when("/easymockExceptionHandling",{templateUrl : "easymockExceptionHandling.html",controller : "cerebroController"})
+
 	// ant start
 	.when("/ant",{templateUrl : "ant.html",controller : "cerebroController"})
 	.when("/antJacoco",{templateUrl : "antJacoco.html",controller : "cerebroController"})

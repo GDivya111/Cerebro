@@ -6,17 +6,17 @@
 </div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">Create Core Java Project using maven from cmd</div><div class="panel-body">
-<pre ><code>
+<pre>
 mvn archetype:generate -DgroupId=com.easymock.practice -DartifactId=EasyMockPractice -Dversion=1.0 -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
-</code></pre>
+</pre>
 </div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">Project structure after importing to eclipse</div><div class="panel-body">
-<img class="img-responsive" ng-src="images/easymock/1-easymockStrictmock.jpg" />
+<img class="img-responsive" ng-src="images/easymock/1-easymockExceptionHandling.jpg" />
 </div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">pom.xml</div><div class="panel-body">
-<pre ><code>
+<pre>
 &lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
 	xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
 	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
@@ -64,11 +64,11 @@ mvn archetype:generate -DgroupId=com.easymock.practice -DartifactId=EasyMockPrac
 		&lt;/plugins&gt;
 	&lt;/build&gt;
 &lt;/project&gt;
-</code></pre>
+</pre>
 </div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">build.gradle</div><div class="panel-body">
-<pre ><code>
+<pre>
 apply plugin: 'java'
 
 sourceSets { 
@@ -84,103 +84,130 @@ dependencies {
 	compile 'junit:junit:4.12'
 	compile 'org.easymock:easymock:3.5'
 }
-</code></pre>
+</pre>
 </div></div>
 
-<div class="panel panel-primary" ><div class="panel-heading">CalculateService3</div><div class="panel-body">
-<pre ><code>
-package easy.mock.strictmock;
+<div class="panel panel-primary"><div class="panel-heading">CalculateService4.java</div><div class="panel-body">
+<em>Explanation:</em>
+<pre>
+Interface to which we will create mock using EasyMock annotation @Mock
+</pre>
+<pre>
+package easy.mock.exception;
 
-public interface CalculateService3 {
+public interface CalculateService4 {
 
 	public &lt;T&gt; T add(T t1, T t2);
 
 	public &lt;T&gt; T subtract(T t1, T t2);
 }
-</code></pre>
+</pre>
 </div></div>
 
-<div class="panel panel-primary" ><div class="panel-heading">MathApplication3</div><div class="panel-body">
-<pre ><code>
-package easy.mock.strictmock;
+<div class="panel panel-primary"><div class="panel-heading">MathApplication4.java</div><div class="panel-body">
+<em>Explanation:</em>
+<pre>
+class which is using above interface
+</pre>
+<pre>
+package easy.mock.exception;
 
-public class MathApplication3 {
+public class MathApplication4 {
 
-	private CalculateService3 calculateService3;
+	private CalculateService4 calculateService4;
 
-	public void setCalculateService3(CalculateService3 calculateService3) {
-		this.calculateService3 = calculateService3;
+	public void setCalculateService4(CalculateService4 calculateService4) {
+		this.calculateService4 = calculateService4;
 	}
 
 	public &lt;T&gt; T add(T t1, T t2) {
-		return calculateService3.add(t1, t2);
+		return calculateService4.add(t1, t2);
 	}
 
 	public &lt;T&gt; T subtract(T t1, T t2) {
-		return calculateService3.subtract(t1, t2);
+		return calculateService4.subtract(t1, t2);
 	}
 }
-</code></pre>
+</pre>
 </div></div>
 
-<div class="panel panel-primary" ><div class="panel-heading">Test3</div><div class="panel-body">
-<pre ><code>
-package easy.mock.strictmock;
+<div class="panel panel-primary"><div class="panel-heading">Test4.java</div><div class="panel-body">
+<em>Explanation:</em>
+<pre>
+Test class with test cases
+</pre>
+<pre>
+package easy.mock.exception;
 
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRunner;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
+import org.easymock.Mock;
+import org.easymock.TestSubject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+<em>// @RunWith attaches a runner with the test class to initialize the test data</em>
 @RunWith(EasyMockRunner.class)
-public class Test3 {
+public class Test4 {
 
-	private CalculateService3 calculateService3;
-	private MathApplication3 mathApplication3;
+	<em>// @TestSubject annotation is used to identify class which is going to use the mock object</em>
+	@TestSubject
+	private MathApplication4 mathApplication4 = new MathApplication4();
 
-	/**
-	 * EasyMock.createStrictMock() creates a mock and also takes care of the order of method calls 
-	 * that the mock is going to make in due course of its action
-	 */
-	@Before
-	public void setup() {
-		calculateService3 = EasyMock.createStrictMock(CalculateService3.class);
-		mathApplication3 = new MathApplication3();
-		mathApplication3.setCalculateService3(calculateService3);
+	<em>// @Mock annotation is used to create the mock object to be injected</em>
+	@Mock
+	private CalculateService4 calculateService4;
+
+	@Test(expected = RuntimeException.class)
+	public void add() {
+		<em>/*java.lang.Exception: Unexpected exception, expected&lt;java.lang.RuntimeException&gt; but was&lt;java.lang.AssertionError&gt;
+		Caused by: java.lang.AssertionError: Unexpected method call CalculateService4.add(10 (int), 20 (int)):
+				CalculateService4.add(isA(int), isA(int)): expected: 1, actual: 0*/
+		/*EasyMock.expect(calculateService4.add(EasyMock.isA(int.class), EasyMock.isA(int.class))).andThrow(
+				new RuntimeException(&quot;Exception thrown from test case&quot;));*/</em>
+
+		<em>// since add method is generic we need to pass Integer wrapper class for Class object.</em>
+		EasyMock.expect(calculateService4.add(EasyMock.isA(Integer.class), EasyMock.isA(Integer.class)))
+				.andThrow(new RuntimeException(&quot;Exception thrown from test case&quot;));
+
+		EasyMock.replay(calculateService4);
+		mathApplication4.add(10, 20);
 	}
-
-	@After
-	public void teardown() {
-		calculateService3 = null;
-		mathApplication3 = null;
-	}
-
-	/**
-	 * This test case will fail with below error
-	 * 
-	 * java.lang.AssertionError: 
-	 * Unexpected method call CalculateService3.subtract(10 (int), 20 (int)):
-	 * CalculateService3.add(10 (int), 20 (int)): expected: 1, actual: 0
-	 */
-	@Test
-	public void test1() {
-		EasyMock.expect(calculateService3.add(10, 20)).andReturn(40);
-		EasyMock.expect(calculateService3.subtract(10, 20)).andReturn(10);
-		EasyMock.replay(calculateService3);
-
-		mathApplication3.subtract(10, 20);
-		mathApplication3.add(10, 20);
-
-		EasyMock.verify(calculateService3);
-	}
-
 }
-</code></pre>
+</pre>
 </div></div>
 
-<div class="panel panel-primary"><div class="panel-heading">Junit View Output</div><div class="panel-body">
-<img class="img-responsive" ng-src="images/easymock/2-easymockStrictmock.jpg" />
+<div class="panel panel-primary"><div class="panel-heading">App4.java</div><div class="panel-body">
+<em>Explanation:</em>
+<pre>
+main class to execute test cases
+</pre>
+<pre>
+package easy.mock.exception;
+
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
+
+public class App4 {
+
+	public static void main(String[] args) {
+		Result result = JUnitCore.runClasses(Test4.class);
+
+		for (Failure failure : result.getFailures()) {
+			System.out.println(failure.toString());
+		}
+
+		System.out.println(&quot;result.wasSuccessful(): &quot; + result.wasSuccessful());
+	}
+}
+</pre>
+<em>Output</em>
+<pre>
+result.wasSuccessful(): true
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Output</div><div class="panel-body">
+<img class="img-responsive" ng-src="images/easymock/2-easymockExceptionHandling.jpg" />
 </div></div>
