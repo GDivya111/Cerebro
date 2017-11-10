@@ -45,6 +45,10 @@ app.config(function($routeProvider){
 	.when("/myBatis",{templateUrl : "myBatis.html",controller : "cerebroController"})
 	.when("/myBatisCrud",{templateUrl : "myBatisCrud.html",controller : "cerebroController"})
 	
+	// EclipseLink
+	.when("/eclipselink",{templateUrl : "eclipselink.html",controller : "cerebroController"})
+	.when("/eclipselinkGenerateMetaModel",{templateUrl : "eclipselinkGenerateMetaModel.html",controller : "cerebroController"})
+	
 	// maven start
 	.when("/maven",{templateUrl : "maven.html",controller : "cerebroController"})
 	.when("/installMaven",{templateUrl : "installMaven.html",controller : "cerebroController"})
