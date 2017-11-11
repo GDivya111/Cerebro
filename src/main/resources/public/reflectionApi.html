@@ -1,127 +1,98 @@
-<div class="panel panel-primary"><div class="panel-heading">Contents</div><div class="panel-body">
-	<ul>
-		<li><a ng-click="navigate(1)">Create Object using reflection API - class has zero argument constructor</a></li>
-		<li><a ng-click="navigate(2)">Calling method with zero arguments</a></li>
-		<li><a ng-click="navigate(3)">Calling method with String array as arguments</a></li>
-	</ul>
-</div></div>
+<link rel="stylesheet" href="css/leftNav.css">
+<ul>
+	<li><a class="active" ng-href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a></li>
+	
+	<!-- Bread Crumbs -->
+	<li class="subGroupHeading" ng-if="breadCrumbs.length > 0">Navigation</li>
+	<li ng-controller="cerebroController" ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+	
+	<li class="subGroupHeading">Examples</li>
+	<li><a ng-click="navigate(1)">Create Class object if we know class name compile time</a></li>
+	<li><a ng-click="navigate(2)">Create Class object if we know fully packaged class name at run time</a></li>
+</ul>
 
-<div class="panel panel-primary" id="1"><div class="panel-heading">Create Object using reflection API - class has zero argument constructor</div><div class="panel-body">
-<pre><code>
-package core.java.reflection.api.model;
+<div style="margin-left:30%;padding:1px 16px;">
 
+<div class="panel panel-primary" id="1"><div class="panel-heading">Create Class object</div><div class="panel-body">
+<em>ReflectionModel1.java</em>
+<pre>
+package core.java.reflection.model;
+
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class ReflectionAPIModel1 {
+public class ReflectionModel1 extends Object implements Serializable {
 
-	public void method1(String arg1) {
-		System.out.println(&quot;method1 argument: &quot; + arg1);
+	private static final long serialVersionUID = -2693156947838409146L;
+
+	public void method1() {
+		System.out.println(&quot;ReflectionModel1.method1()&quot;);
+	}
+
+	public void method2(String name) {
+		System.out.println(&quot;Hello: &quot; + name);
+	}
+
+	public void method3(String[] names) {
+		Arrays.stream(names).forEach(System.out::println);
 	}
 
 }
-</code></pre>
-<pre><code>
-public void method3() {
-		try {
-			Class&lt;?&gt; klass = Class.forName(&quot;core.java.reflection.api.model.ReflectionAPIModel1&quot;);
-			System.out.println(klass);
-
-			Object object = klass.newInstance();
-			System.out.println(object);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-</code></pre>
+</pre>
+<em>Method:</em>
+<pre>
+public void classObject() {
+	Class&lt;ReflectionModel1&gt; classObject = ReflectionModel1.class;
+	System.out.println(&quot;classObject: &quot; + classObject);
+}
+</pre>
 <em>Output</em>
-<pre><code>
-class core.java.reflection.api.model.ReflectionAPIModel1
-core.java.reflection.api.model.ReflectionAPIModel1@6276ae34
-</code></pre>
+<pre>
+classObject: class core.java.reflection.model.ReflectionModel
+</pre>
 </div></div>
 
-<div class="panel panel-primary" id="2"><div class="panel-heading">Calling method with zero arguments</div><div class="panel-body">
-<pre><code>
-package core.java.reflection.api.model;
+<div class="panel panel-primary" id="2"><div class="panel-heading">Create Class object if we know fully packaged class name at run time</div><div class="panel-body">
+<em>ReflectionModel1.java</em>
+<pre>
+package core.java.reflection.model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class ReflectionAPIModel1 {
+public class ReflectionModel1 extends Object implements Serializable {
 
-	public void method1(String arg1) {
-		System.out.println(&quot;method1 argument: &quot; + arg1);
+	private static final long serialVersionUID = -2693156947838409146L;
+
+	public void method1() {
+		System.out.println(&quot;ReflectionModel1.method1()&quot;);
+	}
+
+	public void method2(String name) {
+		System.out.println(&quot;Hello: &quot; + name);
+	}
+
+	public void method3(String[] names) {
+		Arrays.stream(names).forEach(System.out::println);
 	}
 
 }
-</code></pre>
-<pre><code>
-import java.lang.reflect.Array;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.List;
-
-public void method1() {
-		try {
-			Class&lt;?&gt; klass = Class.forName(&quot;core.java.reflection.api.model.ReflectionAPIModel1&quot;);
-			System.out.println(klass);
-
-			Method method1 = klass.getMethod(&quot;method1&quot;, String.class);
-			System.out.println(method1);
-			method1.invoke(klass.newInstance(), &quot;Hello Reflection API&quot;);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-</code></pre>
-<em>Output</em>
-<pre><code>
-class core.java.reflection.api.model.ReflectionAPIModel1
-public void core.java.reflection.api.model.ReflectionAPIModel1.method1(java.lang.String)
-method1 argument: Hello Reflection API
-</code></pre>
-</div></div>
-
-<div class="panel panel-primary" id="3"><div class="panel-heading">Calling method with String array as arguments</div><div class="panel-body">
-<pre ><code>
-package core.java.reflection.api.model;
-
-import java.util.Arrays;
-
-public class ReflectionAPIModel1 {
-
-	public void method2(String[] arg1) {
-		Arrays.stream(arg1).forEach(System.out::println);
+</pre>
+<em>Method:</em>
+<pre>
+public void classObject2() {
+try {
+	Class&lt;?&gt; classObject = Class.forName(&quot;core.java.reflection.model.ReflectionModel1&quot;);
+	System.out.println(&quot;classObject: &quot; + classObject);
+} catch (ClassNotFoundException e) {
+	e.printStackTrace();
 	}
 }
-</code></pre>
-<pre><code>
-import java.lang.reflect.Array;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.List;
-
-public void method2() {
-		try {
-			Class&lt;?&gt; klass = Class.forName(&quot;core.java.reflection.api.model.ReflectionAPIModel1&quot;);
-			System.out.println(klass);
-
-			Method method2 = klass.getMethod(&quot;method2&quot;, Array.newInstance(String.class, 1).getClass());
-			System.out.println(method2);
-
-			List&lt;String&gt; values = Arrays.asList(&quot;Hello&quot;, &quot;reflection&quot;, &quot;api&quot;);
-			method2.invoke(klass.newInstance(), new Object[] { values.toArray() });
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-</code></pre>
+</pre>
 <em>Output</em>
-<pre><code>
-class core.java.reflection.api.model.ReflectionAPIModel1
-public void core.java.reflection.api.model.ReflectionAPIModel1.method2(java.lang.String[])
-Hello
-reflection
-api
-</code></pre>
+<pre>
+classObject: class core.java.reflection.model.ReflectionModel1
+</pre>
 </div></div>
+
+</div>
