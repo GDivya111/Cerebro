@@ -9,11 +9,19 @@
 	<li class="subGroupHeading">Examples</li>
 	<li><a ng-click="navigate(1)">Create Class object if we know class name compile time</a></li>
 	<li><a ng-click="navigate(2)">Create Class object if we know fully packaged class name at run time</a></li>
+	<li><a ng-click="navigate(3)">Get Class object from actual object</a></li>
+	<li><a ng-click="navigate(4)">Create instance of a class where class has zero argument constructor</a></li>
+	<li><a ng-click="navigate(5)">Create instance of a class where class has argumented constructor</a></li>
+	<li><a ng-click="navigate(6)">Create instance of a class where class has argumented constructor and constructor is taking primitive int as argument</a></li>
+	<li><a ng-click="navigate(7)">Get Super Class object of our class</a></li>
+	<li><a ng-click="navigate(8)">Calling a method with zero arguments</a></li>
+	<li><a ng-click="navigate(9)">Calling method with String as argument</a></li>
+	<li><a ng-click="navigate(10)">Call method with String array as argument</a></li>
 </ul>
 
 <div style="margin-left:30%;padding:1px 16px;">
 
-<div class="panel panel-primary" id="1"><div class="panel-heading">Create Class object</div><div class="panel-body">
+<div class="panel panel-primary" id="1"><div class="panel-heading">Create Class object if we know class name compile time</div><div class="panel-body">
 <em>ReflectionModel1.java</em>
 <pre>
 package core.java.reflection.model;
@@ -92,6 +100,463 @@ try {
 <em>Output</em>
 <pre>
 classObject: class core.java.reflection.model.ReflectionModel1
+</pre>
+</div></div>
+
+<div class="panel panel-primary" id="3"><div class="panel-heading">Get Class object from actual object</div><div class="panel-body">
+<em>ReflectionModel1.java</em>
+<pre>
+package core.java.reflection.model;
+
+import java.io.Serializable;
+import java.util.Arrays;
+
+public class ReflectionModel1 extends Object implements Serializable {
+
+	private static final long serialVersionUID = -2693156947838409146L;
+
+	public void method1() {
+		System.out.println(&quot;ReflectionModel1.method1()&quot;);
+	}
+
+	public void method2(String name) {
+		System.out.println(&quot;Hello: &quot; + name);
+	}
+
+	public void method3(String[] names) {
+		Arrays.stream(names).forEach(System.out::println);
+	}
+
+}
+</pre>
+<em>Method:</em>
+<pre>
+import core.java.reflection.model.ReflectionModel1;
+
+public void classObject3() {
+		ReflectionModel1 reflectionModel1 = new ReflectionModel1();
+		Class&lt;?&gt; classObject = reflectionModel1.getClass();
+		System.out.println(&quot;classObject: &quot; + classObject);
+	}
+</pre>
+<em>Output</em>
+<pre>
+classObject: class core.java.reflection.model.ReflectionModel1
+</pre>
+</div></div>
+
+<div class="panel panel-primary" id="4"><div class="panel-heading">Create instance of a class where class has zero argument constructor</div><div class="panel-body">
+<em>ReflectionModel1.java</em>
+<pre>
+package core.java.reflection.model;
+
+import java.io.Serializable;
+import java.util.Arrays;
+
+public class ReflectionModel1 extends Object implements Serializable {
+
+	private static final long serialVersionUID = -2693156947838409146L;
+
+	public void method1() {
+		System.out.println(&quot;ReflectionModel1.method1()&quot;);
+	}
+
+	public void method2(String name) {
+		System.out.println(&quot;Hello: &quot; + name);
+	}
+
+	public void method3(String[] names) {
+		Arrays.stream(names).forEach(System.out::println);
+	}
+
+}
+</pre>
+<em>Method:</em>
+<pre>
+public void createInstance() {
+		try {
+			Class&lt;ReflectionModel1&gt; classObject = ReflectionModel1.class;
+			ReflectionModel1 reflectionModel1 = classObject.newInstance();
+			System.out.println(&quot;classObject: &quot; + classObject);
+			System.out.println(&quot;reflectionModel1: &quot; + reflectionModel1);
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+	}
+</pre>
+<em>Output</em>
+<pre>
+classObject: class core.java.reflection.model.ReflectionModel1
+reflectionModel1: core.java.reflection.model.ReflectionModel1@6a41eaa2
+</pre>
+</div></div>
+
+<div class="panel panel-primary" id="5"><div class="panel-heading">Create instance of a class where class has argumented constructor</div><div class="panel-body">
+<em>ReflectionModel2.java</em>
+<pre>
+package core.java.reflection.model;
+
+public class ReflectionModel2 {
+
+	private String name;
+	private int number;
+
+	public ReflectionModel2(String name) {
+		this.name = name;
+	}
+
+	public ReflectionModel2(int number) {
+		this.number = number;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+}
+</pre>
+<em>Method:</em>
+<pre>
+import core.java.reflection.model.ReflectionModel2;
+import java.lang.NoSuchMethodException;
+import java.lang.SecurityException;
+import java.lang.InstantiationException;
+import java.lang.IllegalAccessException;
+import java.lang.IllegalArgumentException;
+import java.lang.reflect.InvocationTargetException;
+
+public void createInstance2() {
+		try {
+			Class&lt;ReflectionModel2&gt; classObject = ReflectionModel2.class;
+			Constructor&lt;ReflectionModel2&gt; constructorObject = classObject.getConstructor(String.class);
+
+			ReflectionModel2 reflectionModel2 = constructorObject.newInstance(&quot;Jack&quot;);
+
+			System.out.println(&quot;classObject: &quot; + classObject);
+			System.out.println(&quot;constructorObject: &quot; + constructorObject);
+			System.out.println(&quot;reflectionModel2: &quot; + reflectionModel2 + &quot;, name: &quot;
+					+ reflectionModel2.getName());
+		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+	}
+</pre>
+<em>Output</em>
+<pre>
+classObject: class core.java.reflection.model.ReflectionModel2
+constructorObject: public core.java.reflection.model.ReflectionModel2(java.lang.String)
+reflectionModel2: core.java.reflection.model.ReflectionModel2@6a41eaa2, name: Jack
+</pre>
+</div></div>
+
+<div class="panel panel-primary" id="6"><div class="panel-heading">Create instance of a class where class has argumented constructor and constructor is taking primitive int as argument</div><div class="panel-body">
+<em>ReflectionModel2.java</em>
+<pre>
+package core.java.reflection.model;
+
+public class ReflectionModel2 {
+
+	private String name;
+	private int number;
+
+	public ReflectionModel2(String name) {
+		this.name = name;
+	}
+
+	public ReflectionModel2(int number) {
+		this.number = number;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+}
+</pre>
+<em>Method:</em>
+<pre>
+import java.lang.Class;
+import core.java.reflection.model.ReflectionModel2;
+import java.lang.reflect.Constructor;
+import java.lang.NoSuchMethodException;
+import java.lang.SecurityException;
+import java.lang.InstantiationException;
+import java.lang.IllegalArgumentException;
+import java.lang.reflect.InvocationTargetException;
+
+public void createInstance3() {
+		try {
+			Class&lt;ReflectionModel2&gt; classObject = ReflectionModel2.class;
+			Constructor&lt;ReflectionModel2&gt; constructorObject = classObject.getConstructor(int.class);
+
+			ReflectionModel2 reflectionModel2 = constructorObject.newInstance(10);
+
+			System.out.println(&quot;classObject: &quot; + classObject);
+			System.out.println(&quot;constructorObject: &quot; + constructorObject);
+			System.out.println(&quot;reflectionModel2: &quot; + reflectionModel2 + &quot;, number: &quot;
+					+ reflectionModel2.getNumber());
+		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+
+	}
+</pre>
+<em>Output</em>
+<pre>
+classObject: class core.java.reflection.model.ReflectionModel2
+constructorObject: public core.java.reflection.model.ReflectionModel2(int)
+reflectionModel2: core.java.reflection.model.ReflectionModel2@6a41eaa2, number: 10
+</pre>
+</div></div>
+
+<div class="panel panel-primary" id="7"><div class="panel-heading">Get Super Class object of our class</div><div class="panel-body">
+<em>ReflectionModel1.java</em>
+<pre>
+package core.java.reflection.model;
+
+import java.io.Serializable;
+import java.util.Arrays;
+
+public class ReflectionModel1 extends Object implements Serializable {
+
+	private static final long serialVersionUID = -2693156947838409146L;
+
+	public void method1() {
+		System.out.println(&quot;ReflectionModel1.method1()&quot;);
+	}
+
+	public void method2(String name) {
+		System.out.println(&quot;Hello: &quot; + name);
+	}
+
+	public void method3(String[] names) {
+		Arrays.stream(names).forEach(System.out::println);
+	}
+
+}
+</pre>
+<em>Method:</em>
+<pre>
+import java.lang.Class;
+import core.java.reflection.model.ReflectionModel1;
+
+public void getSuperClass() {
+		Class&lt;ReflectionModel1&gt; classObject = ReflectionModel1.class;
+		Class&lt;? super ReflectionModel1&gt; superClassObject = classObject.getSuperclass();
+
+		System.out.println(&quot;classObject: &quot; + classObject);
+		System.out.println(&quot;superClassObject: &quot; + superClassObject);
+	}
+</pre>
+<em>Output</em>
+<pre>
+classObject: class core.java.reflection.model.ReflectionModel1
+superClassObject: class java.lang.Object
+</pre>
+</div></div>
+
+<div class="panel panel-primary" id="8"><div class="panel-heading">Calling a method with zero arguments</div><div class="panel-body">
+<em>ReflectionModel1.java</em>
+<pre>
+package core.java.reflection.model;
+
+import java.io.Serializable;
+import java.util.Arrays;
+
+public class ReflectionModel1 extends Object implements Serializable {
+
+	private static final long serialVersionUID = -2693156947838409146L;
+
+	public void method1() {
+		System.out.println(&quot;ReflectionModel1.method1()&quot;);
+	}
+
+	public void method2(String name) {
+		System.out.println(&quot;Hello: &quot; + name);
+	}
+
+	public void method3(String[] names) {
+		Arrays.stream(names).forEach(System.out::println);
+	}
+
+}
+</pre>
+<em>Method:</em>
+<pre>
+import java.lang.Class;
+import core.java.reflection.model.ReflectionModel1;
+import java.lang.reflect.Method;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.NoSuchMethodException;
+import java.lang.SecurityException;
+import java.lang.InstantiationException;
+import java.lang.IllegalAccessException;
+import java.lang.IllegalArgumentException;
+import java.lang.reflect.InvocationTargetException;
+
+public void callingMethodWithZeroArguments() {
+		try {
+			Class&lt;ReflectionModel1&gt; klass = ReflectionModel1.class;
+			ReflectionModel1 reflectionModel1 = klass.newInstance();
+			Method methodObject = klass.getMethod(&quot;method1&quot;);
+			methodObject.invoke(reflectionModel1);
+
+			System.out.println(&quot;klass: &quot; + klass);
+			System.out.println(&quot;reflectionModel1: &quot; + reflectionModel1);
+			System.out.println(&quot;methodObject: &quot; + methodObject);
+		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+	}
+</pre>
+<em>Output</em>
+<pre>
+ReflectionModel1.method1()
+klass: class core.java.reflection.model.ReflectionModel1
+reflectionModel1: core.java.reflection.model.ReflectionModel1@6a41eaa2
+methodObject: public void core.java.reflection.model.ReflectionModel1.method1()
+</pre>
+</div></div>
+
+<div class="panel panel-primary" id="9"><div class="panel-heading">Calling method with String as argument</div><div class="panel-body">
+<em>ReflectionModel1.java</em>
+<pre>
+package core.java.reflection.model;
+
+import java.io.Serializable;
+import java.util.Arrays;
+
+public class ReflectionModel1 extends Object implements Serializable {
+
+	private static final long serialVersionUID = -2693156947838409146L;
+
+	public void method1() {
+		System.out.println(&quot;ReflectionModel1.method1()&quot;);
+	}
+
+	public void method2(String name) {
+		System.out.println(&quot;Hello: &quot; + name);
+	}
+
+	public void method3(String[] names) {
+		Arrays.stream(names).forEach(System.out::println);
+	}
+
+}
+</pre>
+<em>Method:</em>
+<pre>
+import java.lang.Class;
+import core.java.reflection.model.ReflectionModel1;
+import java.lang.reflect.Method;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.NoSuchMethodException;
+import java.lang.SecurityException;
+import java.lang.InstantiationException;
+import java.lang.IllegalAccessException;
+import java.lang.IllegalArgumentException;
+import java.lang.reflect.InvocationTargetException;
+
+public void callingMethodWithStringArgument() {
+		try {
+			Class&lt;ReflectionModel1&gt; klass = ReflectionModel1.class;
+			ReflectionModel1 reflectionModel1 = klass.newInstance();
+			Method methodObject = klass.getMethod(&quot;method2&quot;, String.class);
+			methodObject.invoke(reflectionModel1, &quot;Jack&quot;);
+
+			System.out.println(&quot;klass: &quot; + klass);
+			System.out.println(&quot;reflectionModel1: &quot; + reflectionModel1);
+			System.out.println(&quot;methodObject: &quot; + methodObject);
+		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+	}
+</pre>
+<em>Output</em>
+<pre>
+Hello: Jack
+klass: class core.java.reflection.model.ReflectionModel1
+reflectionModel1: core.java.reflection.model.ReflectionModel1@6a41eaa2
+methodObject: public void core.java.reflection.model.ReflectionModel1.method2(java.lang.String)
+</pre>
+</div></div>
+
+<div class="panel panel-primary" id="10"><div class="panel-heading">Call method with String array as argument</div><div class="panel-body">
+<em>ReflectionModel1.java</em>
+<pre>
+package core.java.reflection.model;
+
+import java.io.Serializable;
+import java.util.Arrays;
+
+public class ReflectionModel1 extends Object implements Serializable {
+
+	private static final long serialVersionUID = -2693156947838409146L;
+
+	public void method1() {
+		System.out.println(&quot;ReflectionModel1.method1()&quot;);
+	}
+
+	public void method2(String name) {
+		System.out.println(&quot;Hello: &quot; + name);
+	}
+
+	public void method3(String[] names) {
+		Arrays.stream(names).forEach(System.out::println);
+	}
+
+}
+</pre>
+<em>Method:</em>
+<pre>
+import java.lang.Class;
+import core.java.reflection.model.ReflectionModel1;
+import java.lang.reflect.Method;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.NoSuchMethodException;
+import java.lang.SecurityException;
+import java.lang.InstantiationException;
+import java.lang.IllegalAccessException;
+import java.lang.IllegalArgumentException;
+import java.lang.reflect.InvocationTargetException;
+
+public void callingMethodWithStringArrayAsArgument() {
+try {
+	Class&lt;ReflectionModel1&gt; klass = ReflectionModel1.class;
+	ReflectionModel1 reflectionModel1 = klass.newInstance();
+	Method methodObject = klass.getMethod(&quot;method3&quot;, Array.newInstance(String.class, 1).getClass());
+	List&lt;String&gt; names = Arrays.asList(&quot;Jack&quot;, &quot;Jill&quot;, &quot;John&quot;);
+	methodObject.invoke(reflectionModel1, new Object[] { names.toArray() });
+
+	System.out.println(&quot;klass: &quot; + klass);
+	System.out.println(&quot;reflectionModel1: &quot; + reflectionModel1);
+	System.out.println(&quot;methodObject: &quot; + methodObject);
+	} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+		| IllegalArgumentException | InvocationTargetException e) {
+		e.printStackTrace();
+	}
+}
+</pre>
+<em>Output</em>
+<pre>
+Jack
+Jill
+John
+klass: class core.java.reflection.model.ReflectionModel1
+reflectionModel1: core.java.reflection.model.ReflectionModel1@1f36e637
+methodObject: public void core.java.reflection.model.ReflectionModel1.method3(java.lang.String[])
 </pre>
 </div></div>
 
