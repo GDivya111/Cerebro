@@ -1,28 +1,16 @@
-<!-- Sidebar -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
-            <ul class="nav sidebar-nav">
-                <li><a ng-click="navigate(1)">Iterate Set</a></li>
-                <!-- <li class="dropdown">
-        		<a class="dropdown-toggle" data-toggle="dropdown">Works<span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-                	<li class="dropdown-header">Dropdown heading</li>
-                	<li><a href="#">Action</a></li>
-                	<li><a href="#">Another action</a></li>
-                	<li><a href="#">Something else here</a></li>
-                	<li><a href="#">Separated link</a></li>
-            		<li><a href="#">One more separated link</a></li>
-        		</ul>
-        		</li>
-                <li><a href="https://www.google.com/" target="_blank">Follow me</a></li> -->
-            </ul>
-        </nav>
-<!-- /#sidebar-wrapper -->
+<link rel="stylesheet" href="css/leftNav.css">
+<ul>
+	<li><a class="active" ng-href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a></li>
+	
+	<!-- Bread Crumbs -->
+	<li class="subGroupHeading" ng-if="breadCrumbs.length > 0">Navigation</li>
+	<li ng-controller="cerebroController" ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+	
+	<li class="subGroupHeading">Examples</li>
+	<li><a ng-click="navigate(1)">Iterate Set</a></li>
+</ul>
 
-<div class="panel panel-primary"><div class="panel-heading">Topics</div><div class="panel-body">
-	<ul>
-		<li><a ng-click="navigate(1)">Iterate Set</a></li>
-	</ul>
-</div></div>
+<div style="margin-left:30%;padding:1px 16px;">
 
 <div class="panel panel-primary" id="1"><div class="panel-heading">Iterate Set</div><div class="panel-body">
 <pre><code>
@@ -53,3 +41,5 @@ value0
 value9
 </code></pre>
 </div></div>
+
+</div>

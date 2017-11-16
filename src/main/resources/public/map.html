@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+        <!-- <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
             <ul class="nav sidebar-nav">
                 <li><a ng-click="navigate(7)">Create HashMap</a></li>
 				<li><a ng-click="navigate(1)">Sort Map by Key method1</a></li>
@@ -11,10 +11,10 @@
 				<li><a ng-click="navigate(8)">Get All Keys</a></li>
 				<li><a ng-click="navigate(9)">Get All Values</a></li>
             </ul>
-        </nav>
+        </nav> -->
 <!-- /#sidebar-wrapper -->
 
-<div class="panel panel-primary"><div class="panel-heading">Topics</div><div class="panel-body">
+<!-- <div class="panel panel-primary"><div class="panel-heading">Topics</div><div class="panel-body">
 	<ul>
 		<li><a ng-click="navigate(7)">Create HashMap</a></li>
 		<li><a ng-click="navigate(1)">Sort Map by Key method1</a></li>
@@ -26,7 +26,29 @@
 		<li><a ng-click="navigate(8)">Get All Keys</a></li>
 		<li><a ng-click="navigate(9)">Get All Values</a></li>
 	</ul>
-</div></div>
+</div></div> -->
+
+<link rel="stylesheet" href="css/leftNav.css">
+<ul>
+	<li><a class="active" ng-href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a></li>
+	
+	<!-- Bread Crumbs -->
+	<li class="subGroupHeading" ng-if="breadCrumbs.length > 0">Navigation</li>
+	<li ng-controller="cerebroController" ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+	
+	<li class="subGroupHeading">Examples</li>
+	<li><a ng-click="navigate(7)">Create HashMap</a></li>
+		<li><a ng-click="navigate(1)">Sort Map by Key method1</a></li>
+		<li><a ng-click="navigate(2)">Sort Map by Key with java.util.Comparator</a></li>
+		<li><a ng-click="navigate(3)">Sort Map by value</a></li>
+		<li><a ng-click="navigate(4)">Iterate Map</a></li>
+		<li><a ng-click="navigate(5)">Check if key exists in a Map</a></li>
+		<li><a ng-click="navigate(6)">Map - Get default value if key is not found</a></li>
+		<li><a ng-click="navigate(8)">Get All Keys</a></li>
+		<li><a ng-click="navigate(9)">Get All Values</a></li>
+</ul>
+
+<div style="margin-left:30%;padding:1px 16px;">
 	
 <div class="panel panel-primary" id="7"><div class="panel-heading">Create HashMap</div><div class="panel-body">
 <pre><code>
@@ -292,3 +314,5 @@ public void getAllValues() {
 values: [value0, value1, value2, value3, value4, value5, value6, value7, value8, value9]
 </code></pre>
 </div></div>
+
+</div>
