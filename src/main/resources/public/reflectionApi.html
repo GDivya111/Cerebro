@@ -17,6 +17,9 @@
 	<li><a ng-click="navigate(8)">Calling a method with zero arguments</a></li>
 	<li><a ng-click="navigate(9)">Calling method with String as argument</a></li>
 	<li><a ng-click="navigate(10)">Call method with String array as argument</a></li>
+	<li><a ng-click="navigate(11)">Get interfaces implements by class</a></li>
+	<li><a ng-click="navigate(12)">Calling method whose argument is List&lt;String&gt;</a></li>
+	<li><a ng-click="navigate(13)">Create String array class</a></li>
 </ul>
 
 <div style="margin-left:30%;padding:1px 16px;">
@@ -557,6 +560,172 @@ John
 klass: class core.java.reflection.model.ReflectionModel1
 reflectionModel1: core.java.reflection.model.ReflectionModel1@1f36e637
 methodObject: public void core.java.reflection.model.ReflectionModel1.method3(java.lang.String[])
+</pre>
+</div></div>
+
+<div class="panel panel-primary" id="11"><div class="panel-heading">Get interfaces implements by class</div><div class="panel-body">
+<em>Explanation</em>
+<pre>
+Get interfaces imlpemented by class using reflection api. We have to use classObject.getInterfaces() method.
+</pre>
+<em>IReflection3.java</em>
+<pre>
+package core.java.reflection.model;
+
+public interface IReflection3 {
+
+}
+</pre>
+<em>ReflectionModel1.java</em>
+<pre>
+package core.java.reflection.model;
+
+import java.io.Serializable;
+import java.util.Arrays;
+
+public class ReflectionModel1 extends Object implements Serializable, IReflection3 {
+
+	private static final long serialVersionUID = -2693156947838409146L;
+
+	public void method1() {
+		System.out.println(&quot;ReflectionModel1.method1()&quot;);
+	}
+
+	public void method2(String name) {
+		System.out.println(&quot;Hello: &quot; + name);
+	}
+
+	public void method3(String[] names) {
+		Arrays.stream(names).forEach(System.out::println);
+	}
+
+}
+</pre>
+<em>Test Method</em>
+<pre>
+import java.lang.Class;
+import core.java.reflection.model.ReflectionModel1;
+import java.util.Arrays;
+
+public void getImplementedInterfaces() {
+		Class&lt;ReflectionModel1&gt; classObject = ReflectionModel1.class;
+		Class&lt;?&gt;[] interfaces = classObject.getInterfaces();
+
+		Arrays.stream(interfaces).forEach(interfaceName -&gt; {
+			System.out.println(interfaceName.getName());
+		});
+	}
+</pre>
+<em>Output</em>
+<pre>
+java.io.Serializable
+core.java.reflection.model.IReflection3
+</pre>
+</div></div>
+
+<div class="panel panel-primary" id="12"><div class="panel-heading">Calling method whose argument is List&lt;String&gt;</div><div class="panel-body">
+<em>Explanation</em>
+<pre>
+Call a method whose argument is List of String
+</pre>
+<em>ReflectionModel1.java</em>
+<pre>
+package core.java.reflection.model;
+
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
+
+public class ReflectionModel1 extends Object implements Serializable, IReflection3 {
+
+	private static final long serialVersionUID = -2693156947838409146L;
+
+	public void method1() {
+		System.out.println(&quot;ReflectionModel1.method1()&quot;);
+	}
+
+	public void method2(String name) {
+		System.out.println(&quot;Hello: &quot; + name);
+	}
+
+	public void method3(String[] names) {
+		Arrays.stream(names).forEach(System.out::println);
+	}
+
+	public void method4(List&lt;String&gt; names) {
+		names.stream().forEach(System.out::println);
+	}
+
+}
+</pre>
+<em>Test Method:</em>
+<pre>
+import java.lang.Class;
+import core.java.reflection.model.ReflectionModel1;
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.Arrays;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.NoSuchMethodException;
+import java.lang.SecurityException;
+import java.lang.InstantiationException;
+import java.lang.IllegalAccessException;
+import java.lang.IllegalArgumentException;
+import java.lang.reflect.InvocationTargetException;
+
+public void callingMethodWithStringListAsArgument() {
+try {
+  Class&lt;ReflectionModel1&gt; klass = ReflectionModel1.class;
+  ReflectionModel1 reflectionModel1 = klass.newInstance();
+  Method method = klass.getMethod(&quot;method4&quot;, List.class);
+  List&lt;String&gt; names = Arrays.asList(&quot;jack&quot;, &quot;jill&quot;, &quot;john&quot;);
+  method.invoke(reflectionModel1, names);
+ } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | SecurityException
+     | IllegalArgumentException | InvocationTargetException e) {
+   e.printStackTrace();
+ }
+}
+</pre>
+<em>Output</em>
+<pre>
+jack
+jill
+john
+</pre>
+</div></div>
+
+<div class="panel panel-primary" id="13"><div class="panel-heading">Create String array class</div><div class="panel-body">
+<em>Explanation</em>
+<pre>
+Create String array class using reflection api. Set and Get values using reflection api
+</pre>
+<em>Test Method</em>
+<pre>
+import java.lang.reflect.Array;
+import java.lang.Class;
+import java.lang.NegativeArraySizeException;
+import java.lang.ClassNotFoundException;
+
+public void createStringArray() {
+ try {
+  Object stringArray = Array.newInstance(Class.forName(&quot;java.lang.String&quot;), 3);
+  Array.set(stringArray, 0, &quot;jack&quot;);
+  Array.set(stringArray, 1, &quot;jill&quot;);
+  Array.set(stringArray, 2, &quot;john&quot;);
+
+  System.out.println(Array.get(stringArray, 0));
+  System.out.println(Array.get(stringArray, 1));
+  System.out.println(Array.get(stringArray, 2));
+ } catch (NegativeArraySizeException | ClassNotFoundException e) {
+   e.printStackTrace();
+ }
+}
+</pre>
+<em>Output</em>
+<pre>
+jack
+jill
+john
 </pre>
 </div></div>
 
