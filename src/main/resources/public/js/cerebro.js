@@ -186,6 +186,7 @@ app.config(function($routeProvider){
 	.when("/jerseyFileDownload",{templateUrl : "jerseyFileDownload.html",controller : "cerebroController"})
 	.when("/jerseyExceptionHandling",{templateUrl : "jerseyExceptionHandling.html",controller : "cerebroController"})
 	.when("/springRestPostPolymorphism",{templateUrl : "springRestPostPolymorphism.html",controller : "cerebroController"})
+	.when("/springMvcRest",{templateUrl : "springMvcRest.html",controller : "cerebroController"})
 	
 	// mongo db start
 	.when("/mongoDB",{templateUrl : "mongoDB.html",controller : "cerebroController"})

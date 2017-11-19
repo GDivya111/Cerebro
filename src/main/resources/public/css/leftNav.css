@@ -9,10 +9,12 @@ ul {
     width: 30%;
     background-color: #f1f1f1;
     position: fixed;
+    overflow: auto;
+    
     min-height: 20%;
     max-height: 80%;
     height: auto;
-    overflow: auto;
+   
 }
 
 li a {
