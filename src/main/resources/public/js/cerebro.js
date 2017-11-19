@@ -222,6 +222,9 @@ app.config(function($routeProvider){
 	.when("/ngRouteTemplate",{templateUrl : "ngRouteTemplate.html",controller : "cerebroController"})
 	.when("/logService",{templateUrl : "logService.html",controller : "cerebroController"})
 	
+	// React JS
+	.when("/reactHelloWorld",{templateUrl : "reactHelloWorld.html",controller : "cerebroController"})
+	
 	// search
 	.when("/search",{templateUrl : "search.html",controller : "cerebroController"})
 	
