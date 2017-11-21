@@ -223,7 +223,10 @@ app.config(function($routeProvider){
 	.when("/logService",{templateUrl : "logService.html",controller : "cerebroController"})
 	
 	// React JS
+	.when("/react",{templateUrl : "react.html",controller : "cerebroController"})
 	.when("/reactHelloWorld",{templateUrl : "reactHelloWorld.html",controller : "cerebroController"})
+	.when("/reactComponents",{templateUrl : "reactComponents.html",controller : "cerebroController"})
+	.when("/reactState",{templateUrl : "reactState.html",controller : "cerebroController"})
 	
 	// search
 	.when("/search",{templateUrl : "search.html",controller : "cerebroController"})
