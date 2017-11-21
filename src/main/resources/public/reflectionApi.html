@@ -20,6 +20,8 @@
 	<li><a ng-click="navigate(11)">Get interfaces implements by class</a></li>
 	<li><a ng-click="navigate(12)">Calling method whose argument is List&lt;String&gt;</a></li>
 	<li><a ng-click="navigate(13)">Create String array class</a></li>
+	<li><a ng-click="navigate(14)">Get Parameter name and parameter type</a></li>
+	<li><a ng-click="navigate(15)">Get Parameter name and parameter type</a></li>
 </ul>
 
 <div style="margin-left:30%;padding:1px 16px;">
@@ -729,4 +731,64 @@ john
 </pre>
 </div></div>
 
+<div class="panel panel-primary" id="14"><div class="panel-heading">Get Method Name, Modifier, Return Type</div><div class="panel-body">
+<em>Test Method</em>
+<pre>
+import java.lang.Class;
+import java.util.Arrays;
+import java.lang.reflect.Method;
+
+public void getAllMethods() {
+ Class&lt;ReflectionModel1&gt; klass = ReflectionModel1.class;
+ Method[] methods = klass.getMethods();
+ Arrays.stream(methods).forEach(
+  method -&gt; {
+   System.out.println(&quot;name: &quot; + method.getName() + &quot;, modifier: &quot; + method.getModifiers()
+	+ &quot;, return type: &quot; + method.getReturnType());
+   });
+}
+</pre>
+<em>Output</em>
+<pre>
+name: method1, modifier: 1, return type: void
+name: method4, modifier: 1, return type: void
+name: method5, modifier: 1, return type: void
+name: method3, modifier: 1, return type: void
+name: method2, modifier: 1, return type: void
+name: wait, modifier: 17, return type: void
+name: wait, modifier: 17, return type: void
+name: wait, modifier: 273, return type: void
+name: equals, modifier: 1, return type: boolean
+name: toString, modifier: 1, return type: class java.lang.String
+name: hashCode, modifier: 257, return type: int
+name: getClass, modifier: 273, return type: class java.lang.Class
+name: notify, modifier: 273, return type: void
+name: notifyAll, modifier: 273, return type: void
+</pre>
+</div></div>
+
+<div class="panel panel-primary" id="15"><div class="panel-heading">Get Parameter name and parameter type</div><div class="panel-body">
+<em>Test Method</em>
+<pre>
+public void getMethodParamters() {
+try {
+ Class&lt;ReflectionModel1&gt; klass = ReflectionModel1.class;
+ Method method = klass.getMethod(&quot;method5&quot;, Integer.class, String.class, List.class, Map.class);
+ Parameter[] parameters = method.getParameters();
+ Arrays.stream(parameters).forEach(parameter -&gt; {
+   System.out.println(&quot;param name: &quot; + parameter.getName() + &quot;, type: &quot; + parameter.getType());
+	 });
+} catch (NoSuchMethodException | SecurityException e) {
+ e.printStackTrace();
+}
+}
+</pre>
+<em>Output</em>
+<pre>
+param name: arg0, type: class java.lang.Integer
+param name: arg1, type: class java.lang.String
+param name: list, type: interface java.util.List
+param name: map, type: interface java.util.Map
+</pre>
+</div></div>
 </div>
