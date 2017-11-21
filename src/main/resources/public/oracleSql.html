@@ -74,6 +74,20 @@ FROM SH_APPOINTMENTS;
 	<td>Save current session sql commands to file. File will be saved on running &quot;SPOOL OFF&quot;</td>
 	<td><pre>SPOOL [path]\[fileName].extension</pre></td>
 </tr>
+<tr>
+	<td>create_date is a date in a table MY_TABLE. Get no.of records of each create_date</td>
+	<td><pre>
+select count(*), to_char(create_date,  'DD-MON-YY') from MY_TABLE group by to_char(create_date,  'DD-MON-YY') 
+order by to_char(create_date,  'DD-MON-YY') desc;
+	</pre></td>
+</tr>
+<tr>
+	<td>create_date is a date in a table MY_TABLE. Get no.of records of each create_date. Display in descending order of create_date</td>
+	<td><pre>
+select count(*), to_date(create_date,  'DD-MON-YY') from MY_TABLE group by to_date(create_date,  'DD-MON-YY') 
+order by to_date(create_date,  'DD-MON-YY') desc;	
+	</pre></td>
+</tr>
 </tbody>
 </table>
 </div></div>
