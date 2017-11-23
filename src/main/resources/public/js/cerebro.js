@@ -30,6 +30,7 @@ app.config(function($routeProvider){
 	.when("/javaUtilOptional",{templateUrl : "javaUtilOptional.html",controller : "cerebroController"})
 	.when("/exceptionHandling",{templateUrl : "exceptionHandling.html",controller : "cerebroController"})
 	.when("/generics",{templateUrl : "generics.html",controller : "cerebroController"})
+	.when("/randomNumber",{templateUrl : "randomNumber.html",controller : "cerebroController"})
 	
 	// JDK 8
 	.when("/typeReference",{templateUrl : "typeReference.html",controller : "cerebroController"})
