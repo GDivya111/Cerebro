@@ -31,6 +31,9 @@ app.config(function($routeProvider){
 	.when("/exceptionHandling",{templateUrl : "exceptionHandling.html",controller : "cerebroController"})
 	.when("/generics",{templateUrl : "generics.html",controller : "cerebroController"})
 	
+	// JDK 8
+	.when("/typeReference",{templateUrl : "typeReference.html",controller : "cerebroController"})
+	
 	// interview questions
 	.when("/interviewQuestions",{templateUrl : "interviewQuestions.html",controller : "cerebroController"})
 	
