@@ -233,6 +233,8 @@ app.config(function($routeProvider){
 	.when("/reactHelloWorld",{templateUrl : "reactHelloWorld.html",controller : "cerebroController"})
 	.when("/reactComponents",{templateUrl : "reactComponents.html",controller : "cerebroController"})
 	.when("/reactState",{templateUrl : "reactState.html",controller : "cerebroController"})
+	.when("/reactIncrementButton",{templateUrl : "reactIncrementButton.html",controller : "cerebroController"})
+	.when("/reactArrayData",{templateUrl : "reactArrayData.html",controller : "cerebroController"})
 	
 	// search
 	.when("/search",{templateUrl : "search.html",controller : "cerebroController"})
