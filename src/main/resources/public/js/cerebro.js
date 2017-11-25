@@ -235,6 +235,10 @@ app.config(function($routeProvider){
 	.when("/reactState",{templateUrl : "reactState.html",controller : "cerebroController"})
 	.when("/reactIncrementButton",{templateUrl : "reactIncrementButton.html",controller : "cerebroController"})
 	.when("/reactArrayData",{templateUrl : "reactArrayData.html",controller : "cerebroController"})
+	.when("/reactReadTextBoxValue1",{templateUrl : "reactReadTextBoxValue1.html",controller : "cerebroController"})
+	.when("/reactReadTextBoxValue2",{templateUrl : "reactReadTextBoxValue2.html",controller : "cerebroController"})
+	.when("/reactGetDataFromGithub",{templateUrl : "reactGetDataFromGithub.html",controller : "cerebroController"})
+	.when("/reactPlayNineGame",{templateUrl : "reactPlayNineGame.html",controller : "cerebroController"})
 	
 	// search
 	.when("/search",{templateUrl : "search.html",controller : "cerebroController"})
