@@ -739,6 +739,56 @@ john
 </div></div>
 
 <div class="panel panel-primary" id="14"><div class="panel-heading">Get Method Name, Modifier, Return Type</div><div class="panel-body">
+<em>ReflectionModel1.java</em>
+<pre>
+package core.java.reflection.model;
+
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+@SuppressWarnings({ &quot;unused&quot; })
+public class ReflectionModel1 extends Object implements Serializable, IReflection3 {
+
+	private static final long serialVersionUID = -2693156947838409146L;
+
+	public String publicField1;
+	public Long publicField2;
+
+	private Integer privateField1;
+	private Integer privateField2;
+
+	public void method1() {
+		System.out.println(&quot;ReflectionModel1.method1()&quot;);
+	}
+
+	public void method2(String name) {
+		System.out.println(&quot;Hello: &quot; + name);
+	}
+
+	public void method3(String[] names) {
+		Arrays.stream(names).forEach(System.out::println);
+	}
+
+	public void method4(List&lt;String&gt; names) {
+		names.stream().forEach(System.out::println);
+	}
+
+	public void method5(Integer arg0, String arg1, List&lt;String&gt; list, Map&lt;String, String&gt; map) {
+		System.out.println(&quot;ReflecitonModel1.method5&quot;);
+	}
+
+	public Integer getPrivateField1() {
+		return privateField1;
+	}
+
+	public void setPrivateField1(Integer privateField1) {
+		this.privateField1 = privateField1;
+	}
+
+}
+</pre>
 <em>Test Method</em>
 <pre>
 import java.lang.Class;
@@ -775,6 +825,56 @@ name: notifyAll, modifier: 273, return type: void
 </div></div>
 
 <div class="panel panel-primary" id="15"><div class="panel-heading">Get Parameter name and parameter type</div><div class="panel-body">
+<em>ReflectionModel1.java</em>
+<pre>
+package core.java.reflection.model;
+
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+@SuppressWarnings({ &quot;unused&quot; })
+public class ReflectionModel1 extends Object implements Serializable, IReflection3 {
+
+	private static final long serialVersionUID = -2693156947838409146L;
+
+	public String publicField1;
+	public Long publicField2;
+
+	private Integer privateField1;
+	private Integer privateField2;
+
+	public void method1() {
+		System.out.println(&quot;ReflectionModel1.method1()&quot;);
+	}
+
+	public void method2(String name) {
+		System.out.println(&quot;Hello: &quot; + name);
+	}
+
+	public void method3(String[] names) {
+		Arrays.stream(names).forEach(System.out::println);
+	}
+
+	public void method4(List&lt;String&gt; names) {
+		names.stream().forEach(System.out::println);
+	}
+
+	public void method5(Integer arg0, String arg1, List&lt;String&gt; list, Map&lt;String, String&gt; map) {
+		System.out.println(&quot;ReflecitonModel1.method5&quot;);
+	}
+
+	public Integer getPrivateField1() {
+		return privateField1;
+	}
+
+	public void setPrivateField1(Integer privateField1) {
+		this.privateField1 = privateField1;
+	}
+
+}
+</pre>
 <em>Test Method</em>
 <pre>
 public void getMethodParamters() {
