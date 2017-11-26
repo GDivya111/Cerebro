@@ -112,8 +112,46 @@ E:\Backup\JavaPrep\practiceProjects\ReactJsProjects\ReactJSHelloWorld>npm instal
 <pre>
 import React from 'react';
 
-class App extends React.Component{
-    render(){
+class Button extends React.Component {
+    render() {
+        return (
+            &lt;button type=&quot;button&quot;&gt;{this.props.name}&lt;/button&gt;
+        );
+    }
+}
+
+class StudentList extends React.Component {
+    render() {
+        return (
+            &lt;div&gt;
+                &lt;table&gt;
+                    &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th&gt;Firstname&lt;/th&gt;
+                            &lt;th&gt;Lastname&lt;/th&gt;
+                            &lt;th&gt;Age&lt;/th&gt;
+                        &lt;/tr&gt;
+                    &lt;/thead&gt;
+                    &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;Jill&lt;/td&gt;
+                            &lt;td&gt;Smith&lt;/td&gt;
+                            &lt;td&gt;19&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;Eve&lt;/td&gt;
+                            &lt;td&gt;Jackson&lt;/td&gt;
+                            &lt;td&gt;21&lt;/td&gt;
+                        &lt;/tr&gt;
+                    &lt;/tbody&gt;
+                &lt;/table&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+
+class App extends React.Component {
+    render() {
         let i = 10;
 
         let myStyle = {
@@ -121,7 +159,7 @@ class App extends React.Component{
         };
 
         return (
-            &lt;div&gt; 
+            &lt;div&gt;
                 &lt;h1&gt;Hello World&lt;/h1&gt;
                 &lt;h2&gt;Hello World 2&lt;/h2&gt;
                 &lt;h3&gt;Hello World 3&lt;/h3&gt;
@@ -130,6 +168,16 @@ class App extends React.Component{
 
                 &lt;h3&gt;{i &gt; 5 ? 'TRUE' : 'FALSE'}&lt;/h3&gt;
                 &lt;h3&gt;{i &gt; 10 ? 'TRUE' : 'FALSE'}&lt;/h3&gt;
+
+                &lt;hr /&gt;
+                &lt;h3&gt;Buttons:&lt;/h3&gt;
+                &lt;Button name=&quot;Add&quot; /&gt;
+                &lt;Button name=&quot;Edit&quot; /&gt;
+                &lt;Button name=&quot;Delete&quot; /&gt;
+
+                &lt;hr /&gt;
+                &lt;h1&gt;Student List&lt;/h1&gt;
+                &lt;StudentList /&gt;
             &lt;/div&gt;
         );
     }
@@ -174,21 +222,19 @@ ReactDOM.render(&lt;App /&gt;, document.getElementById('app'));
 <div class="panel panel-primary"><div class="panel-heading">package.json</div><div class="panel-body">
 <pre>
 {
-  &quot;start&quot;: &quot;webpack-dev-server --hot&quot;,
   &quot;name&quot;: &quot;reactjshelloworld&quot;,
   &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;description&quot;: &quot;React JS Hello World&quot;,
+  &quot;description&quot;: &quot;React JS Hello World Example&quot;,
   &quot;main&quot;: &quot;index.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;start&quot;: &quot;webpack-dev-server --hot&quot;
+  },
   &quot;keywords&quot;: [
-    &quot;React&quot;,
-    &quot;JS&quot;,
-    &quot;Hello&quot;,
-    &quot;World&quot;,
-    &quot;Hello&quot;,
-    &quot;World&quot;,
+    &quot;react&quot;,
+    &quot;reactjs&quot;,
+    &quot;reactjs&quot;,
     &quot;hello&quot;,
-    &quot;world&quot;,
-    &quot;helloworld&quot;
+    &quot;world&quot;
   ],
   &quot;author&quot;: &quot;Avinash Babu Donthu&quot;,
   &quot;license&quot;: &quot;ISC&quot;,
@@ -208,7 +254,7 @@ ReactDOM.render(&lt;App /&gt;, document.getElementById('app'));
 
 <div class="panel panel-primary"><div class="panel-heading">Execute application</div><div class="panel-body">
 <pre>
-E:\Backup\JavaPrep\practiceProjects\ReactJsProjects\ReactJSHelloWorld&gt;webpack-dev-server
+E:\Backup\JavaPrep\practiceProjects\ReactJsProjects\ReactJSHelloWorld&gt;npm start
 Project is running at http://localhost:9092/
 webpack output is served from /
 webpack: wait until bundle finished: /
