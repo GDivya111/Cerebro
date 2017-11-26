@@ -242,6 +242,7 @@ app.config(function($routeProvider){
 	.when("/reactCRUDWithInUI",{templateUrl : "reactCRUDWithInUI.html",controller : "cerebroController"})
 	.when("/reactRestApiSuperagent",{templateUrl : "reactRestApiSuperagent.html",controller : "cerebroController"})
 	.when("/reactRestApiAxios",{templateUrl : "reactRestApiAxios.html",controller : "cerebroController"})
+	.when("/reactBootstrap",{templateUrl : "reactBootstrap.html",controller : "cerebroController"})
 	
 	// search
 	.when("/search",{templateUrl : "search.html",controller : "cerebroController"})
