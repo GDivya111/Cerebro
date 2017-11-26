@@ -241,6 +241,7 @@ app.config(function($routeProvider){
 	.when("/reactPlayNineGame",{templateUrl : "reactPlayNineGame.html",controller : "cerebroController"})
 	.when("/reactCRUDWithInUI",{templateUrl : "reactCRUDWithInUI.html",controller : "cerebroController"})
 	.when("/reactRestApiSuperagent",{templateUrl : "reactRestApiSuperagent.html",controller : "cerebroController"})
+	.when("/reactRestApiAxios",{templateUrl : "reactRestApiAxios.html",controller : "cerebroController"})
 	
 	// search
 	.when("/search",{templateUrl : "search.html",controller : "cerebroController"})
