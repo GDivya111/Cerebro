@@ -239,6 +239,8 @@ app.config(function($routeProvider){
 	.when("/reactReadTextBoxValue2",{templateUrl : "reactReadTextBoxValue2.html",controller : "cerebroController"})
 	.when("/reactGetDataFromGithub",{templateUrl : "reactGetDataFromGithub.html",controller : "cerebroController"})
 	.when("/reactPlayNineGame",{templateUrl : "reactPlayNineGame.html",controller : "cerebroController"})
+	.when("/reactCRUDWithInUI",{templateUrl : "reactCRUDWithInUI.html",controller : "cerebroController"})
+	.when("/reactRestApiSuperagent",{templateUrl : "reactRestApiSuperagent.html",controller : "cerebroController"})
 	
 	// search
 	.when("/search",{templateUrl : "search.html",controller : "cerebroController"})
