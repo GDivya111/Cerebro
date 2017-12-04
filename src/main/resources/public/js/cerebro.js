@@ -244,6 +244,7 @@ app.config(function($routeProvider){
 	.when("/reactRestApiAxios",{templateUrl : "reactRestApiAxios.html",controller : "cerebroController"})
 	.when("/reactBootstrap",{templateUrl : "reactBootstrap.html",controller : "cerebroController"})
 	.when("/reactBootstrapRestApiAxios",{templateUrl : "reactBootstrapRestApiAxios.html",controller : "cerebroController"})
+	.when("/reactBootstrapRestApiHibernateAxios",{templateUrl : "reactBootstrapRestApiHibernateAxios.html",controller : "cerebroController"})
 	
 	// search
 	.when("/search",{templateUrl : "search.html",controller : "cerebroController"})

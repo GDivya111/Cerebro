@@ -7,6 +7,7 @@
 	<li ng-controller="cerebroController" ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
 	
 	<li class="subGroupHeading">Examples</li>
+	<li><a ng-click="navigate(7)">Thread Life Cycle</a></li>
 	<li><a ng-click="navigate(1)">Creating threads - using Thread class, using Runnable class, using anonymous inner class, using lambda expressions</a></li>
 	<li><a ng-click="navigate(2)">Thread Name</a></li>
 	<li><a ng-click="navigate(3)">Thread Name Another Example</a></li>
@@ -20,6 +21,10 @@
 </ul>
 
 <div style="margin-left:30%;padding:1px 16px;">
+
+<div class="panel panel-primary" id="1"><div class="panel-heading">Thread Life Cycle</div><div class="panel-body">
+<img class="img-responsive" ng-src="images/threads/thread-life-cycle.jpg"/>
+</div></div>
 	
 <div class="panel panel-primary" id="1"><div class="panel-heading">Creating threads - using Thread class, using Runnable class, using anonymous inner class, using lambda expressions</div><div class="panel-body">
 <em>Thread1.java</em>
