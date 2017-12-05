@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="css/leftNav.css">
+<ul>
+	<li><a class="active" ng-href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a></li>
+	
+	<!-- Bread Crumbs -->
+	<li class="subGroupHeading" ng-if="breadCrumbs.length > 0">Navigation</li>
+	<li ng-controller="cerebroController" ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+	
+	<li class="subGroupHeading">Examples</li>
+	<li><a ng-click="navigate(1)">Core Java</a></li>
+	
+</ul>
+
+<div style="margin-left:30%;padding:1px 16px;">
+
+<div class="panel panel-primary" id="1"><div class="panel-heading">Core Java</div><div class="panel-body table-responsive">
+<table class="table table-hover">
+<thead>
+	<tr>
+		<th>Course</th>
+        <th>Source</th>
+        <th>Status</th>
+	</tr>
+</thead>
+<tbody>
+<tr>
+	<td><a href="http://tutorials.jenkov.com/java-concurrency/index.html" target="_blank">http://tutorials.jenkov.com/java-concurrency/index.html</a></td>
+	<td>Jenkov Tutorial</td>
+	<td>None</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+
+</div>

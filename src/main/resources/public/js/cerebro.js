@@ -4,6 +4,9 @@ app.config(function($routeProvider){
 	$routeProvider
 	.when("/home",{templateUrl : "home.html",controller : "cerebroController"})
 	
+	// study
+	.when("/study",{templateUrl : "study.html",controller : "cerebroController"})
+	
 	// core java start
 	.when("/coreJava",{templateUrl : "coreJava.html",controller : "cerebroController"})
 	.when("/string",{templateUrl : "string.html",controller : "cerebroController"})
