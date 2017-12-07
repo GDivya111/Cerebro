@@ -1,54 +1,50 @@
-<!-- Body Content -->
-<div class="page-header">
-    <h3>Java 8 - Collection Streams</h3>      
-</div>
-
-<div class="panel panel-primary"><div class="panel-heading">Contents</div><div class="panel-body">
+<link rel="stylesheet" href="css/leftNav.css">
 <ul>
-	<li><em>Examples:</em>
-		<ul>
-		<li><a ng-click="navigate(1)">Prepare stream and print each element in the stream using method reference</a></li>
-		<li><a ng-click="navigate(2)">Prepare stream of Employee objects</a></li>
-		<li><a ng-click="navigate(3)">Prepare stream with primitive int</a></li>
-		<li><a ng-click="navigate(4)">Prepare stream with primitive long</a></li>
-		<li><a ng-click="navigate(5)">Prepare stream with primitive double</a></li>
-		<li><a ng-click="navigate(6)">iterate and print elements in list</a></li>
-		<li><a ng-click="navigate(7)">iterate list and prepare new list with all elements in source list</a></li>
-		<li><a ng-click="navigate(8)">list of employee object and filter list with name starts with j</a></li>
-		<li><a ng-click="navigate(9)">list of employee object and filter list with name starts with j and prepare new list with filtered values</a></li>
-		<li><a ng-click="navigate(10)">list of employee objects, convert all firstNames to upper case, prepare new list with upper cased firstName values</a></li>
-		<li><a ng-click="navigate(11)">list of employee objects, get all first names of employee whose name starting with j with all names converted to upper case and display names in sorted order</a></li>
-		<li><a ng-click="navigate(12)">print first element in the list</a></li>
-		<li><a ng-click="navigate(13)">List of Employee objects, Sort list by employee joiningDate using Java 8 collection streams</a></li>
-		<li><a ng-click="navigate(14)">List of employee objects, Prepare new list with employee's firstName using Java 8 collection streams</a></li>
-		<li><a ng-click="navigate(15)">Sum all int values</a></li>
-		<li><a ng-click="navigate(16)">Sum of all employee ages</a></li>
-		<li><a ng-click="navigate(17)">Average age of all employees</a></li>
-		<li><a ng-click="navigate(18)">Max age of all employees</a></li>
-		<li><a ng-click="navigate(19)">Min age of all employees</a></li>
-		<li><a ng-click="navigate(20)">Convert stream of int to employee objects</a></li>
-		<li><a ng-click="navigate(21)">Group employees by age</a></li>
-		<li><a ng-click="navigate(22)">Group employees by age with summary statistics</a></li>
-		<li><a ng-click="navigate(23)">Joining the list of employee filters to phrase</a></li>
-		<li><a ng-click="navigate(24)">Create map(age, firstName) with list of employee objects</a></li>
-		<li><a ng-click="navigate(25)">Sort of list of Employee objects</a></li>
-		<li><a ng-click="navigate(26)">flatMap()</a></li>
-		<li><a ng-click="navigate(27)">Remove duplicates in a list</a></li>
-		<li><a ng-click="navigate(28)">Print Random numbers</a></li>
-		<li><a ng-click="navigate(29)">Unique Squares</a></li>
-		<li><a ng-click="navigate(30)">Count Empty Strings</a></li>
-		<li><a ng-click="navigate(31)">Print Non Empty Strings</a></li>
-		<li><a ng-click="navigate(32)">Print 2 Non Empty Strings</a></li>
-	</ul>
-	</li>
-	<li><em>References:</em>
-		<ul>
-			<li>Refer source code from <a ng-href="https://github.com/avinashbabudonthu/CoreJavaPractice/blob/master/src/main/java/core/java/java8/collections/streams/CollectionStreamsPractice.java" target="_blank">here</a></li>
-			<li>Download repository from <a ng-href="https://github.com/avinashbabudonthu/CoreJavaPractice/archive/master.zip" target="_blank">here</a></li>
-		</ul>
-	</li>
+	<li><a class="active" ng-href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a></li>
+	
+	<!-- Bread Crumbs -->
+	<li class="subGroupHeading" ng-if="breadCrumbs.length > 0">Navigation</li>
+	<li ng-controller="cerebroController" ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+	
+	<li class="subGroupHeading">Examples</li>
+	<li><a ng-click="navigate(1)">Prepare stream and print each element in the stream using method reference</a></li>
+	<li><a ng-click="navigate(2)">Prepare stream of Employee objects</a></li>
+	<li><a ng-click="navigate(3)">Prepare stream with primitive int</a></li>
+	<li><a ng-click="navigate(4)">Prepare stream with primitive long</a></li>
+	<li><a ng-click="navigate(5)">Prepare stream with primitive double</a></li>
+	<li><a ng-click="navigate(6)">iterate and print elements in list</a></li>
+	<li><a ng-click="navigate(7)">iterate list and prepare new list with all elements in source list</a></li>
+	<li><a ng-click="navigate(8)">list of employee object and filter list with name starts with j</a></li>
+	<li><a ng-click="navigate(9)">list of employee object and filter list with name starts with j and prepare new list with filtered values</a></li>
+	<li><a ng-click="navigate(10)">list of employee objects, convert all firstNames to upper case, prepare new list with upper cased firstName values</a></li>
+	<li><a ng-click="navigate(11)">list of employee objects, get all first names of employee whose name starting with j with all names converted to upper case and display names in sorted order</a></li>
+	<li><a ng-click="navigate(12)">print first element in the list</a></li>
+	<li><a ng-click="navigate(13)">List of Employee objects, Sort list by employee joiningDate using Java 8 collection streams</a></li>
+	<li><a ng-click="navigate(14)">List of employee objects, Prepare new list with employee's firstName using Java 8 collection streams</a></li>
+	<li><a ng-click="navigate(15)">Sum all int values</a></li>
+	<li><a ng-click="navigate(16)">Sum of all employee ages</a></li>
+	<li><a ng-click="navigate(17)">Average age of all employees</a></li>
+	<li><a ng-click="navigate(18)">Max age of all employees</a></li>
+	<li><a ng-click="navigate(19)">Min age of all employees</a></li>
+	<li><a ng-click="navigate(20)">Convert stream of int to employee objects</a></li>
+	<li><a ng-click="navigate(21)">Group employees by age</a></li>
+	<li><a ng-click="navigate(22)">Group employees by age with summary statistics</a></li>
+	<li><a ng-click="navigate(23)">Joining the list of employee filters to phrase</a></li>
+	<li><a ng-click="navigate(24)">Create map(age, firstName) with list of employee objects</a></li>
+	<li><a ng-click="navigate(25)">Sort of list of Employee objects</a></li>
+	<li><a ng-click="navigate(26)">flatMap()</a></li>
+	<li><a ng-click="navigate(27)">Remove duplicates in a list</a></li>
+	<li><a ng-click="navigate(28)">Print Random numbers</a></li>
+	<li><a ng-click="navigate(29)">Unique Squares</a></li>
+	<li><a ng-click="navigate(30)">Count Empty Strings</a></li>
+	<li><a ng-click="navigate(31)">Print Non Empty Strings</a></li>
+	<li><a ng-click="navigate(32)">Print 2 Non Empty Strings</a></li>
+	<li class="subGroupHeading">References</li>
+	<li><a ng-href="https://github.com/avinashbabudonthu/CoreJavaPractice/blob/master/src/main/java/core/java/java8/collections/streams/CollectionStreamsPractice.java" target="_blank">source code</a></li>
+	<li><a ng-href="https://github.com/avinashbabudonthu/CoreJavaPractice/archive/master.zip" target="_blank">Download repository</a></li>
 </ul>
-</div></div>
+
+<div style="margin-left:30%;padding:1px 16px;">
 
 <div class="panel panel-primary" id="1"><div class="panel-heading">Prepare stream and print each element in the stream using method reference</div><div class="panel-body">
 <pre ><code>
@@ -2128,3 +2124,5 @@ public void printTwoNonEmptyStrings() {
 First two non empty strings: [a, b]
 </code></pre> 
 </div></div>
+
+</div>
