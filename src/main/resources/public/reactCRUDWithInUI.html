@@ -61,14 +61,17 @@ class App extends Component {
 
   removeTodo = (index) =&gt; {
     let todos = this.state.todos;
-    let todo = todos.find(function(todo) {
-      return todo.counter === index;
-    });
-    console.log(todo);
-    todos.splice(todo, 1);
+   
+    let newTodos = [];
+    for (let i = 0; i &lt; todos.length; i++) {
+      let val1 = todos[i];
+      if (val1.counter !== index) {
+        newTodos.push(val1);
+      }
+    }
 
     this.setState({
-      todos: todos
+      todos: newTodos
     });
   }
 
