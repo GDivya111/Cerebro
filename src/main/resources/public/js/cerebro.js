@@ -249,6 +249,7 @@ app.config(function($routeProvider){
 	.when("/reactBootstrapRestApiAxios",{templateUrl : "reactBootstrapRestApiAxios.html",controller : "cerebroController"})
 	.when("/reactBootstrapRestApiHibernateAxios",{templateUrl : "reactBootstrapRestApiHibernateAxios.html",controller : "cerebroController"})
 	.when("/reactCheckbox",{templateUrl : "reactCheckbox.html",controller : "cerebroController"})
+	.when("/reactTableRowButton",{templateUrl : "reactTableRowButton.html",controller : "cerebroController"})
 	
 	// search
 	.when("/search",{templateUrl : "search.html",controller : "cerebroController"})
