@@ -256,6 +256,7 @@ app.config(function($routeProvider){
 	
 	// IBM MQ
 	.when("/ibmmq",{templateUrl : "ibmmq.html",controller : "cerebroController"})
+	.when("/ibmMqInstallation",{templateUrl : "ibmMqInstallation.html",controller : "cerebroController"})
 	
 	// search
 	.when("/search",{templateUrl : "search.html",controller : "cerebroController"})
