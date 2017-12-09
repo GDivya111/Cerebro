@@ -51,8 +51,6 @@ body {margin:0;}
 
 .main {
   padding: 16px;
-  /* margin-top: 10px; */
-  /* height: 1500px; */ /* Used in this example to enable scrolling */
 }
 
 </style>
@@ -71,25 +69,17 @@ body {margin:0;}
 </div> -->
 
 <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
+  <div class="container-fluid" ng-controller="cerebroController">
     <div class="navbar-header">
-      <a ng-controller="cerebroController" ng-href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Cerebro</a>
+      <a ng-href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Cerebro</a>
     </div>
     <div class="navbar-header"><a href="#study">Study</a></div>
-    
-    <!-- <ul class="nav navbar-nav">
-    	<li class="active"><a href="#study">Study</a></li>
-      <li><a href="#">Page 1</a></li>
-      <li><a href="#">Page 2</a></li>
-    </ul> -->
+    <div class="navbar-header"><a href="#definitions" ng-click="buildBreadCrumbs('Definitions', '#definitions')">Definitions</a></div>
     
     <form class="navbar-form navbar-right">
       <div class="input-group" ng-controller="searchController">
         <input type="text" class="form-control" placeholder="Search" ng-model="searchText" ng-keypress="checkIfEnterKeyWasPressed($event)">
         <div class="input-group-btn">
-          <!-- <button class="btn btn-default" type="submit">
-            <i class="glyphicon glyphicon-search"></i>
-          </button> -->
           <button class="btn btn-default" type="button" ng-click="search()"><span class="glyphicon glyphicon-search"></span></button>
         </div>
       </div>

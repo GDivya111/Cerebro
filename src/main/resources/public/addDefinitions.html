@@ -1,6 +1,13 @@
-<div class="page-header">
-    <h3>Add Definition</h3>
-    <h4>Status: {{addDefinitionStatus}}</h4>
+<div ng-controller="cerebroController"><div ng-if="breadCrumbs.length > 0">
+<ol class="breadcrumb">
+	<li ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+</ol>
+<hr/>
+</div></div>
+
+<div class="alert alert-success alert-dismissable fade in" ng-if="addDefinitionStatus">
+	<span href="#" class="close" data-dismiss="alert" aria-label="close">X</span>
+  	<strong>Status: </strong> {{addDefinitionStatus}}
 </div>
 
 <div class="form-group">
@@ -12,10 +19,10 @@
 </div>
 
 <div class="form-group">
-      <label for="sel1">Definition Types:</label>
-      <select class="form-control" id="definitionType" name="definitionType" ng-model="definitionType.selected">
-      	<option ng-repeat="type in definitionType.types" value="{{type.value}}">{{type.key}}</option>
-      </select>
+	<label for="sel1">Definition Types:</label>
+	<select class="form-control" id="definitionType" name="definitionType" ng-model="definitionType.selected">
+		<option ng-repeat="type in definitionType.types" value="{{type.value}}">{{type.key}}</option>
+	</select>
 </div>
 
-<button type="button" class="btn btn-primary btn-block" ng-click="addDefintions()">Add Definition</button>
+<button type="button" class="btn btn-default btn-block" ng-click="addDefintions()" style="border-radius: 25px;"><strong>ADD DEFINITION</strong></button>

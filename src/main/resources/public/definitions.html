@@ -1,41 +1,42 @@
-<!-- <div class="page-header">
-    <h3>{{message}}</h3>      
-</div> -->
-
-<div class="form-group col-xs-4">
-      <!-- <label for="sel1">Definition Types:</label>
-      <select class="form-control" id="definitionType" name="definitionType" ng-model="definitionType.selected" ng-change="getDefinitions()">
-      	<option ng-repeat="type in definitionType.types" value="{{type.value}}">{{type.key}}</option>
-      </select> -->
-      <form class="form-inline">
-      <label for="sel1">Definition Types:</label>
-      <select class="form-control" id="definitionType" name="definitionType" ng-model="definitionType.selected" ng-change="getDefinitions()">
-      	<option ng-repeat="type in definitionType.types" value="{{type.value}}">{{type.key}}</option>
-      </select>
-      <a ng-click="getDefinitions()"><span class="glyphicon glyphicon-refresh"></span></a>
-      </form>
+<div class="alert alert-success alert-dismissable fade in" ng-if=getDefinitionStatus>
+	<span href="#" class="close" data-dismiss="alert" aria-label="close">X</span>
+  	<strong>Status: </strong> {{getDefinitionStatus}}
 </div>
 
-<!-- <button type="button" class="btn btn-info" ng-click="getDefinitions()">Get Definitions</button> 
-<a class="btn btn-info" role="button" ng-href="#addDefinitions">Add Definition</a> 
-<hr/> -->
+<div class="panel panel-primary"><div class="panel-heading">Definition Types</div><div class="panel-body table-responsive">
+<form>
+    <div class="form-group">
+      <select class="form-control" id="definitionType" name="definitionType" ng-model="definitionType.selected" ng-change="getDefinitions()">
+        <option ng-repeat="type in definitionType.types" value="{{type.value}}">{{type.key}}</option>
+      </select>
+	</div>
+</form>
+<button class="btn btn-default btn-sm" ng-click="getDefinitions()" style="border-radius: 25px;float: right;">REFRESH DEFINITIONS</button>
+<a ng-href="#addDefinitions" ng-click="buildBreadCrumbs('Add Definitions', '#addDefinitions')" class="btn btn-default btn-sm" role="button" style="border-radius: 25px;float: right;">ADD DEFINITION</a>
+</div></div>
 
-<table class="table table-hover table-bordered table-striped">
-	<thead>
-		<tr>
+<hr />
+
+<div class="panel panel-primary"><div class="panel-heading">Definitions</div><div class="panel-body table-responsive">
+<table class="table table-hover">
+<thead>
+	<tr>
 		<th>Description</th>
 		<th>Details</th>
 		<th>Images</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr ng-repeat="definition in definitionsList">
-			<td>{{definition.description}}</td>
-			<td ><div ng-bind-html="definition.details"></div><!-- {{definition.details}} --></td>
-			<td>{{definition.imagePaths}}</td>
-		</tr>
-	</tbody>
+	</tr>
+</thead>
+<tbody>
+<tr>
+	<tr ng-repeat="definition in definitionsList">
+		<td>{{definition.description}}</td>
+		<td><div ng-bind-html="definition.details"/></td>
+		<td>{{definition.imagePaths}}</td>
+	</tr>
+</tr>
+</tbody>
 </table>
+</div></div>
 
 <hr />
 

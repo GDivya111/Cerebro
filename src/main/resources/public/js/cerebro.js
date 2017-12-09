@@ -35,6 +35,9 @@ app.config(function($routeProvider){
 	.when("/generics",{templateUrl : "generics.html",controller : "cerebroController"})
 	.when("/randomNumber",{templateUrl : "randomNumber.html",controller : "cerebroController"})
 	
+	// Groovy
+	.when("/groovy",{templateUrl : "groovy.html",controller : "cerebroController"})
+	
 	// JDK 8
 	.when("/typeReference",{templateUrl : "typeReference.html",controller : "cerebroController"})
 	
@@ -251,6 +254,9 @@ app.config(function($routeProvider){
 	.when("/reactCheckbox",{templateUrl : "reactCheckbox.html",controller : "cerebroController"})
 	.when("/reactTableRowButton",{templateUrl : "reactTableRowButton.html",controller : "cerebroController"})
 	
+	// IBM MQ
+	.when("/ibmmq",{templateUrl : "ibmmq.html",controller : "cerebroController"})
+	
 	// search
 	.when("/search",{templateUrl : "search.html",controller : "cerebroController"})
 	
@@ -308,7 +314,24 @@ var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsSe
 	$scope.breadCrumbs = breadCrumbsService.getNavigations();
 };
 
-var DefinitionsController = function($scope, $location, $anchorScroll, $http){
+var DefinitionsController = function($scope, $location, $anchorScroll, $http, breadCrumbsService){
+	
+	// build bread crumbs for Definitions and Add Definition screens
+	$scope.buildBreadCrumbs = function(name, link){
+		breadCrumbsService.addBreadCrumb(name, link);
+	};
+	
+	$scope.popBreadCrumb = function(index){
+		breadCrumbsService.popBreadCrumb(index);
+		
+		// Rest Search box - drop down
+		$('.search-panel span#search_concept').text("All");
+		$('.input-group #search_param').val("All");
+	}
+	
+	$scope.breadCrumbs = breadCrumbsService.getNavigations();
+	// build bread crumbs for Definitions and Add Definition screens
+	
 	var definitionsMessage = " Definitions";
 	var config = {"Content-Type": "application/json"};
 	
@@ -326,25 +349,31 @@ var DefinitionsController = function($scope, $location, $anchorScroll, $http){
 		         {key: "Docker", value: "dockerDefs"},
 		         {key: "Mockito", value: "mockitoDefs"},
 		         {key: "Scala", value: "scalaDefs"},
-		         {key: "Multithreading", value: "concurrencyDefs"}]
+		         {key: "Multithreading", value: "concurrencyDefs"},
+		         {key: "IBM MQ", value: "ibmMqDefs"}]
 	};
 	
 	var onSuccess = function(response){
-		$scope.definitionsList = response.data._embedded.definitionsList;
+		var definitionsList = response.data._embedded.definitionsList;
+		$scope.definitionsList = definitionsList;
+		$scope.definitionsCount = definitionsList.length;
+		$scope.getDefinitionStatus = definitionsList.length + " definitions loaded";
 	};
 	
 	var onError = function(){
-		console.log("onError()");
+		$scope.getDefinitionStatus = "Error on getting Definitions";
 	};
 	
+	var definitionSaveCount = 1;
 	var onAddSuccess = function(){
-		$scope.addDefinitionStatus = "add success";
+		$scope.addDefinitionStatus = definitionSaveCount + " definition(s) Saved Successfully";
 		$scope.definition.description = '';
 		$scope.definition.details = '';
+		definitionSaveCount = definitionSaveCount + 1;
 	}
 	
 	var onAddError = function(){
-		$scope.addDefinitionStatus = "add error";
+		$scope.addDefinitionStatus = "Erorr Saving Definition";
 	}
 	
 	var getDefinitions = function(){
@@ -429,6 +458,12 @@ app.service("searchService", function(){
 	
 });
 
+app.filter('nospace', function () {
+    return function (value) {
+        return (!value) ? '' : value.replace(/ /g, '');
+    };
+});
+
 app.controller("cerebroController",["$scope", "$location", "$anchorScroll", "breadCrumbsService", CerebroController] );
-app.controller("definitionsController",["$scope", "$location", "$anchorScroll","$http", DefinitionsController]);
+app.controller("definitionsController",["$scope", "$location", "$anchorScroll","$http", "breadCrumbsService", DefinitionsController]);
 app.controller("searchController", ["$scope", "$http", "$location", "$log", "searchService", searchController]);
