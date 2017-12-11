@@ -254,6 +254,9 @@ app.config(function($routeProvider){
 	.when("/reactCheckbox",{templateUrl : "reactCheckbox.html",controller : "cerebroController"})
 	.when("/reactTableRowButton",{templateUrl : "reactTableRowButton.html",controller : "cerebroController"})
 	
+	// Active MQ
+	.when("/activemq",{templateUrl : "activemq.html",controller : "cerebroController"})
+	
 	// IBM MQ
 	.when("/ibmmq",{templateUrl : "ibmmq.html",controller : "cerebroController"})
 	.when("/ibmMqInstallation",{templateUrl : "ibmMqInstallation.html",controller : "cerebroController"})
