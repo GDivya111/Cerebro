@@ -153,20 +153,21 @@ app.config(function($routeProvider){
 	.when("/easymockStrictmock",{templateUrl : "easymockStrictmock.html",controller : "cerebroController"})
 	.when("/easymockExceptionHandling",{templateUrl : "easymockExceptionHandling.html",controller : "cerebroController"})
 
-	// ant start
+	// ant
 	.when("/ant",{templateUrl : "ant.html",controller : "cerebroController"})
 	.when("/antJacoco",{templateUrl : "antJacoco.html",controller : "cerebroController"})
 	
-	// gradle start
+	// gradle
 	.when("/gradle",{templateUrl : "gradle.html",controller : "cerebroController"})
+	.when("/gradleInstallation",{templateUrl : "gradleInstallation.html",controller : "cerebroController"})
 	
-	// DB start
+	// DB
 	.when("/h2DB",{templateUrl : "h2DB.html",controller : "cerebroController"})
 	.when("/practiceDBScripts",{templateUrl : "practiceDBScripts.html",controller : "cerebroController"})
 	.when("/dbJoins",{templateUrl : "dbJoins.html",controller : "cerebroController"})
 	.when("/oracleSql",{templateUrl : "oracleSql.html",controller : "cerebroController"})
 	
-	// Scala start
+	// Scala
 	.when("/scala",{templateUrl : "scala.html",controller : "cerebroController"})
 	.when("/installScala",{templateUrl : "installScala.html",controller : "cerebroController"})
 	.when("/scalaHelloWorldWithSbt",{templateUrl : "scalaHelloWorldWithSbt.html",controller : "cerebroController"})
