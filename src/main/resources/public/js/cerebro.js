@@ -38,6 +38,9 @@ app.config(function($routeProvider){
 	// Groovy
 	.when("/groovy",{templateUrl : "groovy.html",controller : "cerebroController"})
 	
+	// Spock
+	.when("/spock",{templateUrl : "spock.html",controller : "cerebroController"})
+	
 	// JDK 8
 	.when("/typeReference",{templateUrl : "typeReference.html",controller : "cerebroController"})
 	
