@@ -177,10 +177,14 @@ app.config(function($routeProvider){
 	
 	// Apache camel
 	.when("/camel",{templateUrl : "camel.html",controller : "cerebroController"})
-	.when("/camelUnmarshalCsv",{templateUrl : "camelUnmarshalCsv.html",controller : "cerebroController"})
-	.when("/camelMarshalCsv",{templateUrl : "camelMarshalCsv.html",controller : "cerebroController"})
 	.when("/camelHelloWorld",{templateUrl : "camelHelloWorld.html",controller : "cerebroController"})
 	.when("/camelWithBean",{templateUrl : "camelWithBean.html",controller : "cerebroController"})
+	.when("/camelWithBean2",{templateUrl : "camelWithBean2.html",controller : "cerebroController"})
+	
+	.when("/camelUnmarshalCsv",{templateUrl : "camelUnmarshalCsv.html",controller : "cerebroController"})
+	.when("/camelMarshalCsv",{templateUrl : "camelMarshalCsv.html",controller : "cerebroController"})
+	
+	
 	.when("/camelWithBeanAndProcessor",{templateUrl : "camelWithBeanAndProcessor.html",controller : "cerebroController"})
 	.when("/camelWithSpring",{templateUrl : "camelWithSpring.html",controller : "cerebroController"})
 	.when("/camelSpringProcessorBean",{templateUrl : "camelSpringProcessorBean.html",controller : "cerebroController"})

@@ -23,7 +23,7 @@ mvn archetype:generate -DgroupId=com.camel -DartifactId=ApacheCamel -Dversion=1.
 </div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">Project Structure</div><div class="panel-body">
-<img class="img-responsive" ng-src="images/camel/1-camelWithBean.jpg"/>
+<img class="img-responsive" ng-src="images/camel/1-camelWithBean2.jpg"/>
 </div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">pom.xml</div><div class="panel-body">
@@ -148,70 +148,66 @@ mvn archetype:generate -DgroupId=com.camel -DartifactId=ApacheCamel -Dversion=1.
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary"><div class="panel-heading">BeanRouteBuilder</div><div class="panel-body">
-<pre ><code>
-package com.camel.bean;
+<div class="panel panel-primary"><div class="panel-heading">BeanRouteBuilder2.java</div><div class="panel-body">
+<pre><code>
+package com.camel.bean2;
 
 import org.apache.camel.builder.RouteBuilder;
 
-public class BeanRouteBuilder extends RouteBuilder {
+public class BeanRouteBuilder2 extends RouteBuilder {
 
 	@Override
-	public void configure() throws Exception {
-		from(&quot;file:E:/Backup/JavaPrep/Apache_Camel/router_practice_folder/input?noop=true&quot;)
-                       .bean(new TestBean())
-		.to(&quot;file:E:/Backup/JavaPrep/Apache_Camel/router_practice_folder/output2&quot;).end();
+	public void configure() {
+		from(
+				&quot;file:E:/Backup/JavaPrep/Apache_Camel/router_practice_folder/input?noop=true&quot;)
+				.to(&quot;bean:testBean?method=process&quot;)
+				.to(&quot;file:E:/Backup/JavaPrep/Apache_Camel/router_practice_folder/output8&quot;)
+				.end();
 	}
 
 }
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary"><div class="panel-heading">TestBean</div><div class="panel-body">
-<pre ><code>
-package com.camel.bean;
+<div class="panel panel-primary"><div class="panel-heading">TestBean2.java</div><div class="panel-body">
+<pre><code>
+package com.camel.bean2;
 
-import org.apache.camel.Exchange;
+public class TestBean2 {
 
-public class TestBean {
-
-	public String testContent(Exchange exchange) {
-		System.out.println(&quot;TestBean.testContent()&quot;);
-		return &quot;Test Content&quot;;
+	public String process(String body) {
+		System.out.println(&quot;TestBean2.process:: &quot; + body);
+		return body;
 	}
 }
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary"><div class="panel-heading">App</div><div class="panel-body">
-<pre ><code>
-package com.camel.bean;
+<div class="panel panel-primary"><div class="panel-heading">Bean2App.java</div><div class="panel-body">
+<pre><code>
+package com.camel.bean2;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.impl.DefaultCamelContext;
+import org.apache.camel.util.jndi.JndiContext;
 
-public class App {
+public class Bean2App {
 
 	public static void main(String[] args) {
 		try {
-			CamelContext context = new DefaultCamelContext();
-			context.addRoutes(new BeanRouteBuilder());
-			context.start();
-			Thread.sleep(1000 * 60 * 2);
-			context.stop();
+			JndiContext jndiContext = new JndiContext();
+			jndiContext.bind(&quot;testBean&quot;, new TestBean2());
+
+			CamelContext camelContext = new DefaultCamelContext(jndiContext);
+			camelContext.addRoutes(new BeanRouteBuilder2());
+			camelContext.start();
+			Thread.sleep(1000 * 60 * 1);
+			camelContext.stop();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 }
 </code></pre>
-</div></div>
-
-<div class="panel panel-primary"><div class="panel-heading">Output</div><div class="panel-body">
-<ul>
-	<li><em>Input Folder:</em></li>
-	<li class="noBullet"><img class="img-responsive" ng-src="images/camel/2-camelWithBean.jpg"/></li>
-	<li><em>Output Folder:</em></li>
-	<li class="noBullet"><img class="img-responsive" ng-src="images/camel/3-camelWithBean.jpg"/></li>
-</ul>
 </div></div>
