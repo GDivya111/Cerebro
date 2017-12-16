@@ -23,7 +23,7 @@ mvn archetype:generate -DgroupId=com.camel -DartifactId=ApacheCamel -Dversion=1.
 </div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">Project Structure</div><div class="panel-body">
-<img class="img-responsive" ng-src="images/camel/1-camelWithSpring.jpg"/>
+<img class="img-responsive" ng-src="images/camel/1-camelMulticast.jpg"/>
 </div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">pom.xml</div><div class="panel-body">
@@ -148,56 +148,44 @@ mvn archetype:generate -DgroupId=com.camel -DartifactId=ApacheCamel -Dversion=1.
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary"><div class="panel-heading">camel-spring.xml</div><div class="panel-body">
+<div class="panel panel-primary"><div class="panel-heading">MyBean.java</div><div class="panel-body">
 <pre ><code>
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:camel=&quot;http://camel.apache.org/schema/spring&quot;
-    xmlns:util=&quot;http://www.springframework.org/schema/util&quot;
-    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd    
-     http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
-      http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd&quot;&gt;
-      &lt;bean id=&quot;bean1&quot; class=&quot;com.camel.spring.TestBean1&quot;&gt;&lt;/bean&gt;
-      &lt;bean id=&quot;bean2&quot; class=&quot;com.camel.spring.TestBean2&quot;&gt;&lt;/bean&gt;
-      &lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
-      	&lt;route&gt;
- 	&lt;from uri=&quot;file:E:/Backup/JavaPrep/Apache_Camel/router_practice_folder/input?noop=true&quot;/&gt;
-      	&lt;bean ref=&quot;bean1&quot;/&gt;
-      	&lt;bean ref=&quot;bean2&quot;/&gt;
-      	&lt;to uri=&quot;file:E:/Backup/JavaPrep/Apache_Camel/router_practice_folder/output4&quot;/&gt;
-      	&lt;/route&gt;
-      &lt;/camelContext&gt;
-&lt;/beans&gt;
-</code></pre>
-</div></div>
+package com.camel.multicast;
 
-<div class="panel panel-primary"><div class="panel-heading">TestBean1.java</div><div class="panel-body">
-<pre ><code>
-package com.camel.spring;
+public class MyBean {
 
-import org.apache.camel.Exchange;
+	public String addFirst(String body) {
+		return body + &quot; first destination&quot;;
+	}
 
-public class TestBean1 {
+	public String addSecond(String body) {
+		return body + &quot; second destination&quot;;
+	}
 
-	public String testBean(Exchange exchange) {
-		System.out.println(&quot;TestBean1.testBean(): &quot; + exchange.getIn().getBody(String.class));
-		return &quot;Test Bean1&quot;;
+	public String addThird(String body) {
+		return body + &quot; third destination&quot;;
 	}
 }
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary"><div class="panel-heading">TestBean2.java</div><div class="panel-body">
+<div class="panel panel-primary"><div class="panel-heading">MultiCastRouter.java</div><div class="panel-body">
 <pre ><code>
-package com.camel.spring;
+package com.camel.multicast;
 
-import org.apache.camel.Exchange;
+import org.apache.camel.builder.RouteBuilder;
 
-public class TestBean2 {
+public class MultiCastRouter extends RouteBuilder {
 
-	public String testBean(Exchange exchange) {
-		System.out.println(&quot;TestBean2.testBean(): &quot; + exchange.getIn().getBody(String.class));
-		return &quot;Test Bean2&quot;;
+	@Override
+	public void configure() throws Exception {
+		from(&quot;direct:start&quot;).multicast().to(&quot;direct:a&quot;, &quot;direct:b&quot;, &quot;direct:c&quot;);
+
+		from(&quot;direct:a&quot;).to(&quot;bean:myBean?method=addFirst&quot;).setBody(simple(&quot;body: ${body}, thread: ${threadName}&quot;)).to(&quot;stream:out&quot;);
+
+		from(&quot;direct:b&quot;).to(&quot;bean:myBean?method=addSecond&quot;).setBody(simple(&quot;body: ${body}, thread: ${threadName}&quot;)).to(&quot;stream:out&quot;);
+
+		from(&quot;direct:c&quot;).to(&quot;bean:myBean?method=addThird&quot;).setBody(simple(&quot;body: ${body}, thread: ${threadName}&quot;)).to(&quot;stream:out&quot;);
 	}
 }
 </code></pre>
@@ -205,25 +193,45 @@ public class TestBean2 {
 
 <div class="panel panel-primary"><div class="panel-heading">App.java</div><div class="panel-body">
 <pre ><code>
-package com.camel.spring;
+package com.camel.multicast;
 
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.apache.camel.CamelContext;
+import org.apache.camel.ProducerTemplate;
+import org.apache.camel.impl.DefaultCamelContext;
+import org.apache.camel.util.jndi.JndiContext;
 
 public class App {
-     public static void main(String[] args) throws InterruptedException {
-          AbstractApplicationContext context = new ClassPathXmlApplicationContext(&quot;camel-spring.xml&quot;);
-	Thread.sleep(1000 * 60 * 2);
-	context.close();
-       }
+
+	public static void main(String[] args) throws Exception {
+		JndiContext jndiContext = new JndiContext();
+		jndiContext.bind(&quot;myBean&quot;, new MyBean());
+		CamelContext camelContext = new DefaultCamelContext(jndiContext);
+		camelContext.addRoutes(new MultiCastRouter());
+
+		ProducerTemplate template = camelContext.createProducerTemplate();
+		camelContext.start();
+		template.sendBody(&quot;direct:start&quot;, &quot;Multicast&quot;);
+	}
 }
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary"><div class="panel-heading">Input Folder</div><div class="panel-body">
-<img class="img-responsive" ng-src="images/camel/2-camelHelloWorld.jpg"/>
-</div></div>
-
-<div class="panel panel-primary"><div class="panel-heading">Output Folder</div><div class="panel-body">
-<img class="img-responsive" ng-src="images/camel/2-camelWithSpring.jpg"/>
+<div class="panel panel-primary"><div class="panel-heading">Output</div><div class="panel-body">
+<pre ><code>
+17/12/16 12:59:40 INFO impl.DefaultCamelContext: Apache Camel 2.17.1 (CamelContext: camel-1) is starting
+17/12/16 12:59:40 INFO management.ManagedManagementStrategy: JMX is enabled
+17/12/16 12:59:40 INFO converter.DefaultTypeConverter: Loaded 195 type converters
+17/12/16 12:59:40 INFO impl.DefaultRuntimeEndpointRegistry: Runtime endpoint registry is in extended mode gathering usage statistics of all incoming and outgoing endpoints (cache limit: 1000)
+17/12/16 12:59:43 INFO impl.DefaultCamelContext: AllowUseOriginalMessage is enabled. If access to the original message is not needed, then its recommended to turn this option off as it may improve performance.
+17/12/16 12:59:43 INFO impl.DefaultCamelContext: StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
+17/12/16 12:59:43 INFO impl.DefaultCamelContext: Route: route1 started and consuming from: Endpoint[direct://start]
+17/12/16 12:59:43 INFO impl.DefaultCamelContext: Route: route2 started and consuming from: Endpoint[direct://a]
+17/12/16 12:59:43 INFO impl.DefaultCamelContext: Route: route3 started and consuming from: Endpoint[direct://b]
+17/12/16 12:59:43 INFO impl.DefaultCamelContext: Route: route4 started and consuming from: Endpoint[direct://c]
+17/12/16 12:59:43 INFO impl.DefaultCamelContext: Total 4 routes, of which 4 are started.
+17/12/16 12:59:43 INFO impl.DefaultCamelContext: Apache Camel 2.17.1 (CamelContext: camel-1) started in 2.898 seconds
+body: Multicast first destination, thread: main
+body: Multicast second destination, thread: main
+body: Multicast third destination, thread: main
+</code></pre>
 </div></div>

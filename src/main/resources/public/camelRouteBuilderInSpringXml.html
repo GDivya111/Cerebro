@@ -23,7 +23,7 @@ mvn archetype:generate -DgroupId=com.camel -DartifactId=ApacheCamel -Dversion=1.
 </div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">Project Structure</div><div class="panel-body">
-<img class="img-responsive" ng-src="images/camel/1-camelWithSpring.jpg"/>
+<img class="img-responsive" ng-src="images/camel/1-camelRouteBuilderInSpringXml.jpg"/>
 </div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">pom.xml</div><div class="panel-body">
@@ -148,7 +148,25 @@ mvn archetype:generate -DgroupId=com.camel -DartifactId=ApacheCamel -Dversion=1.
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary"><div class="panel-heading">camel-spring.xml</div><div class="panel-body">
+<div class="panel panel-primary"><div class="panel-heading">MyRouteBuilder.java</div><div class="panel-body">
+<pre ><code>
+package com.routebuilder.in.xml;
+
+import org.apache.camel.builder.RouteBuilder;
+
+public class MyRouteBuilder extends RouteBuilder {
+
+	@Override
+	public void configure() throws Exception {
+		from(&quot;file:E:/Backup/JavaPrep/Apache_Camel/router_practice_folder/input?noop=true&quot;).to(
+		        &quot;file:E:/Backup/JavaPrep/Apache_Camel/router_practice_folder/output6&quot;).end();
+	}
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">camel-routeBuilder-in-spring.xml</div><div class="panel-body">
 <pre ><code>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
@@ -157,65 +175,30 @@ mvn archetype:generate -DgroupId=com.camel -DartifactId=ApacheCamel -Dversion=1.
     xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd    
      http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd&quot;&gt;
-      &lt;bean id=&quot;bean1&quot; class=&quot;com.camel.spring.TestBean1&quot;&gt;&lt;/bean&gt;
-      &lt;bean id=&quot;bean2&quot; class=&quot;com.camel.spring.TestBean2&quot;&gt;&lt;/bean&gt;
+      &lt;bean id=&quot;myRouteBuilder&quot; class=&quot;com.routebuilder.in.xml.MyRouteBuilder&quot;&gt;&lt;/bean&gt;
       &lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
-      	&lt;route&gt;
- 	&lt;from uri=&quot;file:E:/Backup/JavaPrep/Apache_Camel/router_practice_folder/input?noop=true&quot;/&gt;
-      	&lt;bean ref=&quot;bean1&quot;/&gt;
-      	&lt;bean ref=&quot;bean2&quot;/&gt;
-      	&lt;to uri=&quot;file:E:/Backup/JavaPrep/Apache_Camel/router_practice_folder/output4&quot;/&gt;
-      	&lt;/route&gt;
+      	&lt;routeBuilder ref=&quot;myRouteBuilder&quot;/&gt;
       &lt;/camelContext&gt;
 &lt;/beans&gt;
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary"><div class="panel-heading">TestBean1.java</div><div class="panel-body">
-<pre ><code>
-package com.camel.spring;
-
-import org.apache.camel.Exchange;
-
-public class TestBean1 {
-
-	public String testBean(Exchange exchange) {
-		System.out.println(&quot;TestBean1.testBean(): &quot; + exchange.getIn().getBody(String.class));
-		return &quot;Test Bean1&quot;;
-	}
-}
-</code></pre>
-</div></div>
-
-<div class="panel panel-primary"><div class="panel-heading">TestBean2.java</div><div class="panel-body">
-<pre ><code>
-package com.camel.spring;
-
-import org.apache.camel.Exchange;
-
-public class TestBean2 {
-
-	public String testBean(Exchange exchange) {
-		System.out.println(&quot;TestBean2.testBean(): &quot; + exchange.getIn().getBody(String.class));
-		return &quot;Test Bean2&quot;;
-	}
-}
-</code></pre>
-</div></div>
-
 <div class="panel panel-primary"><div class="panel-heading">App.java</div><div class="panel-body">
 <pre ><code>
-package com.camel.spring;
+package com.routebuilder.in.xml;
 
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
-     public static void main(String[] args) throws InterruptedException {
-          AbstractApplicationContext context = new ClassPathXmlApplicationContext(&quot;camel-spring.xml&quot;);
-	Thread.sleep(1000 * 60 * 2);
-	context.close();
-       }
+
+	public static void main(String[] args) {
+		try (AbstractApplicationContext context = new ClassPathXmlApplicationContext(&quot;camel-routeBuilder-in-spring.xml&quot;)) {
+			Thread.sleep(1000 * 60 * 2);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 }
 </code></pre>
 </div></div>
@@ -225,5 +208,5 @@ public class App {
 </div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">Output Folder</div><div class="panel-body">
-<img class="img-responsive" ng-src="images/camel/2-camelWithSpring.jpg"/>
+<img class="img-responsive" ng-src="images/camel/2-camelRouteBuilderInSpringXml.jpg"/>
 </div></div>

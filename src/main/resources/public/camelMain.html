@@ -12,7 +12,7 @@
 3. Add dependencies to pom.xml
 4. Write RouteBuilder
 5. Write Bean
-6. Write main class
+6. Start the router using camel provided Main class
 </pre>
 </div></div>
 
@@ -23,7 +23,7 @@ mvn archetype:generate -DgroupId=com.camel -DartifactId=ApacheCamel -Dversion=1.
 </div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">Project Structure</div><div class="panel-body">
-<img class="img-responsive" ng-src="images/camel/1-camelWithSpring.jpg"/>
+<img class="img-responsive" ng-src="images/camel/1-camelMain.jpg"/>
 </div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">pom.xml</div><div class="panel-body">
@@ -148,74 +148,87 @@ mvn archetype:generate -DgroupId=com.camel -DartifactId=ApacheCamel -Dversion=1.
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary"><div class="panel-heading">camel-spring.xml</div><div class="panel-body">
+<div class="panel panel-primary"><div class="panel-heading">MessageProcessorBean.java</div><div class="panel-body">
 <pre ><code>
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:camel=&quot;http://camel.apache.org/schema/spring&quot;
-    xmlns:util=&quot;http://www.springframework.org/schema/util&quot;
-    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd    
-     http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
-      http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd&quot;&gt;
-      &lt;bean id=&quot;bean1&quot; class=&quot;com.camel.spring.TestBean1&quot;&gt;&lt;/bean&gt;
-      &lt;bean id=&quot;bean2&quot; class=&quot;com.camel.spring.TestBean2&quot;&gt;&lt;/bean&gt;
-      &lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
-      	&lt;route&gt;
- 	&lt;from uri=&quot;file:E:/Backup/JavaPrep/Apache_Camel/router_practice_folder/input?noop=true&quot;/&gt;
-      	&lt;bean ref=&quot;bean1&quot;/&gt;
-      	&lt;bean ref=&quot;bean2&quot;/&gt;
-      	&lt;to uri=&quot;file:E:/Backup/JavaPrep/Apache_Camel/router_practice_folder/output4&quot;/&gt;
-      	&lt;/route&gt;
-      &lt;/camelContext&gt;
-&lt;/beans&gt;
-</code></pre>
-</div></div>
+package com.camel.main;
 
-<div class="panel panel-primary"><div class="panel-heading">TestBean1.java</div><div class="panel-body">
-<pre ><code>
-package com.camel.spring;
+public class MessageProcessorBean {
 
-import org.apache.camel.Exchange;
-
-public class TestBean1 {
-
-	public String testBean(Exchange exchange) {
-		System.out.println(&quot;TestBean1.testBean(): &quot; + exchange.getIn().getBody(String.class));
-		return &quot;Test Bean1&quot;;
+	public String process(String message) {
+		return Thread.currentThread() + &quot;:&quot; + message;
 	}
 }
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary"><div class="panel-heading">TestBean2.java</div><div class="panel-body">
+<div class="panel panel-primary"><div class="panel-heading">CamelMainRouteBuilder.java</div><div class="panel-body">
 <pre ><code>
-package com.camel.spring;
+package com.camel.main;
 
-import org.apache.camel.Exchange;
+import org.apache.camel.builder.RouteBuilder;
 
-public class TestBean2 {
+public class CamelMainRouteBuilder extends RouteBuilder {
 
-	public String testBean(Exchange exchange) {
-		System.out.println(&quot;TestBean2.testBean(): &quot; + exchange.getIn().getBody(String.class));
-		return &quot;Test Bean2&quot;;
+	@Override
+	public void configure() throws Exception {
+		<em>/*
+		 * noop=true. By giving this files will not be moved to output folder
+		 * while routing
+		 */</em>
+		from(&quot;file:E:/Backup/JavaPrep/Apache_Camel/router_practice_folder/input?noop=true&quot;)
+				.to(&quot;bean:testBean?method=process&quot;)
+				.to(&quot;file:E:/Backup/JavaPrep/Apache_Camel/router_practice_folder/output7&quot;).end();
 	}
+
 }
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary"><div class="panel-heading">App.java</div><div class="panel-body">
+<div class="panel panel-primary"><div class="panel-heading">CamelMain.java</div><div class="panel-body">
 <pre ><code>
-package com.camel.spring;
+package com.camel.main;
 
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.apache.camel.main.Main;
+import org.apache.camel.main.MainListenerSupport;
+import org.apache.camel.main.MainSupport;
 
-public class App {
-     public static void main(String[] args) throws InterruptedException {
-          AbstractApplicationContext context = new ClassPathXmlApplicationContext(&quot;camel-spring.xml&quot;);
-	Thread.sleep(1000 * 60 * 2);
-	context.close();
-       }
+public class CamelMain {
+
+	public static void main(String[] args) throws Exception {
+		CamelMain camelMain = new CamelMain();
+		camelMain.boot();
+	}
+
+	public void boot() throws Exception {
+		Main main = new Main();
+		main.bind(&quot;testBean&quot;, new MessageProcessorBean());
+		main.addRouteBuilder(new CamelMainRouteBuilder());
+		main.addMainListener(new Events());
+		System.out.println(&quot;Starting Camel. Use Ctrl+C to terminate JVM&quot;);
+		main.run();
+	}
+
+	public static class Events extends MainListenerSupport {
+		@Override
+		public void beforeStart(MainSupport main) {
+			System.out.println(&quot;CamelMain.Events.beforeStart&quot;);
+		}
+
+		@Override
+		public void afterStart(MainSupport main) {
+			System.out.println(&quot;CamelMain.Events.afterStart&quot;);
+		}
+
+		@Override
+		public void beforeStop(MainSupport main) {
+			System.out.println(&quot;CamelMain.Events.beforeStop&quot;);
+		}
+
+		@Override
+		public void afterStop(MainSupport main) {
+			System.out.println(&quot;CamelMain.Events.afterStop&quot;);
+		}
+	}
 }
 </code></pre>
 </div></div>
@@ -224,6 +237,25 @@ public class App {
 <img class="img-responsive" ng-src="images/camel/2-camelHelloWorld.jpg"/>
 </div></div>
 
+<div class="panel panel-primary"><div class="panel-heading">Console Output</div><div class="panel-body">
+<pre><code>
+Starting Camel. Use Ctrl+C to terminate JVM
+CamelMain.Events.beforeStart
+17/12/16 13:29:07 INFO impl.DefaultCamelContext: Apache Camel 2.17.1 (CamelContext: camel-1) is starting
+17/12/16 13:29:07 INFO management.ManagedManagementStrategy: JMX is enabled
+17/12/16 13:29:08 INFO converter.DefaultTypeConverter: Loaded 195 type converters
+17/12/16 13:29:08 INFO impl.DefaultRuntimeEndpointRegistry: Runtime endpoint registry is in extended mode gathering usage statistics of all incoming and outgoing endpoints (cache limit: 1000)
+17/12/16 13:29:10 INFO impl.DefaultCamelContext: AllowUseOriginalMessage is enabled. If access to the original message is not needed, then its recommended to turn this option off as it may improve performance.
+17/12/16 13:29:10 INFO impl.DefaultCamelContext: StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
+17/12/16 13:29:10 INFO file.FileEndpoint: Endpoint is configured with noop=true so forcing endpoint to be idempotent as well
+17/12/16 13:29:10 INFO file.FileEndpoint: Using default memory based idempotent repository with cache max size: 1000
+17/12/16 13:29:10 INFO impl.DefaultCamelContext: Route: route1 started and consuming from: Endpoint[file://E:/Backup/JavaPrep/Apache_Camel/router_practice_folder/input?noop=true]
+17/12/16 13:29:10 INFO impl.DefaultCamelContext: Total 1 routes, of which 1 are started.
+17/12/16 13:29:10 INFO impl.DefaultCamelContext: Apache Camel 2.17.1 (CamelContext: camel-1) started in 2.360 seconds
+CamelMain.Events.afterStart
+</code></pre>
+</div></div>
+
 <div class="panel panel-primary"><div class="panel-heading">Output Folder</div><div class="panel-body">
-<img class="img-responsive" ng-src="images/camel/2-camelWithSpring.jpg"/>
+<img class="img-responsive" ng-src="images/camel/2-camelMain.jpg"/>
 </div></div>

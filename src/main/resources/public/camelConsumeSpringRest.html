@@ -1,0 +1,343 @@
+<div ng-controller="cerebroController"><div ng-if="breadCrumbs.length > 0">
+<ol class="breadcrumb">
+	<li ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+</ol>
+<hr/>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Steps</div><div class="panel-body">
+<pre>
+1. create a maven project using following command
+2. Import project into eclipse as maven project
+3. Add dependencies to pom.xml
+4. Write RouteBuilder
+5. Write Bean
+6. Write Pojo for Response coming from REST API
+7. Write camel main class
+8. Make sure REST API is up and running
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">create a maven project using following command</div><div class="panel-body">
+<pre ><code>
+mvn archetype:generate -DgroupId=com.camel -DartifactId=ApacheCamel -Dversion=1.0-SNAPSHOT -Dpackage=com.camel.hello.world -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Project Structure</div><div class="panel-body">
+<img class="img-responsive" ng-src="images/camel/1-camelConsumeSpringRest.jpg"/>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">pom.xml</div><div class="panel-body">
+<pre ><code>
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+	&lt;groupId&gt;com.camel&lt;/groupId&gt;
+	&lt;artifactId&gt;ApacheCamel&lt;/artifactId&gt;
+	&lt;packaging&gt;jar&lt;/packaging&gt;
+	&lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+	&lt;name&gt;ApacheCamel&lt;/name&gt;
+	&lt;url&gt;http://maven.apache.org&lt;/url&gt;
+
+	&lt;properties&gt;
+		&lt;camel.version&gt;2.17.1&lt;/camel.version&gt;
+	&lt;/properties&gt;
+	&lt;dependencies&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;junit&lt;/groupId&gt;
+			&lt;artifactId&gt;junit&lt;/artifactId&gt;
+			&lt;version&gt;4.12&lt;/version&gt;
+		&lt;/dependency&gt;
+		<em>&lt;!-- Camel --&gt;</em>
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-core&lt;/artifactId&gt;
+			&lt;version&gt;${camel.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-http&lt;/artifactId&gt;
+			&lt;version&gt;${camel.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-stream&lt;/artifactId&gt;
+			&lt;version&gt;${camel.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		<em>&lt;!-- camel spring dependencies --&gt;</em>
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-spring&lt;/artifactId&gt;
+			&lt;version&gt;${camel.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		<em>&lt;!-- spring --&gt;</em>
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+			&lt;version&gt;4.2.6.RELEASE&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		<em>&lt;!-- camel test --&gt;</em>
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-test&lt;/artifactId&gt;
+			&lt;version&gt;${camel.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+		
+		<em>&lt;!-- Active MQ JMS --&gt;</em>
+		&lt;dependency&gt;
+            &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+            &lt;artifactId&gt;camel-jms&lt;/artifactId&gt;
+            &lt;version&gt;${camel.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+            &lt;artifactId&gt;activemq-camel&lt;/artifactId&gt;
+            &lt;version&gt;5.6.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+            &lt;artifactId&gt;activemq-pool&lt;/artifactId&gt;
+            &lt;version&gt;5.11.1&lt;/version&gt;
+        &lt;/dependency&gt;
+        
+        <em>&lt;!-- Logging --&gt;</em>
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+            &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
+            &lt;version&gt;1.7.12&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+            &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
+            &lt;version&gt;1.7.12&lt;/version&gt;
+        &lt;/dependency&gt;
+        
+
+	&lt;/dependencies&gt;
+	&lt;build&gt;
+		&lt;pluginManagement&gt;
+			&lt;plugins&gt;
+				&lt;plugin&gt;
+					&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+					&lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+					&lt;version&gt;3.5.1&lt;/version&gt;
+					&lt;configuration&gt;
+						&lt;source&gt;1.8&lt;/source&gt;
+						&lt;target&gt;1.8&lt;/target&gt;
+					&lt;/configuration&gt;
+				&lt;/plugin&gt;
+
+				&lt;plugin&gt;
+					&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+					&lt;artifactId&gt;camel-maven-plugin&lt;/artifactId&gt;
+					&lt;version&gt;2.17.1&lt;/version&gt;
+					<em>&lt;!-- the file must be in the classpath --&gt;</em>
+					&lt;configuration&gt;
+						&lt;applicationContextUri&gt;camel-spring.xml&lt;/applicationContextUri&gt;
+					&lt;/configuration&gt;
+				&lt;/plugin&gt;
+
+			&lt;/plugins&gt;
+		&lt;/pluginManagement&gt;
+	&lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Employee.java</div><div class="panel-body">
+<pre ><code>
+package com.camle.spring.rest;
+
+public class Employee {
+
+	private String	name;
+	private String	address;
+
+	public Employee() {
+
+	}
+
+	public Employee(String name, String address) {
+		this.name = name;
+		this.address = address;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return &quot;name: &quot; + name + &quot;,  address: &quot; + address;
+	}
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Bean1.java</div><div class="panel-body">
+<pre ><code>
+package com.camle.spring.rest;
+
+import org.apache.camel.Exchange;
+
+public class Bean1 {
+
+	public Exchange testBean(Exchange exchange) {
+		System.out.println(&quot;Bean 1 Body: &quot; + exchange.getIn().getBody(String.class));
+		return exchange;
+	}
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">RouteBuilderImpl.java</div><div class="panel-body">
+<pre ><code>
+package com.camle.spring.rest;
+
+import org.apache.camel.Exchange;
+import org.apache.camel.builder.RouteBuilder;
+
+public class RouteBuilderImpl extends RouteBuilder {
+
+	@Override
+	public void configure() throws Exception {
+		from(&quot;direct:rest1&quot;).to(&quot;http://localhost:9091/SpringRest/employees&quot;).bean(new Bean1()).end();
+
+		from(&quot;direct:rest2&quot;).to(&quot;http://localhost:9091/SpringRest/moreEmployees&quot;).bean(new Bean1()).end();
+
+		from(&quot;direct:rest3&quot;).to(&quot;http://localhost:9091/SpringRest/newEmployees?name=name1&amp;address=address1&quot;)
+		        .bean(new Bean1()).end();
+
+		from(&quot;direct:rest4&quot;).setHeader(Exchange.HTTP_QUERY, constant(&quot;name=name2&amp;address=address2&quot;))
+		        .to(&quot;http://localhost:9091/SpringRest/newEmployees&quot;).bean(new Bean1()).end();
+
+		from(&quot;direct:rest5&quot;).to(&quot;http://localhost:9091/SpringRest/newEmployees&quot;).bean(new Bean1()).end();
+
+		from(&quot;direct:rest6&quot;).process(new RequestProcessor()).to(&quot;http://localhost:9091/SpringRest/newEmployees&quot;)
+		        .bean(new Bean1()).end();
+
+		from(&quot;direct:postRest&quot;).setHeader(Exchange.HTTP_METHOD, constant(&quot;POST&quot;))
+		        .to(&quot;http://localhost:9091/SpringRest/addEmployee&quot;).bean(new Bean1()).end();
+	}
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">RequestProcessor.java</div><div class="panel-body">
+<pre ><code>
+package com.camle.spring.rest;
+
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
+
+public class RequestProcessor implements Processor {
+
+	@Override
+	public void process(Exchange exchange) throws Exception {
+		String name = &quot;name=&quot; + exchange.getProperty(&quot;name&quot;);
+		String address = &quot;address=&quot; + exchange.getProperty(&quot;address&quot;);
+		String requestParams = name + &quot;&amp;&quot; + address;
+		exchange.getIn().setHeader(Exchange.HTTP_QUERY, requestParams);
+	}
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">App.java</div><div class="panel-body">
+<pre ><code>
+package com.camle.spring.rest;
+
+import org.apache.camel.CamelContext;
+import org.apache.camel.Exchange;
+import org.apache.camel.Message;
+import org.apache.camel.ProducerTemplate;
+import org.apache.camel.impl.DefaultCamelContext;
+import org.apache.camel.impl.DefaultExchange;
+import org.apache.camel.impl.DefaultMessage;
+
+public class App {
+
+	public static void main(String[] args) throws Exception {
+		CamelContext context = new DefaultCamelContext();
+		context.addRoutes(new RouteBuilderImpl());
+		context.start();
+
+		Message message = new DefaultMessage();
+
+		Exchange exchange = new DefaultExchange(context);
+		exchange.setIn(message);
+
+		<em>// GET Request 1</em>
+		ProducerTemplate template = context.createProducerTemplate();
+		template.send(&quot;direct:rest1&quot;, exchange);
+		String firstCall = exchange.getIn().getBody(String.class);
+		System.out.println(&quot;firstCall result: &quot; + firstCall);
+
+		<em>// GET Request 2</em>
+		exchange = new DefaultExchange(context);
+		template.send(&quot;direct:rest2&quot;, exchange);
+		String secondCall = exchange.getIn().getBody(String.class);
+		System.out.println(&quot;secondCall Result: &quot; + secondCall);
+
+		<em>// GET request 3</em>
+		exchange = new DefaultExchange(context);
+		template.send(&quot;direct:rest3&quot;, exchange);
+		String call3 = exchange.getIn().getBody(String.class);
+		System.out.println(&quot;Call 3: &quot; + call3);
+
+		<em>// GET request 4</em>
+		exchange = new DefaultExchange(context);
+		template.send(&quot;direct:rest4&quot;, exchange);
+		String call4 = exchange.getIn().getBody(String.class);
+		System.out.println(&quot;Call 4: &quot; + call4);
+
+		<em>// GET request 5</em>
+		exchange = new DefaultExchange(context);
+		String name = &quot;name=dynamicNameValue&quot;;
+		String address = &quot;address=dynamicAddressValue&quot;;
+		String requestParams = name + &quot;&amp;&quot; + address;
+		exchange.getIn().setHeader(Exchange.HTTP_QUERY, requestParams);
+		template.send(&quot;direct:rest5&quot;, exchange);
+		String call5 = exchange.getIn().getBody(String.class);
+		System.out.println(&quot;call 5: &quot; + call5);
+
+		<em>// GET Request 6</em>
+		exchange = new DefaultExchange(context);
+		exchange.setProperty(&quot;name&quot;, &quot;dynamicNameValue2&quot;);
+		exchange.setProperty(&quot;address&quot;, &quot;dynamicAddressValue2&quot;);
+		template.send(&quot;direct:rest6&quot;, exchange);
+		String call6 = exchange.getIn().getBody(String.class);
+		System.out.println(&quot;call 6: &quot; + call6);
+
+		<em>// POST request 1</em>
+		exchange = new DefaultExchange(context);
+		exchange.getOut().setBody(&quot;newName1,newAddress1&quot;);
+		template.send(&quot;direct:postRest&quot;, exchange);
+		String call7 = exchange.getIn().getBody(String.class);
+		System.out.println(&quot;call 7: &quot; + call7);
+
+		Thread.sleep(1000 * 60 * 2);
+		context.stop();
+	}
+}
+</code></pre>
+</div></div>

@@ -180,14 +180,21 @@ app.config(function($routeProvider){
 	.when("/camelHelloWorld",{templateUrl : "camelHelloWorld.html",controller : "cerebroController"})
 	.when("/camelWithBean",{templateUrl : "camelWithBean.html",controller : "cerebroController"})
 	.when("/camelWithBean2",{templateUrl : "camelWithBean2.html",controller : "cerebroController"})
+	.when("/camelWithBeanAndProcessor",{templateUrl : "camelWithBeanAndProcessor.html",controller : "cerebroController"})
+	.when("/camelObjectAsBody",{templateUrl : "camelObjectAsBody.html",controller : "cerebroController"})
+	.when("/camelExceptionHandling1",{templateUrl : "camelExceptionHandling1.html",controller : "cerebroController"})
+	.when("/camelMulticast",{templateUrl : "camelMulticast.html",controller : "cerebroController"})
+	.when("/camelMulticastAggregationStrategy",{templateUrl : "camelMulticastAggregationStrategy.html",controller : "cerebroController"})
+	.when("/camelMulticastParallel",{templateUrl : "camelMulticastParallel.html",controller : "cerebroController"})
+	.when("/camelMain",{templateUrl : "camelMain.html",controller : "cerebroController"})
+	.when("/camelWithSpring",{templateUrl : "camelWithSpring.html",controller : "cerebroController"})
+	.when("/camelRouteBuilderInSpringXml",{templateUrl : "camelRouteBuilderInSpringXml.html",controller : "cerebroController"})
+	.when("/camelSpringProcessorBean",{templateUrl : "camelSpringProcessorBean.html",controller : "cerebroController"})
+	.when("/camelConsumeSpringRest",{templateUrl : "camelConsumeSpringRest.html",controller : "cerebroController"})
 	
 	.when("/camelUnmarshalCsv",{templateUrl : "camelUnmarshalCsv.html",controller : "cerebroController"})
 	.when("/camelMarshalCsv",{templateUrl : "camelMarshalCsv.html",controller : "cerebroController"})
 	
-	
-	.when("/camelWithBeanAndProcessor",{templateUrl : "camelWithBeanAndProcessor.html",controller : "cerebroController"})
-	.when("/camelWithSpring",{templateUrl : "camelWithSpring.html",controller : "cerebroController"})
-	.when("/camelSpringProcessorBean",{templateUrl : "camelSpringProcessorBean.html",controller : "cerebroController"})
 	
 	// Mule
 	.when("/mule",{templateUrl : "mule.html",controller : "cerebroController"})
