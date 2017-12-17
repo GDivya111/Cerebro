@@ -1,0 +1,28 @@
+<div ng-controller="cerebroController"><div ng-if="breadCrumbs.length > 0">
+<ol class="breadcrumb">
+	<li ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+</ol>
+<hr/>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Use distributionManagement tag</div><div class="panel-body">
+<pre>
+&lt;distributionManagement&gt;
+    &lt;repository&gt;
+      &lt;id&gt;operative-releases&lt;/id&gt;
+      &lt;name&gt;Operative Releases Repository&lt;/name&gt;
+      &lt;url&gt;${operative.nexus}/repositories/operative-releases&lt;/url&gt;
+    &lt;/repository&gt;
+    &lt;snapshotRepository&gt;
+      &lt;id&gt;operative-snapshots&lt;/id&gt;
+      &lt;name&gt;Operative Snapshots Repository&lt;/name&gt;
+      &lt;url&gt;${operative.nexus}/repositories/operative-snapshots&lt;/url&gt;
+    &lt;/snapshotRepository&gt;
+    &lt;site&gt;
+      &lt;id&gt;operative-mavensite&lt;/id&gt;
+      &lt;name&gt;Operative Maven WebSite&lt;/name&gt;
+      &lt;url&gt;operative-global&lt;/url&gt;
+    &lt;/site&gt;
+  &lt;/distributionManagement&gt;
+</pre>
+</div></div>

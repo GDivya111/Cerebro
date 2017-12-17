@@ -1,6 +1,9 @@
-<div class="page-header">
-    <h3>Code Coverage report in Sonarqube with Jacoco</h3>      
-</div>
+<div ng-controller="cerebroController"><div ng-if="breadCrumbs.length > 0">
+<ol class="breadcrumb">
+	<li ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+</ol>
+<hr/>
+</div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">Steps</div><div class="panel-body">
 	<ul>
@@ -28,9 +31,15 @@ sonar.sources=src/main/java
 sonar.java.binaries=target/classes
 sonar.tests=src/test/java
 sonar.java.test.binaries=target/test-classes
+<em>#Tells SonarQube where the unit tests execution reports are</em>
 sonar.junit.reportsPath=target/surefire-reports
+<em>#Tells SonarQube where the unit tests code coverage report is</em>
 sonar.jacoco.reportPaths=target/coverage-reports/jacoco-ut.exec
 sonar.verbose=true
+<em>
+#Tells SonarQube where the integration tests code coverage report is. Use this if project has integration test cases
+#sonar.jacoco.itReportPath=reports/jacoco/jacoco-it.exec
+</em>
 </code></pre>
 </li>
 </ul>

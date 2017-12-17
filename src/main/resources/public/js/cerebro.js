@@ -78,6 +78,8 @@ app.config(function($routeProvider){
 	.when("/mavenJacoco",{templateUrl : "mavenJacoco.html",controller : "cerebroController"})
 	.when("/mavenAssemblyPlugin",{templateUrl : "mavenAssemblyPlugin.html",controller : "cerebroController"})
 	.when("/mavenJarPlugin",{templateUrl : "mavenJarPlugin.html",controller : "cerebroController"})
+	.when("/mavenPushToRemoteRepository",{templateUrl : "mavenPushToRemoteRepository.html",controller : "cerebroController"})
+	.when("/mavenPullFromRemoteRepository",{templateUrl : "mavenPullFromRemoteRepository.html",controller : "cerebroController"})
 	
 	// spring
 	.when("/spring",{templateUrl : "spring.html",controller : "cerebroController"})
