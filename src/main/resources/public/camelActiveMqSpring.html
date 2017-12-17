@@ -1,0 +1,254 @@
+<div ng-controller="cerebroController"><div ng-if="breadCrumbs.length > 0">
+<ol class="breadcrumb">
+	<li ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+</ol>
+<hr/>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Steps</div><div class="panel-body">
+<pre>
+1. create a maven project using following command
+2. Import project into eclipse as maven project
+3. Add dependencies to pom.xml
+4. Write RouteBuilder
+5. Write Bean
+6. Write main class
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">create a maven project using following command</div><div class="panel-body">
+<pre ><code>
+mvn archetype:generate -DgroupId=com.camel -DartifactId=ApacheCamel -Dversion=1.0-SNAPSHOT -Dpackage=com.camel.hello.world -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Project Structure</div><div class="panel-body">
+<img class="img-responsive" ng-src="images/camel/1-camelActiveMqSpring.jpg"/>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">pom.xml</div><div class="panel-body">
+<pre ><code>
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+	&lt;groupId&gt;com.camel&lt;/groupId&gt;
+	&lt;artifactId&gt;ApacheCamel&lt;/artifactId&gt;
+	&lt;packaging&gt;jar&lt;/packaging&gt;
+	&lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+	&lt;name&gt;ApacheCamel&lt;/name&gt;
+	&lt;url&gt;http://maven.apache.org&lt;/url&gt;
+
+	&lt;properties&gt;
+		&lt;camel.version&gt;2.17.1&lt;/camel.version&gt;
+	&lt;/properties&gt;
+	&lt;dependencies&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;junit&lt;/groupId&gt;
+			&lt;artifactId&gt;junit&lt;/artifactId&gt;
+			&lt;version&gt;4.12&lt;/version&gt;
+		&lt;/dependency&gt;
+		<em>&lt;!-- Camel --&gt;</em>
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-core&lt;/artifactId&gt;
+			&lt;version&gt;${camel.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-http&lt;/artifactId&gt;
+			&lt;version&gt;${camel.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-stream&lt;/artifactId&gt;
+			&lt;version&gt;${camel.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		<em>&lt;!-- camel spring dependencies --&gt;</em>
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-spring&lt;/artifactId&gt;
+			&lt;version&gt;${camel.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		<em>&lt;!-- spring --&gt;</em>
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+			&lt;version&gt;4.2.6.RELEASE&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		<em>&lt;!-- camel test --&gt;</em>
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-test&lt;/artifactId&gt;
+			&lt;version&gt;${camel.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+		
+		<em>&lt;!-- Active MQ JMS --&gt;</em>
+		&lt;dependency&gt;
+            &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+            &lt;artifactId&gt;camel-jms&lt;/artifactId&gt;
+            &lt;version&gt;${camel.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+            &lt;artifactId&gt;activemq-camel&lt;/artifactId&gt;
+            &lt;version&gt;5.6.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+            &lt;artifactId&gt;activemq-pool&lt;/artifactId&gt;
+            &lt;version&gt;5.11.1&lt;/version&gt;
+        &lt;/dependency&gt;
+        
+        <em>&lt;!-- Logging --&gt;</em>
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+            &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
+            &lt;version&gt;1.7.12&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+            &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
+            &lt;version&gt;1.7.12&lt;/version&gt;
+        &lt;/dependency&gt;
+        
+
+	&lt;/dependencies&gt;
+	&lt;build&gt;
+		&lt;pluginManagement&gt;
+			&lt;plugins&gt;
+				&lt;plugin&gt;
+					&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+					&lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+					&lt;version&gt;3.5.1&lt;/version&gt;
+					&lt;configuration&gt;
+						&lt;source&gt;1.8&lt;/source&gt;
+						&lt;target&gt;1.8&lt;/target&gt;
+					&lt;/configuration&gt;
+				&lt;/plugin&gt;
+
+				&lt;plugin&gt;
+					&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+					&lt;artifactId&gt;camel-maven-plugin&lt;/artifactId&gt;
+					&lt;version&gt;2.17.1&lt;/version&gt;
+					<em>&lt;!-- the file must be in the classpath --&gt;</em>
+					&lt;configuration&gt;
+						&lt;applicationContextUri&gt;camel-spring.xml&lt;/applicationContextUri&gt;
+					&lt;/configuration&gt;
+				&lt;/plugin&gt;
+
+			&lt;/plugins&gt;
+		&lt;/pluginManagement&gt;
+	&lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">CamelActiveMqSpringApp.java</div><div class="panel-body">
+<pre ><code>
+package com.camel.activemq.spring;
+
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class CamelActiveMqSpringApp {
+
+	public static void main(String[] args) throws InterruptedException {
+		AbstractApplicationContext context = new ClassPathXmlApplicationContext(&quot;camel-activemq-spring1.xml&quot;);
+		Thread.sleep(1000 * 60 * 2);
+		context.close();
+	}
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">.java</div><div class="panel-body">
+<pre ><code>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+	xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:camel=&quot;http://camel.apache.org/schema/spring&quot;
+	xmlns:util=&quot;http://www.springframework.org/schema/util&quot;
+	xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd    
+     http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+      http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd&quot;&gt;
+
+	&lt;bean id=&quot;jmsConnectonFactory&quot; class=&quot;org.apache.activemq.ActiveMQConnectionFactory&quot;&gt;
+		&lt;property name=&quot;brokerURL&quot; value=&quot;tcp://localhost:61616&quot; /&gt;
+	&lt;/bean&gt;
+
+	&lt;bean id=&quot;pooledConnectionFactory&quot; class=&quot;org.apache.activemq.jms.pool.PooledConnectionFactory&quot;
+		init-method=&quot;start&quot; destroy-method=&quot;stop&quot;&gt;
+		&lt;property name=&quot;maxConnections&quot; value=&quot;10&quot; /&gt;
+		&lt;property name=&quot;connectionFactory&quot; ref=&quot;jmsConnectonFactory&quot; /&gt;
+	&lt;/bean&gt;
+
+	&lt;bean id=&quot;jmsTemplate&quot; class=&quot;org.springframework.jms.core.JmsTemplate&quot;&gt;
+		&lt;property name=&quot;connectionFactory&quot; ref=&quot;pooledConnectionFactory&quot; /&gt;
+	&lt;/bean&gt;
+
+	&lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+		&lt;route&gt;
+			&lt;from uri=&quot;timer:foo?period=2s&quot; /&gt;
+			&lt;transform&gt;
+				&lt;simple&gt;Heartbeat: ${date:now:yyyy-MM-dd HH:mm:ss}&lt;/simple&gt;
+			&lt;/transform&gt;
+			&lt;to uri=&quot;activemq:queue:in&quot; /&gt;
+		&lt;/route&gt;
+		
+		&lt;route&gt;
+			&lt;from uri=&quot;activemq:queue:in&quot; /&gt;
+			&lt;log message=&quot;Route message from in queue to out queue with data - ${body}&quot; /&gt;
+			&lt;to uri=&quot;activemq:queue:out&quot; /&gt;
+		&lt;/route&gt;
+		
+		&lt;route&gt;
+			&lt;from uri=&quot;activemq:queue:out&quot; /&gt;
+			&lt;log message=&quot;Print the message to console&quot; /&gt;
+			&lt;to uri=&quot;stream:out&quot; /&gt;
+		&lt;/route&gt;
+	&lt;/camelContext&gt;
+
+&lt;/beans&gt;
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Output</div><div class="panel-body">
+<pre ><code>
+17/12/17 14:22:19 INFO support.ClassPathXmlApplicationContext: Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@72b6cbcc: startup date [Sun Dec 17 14:22:19 IST 2017]; root of context hierarchy
+17/12/17 14:22:19 INFO xml.XmlBeanDefinitionReader: Loading XML bean definitions from class path resource [camel-activemq-spring1.xml]
+17/12/17 14:22:24 INFO spring.SpringCamelContext: Apache Camel 2.17.1 (CamelContext: camel-1) is starting
+17/12/17 14:22:24 INFO management.ManagedManagementStrategy: JMX is enabled
+17/12/17 14:22:25 INFO converter.DefaultTypeConverter: Loaded 195 type converters
+17/12/17 14:22:25 INFO impl.DefaultRuntimeEndpointRegistry: Runtime endpoint registry is in extended mode gathering usage statistics of all incoming and outgoing endpoints (cache limit: 1000)
+17/12/17 14:22:25 INFO spring.SpringCamelContext: AllowUseOriginalMessage is enabled. If access to the original message is not needed, then its recommended to turn this option off as it may improve performance.
+17/12/17 14:22:25 INFO spring.SpringCamelContext: StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
+17/12/17 14:22:25 INFO spring.SpringCamelContext: Route: route1 started and consuming from: Endpoint[timer://foo?period=2s]
+17/12/17 14:22:25 INFO spring.SpringCamelContext: Route: route2 started and consuming from: Endpoint[activemq://queue:in]
+17/12/17 14:22:26 INFO spring.SpringCamelContext: Route: route3 started and consuming from: Endpoint[activemq://queue:out]
+17/12/17 14:22:26 INFO spring.SpringCamelContext: Total 3 routes, of which 3 are started.
+17/12/17 14:22:26 INFO spring.SpringCamelContext: Apache Camel 2.17.1 (CamelContext: camel-1) started in 1.064 seconds
+17/12/17 14:22:27 INFO route2: Route message from in queue to out queue with data - Heartbeat: 2017-12-17 14:22:27
+17/12/17 14:22:28 INFO route3: Print the message to console
+Heartbeat: 2017-12-17 14:22:27
+17/12/17 14:22:29 INFO route2: Route message from in queue to out queue with data - Heartbeat: 2017-12-17 14:22:29
+17/12/17 14:22:30 INFO route3: Print the message to console
+Heartbeat: 2017-12-17 14:22:29
+17/12/17 14:22:31 INFO route2: Route message from in queue to out queue with data - Heartbeat: 2017-12-17 14:22:31
+17/12/17 14:22:32 INFO route3: Print the message to console
+Heartbeat: 2017-12-17 14:22:31
+17/12/17 14:22:33 INFO route2: Route message from in queue to out queue with data - Heartbeat: 2017-12-17 14:22:33
+17/12/17 14:22:34 INFO route3: Print the message to console
+Heartbeat: 2017-12-17 14:22:33
+17/12/17 14:22:35 INFO route2: Route message from in queue to out queue with data - Heartbeat: 2017-12-17 14:22:35
+17/12/17 14:22:35 INFO route3: Print the message to console
+Heartbeat: 2017-12-17 14:22:35
+17/12/17 14:22:37 INFO route2: Route message from in queue to out queue with data - Heartbeat: 2017-12-17 14:22:37
+17/12/17 14:22:37 INFO route3: Print the message to console
+Heartbeat: 2017-12-17 14:22:37
+</code></pre>
+</div></div>

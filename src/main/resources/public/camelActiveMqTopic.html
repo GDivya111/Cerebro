@@ -1,0 +1,241 @@
+<div ng-controller="cerebroController"><div ng-if="breadCrumbs.length > 0">
+<ol class="breadcrumb">
+	<li ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+</ol>
+<hr/>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Steps</div><div class="panel-body">
+<pre>
+1. create a maven project using following command
+2. Import project into eclipse as maven project
+3. Add dependencies to pom.xml
+4. Write RouteBuilder which routes message from topic to two routers
+5. Write Bean
+6. Write main class
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">create a maven project using following command</div><div class="panel-body">
+<pre ><code>
+mvn archetype:generate -DgroupId=com.camel -DartifactId=ApacheCamel -Dversion=1.0-SNAPSHOT -Dpackage=com.camel.hello.world -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Project Structure</div><div class="panel-body">
+<img class="img-responsive" ng-src="images/camel/1-camelActiveMqTopic.jpg"/>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">pom.xml</div><div class="panel-body">
+<pre ><code>
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+	&lt;groupId&gt;com.camel&lt;/groupId&gt;
+	&lt;artifactId&gt;ApacheCamel&lt;/artifactId&gt;
+	&lt;packaging&gt;jar&lt;/packaging&gt;
+	&lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+	&lt;name&gt;ApacheCamel&lt;/name&gt;
+	&lt;url&gt;http://maven.apache.org&lt;/url&gt;
+
+	&lt;properties&gt;
+		&lt;camel.version&gt;2.17.1&lt;/camel.version&gt;
+	&lt;/properties&gt;
+	&lt;dependencies&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;junit&lt;/groupId&gt;
+			&lt;artifactId&gt;junit&lt;/artifactId&gt;
+			&lt;version&gt;4.12&lt;/version&gt;
+		&lt;/dependency&gt;
+		<em>&lt;!-- Camel --&gt;</em>
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-core&lt;/artifactId&gt;
+			&lt;version&gt;${camel.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-http&lt;/artifactId&gt;
+			&lt;version&gt;${camel.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-stream&lt;/artifactId&gt;
+			&lt;version&gt;${camel.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		<em>&lt;!-- camel spring dependencies --&gt;</em>
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-spring&lt;/artifactId&gt;
+			&lt;version&gt;${camel.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		<em>&lt;!-- spring --&gt;</em>
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+			&lt;version&gt;4.2.6.RELEASE&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		<em>&lt;!-- camel test --&gt;</em>
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-test&lt;/artifactId&gt;
+			&lt;version&gt;${camel.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+		
+		<em>&lt;!-- Active MQ JMS --&gt;</em>
+		&lt;dependency&gt;
+            &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+            &lt;artifactId&gt;camel-jms&lt;/artifactId&gt;
+            &lt;version&gt;${camel.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+            &lt;artifactId&gt;activemq-camel&lt;/artifactId&gt;
+            &lt;version&gt;5.6.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+            &lt;artifactId&gt;activemq-pool&lt;/artifactId&gt;
+            &lt;version&gt;5.11.1&lt;/version&gt;
+        &lt;/dependency&gt;
+        
+        <em>&lt;!-- Logging --&gt;</em>
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+            &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
+            &lt;version&gt;1.7.12&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+            &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
+            &lt;version&gt;1.7.12&lt;/version&gt;
+        &lt;/dependency&gt;
+        
+
+	&lt;/dependencies&gt;
+	&lt;build&gt;
+		&lt;pluginManagement&gt;
+			&lt;plugins&gt;
+				&lt;plugin&gt;
+					&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+					&lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+					&lt;version&gt;3.5.1&lt;/version&gt;
+					&lt;configuration&gt;
+						&lt;source&gt;1.8&lt;/source&gt;
+						&lt;target&gt;1.8&lt;/target&gt;
+					&lt;/configuration&gt;
+				&lt;/plugin&gt;
+
+				&lt;plugin&gt;
+					&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+					&lt;artifactId&gt;camel-maven-plugin&lt;/artifactId&gt;
+					&lt;version&gt;2.17.1&lt;/version&gt;
+					<em>&lt;!-- the file must be in the classpath --&gt;</em>
+					&lt;configuration&gt;
+						&lt;applicationContextUri&gt;camel-spring.xml&lt;/applicationContextUri&gt;
+					&lt;/configuration&gt;
+				&lt;/plugin&gt;
+
+			&lt;/plugins&gt;
+		&lt;/pluginManagement&gt;
+	&lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">TopicBean1.java</div><div class="panel-body">
+<pre ><code>
+package com.camel.activemq.topic;
+
+public class TopicBean1 {
+
+	public String method1(String message) {
+		System.out.println(&quot;TopicBean1: message: &quot; + message);
+		message = message + &quot; - &quot; + Thread.currentThread().getName();
+		return message;
+	}
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">TopicRoute1.java</div><div class="panel-body">
+<pre ><code>
+package com.camel.activemq.topic;
+
+import org.apache.camel.builder.RouteBuilder;
+
+public class TopicRoute1 extends RouteBuilder {
+
+	@Override
+	public void configure() throws Exception {
+		from(&quot;activemq:topic:topic1&quot;).routeId(&quot;a&quot;).to(&quot;log:a&quot;, &quot;direct:a&quot;);
+
+		from(&quot;activemq:topic:topic1&quot;).routeId(&quot;b&quot;).to(&quot;log:b&quot;, &quot;direct:b&quot;);
+
+		from(&quot;direct:a&quot;).transform(simple(&quot;direct:a output - ${body}&quot;)).to(&quot;bean:topicBean?method=method1&quot;)
+				.to(&quot;stream:out&quot;);
+
+		from(&quot;direct:b&quot;).transform(simple(&quot;direct:b output - ${body}&quot;)).to(&quot;bean:topicBean?method=method1&quot;)
+				.to(&quot;stream:out&quot;);
+	}
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">TopicWithTwoConsumers.java</div><div class="panel-body">
+<pre ><code>
+package com.camel.activemq.topic;
+
+import org.apache.camel.CamelContext;
+import org.apache.camel.ProducerTemplate;
+import org.apache.camel.impl.DefaultCamelContext;
+import org.apache.camel.util.jndi.JndiContext;
+
+public class TopicWithTwoConsumers {
+
+	public static void main(String[] args) throws Exception {
+		JndiContext jndiContext = new JndiContext();
+		jndiContext.bind(&quot;topicBean&quot;, new TopicBean1());
+
+		CamelContext camelContext = new DefaultCamelContext(jndiContext);
+		camelContext.addRoutes(new TopicRoute1());
+
+		ProducerTemplate producerTemplate = camelContext.createProducerTemplate();
+		camelContext.start();
+		producerTemplate.sendBody(&quot;activemq:topic:topic1&quot;, &quot;Topic Message&quot;);
+		Thread.sleep(1000 * 60 * 2);
+		camelContext.stop();
+	}
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Output</div><div class="panel-body">
+<pre ><code>
+17/12/17 13:30:53 INFO impl.DefaultCamelContext: Apache Camel 2.17.1 (CamelContext: camel-1) is starting
+17/12/17 13:30:53 INFO management.ManagedManagementStrategy: JMX is enabled
+17/12/17 13:30:53 INFO converter.DefaultTypeConverter: Loaded 195 type converters
+17/12/17 13:30:53 INFO impl.DefaultRuntimeEndpointRegistry: Runtime endpoint registry is in extended mode gathering usage statistics of all incoming and outgoing endpoints (cache limit: 1000)
+17/12/17 13:30:54 INFO impl.DefaultCamelContext: AllowUseOriginalMessage is enabled. If access to the original message is not needed, then its recommended to turn this option off as it may improve performance.
+17/12/17 13:30:54 INFO impl.DefaultCamelContext: StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
+17/12/17 13:30:54 INFO failover.FailoverTransport: Successfully connected to tcp://localhost:61616
+17/12/17 13:30:54 INFO impl.DefaultCamelContext: Route: a started and consuming from: Endpoint[activemq://topic:topic1]
+17/12/17 13:30:54 INFO impl.DefaultCamelContext: Route: b started and consuming from: Endpoint[activemq://topic:topic1]
+17/12/17 13:30:54 INFO impl.DefaultCamelContext: Route: route1 started and consuming from: Endpoint[direct://a]
+17/12/17 13:30:54 INFO impl.DefaultCamelContext: Route: route2 started and consuming from: Endpoint[direct://b]
+17/12/17 13:30:54 INFO impl.DefaultCamelContext: Total 4 routes, of which 4 are started.
+17/12/17 13:30:54 INFO impl.DefaultCamelContext: Apache Camel 2.17.1 (CamelContext: camel-1) started in 1.887 seconds
+17/12/17 13:30:55 INFO a: Exchange[ExchangePattern: InOnly, BodyType: String, Body: Topic Message]
+17/12/17 13:30:55 INFO b: Exchange[ExchangePattern: InOnly, BodyType: String, Body: Topic Message]
+TopicBean1: message: direct:a output - Topic Message
+TopicBean1: message: direct:b output - Topic Message
+direct:a output - Topic Message - Camel (camel-1) thread #0 - JmsConsumer[topic1]
+direct:b output - Topic Message - Camel (camel-1) thread #1 - JmsConsumer[topic1]
+</code></pre>
+</div></div>

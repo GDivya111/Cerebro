@@ -129,7 +129,6 @@ app.config(function($routeProvider){
 	.when("/springRestExceptionHandling6",{templateUrl : "springRestExceptionHandling6.html",controller : "cerebroController"})
 	.when("/springRestLog4J",{templateUrl : "springRestLog4J.html",controller : "cerebroController"})
 	.when("/springRestHibernate4",{templateUrl : "springRestHibernate4.html",controller : "cerebroController"})
-	.when("/springIntegration",{templateUrl : "springIntegration.html",controller : "cerebroController"})
 	.when("/springBootHelloWorldGradle",{templateUrl : "springBootHelloWorldGradle.html",controller : "cerebroController"})
 	
 	// tools start
@@ -191,7 +190,15 @@ app.config(function($routeProvider){
 	.when("/camelRouteBuilderInSpringXml",{templateUrl : "camelRouteBuilderInSpringXml.html",controller : "cerebroController"})
 	.when("/camelSpringProcessorBean",{templateUrl : "camelSpringProcessorBean.html",controller : "cerebroController"})
 	.when("/camelConsumeSpringRest",{templateUrl : "camelConsumeSpringRest.html",controller : "cerebroController"})
-	
+	.when("/camelActiveMqAsync",{templateUrl : "camelActiveMqAsync.html",controller : "cerebroController"})
+	.when("/javaQueueCamelReceiver",{templateUrl : "javaQueueCamelReceiver.html",controller : "cerebroController"})
+	.when("/camelActiveMq1",{templateUrl : "camelActiveMq1.html",controller : "cerebroController"})
+	.when("/camelActiveMq2",{templateUrl : "camelActiveMq2.html",controller : "cerebroController"})
+	.when("/camelActiveMqTopic",{templateUrl : "camelActiveMqTopic.html",controller : "cerebroController"})
+	.when("/camelActiveMqQueueTopic",{templateUrl : "camelActiveMqQueueTopic.html",controller : "cerebroController"})
+	.when("/camelActiveMqSpring",{templateUrl : "camelActiveMqSpring.html",controller : "cerebroController"})
+	.when("/camelIbmMq",{templateUrl : "camelIbmMq.html",controller : "cerebroController"})
+	.when("/camelIbmMqActiveMq",{templateUrl : "camelIbmMqActiveMq.html",controller : "cerebroController"})
 	.when("/camelUnmarshalCsv",{templateUrl : "camelUnmarshalCsv.html",controller : "cerebroController"})
 	.when("/camelMarshalCsv",{templateUrl : "camelMarshalCsv.html",controller : "cerebroController"})
 	

@@ -1,40 +1,14 @@
-<div class="page-header">
-    <h3>Unmarshal (converting CSV to List) CSV File using Apache Camel</h3>      
-</div>
+<div ng-controller="cerebroController"><div ng-if="breadCrumbs.length > 0">
+<ol class="breadcrumb">
+	<li ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+</ol>
+<hr/>
+</div></div>
 
-<div class="panel panel-primary" id="1"><div class="panel-heading">Create Web project using Maven</div><div class="panel-body">
-<pre ><code>
-E:\Backup\JavaPrep\practiceProjects\Camel&gt;mvn archetype:generate -DgroupId=camel.csv -DartifactId=CamelCsvToList -Dversion=1.0.SNAPSHOT -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
-[INFO] Scanning for projects...
-[INFO]
-[INFO] ------------------------------------------------------------------------
-[INFO] Building Maven Stub Project (No POM) 1
-[INFO] ------------------------------------------------------------------------
-[INFO]
-[INFO] &gt;&gt;&gt; maven-archetype-plugin:2.4:generate (default-cli) &gt; generate-sources @ standalone-pom &gt;&gt;&gt;
-[INFO]
-[INFO] &lt;&lt;&lt; maven-archetype-plugin:2.4:generate (default-cli) &lt; generate-sources @ standalone-pom &lt;&lt;&lt;
-[INFO]
-[INFO] --- maven-archetype-plugin:2.4:generate (default-cli) @ standalone-pom ---
-[INFO] Generating project in Batch mode
-[INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Old (1.x) Archetype: maven-archetype-quickstart:1.0
-[INFO] ----------------------------------------------------------------------------
-[INFO] Parameter: basedir, Value: E:\Backup\JavaPrep\practiceProjects\Camel
-[INFO] Parameter: package, Value: camel.csv
-[INFO] Parameter: groupId, Value: camel.csv
-[INFO] Parameter: artifactId, Value: CamelCsvToList
-[INFO] Parameter: packageName, Value: camel.csv
-[INFO] Parameter: version, Value: 1.0.SNAPSHOT
-[INFO] project created from Old (1.x) Archetype in dir: E:\Backup\JavaPrep\practiceProjects\Camel\CamelCsvToList
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time: 40.787 s
-[INFO] Finished at: 2017-02-08T21:54:08+05:30
-[INFO] Final Memory: 13M/245M
-[INFO] ------------------------------------------------------------------------
-</code></pre>
+<div class="panel panel-primary" id="1"><div class="panel-heading">Create Core Java project using Maven</div><div class="panel-body">
+<pre >
+mvn archetype:generate -DgroupId=camel.csv -DartifactId=CamelCsvToList -Dversion=1.0.SNAPSHOT -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+</pre>
 </div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">Project structure</div><div class="panel-body">
