@@ -279,6 +279,9 @@ app.config(function($routeProvider){
 	// Typescript
 	.when("/typescript",{templateUrl : "typescript.html",controller : "cerebroController"})
 	
+	// Angular
+	.when("/angular",{templateUrl : "angular.html",controller : "cerebroController"})
+	
 	// Active MQ
 	.when("/activemq",{templateUrl : "activemq.html",controller : "cerebroController"})
 	
