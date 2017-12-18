@@ -34,6 +34,7 @@ app.config(function($routeProvider){
 	.when("/exceptionHandling",{templateUrl : "exceptionHandling.html",controller : "cerebroController"})
 	.when("/generics",{templateUrl : "generics.html",controller : "cerebroController"})
 	.when("/randomNumber",{templateUrl : "randomNumber.html",controller : "cerebroController"})
+	.when("/environmentVariables",{templateUrl : "environmentVariables.html",controller : "cerebroController"})
 	
 	// Groovy
 	.when("/groovy",{templateUrl : "groovy.html",controller : "cerebroController"})
