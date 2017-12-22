@@ -292,6 +292,10 @@ app.config(function($routeProvider){
 	.when("/ibmmq",{templateUrl : "ibmmq.html",controller : "cerebroController"})
 	.when("/ibmMqInstallation",{templateUrl : "ibmMqInstallation.html",controller : "cerebroController"})
 	
+	// Kafka
+	.when("/kafka",{templateUrl : "kafka.html",controller : "cerebroController"})
+	.when("/kafkaSetupInWindows10",{templateUrl : "kafkaSetupInWindows10.html",controller : "cerebroController"})
+	
 	// search
 	.when("/search",{templateUrl : "search.html",controller : "cerebroController"})
 	

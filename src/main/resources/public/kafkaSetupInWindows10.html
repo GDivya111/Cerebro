@@ -1,0 +1,31 @@
+<div ng-controller="cerebroController"><div ng-if="breadCrumbs.length > 0">
+<ol class="breadcrumb">
+	<li ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+</ol>
+<hr/>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Introduction</div><div class="panel-body">
+<pre>
+This article is all about configuring and starting an Apache Kafka server on a Windows OS. 
+This guide will also provide instructions to set up Java and Apache Zookeeper.
+Apache Kafka is a fast and scalable messaging queue, capable of handling heavy loads in context of read and write, i.e. IO-related stuff. 
+You can find more about Kafka on <a href="http://kafka.apache.org/" target="_blank">http://kafka.apache.org/</a> 
+Apache Kafka requires a running Zookeeper instance, which is used for reliable distributed coordination. 
+Please find more about Zookeeper on <a href="https://zookeeper.apache.org/" target="_blank">https://zookeeper.apache.org/</a>
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Downloading the Required Files</div><div class="panel-body">
+<ul>
+	<li>Download Server JRE according to your OS and  CPU architecture from <a href="http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html" target="_blank">http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html</a></li>
+	<li>Download and install 7-zip from <a href="http://www.7-zip.org/download.html" target="_blank">http://www.7-zip.org/download.html</a></li>
+	<li>Download and extract Zookeeper using 7-zip from <a href="http://zookeeper.apache.org/releases.html" target="_blank">http://zookeeper.apache.org/releases.html</a></li>
+	<li>Download and extract Kafka using 7-zip from <a href="http://kafka.apache.org/downloads.html" target="_blank">http://kafka.apache.org/downloads.html</a></li>
+</ul>
+<pre>
+For this tutorial we are assuming that Zookeeper and Kafka are unzipped in C: drive, but you can unzip them in any location.
+Here we are using full-fledged zookeeper and not the one packaged with Kafka because it will be single-node Zookeeper instance. 
+If you want you can run Kafka with packaged zookeeper located in Kafka package inside \kafka\bin\windows directory
+</pre>
+</div></div>

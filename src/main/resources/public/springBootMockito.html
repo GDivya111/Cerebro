@@ -1,10 +1,13 @@
-<!-- <div class="page-header">
-    <h3>Spring Boot + Unit Testing + Mockito</h3>      
-</div> -->
+<div ng-controller="cerebroController"><div ng-if="breadCrumbs.length > 0">
+<ol class="breadcrumb">
+	<li ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+</ol>
+<hr/>
+</div></div>
 
 <div class="panel panel-primary"><div class="panel-heading">Steps</div><div class="panel-body">
 <ul>
-<li>Prior knowledge of Mockito is required before going through this example. Refer Mockito <a ng-href="#mockito">here</a></li>
+<li>Prior knowledge of Mockito is required before going through this example. Refer Mockito <a ng-href="#mockito" target="_blank">here</a></li>
 <li>Create core java project using maven</li>
 <li>Add spring boot dependencies. Add SpringBootApplication annotation to create spring boot project</li>
 <li>Add spring-boot-starter-test to write test cases. This will download JUnit, Hamcrest, Mockito and Spring Test Tools as transitive dependencies</li>
