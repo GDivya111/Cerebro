@@ -132,7 +132,11 @@ app.config(function($routeProvider){
 	.when("/springRestExceptionHandling6",{templateUrl : "springRestExceptionHandling6.html",controller : "cerebroController"})
 	.when("/springRestLog4J",{templateUrl : "springRestLog4J.html",controller : "cerebroController"})
 	.when("/springRestHibernate4",{templateUrl : "springRestHibernate4.html",controller : "cerebroController"})
+	
+	// Spring Boot
+	.when("/springBootCli",{templateUrl : "springBootCli.html",controller : "cerebroController"})
 	.when("/springBootHelloWorldGradle",{templateUrl : "springBootHelloWorldGradle.html",controller : "cerebroController"})
+	.when("/springBootIT2",{templateUrl : "springBootIT2.html",controller : "cerebroController"})
 	
 	// tools start
 	.when("/tools",{templateUrl : "tools.html",controller : "cerebroController"})
@@ -298,6 +302,9 @@ app.config(function($routeProvider){
 	
 	// search
 	.when("/search",{templateUrl : "search.html",controller : "cerebroController"})
+	
+	// Authentication and Authorization
+	.when("/jwt",{templateUrl : "jwt.html",controller : "cerebroController"})
 	
 	// definitions start
 	.when("/definitions",{templateUrl : "definitions.html",controller : "definitionsController"})
