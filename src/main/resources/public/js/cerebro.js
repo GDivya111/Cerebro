@@ -7,7 +7,7 @@ app.config(function($routeProvider){
 	// study
 	.when("/study",{templateUrl : "study.html",controller : "cerebroController"})
 	
-	// core java start
+	// core java
 	.when("/coreJava",{templateUrl : "coreJava.html",controller : "cerebroController"})
 	.when("/string",{templateUrl : "string.html",controller : "cerebroController"})
 	.when("/date",{templateUrl : "date.html",controller : "cerebroController"})
@@ -35,6 +35,8 @@ app.config(function($routeProvider){
 	.when("/generics",{templateUrl : "generics.html",controller : "cerebroController"})
 	.when("/randomNumber",{templateUrl : "randomNumber.html",controller : "cerebroController"})
 	.when("/environmentVariables",{templateUrl : "environmentVariables.html",controller : "cerebroController"})
+	.when("/coreJavaImages",{templateUrl : "coreJavaImages.html",controller : "cerebroController"})
+	
 	
 	// Groovy
 	.when("/groovy",{templateUrl : "groovy.html",controller : "cerebroController"})

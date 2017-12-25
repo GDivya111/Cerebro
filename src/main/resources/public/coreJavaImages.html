@@ -1,0 +1,242 @@
+<script type="text/javascript">
+var slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  var captionText = document.getElementById("caption");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  captionText.innerHTML = dots[slideIndex-1].alt;
+}
+</script>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+  position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Six columns side by side */
+.column {
+  float: left;
+  width: 16.66%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+</style>
+
+<button class="btn btn-default btn-sm" onclick="plusSlides(-1)" style="border-radius: 25px;float: left;">Previous</button>
+<button class="btn btn-default btn-sm" onclick="plusSlides(1)" style="border-radius: 25px;float: right;">Next</button>
+
+<!-- Container for the image gallery -->
+<div class="container">
+
+  <!-- Full-width images with number text -->
+  <div class="mySlides">
+    <!-- <div class="numbertext">1 / 28</div> -->
+      <img src="images/coreJava/1_singleton_issue.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+      <img src="images/coreJava/2_singleton_solution.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+      <img src="images/coreJava/3_accessing_arrays_reflection.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+      <img src="images/coreJava/5_collections_general_implementations.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/6_constructor_reference.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/7_core_collection_fw.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/8_creating_object_dynamically_using_reflection_api.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/9_deque_methods.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/a_dynamic_proxies.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/b_exception_classes_hierarchy.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/c_executor_service_implementation.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/d_generic_field_types_reflection.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/e_generic_method_parameter_types_reflection.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/f_generic_method_return_types_reflection.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/g_getting_setting_field_values.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/h_getting_setting_static_field_values.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/i_JIT_compiler.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/j_JVM-architecture.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/k_List_methods.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/l_Method_reference.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/m_object_ordering.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/n_Parsing XML using JDom.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/o_queue_methods.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/p_reflection_methods.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/q_enum_with_public_constructor.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/r_enum_with_main_method.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/s_enum_with_method.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/t_collection_stream_reduce.jpg" style="width:100%">
+  </div>
+	
+</div>
