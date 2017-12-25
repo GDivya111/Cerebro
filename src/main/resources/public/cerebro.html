@@ -51,8 +51,37 @@ body {margin:0;}
 
 .main {
   padding: 16px;
+  padding-left: 175px;
 }
 
+.breadcrumb{
+	margin-left: 145px;
+	margin-right: 2px;
+}
+
+/* Left Menu */
+.navbar-fixed-left {
+  width: 140px;
+  position: fixed;
+  border-radius: 0;
+  height: 100%;
+  z-index: 50;
+}
+
+.navbar-fixed-left .navbar-nav > li {
+  float: none;  /* Cancel default li float: left */
+  width: 139px;
+}
+
+.navbar-fixed-left + .container {
+  padding-left: 160px;
+}
+
+/* On using dropdown menu (To right shift popuped) */
+.navbar-fixed-left .navbar-nav > li > .dropdown-menu {
+  margin-top: -50px;
+  margin-left: 140px;
+}
 </style>
 
 </head>
@@ -60,6 +89,22 @@ body {margin:0;}
 
 <!-- Top Navigation bar -->
 <div ng-include=" 'topNavigation.html'"></div>
+
+<!-- Left Menu -->
+<div class="navbar navbar-inverse navbar-fixed-left" ng-controller="cerebroController">
+  <a class="navbar-brand" href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Cerebro</a>
+  <ul class="nav navbar-nav">
+   <li ng-repeat="leftNavigation in leftNavigations"><a ng-href="{{leftNavigation.url}}" ng-click="buildBreadCrumbs(leftNavigation.breadCrumbTitle, leftNavigation.url)">{{leftNavigation.breadCrumbTitle}}</a></li>
+  </ul>
+</div>
+
+<!-- Bread Crumb -->
+<div ng-controller="cerebroController"><div ng-if="breadCrumbs.length > 0">
+<ol class="breadcrumb">
+	<li ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
+</ol>
+<hr/>
+</div></div>
 
 <!-- Body Content -->
 <div class="main">

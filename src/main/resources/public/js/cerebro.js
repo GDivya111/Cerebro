@@ -360,6 +360,14 @@ var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsSe
 	}
 	
 	$scope.breadCrumbs = breadCrumbsService.getNavigations();
+	
+	
+	// for left navigation - to build dynamically
+	$scope.leftNavigations = [
+			         {breadCrumbTitle: "Core Java", url: "#coreJava"},
+			         {breadCrumbTitle: "Groovy", url: "#groovy"},
+			         {breadCrumbTitle: "Spring", url: "#spring"}
+			        ];
 };
 
 var DefinitionsController = function($scope, $location, $anchorScroll, $http, breadCrumbsService){
