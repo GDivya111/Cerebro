@@ -53,3 +53,96 @@
 		<li>If new requirement is give to you, what is the process you will follow to implement it</li>
 	</ul>
 </div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Interview Questions and Answers</div><div class="panel-body table-responsive">
+<table class="table table-hover">
+<thead>
+	<tr>
+		<th>Question</th>
+		<th>Answer</th>
+	</tr>
+</thead>
+<tbody>
+<tr>
+	<td>A sequence of aggregate operations is known as a</td>
+	<td><pre>Pipeline</pre></td>
+</tr>
+<tr>
+	<td>Each pipeline contains zero or more ___ operations</td>
+	<td><pre>Intermediate</pre></td>
+</tr>
+<tr>
+	<td>Each pipeline ends with a ___ operation</td>
+	<td><pre>Terminal</pre></td>
+</tr>
+<tr>
+	<td>What kind of operation produces another stream as its output?</td>
+	<td><pre>Intermediate</pre></td>
+</tr>
+<tr>
+	<td>Describe one way in which forEach aggregate operation differs from the enhanced for statement and iterator</td>
+	<td><pre>The forEach aggregate operation lets the system decide "how" the iteration takes place. 
+	Using aggregate operations lets you focus on "what" instead of "how." </pre></td>
+</tr>
+<tr>
+	<td>True or False: A stream is similar to a collection in that it is a data structure that stores elements. </td>
+	<td>False. Unlike a collection, a stream is not a data structure. It instead carries values from a source through a pipeline</td>
+</tr>
+<tr>
+	<td>Identify the intermediate and terminal operations in this code:
+double average = roster .stream().filter(p -&gt; p.getGender() == Person.Sex.MALE).mapToInt(Person::getAge).average().getAsDouble();</td>
+	<td>Intermediate: filter, mapToInt, Terminal: average
+The terminal operation average returns an OptionalDouble. The getAsDouble method is then invoked on that returned object.
+It is always a good idea to consult the API Specification for information about whether an operation is intermediate or terminal</td>
+</tr>
+<tr>
+	<td>The code p -&gt; p.getGender() == Person.Sex.MALE is an example of what?</td>
+	<td>lambda expression</td>
+</tr>
+<tr>
+	<td>The code Person::getAge is an example of what</td>
+	<td>method reference</td>
+</tr>
+<tr>
+	<td>Terminal operations that combine the contents of a stream and return one value are known as what</td>
+	<td>Reduction operations</td>
+</tr>
+<tr>
+	<td>Name one important difference between the Stream.reduce method and the Stream.collect method</td>
+	<td>Stream.reduce always creates a new value when it processes an element. Stream.collect modifies (or mutates) the existing value</td>
+</tr>
+<tr>
+	<td>If you wanted to process a stream of names, extract the male names, and store them in a new List, would Stream.reduce or Stream.collect be the most appropriate operation to use?</td>
+	<td><pre>
+The collect operation is most appropriate for collecting into a List
+Example:
+List&lt;String&gt; namesOfMaleMembersCollect = 
+roster.stream().filter(p -> p.getGender() == Person.Sex.MALE).map(p -> p.getName()).collect(Collectors.toList());	
+	</pre></td>
+</tr>
+<tr>
+	<td>True or False: Aggregate operations make it possible to implement parallelism with non-thread-safe collections</td>
+	<td>True, provided that you do not modify (mutate) the underlying collection while you are operating on it</td>
+</tr>
+<tr>
+	<td>Streams are always serial unless otherwise specified. How do you request that a stream be processed in parallel?</td>
+	<td>Obtain the parallel stream by invoking parallelStream() instead of stream()</td>
+</tr>
+<tr>
+	<td>What is finalize() method</td>
+	<td><pre>
+It is possible to define a method that will be called just before an object's final destruction by the 
+garbage collector. This method is called finalize( ), 
+and it can be used to ensure that an object terminates cleanly	
+	</pre></td>
+</tr>
+<tr>
+	<td>What are condition to use user-defined object as key to hashmap</td>
+	<td><pre>
+1. overrider hashcode(), equals() methods
+2. That object should be immutable	
+	</pre></td>
+</tr>
+</tbody>
+</table>
+</div></div>
