@@ -6,12 +6,17 @@
 	<li class="subGroupHeading" ng-if="breadCrumbs.length > 0">Navigation</li>
 	<li ng-controller="cerebroController" ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
 	
+	<li class="subGroupHeading">Materials</li>
+	<li><a href="https://docs.oracle.com/javase/tutorial/java/generics/restrictions.html" target="_blank">Java Docs</a></li>
+	
 	<li class="subGroupHeading">Examples</li>
 	<li><a ng-click="navigate(1)">Create object of a class which has generic</a></li>
 	<li><a ng-click="navigate(2)">calling method which has generic</a></li>
 	<li><a ng-click="navigate(3)">calling static method which has generic</a></li>
 	<li><a ng-click="navigate(4)">Bounded wild cards</a></li>
 	<li><a ng-click="navigate(5)">wild cards</a></li>
+	
+	
 </ul>
 
 <div style="margin-left:30%;padding:1px 16px;">
