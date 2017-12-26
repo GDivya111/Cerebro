@@ -1,10 +1,3 @@
-<div ng-controller="cerebroController"><div ng-if="breadCrumbs.length > 0">
-<ol class="breadcrumb">
-	<li ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
-</ol>
-<hr/>
-</div></div>
-
 <div class="panel panel-primary" ><div class="panel-heading">Create Web project using Maven from cmd</div><div class="panel-body">
 <pre ><code>
 mvn archetype:generate -DgroupId=mvc.form.validation -DartifactId=MVCFormValidation -Dversion=1.0-SNAPSHOT -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false

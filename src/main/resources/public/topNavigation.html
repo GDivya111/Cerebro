@@ -3,7 +3,7 @@
     <div class="navbar-header">
       <a ng-href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Cerebro</a>
     </div>
-    <div class="navbar-header"><a href="#study">Study</a></div>
+    <div class="navbar-header"><a href="#study" ng-click="buildBreadCrumbs('Study', '#study')">Study</a></div>
     <div class="navbar-header"><a href="#definitions" ng-click="buildBreadCrumbs('Definitions', '#definitions')">Definitions</a></div>
     <div class="navbar-header"><a ng-href="#interviewQuestions" ng-click="buildBreadCrumbs('InterviewQuestions', '#interviewQuestions')">Interview Questions</a></div>
     

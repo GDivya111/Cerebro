@@ -370,7 +370,7 @@ var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsSe
 			         {breadCrumbTitle: "Maven", url: "#maven"},
 			         {breadCrumbTitle: "Gradle", url: "#gradle"},
 			         {breadCrumbTitle: "Web Services", url: "#webservices"},
-			         {breadCrumbTitle: "Ant", url: "#ant"},
+			         {breadCrumbTitle: "Ant", url: "#ant"}
 			        ];
 };
 

@@ -26,14 +26,12 @@ a{
 	position: fixed;
 }
 
-/* table, th , td  {
-  border: 1px solid grey;
-  border-collapse: collapse;
-  padding: 5px;
+.main {
+  padding: 16px;
+  padding-left: 185px;
 }
-table tr:nth-child(odd) {
-  background-color: #f1f1f1;
+
+.breadcrumb{
+	margin-left: 175px;
+	margin-right: 2px;
 }
-table tr:nth-child(even) {
-  background-color: #ffffff;
-} */

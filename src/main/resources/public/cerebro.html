@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="css/cerebro.css">
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -14,7 +13,6 @@
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-sanitize.js"></script>
 <script src="js/cerebro.js"></script>
-
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -23,74 +21,15 @@
 
   ga('create', 'UA-101524048-1', 'auto');
   ga('send', 'pageview');
-
 </script>
-
-<!-- TODO: Move to separate CSS file -->
-<style>
-body {margin:0;}
-
-.navbar {
-  overflow: hidden;
-  background-color: #333;
-  /* position: fixed; */
-  top: 0;
-  width: 100%;
-  z-index: 99;
-}
-
-.navbar a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.main {
-  padding: 16px;
-  padding-left: 175px;
-}
-
-.breadcrumb{
-	margin-left: 145px;
-	margin-right: 2px;
-}
-
-/* Left Menu */
-.navbar-fixed-left {
-  width: 140px;
-  position: fixed;
-  border-radius: 0;
-  height: 100%;
-  z-index: 98;
-}
-
-.navbar-fixed-left .navbar-nav > li {
-  float: none;  /* Cancel default li float: left */
-  width: 139px;
-}
-
-.navbar-fixed-left + .container {
-  padding-left: 160px;
-}
-
-/* On using dropdown menu (To right shift popuped) */
-.navbar-fixed-left .navbar-nav > li > .dropdown-menu {
-  margin-top: -50px;
-  margin-left: 140px;
-}
-</style>
-
+<link rel="stylesheet" href="css/leftNav.css">
 </head>
-<body>
 
-<!-- Top Navigation bar -->
+<body>
+<!-- Top Navigation-->
 <div ng-include=" 'topNavigation.html'"></div>
 
-<!-- Left Menu -->
+<!-- Left Navigation -->
 <div class="navbar navbar-inverse navbar-fixed-left" ng-controller="cerebroController">
   <a class="navbar-brand" href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Cerebro</a>
   <ul class="nav navbar-nav">
@@ -111,9 +50,7 @@ body {margin:0;}
 
 <!-- Page Content -->
 <div ng-view>
-<script type="text/javascript">
-$(this).scrollTop(0)
-</script>
+<script type="text/javascript">$(this).scrollTop(0)</script>
 </div>
 
 </div>
@@ -122,4 +59,5 @@ $(this).scrollTop(0)
 	<span  class="glyphicon glyphicon-chevron-up"></span>
 </a>
 
-</body></html>
+</body>
+</html>
