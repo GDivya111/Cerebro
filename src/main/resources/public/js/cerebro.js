@@ -366,7 +366,11 @@ var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsSe
 	$scope.leftNavigations = [
 			         {breadCrumbTitle: "Core Java", url: "#coreJava"},
 			         {breadCrumbTitle: "Groovy", url: "#groovy"},
-			         {breadCrumbTitle: "Spring", url: "#spring"}
+			         {breadCrumbTitle: "Spring", url: "#spring"},
+			         {breadCrumbTitle: "Maven", url: "#maven"},
+			         {breadCrumbTitle: "Gradle", url: "#gradle"},
+			         {breadCrumbTitle: "Web Services", url: "#webservices"},
+			         {breadCrumbTitle: "Ant", url: "#ant"},
 			        ];
 };
 
