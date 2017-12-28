@@ -1,0 +1,206 @@
+<div class="panel panel-primary"><div class="panel-heading">Create Java project using Maven from cmd</div><div class="panel-body">
+mvn archetype:generate -DgroupId=com.activemq.practice -DartifactId=ActiveMQAllPractice -Dversion=1.0 -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Project Structure</div><div class="panel-body">
+<img class="img-responsive" ng-src="images/activemq/1-springActiveMq.jpg"/>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">pom.xml</div><div class="panel-body">
+<pre>
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+	xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+	&lt;groupId&gt;com.activemq.practice&lt;/groupId&gt;
+	&lt;artifactId&gt;ActiveMQAllPractice&lt;/artifactId&gt;
+	&lt;packaging&gt;jar&lt;/packaging&gt;
+	&lt;version&gt;1.0&lt;/version&gt;
+	&lt;name&gt;ActiveMQAllPractice&lt;/name&gt;
+	&lt;url&gt;http://maven.apache.org&lt;/url&gt;
+	&lt;dependencies&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;junit&lt;/groupId&gt;
+			&lt;artifactId&gt;junit&lt;/artifactId&gt;
+			&lt;version&gt;4.12&lt;/version&gt;
+			&lt;scope&gt;test&lt;/scope&gt;
+		&lt;/dependency&gt;
+
+		&lt;!-- for CoreJava + ActiveMQ --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+			&lt;artifactId&gt;activemq-all&lt;/artifactId&gt;
+			&lt;version&gt;5.15.0&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		&lt;!-- Camel + ActiveMQ --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-core&lt;/artifactId&gt;
+			&lt;version&gt;2.15.1&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-stream&lt;/artifactId&gt;
+			&lt;version&gt;2.15.1&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-jms&lt;/artifactId&gt;
+			&lt;version&gt;2.15.1&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+			&lt;artifactId&gt;activemq-camel&lt;/artifactId&gt;
+			&lt;version&gt;5.6.0&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+			&lt;artifactId&gt;activemq-pool&lt;/artifactId&gt;
+			&lt;version&gt;5.11.1&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+			&lt;artifactId&gt;commons-pool2&lt;/artifactId&gt;
+			&lt;version&gt;2.0&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		&lt;!-- Active MQ + Spring --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-jms&lt;/artifactId&gt;
+			&lt;version&gt;4.2.6.RELEASE&lt;/version&gt;
+		&lt;/dependency&gt;
+
+	&lt;/dependencies&gt;
+
+	&lt;build&gt;
+		&lt;finalName&gt;${project.artifactId}&lt;/finalName&gt;
+		&lt;plugins&gt;
+			&lt;plugin&gt;
+				&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+				&lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+				&lt;version&gt;3.5.1&lt;/version&gt;
+				&lt;configuration&gt;
+					&lt;source&gt;1.8&lt;/source&gt;
+					&lt;target&gt;1.8&lt;/target&gt;
+					&lt;meminitial&gt;128m&lt;/meminitial&gt;
+					&lt;maxmem&gt;512m&lt;/maxmem&gt;
+					&lt;showDeprecation&gt;true&lt;/showDeprecation&gt;
+					&lt;showWarnings&gt;true&lt;/showWarnings&gt;
+					&lt;compilerArgument&gt;-Xlint:all&lt;/compilerArgument&gt;
+					&lt;compilerArgument&gt;-parameters&lt;/compilerArgument&gt;
+				&lt;/configuration&gt;
+			&lt;/plugin&gt;
+		&lt;/plugins&gt;
+	&lt;/build&gt;
+&lt;/project&gt;
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">jmsContext.xml</div><div class="panel-body">
+<pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xmlns:jms=&quot;http://www.springframework.org/schema/jms&quot; xmlns:p=&quot;http://www.springframework.org/schema/p&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+    http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.0.xsd&quot;&gt;
+    
+    &lt;context:annotation-config&gt;&lt;/context:annotation-config&gt;
+	&lt;context:component-scan base-package=&quot;com.activemq.spring&quot;&gt;&lt;/context:component-scan&gt;  
+	&lt;bean id=&quot;messageSender&quot; class=&quot;com.activemq.spring.SimpleMessageSender&quot;&gt;&lt;/bean&gt;
+    &lt;bean id=&quot;simpleMessageListener&quot; class=&quot;com.activemq.spring.SimpleMessageListener&quot;&gt;&lt;/bean&gt;
+  
+  &lt;bean id=&quot;mqConnectionFactory&quot; class=&quot;org.apache.activemq.spring.ActiveMQConnectionFactory&quot;&gt;
+  	&lt;property name=&quot;brokerURL&quot; value=&quot;tcp://localhost:61616&quot;&gt;&lt;/property&gt;
+  &lt;/bean&gt;
+  
+  &lt;jms:listener-container container-type=&quot;default&quot; connection-factory=&quot;mqConnectionFactory&quot; acknowledge=&quot;auto&quot;&gt;
+  	&lt;jms:listener destination=&quot;CLIMATE&quot; ref=&quot;simpleMessageListener&quot; method=&quot;onMessage&quot;/&gt;
+  &lt;/jms:listener-container&gt;
+  
+  &lt;!-- To Send JMS Message --&gt;
+  &lt;bean id=&quot;mqJmsTemplate&quot; class=&quot;org.springframework.jms.core.JmsTemplate&quot;&gt;
+  	&lt;property name=&quot;connectionFactory&quot; ref=&quot;mqConnectionFactory&quot;&gt;&lt;/property&gt;
+  	&lt;property name=&quot;defaultDestinationName&quot; value=&quot;CLIMATE&quot;&gt;&lt;/property&gt;
+  &lt;/bean&gt;
+  
+&lt;/beans&gt;
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">SimpleMessageSender.java</div><div class="panel-body">
+<pre>
+package com.activemq.spring;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jms.core.JmsTemplate;
+
+public class SimpleMessageSender {
+
+	@Autowired
+	@Qualifier(&quot;mqJmsTemplate&quot;)
+	private JmsTemplate	jmsTemplate;
+
+	public void sendMessage(final String message) {
+		jmsTemplate.send((session) -&gt; {
+			return session.createTextMessage(message);
+		});
+	}
+}
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">SimpleMessageListener.java</div><div class="panel-body">
+<pre>
+package com.activemq.spring;
+
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.TextMessage;
+
+public class SimpleMessageListener implements MessageListener {
+
+	@Override
+	public void onMessage(Message message) {
+		try {
+			TextMessage msg = (TextMessage) message;
+			System.out.println(msg.getText());
+		} catch (JMSException e) {
+			e.printStackTrace();
+		}
+	}
+
+}
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">App.java</div><div class="panel-body">
+<pre>
+package com.activemq.spring;
+
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class App {
+
+	public static void main(String[] args) {
+		try (AbstractApplicationContext context = new ClassPathXmlApplicationContext(&quot;jmsContext.xml&quot;)) {
+			SimpleMessageSender sender = (SimpleMessageSender) context.getBean(&quot;messageSender&quot;);
+
+			// send message
+			sender.sendMessage(&quot;Hello ActiveMQ with Spring&quot;);
+		}
+	}
+}
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">SimpleMessageListener - Output</div><div class="panel-body">
+<pre>
+Hello ActiveMQ with Spring
+</pre>
+</div></div>

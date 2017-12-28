@@ -293,6 +293,11 @@ app.config(function($routeProvider){
 	
 	// Active MQ
 	.when("/activemq",{templateUrl : "activemq.html",controller : "cerebroController"})
+	.when("/coreJavaActiveMqQueue",{templateUrl : "coreJavaActiveMqQueue.html",controller : "cerebroController"})
+	.when("/coreJavaActiveMqTopic",{templateUrl : "coreJavaActiveMqTopic.html",controller : "cerebroController"})
+	.when("/coreJavaPublishSubscribe",{templateUrl : "coreJavaPublishSubscribe.html",controller : "cerebroController"})
+	.when("/coreJavaPublishSubscribeOneConsumerMultiProducers",{templateUrl : "coreJavaPublishSubscribeOneConsumerMultiProducers.html",controller : "cerebroController"})
+	.when("/springActiveMq",{templateUrl : "springActiveMq.html",controller : "cerebroController"})
 	
 	// IBM MQ
 	.when("/ibmmq",{templateUrl : "ibmmq.html",controller : "cerebroController"})

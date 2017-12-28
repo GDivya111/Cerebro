@@ -1,0 +1,171 @@
+<div class="panel panel-primary"><div class="panel-heading">Create Java project using Maven from cmd</div><div class="panel-body">
+mvn archetype:generate -DgroupId=com.activemq.practice -DartifactId=ActiveMQAllPractice -Dversion=1.0 -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Project Structure</div><div class="panel-body">
+<img class="img-responsive" ng-src="images/activemq/1-coreJavaActiveMqQueue.jpg"/>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">pom.xml</div><div class="panel-body">
+<pre>
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+	xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+	&lt;groupId&gt;com.activemq.practice&lt;/groupId&gt;
+	&lt;artifactId&gt;ActiveMQAllPractice&lt;/artifactId&gt;
+	&lt;packaging&gt;jar&lt;/packaging&gt;
+	&lt;version&gt;1.0&lt;/version&gt;
+	&lt;name&gt;ActiveMQAllPractice&lt;/name&gt;
+	&lt;url&gt;http://maven.apache.org&lt;/url&gt;
+	&lt;dependencies&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;junit&lt;/groupId&gt;
+			&lt;artifactId&gt;junit&lt;/artifactId&gt;
+			&lt;version&gt;4.12&lt;/version&gt;
+			&lt;scope&gt;test&lt;/scope&gt;
+		&lt;/dependency&gt;
+
+		&lt;!-- for CoreJava + ActiveMQ --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+			&lt;artifactId&gt;activemq-all&lt;/artifactId&gt;
+			&lt;version&gt;5.15.0&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		&lt;!-- Camel + ActiveMQ --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-core&lt;/artifactId&gt;
+			&lt;version&gt;2.15.1&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-stream&lt;/artifactId&gt;
+			&lt;version&gt;2.15.1&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-jms&lt;/artifactId&gt;
+			&lt;version&gt;2.15.1&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+			&lt;artifactId&gt;activemq-camel&lt;/artifactId&gt;
+			&lt;version&gt;5.6.0&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+			&lt;artifactId&gt;activemq-pool&lt;/artifactId&gt;
+			&lt;version&gt;5.11.1&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+			&lt;artifactId&gt;commons-pool2&lt;/artifactId&gt;
+			&lt;version&gt;2.0&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		&lt;!-- Active MQ + Spring --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-jms&lt;/artifactId&gt;
+			&lt;version&gt;4.2.6.RELEASE&lt;/version&gt;
+		&lt;/dependency&gt;
+
+	&lt;/dependencies&gt;
+
+	&lt;build&gt;
+		&lt;finalName&gt;${project.artifactId}&lt;/finalName&gt;
+		&lt;plugins&gt;
+			&lt;plugin&gt;
+				&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+				&lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+				&lt;version&gt;3.5.1&lt;/version&gt;
+				&lt;configuration&gt;
+					&lt;source&gt;1.8&lt;/source&gt;
+					&lt;target&gt;1.8&lt;/target&gt;
+					&lt;meminitial&gt;128m&lt;/meminitial&gt;
+					&lt;maxmem&gt;512m&lt;/maxmem&gt;
+					&lt;showDeprecation&gt;true&lt;/showDeprecation&gt;
+					&lt;showWarnings&gt;true&lt;/showWarnings&gt;
+					&lt;compilerArgument&gt;-Xlint:all&lt;/compilerArgument&gt;
+					&lt;compilerArgument&gt;-parameters&lt;/compilerArgument&gt;
+				&lt;/configuration&gt;
+			&lt;/plugin&gt;
+		&lt;/plugins&gt;
+	&lt;/build&gt;
+&lt;/project&gt;
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">TopicPractice.java</div><div class="panel-body">
+<pre>
+package topic.practice;
+
+import javax.jms.Connection;
+import javax.jms.DeliveryMode;
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageConsumer;
+import javax.jms.MessageProducer;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+
+import org.apache.activemq.ActiveMQConnectionFactory;
+import org.junit.Test;
+
+public class TopicPractice {
+
+	@Test
+	public void producer() throws JMSException {
+		ActiveMQConnectionFactory activeMqConnectionFactory = new ActiveMQConnectionFactory(
+				&quot;tcp://localhost:61616&quot;);
+		Connection connection = activeMqConnectionFactory.createConnection();
+		connection.start();
+
+		Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+
+		Destination topicDestination = session.createTopic(&quot;topic1&quot;);
+		MessageProducer messageProducer = session.createProducer(topicDestination);
+		messageProducer.setDeliveryMode(DeliveryMode.PERSISTENT);
+
+		TextMessage textMessage = session.createTextMessage(&quot;Hello ActiveMQ Topic: topic1&quot;);
+
+		messageProducer.send(textMessage);
+
+		session.close();
+		connection.close();
+	}
+
+	@Test
+	public void consumer() throws JMSException {
+		ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory(
+				&quot;tcp://localhost:61616&quot;);
+		Connection connection = activeMQConnectionFactory.createConnection();
+		connection.start();
+
+		Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+
+		Destination topicDestination = session.createTopic(&quot;topic1&quot;);
+		MessageConsumer messageConsumer = session.createConsumer(topicDestination);
+
+		Message message = messageConsumer.receive();
+		TextMessage textMessage = (TextMessage) message;
+		System.out.println(&quot;Recieved message: &quot; + message + &quot;, text: &quot; + textMessage.getText());
+
+		session.close();
+		connection.close();
+	}
+}
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Output</div><div class="panel-body">
+<pre>
+1. Execute consumer  test case
+2. Execute producer test case
+</pre>
+<pre>
+Recieved message: ActiveMQTextMessage {commandId = 5, responseRequired = true, messageId = ID:Admin-PC-57023-1514482826968-1:1:1:1:1, originalDestination = null, originalTransactionId = null, producerId = ID:Admin-PC-57023-1514482826968-1:1:1:1, destination = topic://topic1, transactionId = null, expiration = 0, timestamp = 1514482827237, arrival = 0, brokerInTime = 1514482827239, brokerOutTime = 1514482827241, correlationId = null, replyTo = null, persistent = true, type = null, priority = 4, groupID = null, groupSequence = 0, targetConsumerId = null, compressed = false, userID = null, content = org.apache.activemq.util.ByteSequence@10e31a9a, marshalledProperties = null, dataStructure = null, redeliveryCounter = 0, size = 0, properties = null, readOnlyProperties = true, readOnlyBody = true, droppable = false, jmsXGroupFirstForConsumer = false, text = Hello ActiveMQ Topic: topic1}, text: Hello ActiveMQ Topic: topic1
+</pre>
+</div></div>

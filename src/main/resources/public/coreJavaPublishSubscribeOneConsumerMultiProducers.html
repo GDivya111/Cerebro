@@ -1,0 +1,337 @@
+<div class="panel panel-primary"><div class="panel-heading">Create Java project using Maven from cmd</div><div class="panel-body">
+mvn archetype:generate -DgroupId=com.activemq.practice -DartifactId=ActiveMQAllPractice -Dversion=1.0 -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Project Structure</div><div class="panel-body">
+<img class="img-responsive" ng-src="images/activemq/1-coreJavaActiveMqQueue.jpg"/>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">pom.xml</div><div class="panel-body">
+<pre>
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+	xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+	&lt;groupId&gt;com.activemq.practice&lt;/groupId&gt;
+	&lt;artifactId&gt;ActiveMQAllPractice&lt;/artifactId&gt;
+	&lt;packaging&gt;jar&lt;/packaging&gt;
+	&lt;version&gt;1.0&lt;/version&gt;
+	&lt;name&gt;ActiveMQAllPractice&lt;/name&gt;
+	&lt;url&gt;http://maven.apache.org&lt;/url&gt;
+	&lt;dependencies&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;junit&lt;/groupId&gt;
+			&lt;artifactId&gt;junit&lt;/artifactId&gt;
+			&lt;version&gt;4.12&lt;/version&gt;
+			&lt;scope&gt;test&lt;/scope&gt;
+		&lt;/dependency&gt;
+
+		&lt;!-- for CoreJava + ActiveMQ --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+			&lt;artifactId&gt;activemq-all&lt;/artifactId&gt;
+			&lt;version&gt;5.15.0&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		&lt;!-- Camel + ActiveMQ --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-core&lt;/artifactId&gt;
+			&lt;version&gt;2.15.1&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-stream&lt;/artifactId&gt;
+			&lt;version&gt;2.15.1&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+			&lt;artifactId&gt;camel-jms&lt;/artifactId&gt;
+			&lt;version&gt;2.15.1&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+			&lt;artifactId&gt;activemq-camel&lt;/artifactId&gt;
+			&lt;version&gt;5.6.0&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+			&lt;artifactId&gt;activemq-pool&lt;/artifactId&gt;
+			&lt;version&gt;5.11.1&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+			&lt;artifactId&gt;commons-pool2&lt;/artifactId&gt;
+			&lt;version&gt;2.0&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		&lt;!-- Active MQ + Spring --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-jms&lt;/artifactId&gt;
+			&lt;version&gt;4.2.6.RELEASE&lt;/version&gt;
+		&lt;/dependency&gt;
+
+	&lt;/dependencies&gt;
+
+	&lt;build&gt;
+		&lt;finalName&gt;${project.artifactId}&lt;/finalName&gt;
+		&lt;plugins&gt;
+			&lt;plugin&gt;
+				&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+				&lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+				&lt;version&gt;3.5.1&lt;/version&gt;
+				&lt;configuration&gt;
+					&lt;source&gt;1.8&lt;/source&gt;
+					&lt;target&gt;1.8&lt;/target&gt;
+					&lt;meminitial&gt;128m&lt;/meminitial&gt;
+					&lt;maxmem&gt;512m&lt;/maxmem&gt;
+					&lt;showDeprecation&gt;true&lt;/showDeprecation&gt;
+					&lt;showWarnings&gt;true&lt;/showWarnings&gt;
+					&lt;compilerArgument&gt;-Xlint:all&lt;/compilerArgument&gt;
+					&lt;compilerArgument&gt;-parameters&lt;/compilerArgument&gt;
+				&lt;/configuration&gt;
+			&lt;/plugin&gt;
+		&lt;/plugins&gt;
+	&lt;/build&gt;
+&lt;/project&gt;
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">TopicProducer1.java</div><div class="panel-body">
+<pre>
+package com.one.consumer.multi.producer;
+
+import javax.jms.Connection;
+import javax.jms.DeliveryMode;
+import javax.jms.Destination;
+import javax.jms.MessageProducer;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+
+import org.apache.activemq.ActiveMQConnectionFactory;
+
+public class TopicProducer1 implements Runnable {
+
+	ActiveMQConnectionFactory	connectionFactory;
+
+	public TopicProducer1(ActiveMQConnectionFactory connectionFactory) {
+		this.connectionFactory = connectionFactory;
+	}
+
+	@Override
+	public void run() {
+		Connection connection;
+		Session session;
+		try {
+			connection = connectionFactory.createConnection();
+			connection.start();
+
+			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+
+			Destination topicDestination = session.createTopic(&quot;CLIMATE&quot;);
+			MessageProducer producer = session.createProducer(topicDestination);
+			producer.setDeliveryMode(DeliveryMode.PERSISTENT);
+
+			TextMessage message = session.createTextMessage(&quot;Message1&quot;);
+			producer.send(message);
+
+			session.close();
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">TopicProducer2.java</div><div class="panel-body">
+<pre>
+package com.one.consumer.multi.producer;
+
+import javax.jms.Connection;
+import javax.jms.DeliveryMode;
+import javax.jms.Destination;
+import javax.jms.MessageProducer;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+
+import org.apache.activemq.ActiveMQConnectionFactory;
+
+public class TopicProducer2 implements Runnable {
+
+	ActiveMQConnectionFactory	connectionFactory;
+
+	public TopicProducer2(ActiveMQConnectionFactory connectionFactory) {
+		this.connectionFactory = connectionFactory;
+	}
+
+	@Override
+	public void run() {
+		Connection connection;
+		Session session;
+		try {
+			connection = connectionFactory.createConnection();
+			connection.start();
+
+			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+
+			Destination topicDestination = session.createTopic(&quot;CLIMATE&quot;);
+			MessageProducer producer = session.createProducer(topicDestination);
+			producer.setDeliveryMode(DeliveryMode.PERSISTENT);
+
+			TextMessage message = session.createTextMessage(&quot;Message2&quot;);
+			producer.send(message);
+
+			session.close();
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">TopicConsumer.java</div><div class="panel-body">
+<pre>
+package com.one.consumer.multi.producer;
+
+import javax.jms.Connection;
+import javax.jms.Destination;
+import javax.jms.Message;
+import javax.jms.MessageConsumer;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+
+import org.apache.activemq.ActiveMQConnectionFactory;
+
+public class TopicConsumer implements Runnable {
+	private ActiveMQConnectionFactory	connectionFactory;
+
+	public TopicConsumer(ActiveMQConnectionFactory connectionFactory) {
+		this.connectionFactory = connectionFactory;
+	}
+
+	@Override
+	public void run() {
+		Connection connection;
+		Session session;
+		try {
+			connection = connectionFactory.createConnection();
+			connection.start();
+
+			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+
+			Destination topicDestination = session.createTopic(&quot;CLIMATE&quot;);
+			MessageConsumer consumer = session.createConsumer(topicDestination);
+			for (;;) {
+				Message message = consumer.receive();
+				TextMessage textMessage = (TextMessage) message;
+				System.out.println(&quot;--------------------------------------&quot;);
+				System.out.println(&quot;Text Message: &quot; + textMessage);
+				System.out.println(&quot;Message: &quot; + textMessage.getText());
+				System.out.println(&quot;--------------------------------------&quot;);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">App.java</div><div class="panel-body">
+<pre>
+package com.one.consumer.multi.producer;
+
+import org.apache.activemq.ActiveMQConnectionFactory;
+
+public class App {
+
+	public static void main(String[] args) {
+		try {
+			ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(&quot;tcp://localhost:61616&quot;);
+			TopicConsumer consumer = new TopicConsumer(connectionFactory);
+			Thread consumerThread = new Thread(consumer);
+			consumerThread.start();
+
+			Thread.sleep(1000 * 5);
+
+			Thread producer1 = new Thread(new TopicProducer1(connectionFactory));
+			Thread producer2 = new Thread(new TopicProducer2(connectionFactory));
+
+			producer1.start();
+			producer2.start();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+}
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">App.java - Output</div><div class="panel-body">
+<pre>
+--------------------------------------
+Text Message: ActiveMQTextMessage {commandId = 5, responseRequired = true, messageId = ID:Admin-PC-57258-1514483166044-1:3:1:1:1, originalDestination = null, originalTransactionId = null, producerId = ID:Admin-PC-57258-1514483166044-1:3:1:1, destination = topic://CLIMATE, transactionId = null, expiration = 0, timestamp = 1514483171083, arrival = 0, brokerInTime = 1514483171086, brokerOutTime = 1514483171087, correlationId = null, replyTo = null, persistent = true, type = null, priority = 4, groupID = null, groupSequence = 0, targetConsumerId = null, compressed = false, userID = null, content = org.apache.activemq.util.ByteSequence@5ab482b1, marshalledProperties = null, dataStructure = null, redeliveryCounter = 0, size = 0, properties = null, readOnlyProperties = true, readOnlyBody = true, droppable = false, jmsXGroupFirstForConsumer = false, text = Message1}
+Message: Message1
+--------------------------------------
+--------------------------------------
+Text Message: ActiveMQTextMessage {commandId = 5, responseRequired = true, messageId = ID:Admin-PC-57258-1514483166044-1:2:1:1:1, originalDestination = null, originalTransactionId = null, producerId = ID:Admin-PC-57258-1514483166044-1:2:1:1, destination = topic://CLIMATE, transactionId = null, expiration = 0, timestamp = 1514483171083, arrival = 0, brokerInTime = 1514483171086, brokerOutTime = 1514483171089, correlationId = null, replyTo = null, persistent = true, type = null, priority = 4, groupID = null, groupSequence = 0, targetConsumerId = null, compressed = false, userID = null, content = org.apache.activemq.util.ByteSequence@249cf188, marshalledProperties = null, dataStructure = null, redeliveryCounter = 0, size = 0, properties = null, readOnlyProperties = true, readOnlyBody = true, droppable = false, jmsXGroupFirstForConsumer = false, text = Message2}
+Message: Message2
+--------------------------------------
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">App2.java</div><div class="panel-body">
+<pre>
+package com.one.consumer.multi.producer;
+
+import javax.jms.Connection;
+import javax.jms.DeliveryMode;
+import javax.jms.Destination;
+import javax.jms.MessageProducer;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+
+import org.apache.activemq.ActiveMQConnectionFactory;
+
+public class App2 {
+
+	public static void main(String[] args) {
+		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(&quot;tcp://localhost:61616&quot;);
+
+		Connection connection;
+		Session session;
+		try {
+			connection = connectionFactory.createConnection();
+			connection.start();
+
+			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+
+			Destination topicDestination = session.createTopic(&quot;CLIMATE&quot;);
+			MessageProducer producer = session.createProducer(topicDestination);
+			producer.setDeliveryMode(DeliveryMode.PERSISTENT);
+
+			TextMessage message = session.createTextMessage(&quot;Message3&quot;);
+			producer.send(message);
+
+			session.close();
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">App2.java - Output</div><div class="panel-body">
+<pre>
+--------------------------------------
+Text Message: ActiveMQTextMessage {commandId = 5, responseRequired = true, messageId = ID:Admin-PC-57304-1514483231585-1:1:1:1:1, originalDestination = null, originalTransactionId = null, producerId = ID:Admin-PC-57304-1514483231585-1:1:1:1, destination = topic://CLIMATE, transactionId = null, expiration = 0, timestamp = 1514483231864, arrival = 0, brokerInTime = 1514483231866, brokerOutTime = 1514483231867, correlationId = null, replyTo = null, persistent = true, type = null, priority = 4, groupID = null, groupSequence = 0, targetConsumerId = null, compressed = false, userID = null, content = org.apache.activemq.util.ByteSequence@301e0694, marshalledProperties = null, dataStructure = null, redeliveryCounter = 0, size = 0, properties = null, readOnlyProperties = true, readOnlyBody = true, droppable = false, jmsXGroupFirstForConsumer = false, text = Message3}
+Message: Message3
+--------------------------------------
+</pre>
+</div></div>
