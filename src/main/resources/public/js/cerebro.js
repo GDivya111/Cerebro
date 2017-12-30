@@ -313,6 +313,9 @@ app.config(function($routeProvider){
 	// Authentication and Authorization
 	.when("/jwt",{templateUrl : "jwt.html",controller : "cerebroController"})
 	
+	// Hadoop
+	.when("/hadoop",{templateUrl : "hadoop.html",controller : "cerebroController"})
+	
 	// definitions start
 	.when("/definitions",{templateUrl : "definitions.html",controller : "definitionsController"})
 	.when("/addDefinitions",{templateUrl : "addDefinitions.html",controller : "definitionsController"})
@@ -375,7 +378,8 @@ var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsSe
 			         {breadCrumbTitle: "Maven", url: "#maven"},
 			         {breadCrumbTitle: "Gradle", url: "#gradle"},
 			         {breadCrumbTitle: "Web Services", url: "#webservices"},
-			         {breadCrumbTitle: "Ant", url: "#ant"}
+			         {breadCrumbTitle: "Ant", url: "#ant"},
+			         {breadCrumbTitle: "Hadoop", url: "#hadoop"}
 			        ];
 };
 
