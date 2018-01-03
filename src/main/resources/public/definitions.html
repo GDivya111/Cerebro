@@ -30,7 +30,7 @@
 <tr>
 	<tr ng-repeat="definition in definitionsList">
 		<td>{{definition.description}}</td>
-		<td><div ng-bind-html="definition.details"/></td>
+		<td><pre><code><div ng-bind-html="definition.details"/></code></pre></td>
 		<td>{{definition.imagePaths}}</td>
 	</tr>
 </tr>
