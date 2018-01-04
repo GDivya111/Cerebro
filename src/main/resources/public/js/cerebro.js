@@ -312,6 +312,8 @@ app.config(function($routeProvider){
 	
 	// Authentication and Authorization
 	.when("/jwt",{templateUrl : "jwt.html",controller : "cerebroController"})
+	.when("/oauth2",{templateUrl : "oauth2.html",controller : "cerebroController"})
+	.when("/openIdConnect",{templateUrl : "openIdConnect.html",controller : "cerebroController"})
 	
 	// Hadoop
 	.when("/hadoop",{templateUrl : "hadoop.html",controller : "cerebroController"})
