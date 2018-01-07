@@ -14,8 +14,147 @@
 </ul>
 
 <div style="margin-left:30%;padding:1px 16px;"> -->
+<div class="panel panel-primary"><div class="panel-heading">Materials</div><div class="panel-body">
+	<ul>
+		<li><a ng-href="https://www.javatpoint.com/java-regex" target="_blank">JavaTPoint</a></li>
+	</ul>
+</div></div>
+<div class="panel panel-primary" id="20"><div class="panel-heading">Regex patterns and description</div><div class="panel-body table-responsive">
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Pattern</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      	<td>[abc]</td>
+      	<td>a, b, or c (simple class)</td>
+      </tr>
+      <tr>
+      	<td>[^abc]</td>
+      	<td>Any character except a, b, or c (negation)</td>
+      </tr>
+      <tr>
+      	<td>[a-zA-Z]</td>
+      	<td>a through z or A through Z, inclusive (range)</td>
+      </tr>
+      <tr>
+      	<td>[a-d[m-p]]</td>
+      	<td>a through d, or m through p: [a-dm-p] (union)</td>
+      </tr>
+      <tr>
+      	<td>[a-z&&[def]]</td>
+      	<td>d, e, or f (intersection)</td>
+      </tr>
+      <tr>
+      	<td>[a-z&&[^bc]]</td>
+      	<td>a through z, except for b and c: [ad-z] (subtraction)</td>
+      </tr>
+      <tr>
+      	<td>[a-z&&[^m-p]]</td>
+      	<td>a through z, and not m through p: [a-lq-z](subtraction)</td>
+      </tr>
+    </tbody>
+    </table>
+</div></div>
 
-<div class="panel panel-primary" id="1"><div class="panel-heading">Alphanumeric</div><div class="panel-body">
+<div class="panel panel-primary" id="20"><div class="panel-heading">Regex Quantifiers</div><div class="panel-body table-responsive">
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Regex</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      	<td>X?</td>
+      	<td>X occurs once or not at all</td>
+      </tr>
+      <tr>
+      	<td>X+</td>
+      	<td>X occurs once or more times</td>
+      </tr>
+      <tr>
+      	<td>X*</td>
+      	<td>X occurs zero or more times</td>
+      </tr>
+      <tr>
+      	<td>X{n}</td>
+      	<td>X occurs n times only</td>
+      </tr>
+      <tr>
+      	<td>X{n,}</td>
+      	<td>X occurs n or more times</td>
+      </tr>
+      <tr>
+      	<td>X{y,z}</td>
+      	<td>X occurs at least y times but less than z times</td>
+      </tr>
+    </tbody>
+</table>
+</div></div>
+
+<div class="panel panel-primary" id="20"><div class="panel-heading">Regex Metacharacters</div><div class="panel-body table-responsive">
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Regex</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      	<td>.</td>
+      	<td>Any character (may or may not match terminator)</td>
+      </tr>
+      <tr>
+      	<td>\d</td>
+      	<td>Any digits, short of [0-9]</td>
+      </tr>
+      <tr>
+      	<td>\D</td>
+      	<td>Any non-digit, short for [^0-9]</td>
+      </tr>
+      <tr>
+      	<td>\s</td>
+      	<td>Any whitespace character, short for [\t\n\x0B\f\r]</td>
+      </tr>
+      <tr>
+      	<td>\S</td>
+      	<td>Any non-whitespace character, short for [^\s]</td>
+      </tr>
+      <tr>
+      	<td>\w</td>
+      	<td>Any word character, short for [a-zA-Z_0-9]</td>
+      </tr>
+      <tr>
+      	<td>\W</td>
+      	<td>Any non-word character, short for [^\w]</td>
+      </tr>
+      <tr>
+      	<td>\b</td>
+      	<td>A word boundary</td>
+      </tr>
+      <tr>
+      	<td>\B</td>
+      	<td>A non word boundary</td>
+      </tr>
+    </tbody>
+</table>
+</div></div>
+<div class="panel panel-primary" id="1"><div class="panel-heading">classes in java.util.regex package</div><div class="panel-body">
+<pre>
+1. MatchResult interface
+2. Matcher class
+3. Pattern class
+4. PatternSyntaxException class
+</pre>
+</div></div>
+
+<div class="panel panel-primary" id="2"><div class="panel-heading">Alphanumeric</div><div class="panel-body">
 <pre >
 <em>/**
 * ^[a-zA-Z0-9]*$ =&gt; Regular expression for Alpha numeric
@@ -41,6 +180,119 @@ pattern: ^[a-zA-Z0-9]*$
 &quot;abc123&quot;.matches(pattern): true
 &quot;abc@12#def&amp;&quot;.matches(pattern): false
 &quot;abc def&quot;.matches(pattern): false
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Single Character Pattern</div><div class="panel-body">
+<pre>
+public void singleCharacter() {
+	<em>// method 1</em>
+	Pattern pattern = Pattern.compile(&quot;.s&quot;); <em>// .(dot) represents single character</em>
+	Matcher m = pattern.matcher(&quot;as&quot;);
+	boolean value1 = m.matches();
+	System.out.println(&quot;value1: &quot; + value1); <em>// value1: true</em>
+
+	// method 2
+	boolean value2 = Pattern.compile(&quot;.s&quot;).matcher(&quot;as&quot;).matches();
+	System.out.println(&quot;value2: &quot; + value2); <em>// value2: true</em>
+
+	// method 3
+	boolean value3 = Pattern.matches(&quot;.s&quot;, &quot;as&quot;);
+	System.out.println(&quot;value3: &quot; + value3); <em>// value3: true</em>
+
+	boolean value4 = Pattern.matches(&quot;.s&quot;, &quot;abs&quot;);
+	System.out.println(&quot;value4: &quot; + value4); <em>// value4: false</em>
+}
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Simple pattern</div><div class="panel-body">
+<pre>
+public void method1() {
+	System.out.println(Pattern.matches(&quot;[adf]&quot;, &quot;a&quot;)); <em>// true</em>
+	System.out.println(Pattern.matches(&quot;[adf]&quot;, &quot;abc&quot;)); <em>// false</em>
+}
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Quantifiers</div><div class="panel-body">
+<pre>
+public void quantifiers() {
+	System.out.println(&quot;? quantifier&quot;);
+	System.out.println(Pattern.matches(&quot;[abc]?&quot;, &quot;a&quot;)); <em>// true</em>
+	System.out.println(Pattern.matches(&quot;[abc]?&quot;, &quot;aa&quot;)); <em>// false</em>
+	System.out.println(Pattern.matches(&quot;[abc]?&quot;, &quot;abcabc&quot;)); <em>// false</em>
+	System.out.println(Pattern.matches(&quot;[abc]?&quot;, &quot;abc&quot;)); <em>// false. a or b or c must occur only once</em>
+
+	System.out.println(&quot;+ quantifier&quot;);
+	System.out.println(Pattern.matches(&quot;[abc]+&quot;, &quot;a&quot;)); <em>// true</em>
+	System.out.println(Pattern.matches(&quot;[abc]+&quot;, &quot;abc&quot;)); <em>// true</em>
+	System.out.println(Pattern.matches(&quot;[abc]+&quot;, &quot;abde&quot;)); <em>// false. d and e are not matching pattern</em>
+
+	System.out.println(&quot;* quantifier&quot;);
+	System.out.println(Pattern.matches(&quot;[abc]*&quot;, &quot;a&quot;)); <em>// true</em>
+	System.out.println(Pattern.matches(&quot;[abc]*&quot;, &quot;abc&quot;)); <em>// true</em>
+	System.out.println(Pattern.matches(&quot;[abc]*&quot;, &quot;abcabc&quot;)); <em>// true</em>
+}
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Metacharacters</div><div class="panel-body">
+<pre>
+public void regexMetaCharacters() {
+	System.out.println(&quot;d metacharacter&quot;);
+	System.out.println(Pattern.matches(&quot;\\d&quot;, &quot;1&quot;)); <em>// true</em>
+	System.out.println(Pattern.matches(&quot;\\d&quot;, &quot;a&quot;)); <em>// false</em>
+	System.out.println(Pattern.matches(&quot;\\d&quot;, &quot;abc&quot;)); <em>// false</em>
+	System.out.println(Pattern.matches(&quot;\\d&quot;, &quot;123&quot;)); <em>// false</em>
+	System.out.println(Pattern.matches(&quot;\\d&quot;, &quot;123abc&quot;)); <em>// false</em>
+
+	System.out.println(&quot;D metacharacter&quot;);
+	System.out.println(Pattern.matches(&quot;\\D&quot;, &quot;1&quot;)); <em>// false</em>
+	System.out.println(Pattern.matches(&quot;\\D&quot;, &quot;a&quot;)); <em>// true</em>
+	System.out.println(Pattern.matches(&quot;\\D&quot;, &quot;abc&quot;)); <em>// false</em>
+	System.out.println(Pattern.matches(&quot;\\D&quot;, &quot;123&quot;)); <em>// false</em>
+	System.out.println(Pattern.matches(&quot;\\D&quot;, &quot;123abc&quot;)); <em>// false</em>
+	System.out.println(Pattern.matches(&quot;\\D*&quot;, &quot;abc&quot;)); <em>// true - non-digit 0 or more times</em>
+}
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Find word in a line</div><div class="panel-body">
+<pre>
+public void finder() {
+try (Scanner scanner = new Scanner(System.in)) {
+	while (true) {
+		System.out.println(&quot;Enter regex pattern: &quot;);
+		Pattern pattern = Pattern.compile(scanner.nextLine());
+		System.out.println(&quot;Enter text: &quot;);
+		Matcher matcher = pattern.matcher(scanner.nextLine());
+		boolean found = false;
+		while (matcher.find()) {
+			System.out.println(&quot;Found the text \&quot;&quot; + matcher.group() + &quot;\&quot; starting at index: &quot;
+					+ matcher.start() + &quot; and ending at index: &quot; + matcher.end());
+			found = true;
+		}
+
+		if (!found) {
+			System.out.println(&quot;No match found&quot;);
+		}
+	}
+}
+}
+</pre>
+<em>Output</em>
+<pre>
+Enter regex pattern: 
+java
+Enter text: 
+Welcome to Java regex
+No match found
+Enter regex pattern: 
+java
+Enter text: 
+welcome to java regex
+Found the text &quot;java&quot; starting at index: 11 and ending at index: 15
 </pre>
 </div></div>
 
