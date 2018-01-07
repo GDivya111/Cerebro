@@ -1138,4 +1138,69 @@ JDK8: outputDate: 10-Aug-2017 19:56:12
 </code></pre>
 </div></div>
 
+<div class="panel panel-primary" id="34"><div class="panel-heading">Format date based on Locale</div><div class="panel-body">
+<pre><code>
+import java.text.DateFormat;
+import java.util.Locale;
+import java.util.Date;
+
+public void formatDateBasedOnLocale() {
+		DateFormat denmarkDateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, new Locale(&quot;da&quot;, &quot;DK&quot;));
+		String date = denmarkDateFormat.format(new Date()); <em>// date is 7 Jan 2018</em>
+		System.out.println(date); <em>// 07-01-2018</em>
+
+		DateFormat ukDateFormat = DateFormat.getDateInstance(DateFormat.FULL, new Locale(&quot;en&quot;, &quot;UK&quot;));
+		String date2 = ukDateFormat.format(new Date());
+		System.out.println(date2); <em>// Sunday, January 7, 2018</em>
+	}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="35"><div class="panel-heading">Format Time based on Locale</div><div class="panel-body">
+<pre><code>
+import java.text.DateFormat;
+import java.util.Locale;
+import java.util.Date;
+
+public void formatTimeBaseOnLocale() {
+	DateFormat denmarkTimeFormat = DateFormat.getTimeInstance(DateFormat.FULL, new Locale(&quot;da&quot;, &quot;DK&quot;));
+	String time = denmarkTimeFormat.format(new Date());
+	System.out.println(time); <em>// 12:24:59 IST</em>
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="36"><div class="panel-heading">Format Date Time based on Locale</div><div class="panel-body">
+<pre><code>
+import java.text.DateFormat;
+import java.util.Locale;
+import java.util.Date;
+
+public void formatDateTimeBasedOnLocale() {
+	DateFormat dateTimeFormat = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.DEFAULT, new Locale(&quot;en&quot;, &quot;US&quot;));
+	String dateTime = dateTimeFormat.format(new Date());
+	System.out.println(dateTime); <em>// Sunday, January 7, 2018 12:26:44 PM</em>
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="37"><div class="panel-heading">Format day using DateFormatSymbols</div><div class="panel-body">
+<pre><code>
+import java.text.DateFormatSymbols;
+import java.util.Locale;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public void formatDaysUsingDateFormatSymbols() {
+	DateFormatSymbols dateFormatSymbols = new DateFormatSymbols(new Locale(&quot;da&quot;, &quot;DK&quot;));
+	dateFormatSymbols.setWeekdays(new String[] { &quot;unused&quot;, &quot;1-sunday&quot;, &quot;2-monday&quot;, &quot;3-tuesday&quot;,
+			&quot;4-wednesday&quot;, &quot;5-thursday&quot;, &quot;6-friday&quot;, &quot;7-saturday&quot; });
+	String pattern = &quot;EEEE MMMM yyyy&quot;;
+	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, dateFormatSymbols);
+
+	String date = simpleDateFormat.format(new Date());
+	System.out.println(date); <em>// 1-sunday januar 2018</em>
+}
+</code></pre>
+</div></div>
 <!-- </div> -->
