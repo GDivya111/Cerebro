@@ -36,7 +36,7 @@ app.config(function($routeProvider){
 	.when("/randomNumber",{templateUrl : "randomNumber.html",controller : "cerebroController"})
 	.when("/environmentVariables",{templateUrl : "environmentVariables.html",controller : "cerebroController"})
 	.when("/coreJavaImages",{templateUrl : "coreJavaImages.html",controller : "cerebroController"})
-	
+	.when("/javaInternationalization",{templateUrl : "javaInternationalization.html",controller : "cerebroController"})
 	
 	// Groovy
 	.when("/groovy",{templateUrl : "groovy.html",controller : "cerebroController"})

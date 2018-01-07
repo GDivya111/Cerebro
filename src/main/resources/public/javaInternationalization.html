@@ -1,0 +1,474 @@
+<script src="js/imageSlider.js"></script>
+<link rel="stylesheet" href="css/imageSlider.css">
+
+<div class="panel panel-primary"><div class="panel-heading">Materials</div><div class="panel-body">
+	<ul>
+		<li><a ng-href="http://tutorials.jenkov.com/java-internationalization/index.html" target="_blank">Jenkov Tutorial</a></li>
+	</ul>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Workspaces</div><div class="panel-body">
+	<ul>
+		<li>Eclipse Oxygen: <em>E:\workspaces\core-java-ws</em></li>	
+	</ul>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Projects</div><div class="panel-body">
+	<ul>
+		<li><a href="https://github.com/avinashbabudonthu/CoreJavaPractice.git" target="_blank">Github link</a></li>
+	</ul>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">LocalePractice.java</div><div class="panel-body">
+<em>Create Locale object by Country</em>
+<pre><code>
+import java.util.Locale;
+
+public void localObjectByCountry() {
+	Locale canadaLocale = Locale.CANADA;
+	System.out.println(&quot;canadaLocale: &quot; + canadaLocale + &quot;, Language: &quot; + canadaLocale.getLanguage()
+			+ &quot;, country: &quot; + canadaLocale.getCountry());
+	
+	Locale canadaFrenchLocale = Locale.CANADA_FRENCH;
+	System.out.println(&quot;canadaFrenchLocale: &quot; + canadaFrenchLocale); 
+	
+	Locale chineseLocale = Locale.CHINESE;
+	System.out.println(&quot;chineseLocale: &quot; + chineseLocale); 
+	
+	Locale chinaLocale = Locale.CHINA;
+	System.out.println(&quot;chinaLocale: &quot; + chinaLocale); 
+}
+</code></pre>
+<em>Output</em>
+<pre>
+canadaLocale: en_CA, Language: en, country: CA
+canadaFrenchLocale: fr_CA
+chineseLocale: zh
+chinaLocale: zh_CN
+</pre>
+
+<em>Create java.util.Locale object</em>
+<pre><code>
+public void createLocalObject() {
+	Locale englishLocale = new Locale(&quot;en&quot;);
+	System.out.println(&quot;englishLocale: &quot; + englishLocale); 
+	
+	Locale usLocale = new Locale(&quot;en&quot;, &quot;US&quot;);
+	System.out.println(&quot;usLocale: &quot; + usLocale); 
+	
+	Locale ukEnglishLocale = new Locale(&quot;en&quot;, &quot;UK&quot;);
+	System.out.println(&quot;ukEnglishLocale: &quot; + ukEnglishLocale); 
+	
+	Locale canadaEnglishLocale = new Locale(&quot;en&quot;, &quot;CA&quot;);
+	System.out.println(&quot;canadaEnglishLocale: &quot; + canadaEnglishLocale); 
+	
+	// using Locale.Builder
+	Locale usEnglishLocale2 = new Locale.Builder().setLanguage(&quot;en&quot;).setRegion(&quot;US&quot;).build();
+	System.out.println(&quot;usEnglishLocale2: &quot; + usEnglishLocale2); 
+	
+	// using forLanguageTag() method
+	Locale usEnglishLocale3 = Locale.forLanguageTag(&quot;en-US&quot;);
+	System.out.println(&quot;usEnglishLocale3: &quot; + usEnglishLocale3); 
+	}
+</code></pre>
+<em>Output</em>
+<pre>
+englishLocale: en
+usLocale: en_US
+ukEnglishLocale: en_UK
+canadaEnglishLocale: en_CA
+usEnglishLocale2: en_US
+usEnglishLocale3: en_US
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">ResourceBundlePractice.java</div><div class="panel-body">
+<em>src/main/resources/labels.properties</em>
+<pre>
+label1 = Welcome to I18N
+label2.label3 = Welcome to ResourceBundle
+</pre>
+<em>src/main/resources/labels_telugu.properties</em>
+<pre>
+label1 = Let's learn to I18N
+label2.label3 = Let's learn PropertyResourceBundle
+</pre>
+<em>Read labels from properties using ResourceBundle</em>
+<pre><code>
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.Set;
+
+public void propertyResourceBundle() {
+	Locale enUSLocale = new Locale(&quot;en&quot;, &quot;US&quot;);
+	ResourceBundle defaultResourceBundle = ResourceBundle.getBundle(&quot;labels&quot;, enUSLocale);
+	System.out.println(defaultResourceBundle.getString(&quot;label1&quot;)); 
+	System.out.println(defaultResourceBundle.getString(&quot;label2.label3&quot;)); 
+
+	Locale deLocale = new Locale(&quot;telugu&quot;);
+	ResourceBundle daResourceBundle = ResourceBundle.getBundle(&quot;labels&quot;, deLocale);
+	System.out.println(daResourceBundle.getString(&quot;label1&quot;)); 
+	System.out.println(daResourceBundle.getString(&quot;label2.label3&quot;));
+
+	// get all keys in a ResourceBundle
+	Set&lt;String&gt; keys = defaultResourceBundle.keySet();
+	System.out.println(&quot;keys: &quot; + keys); 
+	}
+</code></pre>
+<em>Output</em>
+<pre>
+Welcome to I18N
+Welcome to ResourceBundle
+Let's learn to I18N
+Let's learn PropertyResourceBundle
+keys: [label2.label3, label1]
+</pre>
+<em>class as ResourceBundle</em>
+<pre><code>
+package core.java.i18n;
+
+import java.util.ListResourceBundle;
+
+public class MyListResourceBundle extends ListResourceBundle {
+
+	private Object[][] contents = { { &quot;name&quot;, &quot;jack&quot; }, { &quot;course&quot;, &quot;Java&quot; }, { &quot;grade&quot;, 3.9 } };
+
+	@Override
+	protected Object[][] getContents() {
+		return contents;
+	}
+
+}
+</code></pre>
+<pre><code>
+package core.java.i18n;
+
+import java.util.ListResourceBundle;
+
+public class MyListResourceBundle_telugu extends ListResourceBundle {
+
+	private Object[][] contents = { { &quot;name&quot;, &quot;john&quot; }, { &quot;course&quot;, &quot;Groovy&quot; }, { &quot;grade&quot;, 3.8 } };
+
+	@Override
+	protected Object[][] getContents() {
+		return contents;
+	}
+
+}
+</code></pre>
+<pre><code>
+package core.java.i18n;
+
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.Set;
+
+public void listResourceBundle() {
+	Locale defaultLocale = new Locale(&quot;de&quot;);
+	ResourceBundle defaultResourceBundle = ResourceBundle.getBundle(&quot;core.java.i18n.MyListResourceBundle&quot;,
+			defaultLocale);
+	System.out.println(defaultResourceBundle.getObject(&quot;name&quot;)); 
+	System.out.println(defaultResourceBundle.getObject(&quot;course&quot;)); 
+	System.out.println(defaultResourceBundle.getObject(&quot;grade&quot;)); 
+	
+	Locale teluguLocale = new Locale(&quot;telugu&quot;);
+	ResourceBundle teluguResourceBundle = ResourceBundle.getBundle(&quot;core.java.i18n.MyListResourceBundle&quot;,
+			teluguLocale);
+	System.out.println(teluguResourceBundle.getObject(&quot;name&quot;)); 
+	System.out.println(teluguResourceBundle.getObject(&quot;course&quot;)); 
+	System.out.println(teluguResourceBundle.getObject(&quot;grade&quot;)); 
+}
+</code></pre>
+<em>Output</em>
+<pre>
+jack
+Java
+3.9
+john
+Groovy
+3.8
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">NumberFormatPractice.java</div><div class="panel-body">
+<em>Imports</em>
+<pre><code>
+import java.math.RoundingMode;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Currency;
+import java.util.Locale;
+</code></pre>
+<em>Create NumberFormat object</em>
+<pre><code>
+public void createNumberFormatObject() {
+	Locale denmarkLocale = new Locale(&quot;da&quot;, &quot;DK&quot;);
+	NumberFormat numberFormat = NumberFormat.getInstance(denmarkLocale);
+	System.out.println(numberFormat);
+}
+</code></pre>
+<em>Output</em>
+<pre><code>
+java.text.DecimalFormat@674dc
+</code></pre>
+<em>Format Number</em>
+<pre><code>
+public void formatNumber() {
+	Locale denmarkLocale = new Locale(&quot;da&quot;, &quot;DK&quot;);
+	NumberFormat numberFormat = NumberFormat.getInstance(denmarkLocale);
+	String number = numberFormat.format(133.45);
+	System.out.println(number);
+}
+</code></pre>
+<em>Output</em>
+<pre><code>
+133,45
+</code></pre>
+<em>Format Currency</em>
+<pre><code>
+public void formatCurrency() {
+		// Denmark currency
+		Locale denmarkLocale = new Locale(&quot;da&quot;, &quot;DK&quot;);
+		NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(denmarkLocale);
+		String currency = currencyFormat.format(1544.15);
+		System.out.println(currency); 
+
+		// US currency
+		Locale usLocale = new Locale(&quot;en&quot;, &quot;US&quot;);
+		NumberFormat currencyFormat2 = NumberFormat.getCurrencyInstance(usLocale);
+		String currency2 = currencyFormat2.format(1245.26);
+		System.out.println(currency2);
+
+		// India currency
+		Locale indiaLocale = new Locale(&quot;en&quot;, &quot;US&quot;);
+		NumberFormat currencyFormat3 = NumberFormat.getCurrencyInstance(indiaLocale);
+		currencyFormat3.setCurrency(Currency.getInstance(&quot;INR&quot;));
+		String currency3 = currencyFormat3.format(1245.26);
+		System.out.println(currency3);
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+kr 1.544,15
+$1,245.26
+INR1,245.26
+</code></pre>
+<em>Format Percentage</em>
+<pre><code>
+public void formatPercentage() {
+	Locale usLocale = new Locale(&quot;en&quot;, &quot;US&quot;);
+	NumberFormat percentageFormat = NumberFormat.getPercentInstance(usLocale);
+	String percentage = percentageFormat.format(99.56);
+	System.out.println(percentage);
+}
+</code></pre>
+<em>Output</em>
+<pre><code>
+9,956%
+</code></pre>
+<em>Minimum and Maximum number of digits</em>
+<pre><code>
+public void minMaxNoOfDigits() {
+	Locale usLocale = new Locale(&quot;en&quot;, &quot;US&quot;);
+	NumberFormat numberFormat = NumberFormat.getInstance(usLocale);
+	<em>// set min and max number of digits before decimal</em>
+	numberFormat.setMinimumIntegerDigits(2);
+	numberFormat.setMaximumIntegerDigits(9);
+
+	<em>// set min and max number of digits after decimal</em>
+	numberFormat.setMinimumFractionDigits(2);
+	numberFormat.setMaximumFractionDigits(6);
+
+	String number = numberFormat.format(1.2);
+	System.out.println(number);
+}
+</code></pre>
+<em>Output</em>
+<pre><code>
+01.20
+</code></pre>
+<em>Rounding Numbers</em>
+<pre><code>
+public void roundingNumbers() {
+	Locale usLocale = new Locale(&quot;en&quot;, &quot;US&quot;);
+	NumberFormat numberFormat = NumberFormat.getInstance(usLocale);
+	numberFormat.setRoundingMode(RoundingMode.HALF_DOWN);
+	numberFormat.setMinimumFractionDigits(0);
+	numberFormat.setMaximumFractionDigits(0);
+
+	String number = numberFormat.format(123.5);
+	System.out.println(number);
+}
+</code></pre>
+<em>Output</em>
+<pre><code>
+123
+</code></pre>
+<em>Parse Numbers</em>
+<pre><code>
+public void parseNumber() throws ParseException {
+	Locale usLocale = new Locale(&quot;en&quot;, &quot;US&quot;);
+	NumberFormat numberFormat = NumberFormat.getInstance(usLocale);
+	Number number = numberFormat.parse(&quot;125.12&quot;);
+	System.out.println(number);
+}
+</code></pre>
+<em>Output</em>
+<pre><code>
+125.12
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">DecimalFormatPractice.java</div><div class="panel-body">
+<em>Imports</em>
+<pre>
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.util.Locale;
+</pre>
+<em>Create DecimalFormat object</em>
+<pre><code>
+public void createDecimalFormatObject() {
+	String pattern = &quot;###,###.###&quot;;
+	DecimalFormat decimalFormat = new DecimalFormat(pattern);
+	System.out.println(decimalFormat);
+}
+</code></pre>
+<em>Output</em>
+<pre>
+java.text.DecimalFormat@674dc
+</pre>
+<em>Apply New Pattern</em>
+<pre><code>
+public void applyNewPatterns() {
+	String pattern1 = &quot;###,###.###&quot;;
+	DecimalFormat decimalFormat = new DecimalFormat(pattern1);
+	decimalFormat.applyPattern(&quot;#0.##&quot;);
+	System.out.println(decimalFormat);
+}
+</code></pre>
+<em>Output</em>
+<pre>
+java.text.DecimalFormat@674dc
+</pre>
+<em>Format Number</em>
+<pre><code>
+public void formatNumber() {
+	String pattern = &quot;###,###.###&quot;;
+	DecimalFormat decimalFormat = new DecimalFormat(pattern);
+	String formattedNumber = decimalFormat.format(123456789.123);
+	System.out.println(formattedNumber);
+}
+</code></pre>
+<em>Output</em>
+<pre>
+123,456,789.123
+</pre>
+<em>Format Number Specific To Locale</em>
+<pre><code>
+public void formatNumberSpecificToLocale() {
+	String pattern = &quot;###,###.###&quot;;
+
+	// US Locale
+	DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getNumberInstance(new Locale(&quot;en&quot;, &quot;US&quot;));
+	decimalFormat.applyPattern(pattern);
+	String formatNumber = decimalFormat.format(123456789.123);
+	System.out.println(formatNumber);
+
+	// Denmark Locale
+	DecimalFormat denmarkDecimalFormat = (DecimalFormat) NumberFormat
+			.getNumberInstance(new Locale(&quot;da&quot;, &quot;DK&quot;));
+	denmarkDecimalFormat.applyPattern(pattern);
+	String formatNumber2 = denmarkDecimalFormat.format(123456789.123);
+	System.out.println(formatNumber2);
+}
+</code></pre>
+<em>Output</em>
+<pre>
+123,456,789.123
+123.456.789,123
+</pre>
+<em>Custom Decimal Foramts</em>
+<pre><code>
+<em>/**
+ * Method to set custom separators for number
+ * 
+ * Other methods in DecimalFormatSymbols:
+ * setDecimalSeparator();
+setGroupingSeparator();
+setCurrency();
+setCurrencySymbol();
+setDecimalSeparator();
+setDigit();
+setExponentSeparator();
+setGroupingSeparator();
+setInfinity();
+setInternationalCurrencySymbol();
+setMinusSign();
+setMonetaryDecimalSeparator();
+setNaN();
+setPatternSeparator();
+setPercent();
+setPerMill();
+setZeroDigit();
+ */</em>
+@Test
+public void customDecimalFormats() {
+	DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols(new Locale(&quot;en&quot;, &quot;US&quot;));
+	decimalFormatSymbols.setDecimalSeparator(';');
+	decimalFormatSymbols.setGroupingSeparator(':');
+	
+	String pattern = &quot;#,##0.###&quot;;
+	DecimalFormat decimalFormat = new DecimalFormat(pattern, decimalFormatSymbols);
+	String number = decimalFormat.format(123456789.123);
+	System.out.println(number);
+}
+</code></pre>
+<em>Output</em>
+<pre>
+123:456:789;123
+</pre>
+<em>Grouing Digits</em>
+<pre><code>
+public void groupingDigits() {
+	String pattern1 = &quot;#,###.###&quot;;
+	DecimalFormat decimalFormat1 = new DecimalFormat(pattern1);
+	decimalFormat1.setGroupingSize(4);
+
+	String number = decimalFormat1.format(123456789.123);
+	System.out.println(number); <em>// 1,2345,6789.123</em>
+
+	String pattern2 = &quot;####,####.###&quot;;
+	DecimalFormat decimalFormat2 = new DecimalFormat(pattern2);
+	String number2 = decimalFormat2.format(123456789.123);
+	System.out.println(number2); <em>// 1,2345,6789.123</em>
+
+	String pattern3 = &quot;####,####.###&quot;;
+	DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols();
+	decimalFormatSymbols.setDecimalSeparator(';');
+	decimalFormatSymbols.setGroupingSeparator(':');
+	DecimalFormat decimalFormat3 = new DecimalFormat(pattern3, decimalFormatSymbols);
+	String number3 = decimalFormat3.format(123456789.123);
+	System.out.println(number3); <em>// 1:2345:6789;123</em>
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Images</div><div class="panel-body">
+<div class="row">
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/numberFormatPatternSyntax.jpg" onclick="openModal();currentSlide(1)" class="hover-shadow img-thumbnail">
+  </div>
+</div>
+
+<!-- The Modal/Lightbox -->
+<div id="myModal" class="modal">
+	<span class="close cursor" onclick="closeModal()">&times;</span>
+  	<div class="modal-content">
+  		<div class="mySlides">
+      		<img src="images/coreJava/numberFormatPatternSyntax.jpg" style="width:100%">
+    	</div>
+  	</div>
+</div>
+</div></div>
