@@ -318,6 +318,9 @@ app.config(function($routeProvider){
 	// Hadoop
 	.when("/hadoop",{templateUrl : "hadoop.html",controller : "cerebroController"})
 	
+	// Blockchain
+	.when("/blockchain",{templateUrl : "blockchain.html",controller : "cerebroController"})
+	
 	// definitions start
 	.when("/definitions",{templateUrl : "definitions.html",controller : "definitionsController"})
 	.when("/addDefinitions",{templateUrl : "addDefinitions.html",controller : "definitionsController"})
