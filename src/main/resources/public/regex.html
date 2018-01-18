@@ -296,4 +296,23 @@ Found the text &quot;java&quot; starting at index: 11 and ending at index: 15
 </pre>
 </div></div>
 
+<div class="panel panel-primary"><div class="panel-heading">Get all words in { and }</div><div class="panel-body">
+<pre>
+public void readPlaceHoldersInAString() {
+	String str = &quot;Hello {world}. welcome to {java} {regex}&quot;;
+	Pattern pattern = Pattern.compile(&quot;\\{\\w+\\}&quot;);
+	Matcher matcher = pattern.matcher(str);
+	List&lt;String&gt; placeHolders = new ArrayList&lt;&gt;();
+	while (matcher.find()) {
+		placeHolders.add(matcher.group());
+	}
+	System.out.println(placeHolders);
+}
+</pre>
+<em>Output</em>
+<pre>
+[{world}, {java}, {regex}]
+</pre>
+</div></div>
+
 <!-- </div> -->
