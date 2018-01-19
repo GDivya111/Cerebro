@@ -1,18 +1,9 @@
-<link rel="stylesheet" href="css/leftNav.css">
+<div class="panel panel-primary"><div class="panel-heading">Table of Contents</div><div class="panel-body">
 <ul>
-	<li><a class="active" ng-href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a></li>
-	
-	<!-- Bread Crumbs -->
-	<li class="subGroupHeading" ng-if="breadCrumbs.length > 0">Navigation</li>
-	<li ng-controller="cerebroController" ng-repeat="breadCrumb in breadCrumbs"><a ng-href="{{breadCrumb.link}}" ng-click="popBreadCrumb($index)">{{breadCrumb.name}}</a></li>
-	
-	<li class="subGroupHeading">Examples</li>
 	<li><a ng-click="navigate(1)">Create Table Scripts</a></li>
 	<li><a ng-click="navigate(2)">SQL Queries</a></li>
-	
 </ul>
-
-<div style="margin-left:30%;padding:1px 16px;">
+</div></div>
 
 <div class="panel panel-primary" id="1"><div class="panel-heading">Create Table Scripts</div><div class="panel-body table-responsive">
 <table class="table table-hover">
@@ -100,8 +91,6 @@ order by to_date(create_date,  'DD-MON-YY') desc;
 </tbody>
 </table>
 </div></div>
-
-</div>
 
 <!-- <div class="panel panel-primary"><div class="panel-heading">Topics</div><div class="panel-body">
 	<ul>

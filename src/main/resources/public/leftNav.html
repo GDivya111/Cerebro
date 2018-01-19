@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="css/leftNav.css">
+
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+    /* document.body.style.backgroundColor = "rgba(0,0,0,0.4)"; */
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+    /* document.body.style.backgroundColor = "white"; */
+}
+
+/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - 
+	This allows the user to have multiple dropdowns without any conflict */
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+} 
+</script>
+
+<div id="mySidenav" class="sidenav" ng-controller="cerebroController">
+  <span class="closebtn" onclick="closeNav()">&times;</span>
+  <a ng-repeat="leftNavigation in leftNavigations" ng-href="{{leftNavigation.url}}" ng-click="buildBreadCrumbs(leftNavigation.breadCrumbTitle, leftNavigation.url)">{{leftNavigation.breadCrumbTitle}}</a>
+  <button class="dropdown-btn">Dropdown <span class="glyphicon glyphicon-chevron-down"/></button>
+  <div class="dropdown-container">
+    <a href="">Link 1</a>
+    <a href="">Link 2</a>
+    <a href="">Link 3</a>
+  </div>
+</div>

@@ -378,13 +378,26 @@ var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsSe
 	// for left navigation - to build dynamically
 	$scope.leftNavigations = [
 			         {breadCrumbTitle: "Core Java", url: "#coreJava"},
+			         {breadCrumbTitle: "Scala", url: "#scala"},
 			         {breadCrumbTitle: "Groovy", url: "#groovy"},
 			         {breadCrumbTitle: "Spring", url: "#spring"},
 			         {breadCrumbTitle: "Maven", url: "#maven"},
+			         {breadCrumbTitle: "Ant", url: "#ant"},
 			         {breadCrumbTitle: "Gradle", url: "#gradle"},
 			         {breadCrumbTitle: "Web Services", url: "#webservices"},
-			         {breadCrumbTitle: "Ant", url: "#ant"},
-			         {breadCrumbTitle: "Hadoop", url: "#hadoop"}
+			         {breadCrumbTitle: "Oracle SQL Queries", url: "#oracleSql"},
+			         {breadCrumbTitle: "MongoDB", url: "#mongoDB"},
+			         {breadCrumbTitle: "JVM", url: "#jvm"},
+			         {breadCrumbTitle: "JDK Tools", url: "#jdkTools"},
+			         {breadCrumbTitle: "Garbage Collection", url: "#gc"},
+			         {breadCrumbTitle: "Hibernate", url: "#hibernate"},
+			         {breadCrumbTitle: "Eclipselink", url: "#eclipselink"},
+			         {breadCrumbTitle: "MyBatis", url: "#myBatis"},
+			         {breadCrumbTitle: "Unit Testing", url: "#unitTesting"},
+			         {breadCrumbTitle: "Spock", url: "#spock"},
+			         {breadCrumbTitle: "Open CSV", url: "#openCSV"},
+			         {breadCrumbTitle: "Hadoop", url: "#hadoop"},
+			         {breadCrumbTitle: "DB Scripts to Create Practice DB and pojo mappings", url: "#practiceDBScripts"}
 			        ];
 };
 

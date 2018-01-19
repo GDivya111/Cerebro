@@ -17,11 +17,14 @@
 	
 	<div class="col-sm-4">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Scala</div>
+			<div class="panel-heading">Groovy</div>
 			<div class="panel-body">
 				<ul>
-					<li><a ng-href="#installScala" ng-click="buildBreadCrumbs('Install Scala', '#installScala')">Installing Scala and Install SBT and Scala IDE (Eclipse based)</a></li>
-					<li><a ng-href="#scalaHelloWorldWithSbt" ng-click="buildBreadCrumbs('Scala Hello World with SBT', '#scalaHelloWorldWithSbt')">Scala Hello World with sbt</a></li>
+					<li>Groovy Installation</li>
+					<li>String Practice</li>
+					<li>Date Practice</li>
+					<li>Collections Practice</li>
+					<a ng-href="#groovy" ng-click="buildBreadCrumbs('Groovy', '#groovy')" class="btn btn-default btn-sm" role="button" style="border-radius: 25px;float: right;">SEE MORE</a>
 				</ul>
 			</div>
 		</div>
@@ -29,15 +32,19 @@
 	
 	<div class="col-sm-4">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Groovy</div>
+			<div class="panel-heading">Scala</div>
 			<div class="panel-body">
 				<ul>
-					<li>Groovy Installation</li>
-					<a ng-href="#groovy" ng-click="buildBreadCrumbs('Groovy', '#groovy')" class="btn btn-default btn-sm" role="button" style="border-radius: 25px;float: right;">SEE MORE</a>
+					<li><a ng-href="#installScala" ng-click="buildBreadCrumbs('Install Scala', '#installScala')">Installing Scala, SBT and Scala IDE</a></li>
+					<li><a ng-href="#scalaHelloWorldWithSbt" ng-click="buildBreadCrumbs('Scala Hello World with SBT', '#scalaHelloWorldWithSbt')">Scala Hello World with sbt</a></li>
+					<li>String Practice</li>
+					<li>Collections Practice</li>
+					<a ng-href="#scala" ng-click="buildBreadCrumbs('Scala', '#scala')" class="btn btn-default btn-sm" role="button" style="border-radius: 25px;float: right;">SEE MORE</a>
 				</ul>
 			</div>
 		</div>
 	</div>
+	
 </div>
 
 <hr />
@@ -76,18 +83,6 @@
 	
 	<div class="col-sm-4">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Spring Integration</div>
-			<div class="panel-body">
-				<ul>
-					<li>Spring Integration Hello World</li>
-					<a ng-href="#spring#14" ng-click="buildBreadCrumbs('Spring', '#spring')" class="btn btn-default btn-sm" role="button" style="border-radius: 25px;float: right;">SEE MORE</a>
-				</ul>
-			</div>
-		</div>
-	</div>
-	
-	<div class="col-sm-4">
-		<div class="panel panel-primary">
 			<div class="panel-heading">Spring Boot</div>
 			<div class="panel-body">
 				<ul>
@@ -96,6 +91,18 @@
 					<li><a ng-href="#springBootJsonAndXml" ng-click="buildBreadCrumbs('Spring Boot supports both JSON and Xml', '#springBootJsonAndXml')">Spring Boot supports both JSON and Xml</a></li>
 					<li><a ng-href="#springBootJetty" ng-click="buildBreadCrumbs('Spring Boot with Jetty Embedded server', '#springBootJetty')">Spring Boot with Jetty Embedded server</a></li>
 					<a ng-href="#spring#4" ng-click="buildBreadCrumbs('Spring', '#spring')" class="btn btn-default btn-sm" role="button" style="border-radius: 25px;float: right;">SEE MORE</a>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Spring Integration</div>
+			<div class="panel-body">
+				<ul>
+					<li>Spring Integration Hello World</li>
+					<a ng-href="#spring#14" ng-click="buildBreadCrumbs('Spring', '#spring')" class="btn btn-default btn-sm" role="button" style="border-radius: 25px;float: right;">SEE MORE</a>
 				</ul>
 			</div>
 		</div>
@@ -152,7 +159,7 @@
 <div class="row">
 	<div class="col-sm-4">
 		<div class="panel panel-primary">
-			<div class="panel-heading">RESTful Web Services with Jersey Implementation</div>
+			<div class="panel-heading">Jersey Implementation</div>
 			<div class="panel-body">
 				<ul>
 					<li><a ng-href="#jerseyRestGet" ng-click="buildBreadCrumbs('GET requests in Jersey Implementation', '#jerseyRestGet')">GET requests</a></li>
@@ -167,7 +174,7 @@
 
 	<div class="col-sm-4">
 		<div class="panel panel-primary">
-			<div class="panel-heading">RESTful Web Services with Spring Implementation</div>
+			<div class="panel-heading">Spring Implementation</div>
 			<div class="panel-body">
 				<ul>
 					<li><a ng-href="#springRestGet" ng-click="buildBreadCrumbs('Spring REST Get', '#springRestGet')">Spring REST GET</a></li>
@@ -182,7 +189,7 @@
 	
 	<div class="col-sm-4">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Apache CXF</div>
+			<div class="panel-heading">Apache CXF Implementation</div>
 			<div class="panel-body">
 				<ul>
 					<li>Get</li>
@@ -197,11 +204,13 @@
 
 	<div class="col-sm-4">
 		<div class="panel panel-primary">
-			<div class="panel-heading">RESTful Web Services with Dropwizard implementation</div>
+			<div class="panel-heading">Dropwizard implementation</div>
 			<div class="panel-body">
 				<ul>
-					<li><a ng-href="http://www.dropwizard.io/1.0.6/docs/getting-started.html" target="_blank">Getting Started</a></li>
-					<li><a ng-href="http://www.dropwizard.io/1.0.6/docs/manual/index.html#manual-index" target="_blank">Docs</a></li>
+					<li>GET</li>
+					<li>POST</li>
+					<li>PUT</li>
+					<li>DELETE</li>
 					<a ng-href="#webservices" ng-click="buildBreadCrumbs('Webservices', '#webservices')" class="btn btn-default btn-sm" role="button" style="border-radius: 25px;float: right;">SEE MORE</a>
 				</ul>
 			</div>
@@ -213,7 +222,11 @@
 			<div class="panel-heading">Apache Camel implementation</div>
 			<div class="panel-body">
 				<ul>
-					<li>REST API with Apache Camel</li>
+					<li>GET</li>
+					<li>POST</li>
+					<li>PUT</li>
+					<li>DELETE</li>
+					<a ng-href="#webservices" ng-click="buildBreadCrumbs('Webservices', '#webservices')" class="btn btn-default btn-sm" role="button" style="border-radius: 25px;float: right;">SEE MORE</a>
 				</ul>
 			</div>
 		</div>
@@ -224,7 +237,13 @@
 			<div class="panel-heading">Mule implementation</div>
 			<div class="panel-body">
 				<ul>
-					<li>REST API with Mule</li>
+					<ul>
+					<li>GET</li>
+					<li>POST</li>
+					<li>PUT</li>
+					<li>DELETE</li>
+					<a ng-href="#webservices" ng-click="buildBreadCrumbs('Webservices', '#webservices')" class="btn btn-default btn-sm" role="button" style="border-radius: 25px;float: right;">SEE MORE</a>
+				</ul>
 				</ul>
 			</div>
 		</div>
@@ -384,6 +403,19 @@
 		</div>
 	</div>
 	
+	<!-- MyBatis -->
+	<div class="col-sm-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">MyBatis</div>
+			<div class="panel-body">
+				<ul>
+					<li><a ng-href="#myBatisCrud" ng-click="buildBreadCrumbs('MyBatis Crud', '#myBatisCrud')">MyBatis Crud</a></li>
+					<a ng-href="#myBatis" ng-click="buildBreadCrumbs('MyBatis', '#myBatis')" class="btn btn-default btn-sm" role="button" style="border-radius: 25px;float: right;">SEE MORE</a>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
 	<!-- Eclipselink -->
 	<div class="col-sm-4">
 		<div class="panel panel-primary">
@@ -416,17 +448,7 @@
 			</div>
 		</div>
 	</div>
-	
-	<!-- MyBatis -->
-	<div class="col-sm-4"><div class="panel panel-primary"><div class="panel-heading">MyBatis</div>
-		<div class="panel-body">
-			<ul>
-				<li><a ng-href="#myBatisCrud" ng-click="buildBreadCrumbs('MyBatis Crud', '#myBatisCrud')">MyBatis Crud</a></li>
-				<a ng-href="#myBatis" ng-click="buildBreadCrumbs('MyBatis', '#myBatis')" class="btn btn-default btn-sm" role="button" style="border-radius: 25px;float: right;">SEE MORE</a>
-			</ul>
-		</div>
-	</div></div></div>
-
+</div>	
 <hr />
 
 <h4><em>Unit Testing</em></h4>
@@ -518,13 +540,10 @@
 		</div>
 	</div>
 </div>
-
 <hr />
 
-<h4><em><a ng-href="#tools" ng-click="buildBreadCrumbs('Tools', '#tools')">Tools</a></em></h4>
+<h4><a ng-href="#tools" ng-click="buildBreadCrumbs('Tools', '#tools')"><em>CSV Tools</em></a></h4>
 <div class="row">
-
-	<!-- CSV Tools -->
 	<div class="col-sm-4">
 		<div class="panel panel-primary">
 			<div class="panel-heading">CSV</div>
@@ -535,8 +554,11 @@
 			</div>
 		</div>
 	</div>
-	
-	<!-- JSON Tools Start -->
+</div>
+<hr />
+
+<h4><a ng-href="#tools" ng-click="buildBreadCrumbs('Tools', '#tools')"><em>JSON Tools</em></a></h4>
+<div class="row">
 	<div class="col-sm-4">
 		<div class="panel panel-primary">
 			<div class="panel-heading">Jackson Json</div>
@@ -608,10 +630,12 @@
 			</div>
 		</div>
 	</div>
-	<!-- JSON Tools End -->
-	
-	<!-- Beans Tools Start -->
-	<div class="col-sm-4">
+</div>
+<hr />
+
+<h4><a ng-href="#tools" ng-click="buildBreadCrumbs('Tools', '#tools')"><em>Beans Tools</em></a></h4>
+<div class="row">
+<div class="col-sm-4">
 		<div class="panel panel-primary">
 			<div class="panel-heading">Dozer</div>
 			<div class="panel-body">
@@ -621,8 +645,10 @@
 			</div>
 		</div>
 	</div>
-	<!-- Beans Tools End -->
+</div>
 
+<h4><em><a ng-href="#tools" ng-click="buildBreadCrumbs('Tools', '#tools')">Other Tools</a></em></h4>
+<div class="row">
 	<!-- Code Coverage Tools Start -->
 	<div class="col-sm-4">
 		<div class="panel panel-primary">
@@ -773,8 +799,8 @@
 			<div class="panel-heading">Angular JS 1</div>
 			<div class="panel-body">
 				<ul>
-					<li><a ng-href="#angular1HelloWorld" ng-click="buildBreadCrumbs('Angular 1 Hello World', '#angular1HelloWorld')">Angular 1 Hello World</a></li>
-					<li><a ng-href="#printMessage" ng-click="buildBreadCrumbs('Angular JS 1 print message in html by setting scope variable', '#printMessage')">Angular JS 1 print message in html by setting scope variable</a></li>
+					<li><a ng-href="#angular1HelloWorld" ng-click="buildBreadCrumbs('Angular 1 Hello World', '#angular1HelloWorld')">Hello World</a></li>
+					<li><a ng-href="#printMessage" ng-click="buildBreadCrumbs('Angular JS 1 print message in html by setting scope variable', '#printMessage')">print message in html by setting scope variable</a></li>
 					<li><a ng-href="#printMessageWithIIFY" ng-click="buildBreadCrumbs('Using Angular JS with IIFY', '#printMessageWithIIFY')">Using Angular JS with IIFY</a></li>
 					<li><a ng-href="#controller1" ng-click="buildBreadCrumbs('Angular Controller', '#controller1')">Angular Controller Hello World</a></li>
 					<a ng-href="#angular1" ng-click="buildBreadCrumbs('Angular 1', '#angular1')" class="btn btn-default btn-sm" role="button" style="border-radius: 25px;float: right;">SEE MORE</a>

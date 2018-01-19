@@ -22,27 +22,18 @@
   ga('create', 'UA-101524048-1', 'auto');
   ga('send', 'pageview');
 </script>
-<link rel="stylesheet" href="css/leftNav.css">
 
-<!-- <style type="text/css">
-pre{
-	border: 1px solid #AEB6BF;
-	background-color: #fff;
-}
-</style> -->
 </head>
 
 <body>
+
+<div ng-include=" 'leftNav.html' "></div>
+
+<!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+<div id="main">
+
 <!-- Top Navigation-->
 <div ng-include=" 'topNavigation.html'"></div>
-
-<!-- Left Navigation -->
-<div class="navbar navbar-inverse navbar-fixed-left" ng-controller="cerebroController">
-  <a class="navbar-brand" href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Cerebro</a>
-  <ul class="nav navbar-nav">
-   <li ng-repeat="leftNavigation in leftNavigations"><a ng-href="{{leftNavigation.url}}" ng-click="buildBreadCrumbs(leftNavigation.breadCrumbTitle, leftNavigation.url)">{{leftNavigation.breadCrumbTitle}}</a></li>
-  </ul>
-</div>
 
 <!-- Bread Crumb -->
 <div ng-controller="cerebroController"><div ng-if="breadCrumbs.length > 0">
@@ -65,6 +56,8 @@ pre{
 <a id="back-to-top" ng-click="scrollUp()" ng-controller="cerebroController" class="up btn btn-primary btn-lg" role="button" title="Click to return to top of the page">
 	<span  class="glyphicon glyphicon-chevron-up"></span>
 </a>
+
+</div>
 
 </body>
 </html>
