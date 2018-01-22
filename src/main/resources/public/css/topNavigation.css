@@ -23,7 +23,7 @@ body {
 
 /* Change the color of links on hover */
 .topnav a:hover {
-    background-color: #fff;
+    background-color: #ddd;
     color: #000;
     font-weight: bold;
 }
