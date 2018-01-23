@@ -176,7 +176,11 @@ app.config(function($routeProvider){
 	.when("/h2DB",{templateUrl : "h2DB.html",controller : "cerebroController"})
 	.when("/practiceDBScripts",{templateUrl : "practiceDBScripts.html",controller : "cerebroController"})
 	.when("/dbJoins",{templateUrl : "dbJoins.html",controller : "cerebroController"})
+
+	// Oracle
+	.when("/oracle",{templateUrl : "oracle.html",controller : "cerebroController"})
 	.when("/oracleSql",{templateUrl : "oracleSql.html",controller : "cerebroController"})
+	.when("/oracleDdl",{templateUrl : "oracleDdl.html",controller : "cerebroController"})
 	
 	// Scala
 	.when("/scala",{templateUrl : "scala.html",controller : "cerebroController"})
@@ -385,7 +389,7 @@ var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsSe
 			         {breadCrumbTitle: "Ant", url: "#ant"},
 			         {breadCrumbTitle: "Gradle", url: "#gradle"},
 			         {breadCrumbTitle: "Web Services", url: "#webservices"},
-			         {breadCrumbTitle: "Oracle SQL Queries", url: "#oracleSql"},
+			         {breadCrumbTitle: "Oracle", url: "#oracle"},
 			         {breadCrumbTitle: "MongoDB", url: "#mongoDB"},
 			         {breadCrumbTitle: "JVM", url: "#jvm"},
 			         {breadCrumbTitle: "JDK Tools", url: "#jdkTools"},

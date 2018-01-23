@@ -1,0 +1,155 @@
+<div class="panel panel-primary"><div class="panel-heading">Table of Contents</div><div class="panel-body">
+<ul>
+	<li><a ng-click="navigate(1)">Create Table Scripts</a></li>
+	<li><a ng-click="navigate(2)">Check constraint</a></li>
+	<li><a ng-click="navigate(3)">Alter/Modify/Rename/Drop table/column</a></li>
+	<li><a ng-click="navigate(4)">Foreign Key</a></li>
+</ul>
+</div></div>
+
+<div class="panel panel-primary" id="1"><div class="panel-heading">Create Table Scripts</div><div class="panel-body table-responsive">
+<table class="table table-hover">
+<thead>
+	<tr>
+		<th>SQL Command Description</th>
+        <th>SQL</th>
+	</tr>
+</thead>
+<tbody>
+<tr>
+	<td>Table creation with BLOB column and specify column size</td>
+	<td><pre>create table pictures(name varchar(32) not null primary key, pic blob(16M));</pre></td>
+</tr>
+<tr>
+	<td>Create table with BLOB column. Do not specify the column size</td>
+	<td><pre>CREATE TABLE a_table (blob_col BLOB);</pre></td>
+</tr>
+<tr>
+	<td>Create table with CLOB column</td>
+	<td><pre>CREATE TABLE a_table (blob_col CLOB);</pre></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+
+<div class="panel panel-primary" id="2"><div class="panel-heading">Check constraint</div><div class="panel-body table-responsive">
+<em>Constaint along with column</em>
+<pre>
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int CHECK (Age&gt;=18)
+);
+</pre>
+<em>Declare constraint separately</em>
+<pre>
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    City varchar(255),
+    CONSTRAINT CHK_Person CHECK (Age&gt;=18 AND City='Sandnes')
+);
+</pre>
+<pre>
+CREATE TABLE suppliers
+(
+  supplier_id numeric(4),
+  supplier_name varchar2(50),
+  CONSTRAINT check_supplier_name
+  CHECK (supplier_name = upper(supplier_name))
+);
+</pre>
+<em>Alter table add check constraint</em>
+<pre>
+ALTER TABLE Persons ADD CHECK (Age&gt;=18);
+</pre>
+<pre>
+ALTER TABLE Persons ADD CONSTRAINT CHK_PersonAge CHECK (Age&gt;=18 AND City='Sandnes');
+</pre>
+<pre>
+ALTER TABLE suppliers ADD CONSTRAINT check_supplier_name CHECK (supplier_name IN ('IBM', 'Microsoft', 'NVIDIA'));
+</pre>
+<em>Enable Check constraint</em>
+<pre>ALTER TABLE table_name ENABLE CONSTRAINT constraint_name;</pre>
+<pre>ALTER TABLE suppliers ENABLE CONSTRAINT check_supplier_id;</pre>
+<em>Disable check constaint</em>
+<pre>ALTER TABLE table_name DISABLE CONSTRAINT constraint_name;</pre>
+<pre>ALTER TABLE suppliers DISABLE CONSTRAINT check_supplier_id;</pre>
+<em>Drop check constraint</em>
+<pre>
+ALTER TABLE Persons DROP CONSTRAINT CHK_PersonAge;
+</pre>
+</div></div>
+
+<div class="panel panel-primary" id="3"><div class="panel-heading">Alter/Modify/Rename/Drop table/column</div><div class="panel-body table-responsive">
+<em>Add Columns to Table</em>
+<pre>ALTER TABLE table_name ADD column_name column-definition;</pre>
+<pre>ALTER TABLE customers ADD customer_name varchar2(45);</pre>
+<em>Add column with default value</em>
+<pre>ALTER TABLE customers ADD city varchar2(40) DEFAULT 'Hyderabad';</pre>
+<em>Add Multiple columns in a table</em>
+<pre>
+ALTER TABLE table_name
+  ADD (column_1 column-definition,
+       column_2 column-definition,
+       ...
+       column_n column_definition);
+</pre>
+<pre>
+ALTER TABLE customers
+  ADD (customer_name varchar2(45),
+       city varchar2(40) DEFAULT 'Hyderabad');
+</pre>
+<em>Modify Column</em>
+<pre>ALTER TABLE table_name MODIFY column_name column_type;</pre>
+<pre>ALTER TABLE customers MODIFY customer_name varchar2(100) NOT NULL;</pre>
+<pre>ALTER TABLE customers MODIFY city varchar2(75) DEFAULT 'Hyderabad' NOT NULL;</pre>
+<em>Modify Multiple columns</em>
+<pre>
+ALTER TABLE table_name
+  MODIFY (column_1 column_type,
+          column_2 column_type,
+          ...
+          column_n column_type);
+</pre>
+<pre>
+ALTER TABLE customers
+  MODIFY (customer_name varchar2(100) NOT NULL,
+          city varchar2(75) DEFAULT 'Hyderabad' NOT NULL);
+</pre>
+<em>Drop Column</em>
+<pre>ALTER TABLE table_name DROP COLUMN column_name;</pre>
+<pre>ALTER TABLE customers DROP COLUMN customer_name;</pre>
+<em>Rename column</em>
+<pre>ALTER TABLE table_name RENAME COLUMN old_name TO new_name;</pre>
+<pre>ALTER TABLE customers RENAME COLUMN customer_name TO cname;</pre>
+<em>Rename Table</em>
+<pre>ALTER TABLE table_name RENAME TO new_table_name;</pre>
+<pre>ALTER TABLE customers RENAME TO contacts;</pre>
+</div></div>
+
+<div class="panel panel-primary" id="4"><div class="panel-heading">Foreign Key</div><div class="panel-body table-responsive">
+<em>Add along with column</em>
+<pre>
+CREATE TABLE EMP
+(
+ EMPNO NUMBER(32)
+,ENAME VARCHAR2(50)
+,DEPTNO NUMBER(32) CONSTRAINT DEPTNO_FK REFERENCES DEPT(DEPTNO) ON DELETE CASCADE
+,JOB VARCHAR2(50)
+,SAL NUMBER(32)
+,COMM NUMBER(32)
+,MGR NUMBER(32) CONSTRAINT MGR_FK REFERENCES EMP(EMPNO)
+,HIREDATE DATE
+,ACTIVE BOOLEAN
+,CONSTRAINT EMPNO_PK PRIMARY KEY(EMPNO)
+);
+</pre>
+<em>Alter table - add foreign key</em>
+<pre>
+ALTER TABLE SCHEMA_NAME.EMP ADD FOREIGN KEY (DEPTNO) REFERENCES SCHEMA_NAME.DEPT(DEPTNO)
+</pre>
+</div></div>

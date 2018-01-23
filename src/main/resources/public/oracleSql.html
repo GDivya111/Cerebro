@@ -1,36 +1,10 @@
 <div class="panel panel-primary"><div class="panel-heading">Table of Contents</div><div class="panel-body">
 <ul>
-	<li><a ng-click="navigate(1)">Create Table Scripts</a></li>
-	<li><a ng-click="navigate(2)">SQL Queries</a></li>
+	<li><a ng-click="navigate(1)">SQL Queries</a></li>
 </ul>
 </div></div>
 
-<div class="panel panel-primary" id="1"><div class="panel-heading">Create Table Scripts</div><div class="panel-body table-responsive">
-<table class="table table-hover">
-<thead>
-	<tr>
-		<th>SQL Command Description</th>
-        <th>SQL</th>
-	</tr>
-</thead>
-<tbody>
-<tr>
-	<td>Table creation with BLOB column and specify column size</td>
-	<td><pre>create table pictures(name varchar(32) not null primary key, pic blob(16M));</pre></td>
-</tr>
-<tr>
-	<td>Create table with BLOB column. Do not specify the column size</td>
-	<td><pre>CREATE TABLE a_table (blob_col BLOB);</pre></td>
-</tr>
-<tr>
-	<td>Create table with CLOB column</td>
-	<td><pre>CREATE TABLE a_table (blob_col CLOB);</pre></td>
-</tr>
-</tbody>
-</table>
-</div></div>
-
-<div class="panel panel-primary" id="2"><div class="panel-heading">SQL Queries</div><div class="panel-body table-responsive">
+<div class="panel panel-primary" id="1"><div class="panel-heading">SQL Queries</div><div class="panel-body table-responsive">
 <table class="table table-hover">
 <thead>
 	<tr>
@@ -91,10 +65,3 @@ order by to_date(create_date,  'DD-MON-YY') desc;
 </tbody>
 </table>
 </div></div>
-
-<!-- <div class="panel panel-primary"><div class="panel-heading">Topics</div><div class="panel-body">
-	<ul>
-		<li><a ng-click="navigate(1)">Create Table Scripts</a></li>
-		<li><a ng-click="navigate(2)">SQL Queries</a></li>
-	</ul>
-</div></div> -->
