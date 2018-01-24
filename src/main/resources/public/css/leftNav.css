@@ -78,6 +78,7 @@
 
 /* Add an active class to the active dropdown button */
 .active {
-  background-color: green;
-  color: white;
+  background-color: #ddd;
+  color: #000;
+  font-weight: bold;
 }

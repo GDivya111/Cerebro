@@ -15,7 +15,7 @@ function closeNav() {
 
 /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - 
 	This allows the user to have multiple dropdowns without any conflict */
-var dropdown = document.getElementsByClassName("dropdown-btn");
+/* var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;
 
 for (i = 0; i < dropdown.length; i++) {
@@ -28,10 +28,11 @@ for (i = 0; i < dropdown.length; i++) {
       dropdownContent.style.display = "block";
     }
   });
-} 
+} */ 
 </script>
 
-<div id="mySidenav" class="sidenav" ng-controller="cerebroController">
+<!-- Working code -->
+<!-- <div id="mySidenav" class="sidenav" ng-controller="cerebroController">
   <span class="closebtn" onclick="closeNav()">&times;</span>
   <a ng-repeat="leftNavigation in leftNavigations" ng-href="{{leftNavigation.url}}" ng-click="buildBreadCrumbs(leftNavigation.breadCrumbTitle, leftNavigation.url)">{{leftNavigation.breadCrumbTitle}}</a>
   <button class="dropdown-btn">Spring<span class="glyphicon glyphicon-chevron-down"/></button>
@@ -40,4 +41,16 @@ for (i = 0; i < dropdown.length; i++) {
     <a href="#spring#2">Spring MVC</a>
     <a href="#spring#3">Spring Rest</a>
   </div>
+</div> -->
+
+<div id="mySidenav" class="sidenav" ng-controller="cerebroController">
+  <span class="closebtn" onclick="closeNav()">&times;</span>
+  <a ng-repeat="leftNavigation in leftNavigations" ng-href="{{leftNavigation.url}}" ng-click="buildBreadCrumbs(leftNavigation.breadCrumbTitle, leftNavigation.url)">{{leftNavigation.breadCrumbTitle}}</a>
+  
+  <span ng-repeat="leftNavTopicsWithSubTopic in leftNavTopicsWithSubTopics">
+  <button class="dropdown-btn">{{leftNavTopicsWithSubTopic.name}}<span class="glyphicon glyphicon-chevron-down"/></button>
+  <div class="dropdown-container">
+    <a ng-repeat="subTopic in leftNavTopicsWithSubTopic.subTopics" ng-href="{{subTopic.url}}" ng-click="buildBreadCrumbs(subTopic.name, subTopic.url)">{{subTopic.name}}</a>
+  </div>
+  </span>
 </div>

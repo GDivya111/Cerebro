@@ -329,6 +329,25 @@ app.config(function($routeProvider){
 });
 
 var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsService){
+	
+	$scope.dropDownInLeftMenu = function(){
+		 /*Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - 
+		This allows the user to have multiple dropdowns without any conflict*/ 
+		var dropdown = document.getElementsByClassName("dropdown-btn");
+		var i;
+	
+		for (i = 0; i < dropdown.length; i++) {
+		  dropdown[i].addEventListener("click", function() {
+		    this.classList.toggle("active");
+		    var dropdownContent = this.nextElementSibling;
+		    if (dropdownContent.style.display === "block") {
+		      dropdownContent.style.display = "none";
+		    } else {
+		      dropdownContent.style.display = "block";
+		    }
+		  });
+		}
+	}
 
 	$(document).ready(function(e){
 	    $('.search-panel .dropdown-menu').find('a').click(function(e) {
@@ -340,6 +359,8 @@ var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsSe
 			$('.search-panel span#search_concept').text(concept);
 			$('.input-group #search_param').val(param);
 		});
+	    
+	    $scope.dropDownInLeftMenu();
 	});
 	
 	$scope.navigate = function(id){
@@ -399,6 +420,21 @@ var CerebroController = function($scope, $location, $anchorScroll, breadCrumbsSe
 			         {breadCrumbTitle: "Hadoop", url: "#hadoop"},
 			         {breadCrumbTitle: "DB Scripts to Create Practice DB and pojo mappings", url: "#practiceDBScripts"}
 			        ];
+	
+	$scope.leftNavTopicsWithSubTopics = [
+		{name: "Spring", subTopics: [
+			{name: "Spring Core", 	url: "#spring#1"},
+			{name: "Spring MVC", 	url: "#spring#2"},
+			{name: "Spring REST", 	url: "#spring#3"}]
+		},
+		{name: "ORM", subTopics:[
+			{name: "Hibernate", 	url: "#hibernate"},
+			{name: "Eclipselink", 	url: "#myBatis"},
+			{name: "MyBatis", 		url: "#eclipselink"}]
+		}
+	];
+	
+	
 };
 
 var DefinitionsController = function($scope, $location, $anchorScroll, $http, breadCrumbsService){
