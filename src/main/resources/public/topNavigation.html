@@ -1,7 +1,15 @@
 <link rel="stylesheet" href="css/topNavigation.css">
 
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+    /* document.body.style.backgroundColor = "rgba(0,0,0,0.4)";*/
+}
+</script>
+
 <div class="topnav" ng-controller="cerebroController">
-  <a  ng-href="" onclick="openNav()" title="Menu">&#9776; </a>
+  <a  ng-href="" onclick="openNav()" title="Menu"><span class="glyphicon glyphicon-menu-hamburger"/></a>
   <a ng-href="#home" ng-click="popBreadCrumb(-1)"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Cerebro</a>
   <a href="#study" ng-click="buildBreadCrumbs('Study', '#study')">Study</a>
   <a href="#definitions" ng-click="buildBreadCrumbs('Definitions', '#definitions')">Definitions</a>
