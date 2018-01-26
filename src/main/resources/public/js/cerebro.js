@@ -67,6 +67,10 @@ app.config(function($routeProvider){
 	.when("/eclipselink",{templateUrl : "eclipselink.html",controller : "cerebroController"})
 	.when("/eclipselinkGenerateMetaModel",{templateUrl : "eclipselinkGenerateMetaModel.html",controller : "cerebroController"})
 	
+	// JPA Practice
+	.when("/jpa",{templateUrl : "jpa.html",controller : "cerebroController"})
+	.when("/jpaHelloWorld",{templateUrl : "jpaHelloWorld.html",controller : "cerebroController"})
+	
 	// maven start
 	.when("/maven",{templateUrl : "maven.html",controller : "cerebroController"})
 	.when("/installMaven",{templateUrl : "installMaven.html",controller : "cerebroController"})
