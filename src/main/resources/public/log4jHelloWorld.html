@@ -1,0 +1,102 @@
+<div class="panel panel-primary"><div class="panel-heading">Steps</div><div class="panel-body">
+<pre>
+1. Create Core Java Project
+2. Add log4j dependency in pom.xml
+3. Add log4j.properties file in src/main/resources
+4. Add org.apache.log4j.Logger in the required class
+5. Use java.lang.invoke.MethodHandles to create Logger object
+6. Add logger message
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">log4j entry in pom.xml entry</div><div class="panel-body">
+<pre><code>
+&lt;dependency&gt;
+ &lt;groupId&gt;log4j&lt;/groupId&gt;
+ &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+ &lt;version&gt;1.2.17&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">src/main/resources/log4j.properties</div><div class="panel-body">
+<pre><code>
+log4j.rootLogger = DEBUG, stdout, file
+
+#Redirect log messages to console
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.target=System.out
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
+
+## Redirect log messages to file. support file rolling
+log4j.appender.file=org.apache.log4j.RollingFileAppender
+log4j.appender.file.File=C:\\codebases\\CoreJavaPractice\\logs\\test.log
+log4j.appender.file.MaxFileSize=5MB
+log4j.appender.file.MaxBackupIndex=10
+log4j.appender.file.layout=org.apache.log4j.PatternLayout
+log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd} %-5p %c{1}:%L - %m%n
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Log4JPractice.java</div><div class="panel-body">
+<pre><code>
+package core.java.log4j;
+
+import org.apache.log4j.Logger;
+import org.junit.Test;
+
+public class Log4JPractice {
+
+	private static final Logger LOGGER = Logger.getLogger(Log4JPractice.class);
+
+	@Test
+	public void debugLogMessages() {
+		LOGGER.debug(&quot;debug message&quot;);
+	}
+
+	@Test
+	public void errorLogMessage() {
+		LOGGER.error(&quot;error message&quot;);
+	}
+	
+	@Test
+	public void logException() {
+		try {
+			int result = 10 / 0;
+			System.out.println(result);
+		} catch (Exception e) {
+			LOGGER.error(&quot;Exception in divide&quot;, e);
+		}
+	}
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Console Output</div><div class="panel-body">
+<pre><code>
+2018-01-28 14:05:14 DEBUG Log4JPractice:12 - debug message
+2018-01-28 14:05:14 ERROR Log4JPractice:17 - error message
+2018-01-28 ERROR Log4JPractice:26 - Exception in divide
+java.lang.ArithmeticException: / by zero
+	at core.java.log4j.Log4JPractice.logException(Log4JPractice.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">test.log</div><div class="panel-body">
+<pre><code>
+2018-01-28 14:05:14 DEBUG Log4JPractice:12 - debug message
+2018-01-28 14:05:14 ERROR Log4JPractice:17 - error message
+2018-01-28 ERROR Log4JPractice:26 - Exception in divide
+java.lang.ArithmeticException: / by zero
+	at core.java.log4j.Log4JPractice.logException(Log4JPractice.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+</code></pre>
+</div></div>

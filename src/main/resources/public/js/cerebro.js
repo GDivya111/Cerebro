@@ -219,7 +219,6 @@ app.config(function($routeProvider){
 	.when("/camelUnmarshalCsv",{templateUrl : "camelUnmarshalCsv.html",controller : "cerebroController"})
 	.when("/camelMarshalCsv",{templateUrl : "camelMarshalCsv.html",controller : "cerebroController"})
 	
-	
 	// Mule
 	.when("/mule",{templateUrl : "mule.html",controller : "cerebroController"})
 	
@@ -328,6 +327,16 @@ app.config(function($routeProvider){
 	
 	// Blockchain
 	.when("/blockchain",{templateUrl : "blockchain.html",controller : "cerebroController"})
+	
+	// Log4J
+	.when("/log4j",{templateUrl : "log4j.html",controller : "cerebroController"})
+	.when("/log4jHelloWorld",{templateUrl : "log4jHelloWorld.html",controller : "cerebroController"})
+	.when("/log4jMethodHandles",{templateUrl : "log4jMethodHandles.html",controller : "cerebroController"})
+	
+	// Java Util Logging
+	.when("/utilLogging",{templateUrl : "utilLogging.html",controller : "cerebroController"})
+	.when("/utilLoggingHelloWorld",{templateUrl : "utilLoggingHelloWorld.html",controller : "cerebroController"})
+	.when("/utilLoggingMethodHandles",{templateUrl : "utilLoggingMethodHandles.html",controller : "cerebroController"})
 	
 	// definitions start
 	.when("/definitions",{templateUrl : "definitions.html",controller : "definitionsController"})

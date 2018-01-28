@@ -1,0 +1,82 @@
+<div class="panel panel-primary"><div class="panel-heading">Materials</div><div class="panel-body">
+	<ul>
+		<li><a href="https://www.mkyong.com/logging/log4j-hello-world-example/" target="_blank">Log4J Hello World Example</a></li>
+		<li><a href="https://www.tutorialspoint.com/log4j/index.htm" target="_blank">Tutorials point</a></li>
+	</ul>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Workspaces</div><div class="panel-body">
+<ul>
+	<li>Eclipse Oxygen: <em>E:\workspaces\core-java-ws</em></li>
+</ul>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Projects</div><div class="panel-body">
+	<ul>
+		<li><a href="https://github.com/avinashbabudonthu/CoreJavaPractice.git" target="_blank">Github link</a></li>
+		<li>classes to refer:
+			<ul>
+				<li>core.java.log4j.Log4JPractice</li>
+				<li>core.java.log4j.MethodHandlesPractice</li>
+			</ul>
+		</li>
+	</ul>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Log4J Formats</div><div class="panel-body table-responsive">
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Format</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      	<td>%d{yyyy-MM-dd HH:mm:ss}</td>
+      	<td>Date and time format, refer to SimpleDateFormat JavaDoc</td>
+      </tr>
+      <tr>
+      	<td>%-5p</td>
+      	<td>The logging priority, like DEBUG or ERROR. The -5 is optional, for the pretty print format</td>
+      </tr>
+      <tr>
+      	<td>%c{1}</td>
+      	<td>The logging name we set via getLogger()</td>
+      </tr>
+      <tr>
+      	<td>%L</td>
+      	<td>The line number from where the logging request</td>
+      </tr>
+      <tr>
+      	<td>%m%n</td>
+      	<td>The message to log and line break</td>
+      </tr>
+    </tbody>
+</table>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Priority.java</div><div class="panel-body">
+<em>If priority is defined in log4j.properties, only the same or above priority message will be logged</em>
+<pre><code>
+package org.apache.log4j;
+
+public class Priority {
+
+  public final static int OFF_INT = Integer.MAX_VALUE;
+  public final static int FATAL_INT = 50000;
+  public final static int ERROR_INT = 40000;
+  public final static int WARN_INT  = 30000;
+  public final static int INFO_INT  = 20000;
+  public final static int DEBUG_INT = 10000;
+    //public final static int FINE_INT = DEBUG_INT;
+  public final static int ALL_INT = Integer.MIN_VALUE;
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Examples</div><div class="panel-body">
+	<ul>
+		<li><a ng-href="#log4jHelloWorld" ng-click="buildBreadCrumbs('Log4J Hello World', '#log4jHelloWorld')">Log4J Hello World</a></li>
+		<li><a ng-href="#log4jMethodHandles" ng-click="buildBreadCrumbs('Log4J + MethodHandles', '#log4jMethodHandles')">Log4J + MethodHandles</a></li>
+	</ul>
+</div></div>

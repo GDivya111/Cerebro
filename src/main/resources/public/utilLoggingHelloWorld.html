@@ -1,0 +1,34 @@
+<div class="panel panel-primary"><div class="panel-heading">Steps</div><div class="panel-body">
+<pre>
+1. Create java.util.logging.Logger object
+2. Add log messages
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">UtilLoggingPractice.java</div><div class="panel-body">
+<pre><code>
+package core.java.util.logging;
+
+import java.util.logging.Logger;
+
+import org.junit.Test;
+
+public class UtilLoggingPractice {
+
+	private static final Logger LOGGER = Logger.getLogger(&quot;UtilLoggingPractice&quot;);
+
+	@Test
+	public void infoLogMessage() {
+		LOGGER.info(&quot;info message&quot;);
+	}
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Console Output</div><div class="panel-body">
+<pre><code>
+Jan 28, 2018 2:23:29 PM core.java.util.logging.UtilLoggingPractice infoLogMessage
+INFO: info message
+</code></pre>
+</div></div>

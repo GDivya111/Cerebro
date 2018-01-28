@@ -1,0 +1,35 @@
+<div class="panel panel-primary"><div class="panel-heading">Steps</div><div class="panel-body">
+<pre>
+1. Create java.util.logging.Logger object
+2. Add log messages
+</pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">UtilLoggingPractice.java</div><div class="panel-body">
+<pre><code>
+package core.java.util.logging;
+
+import java.lang.invoke.MethodHandles;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.junit.Test;
+
+public class MethodHandlesPractice {
+
+	private static final Logger LOGGER = Logger.getLogger(MethodHandles.lookup().lookupClass().getCanonicalName());
+
+	@Test
+	public void severeMessage() {
+		LOGGER.log(Level.SEVERE, &quot;severe message&quot;);
+	}
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Console Output</div><div class="panel-body">
+<pre><code>
+Jan 28, 2018 2:23:51 PM core.java.util.logging.MethodHandlesPractice severeMessage
+SEVERE: severe message
+</code></pre>
+</div></div>
