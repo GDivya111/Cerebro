@@ -144,6 +144,9 @@ app.config(function($routeProvider){
 	.when("/springBootHelloWorldGradle",{templateUrl : "springBootHelloWorldGradle.html",controller : "cerebroController"})
 	.when("/springBootIT2",{templateUrl : "springBootIT2.html",controller : "cerebroController"})
 	
+	// Spring Batch
+	.when("/springBatchHelloWorld",{templateUrl : "springBatchHelloWorld.html",controller : "cerebroController"})
+	
 	// tools start
 	.when("/tools",{templateUrl : "tools.html",controller : "cerebroController"})
 	.when("/jacksonReadJson",{templateUrl : "readJson.html",controller : "cerebroController"})
