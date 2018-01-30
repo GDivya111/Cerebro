@@ -101,3 +101,329 @@ mvn archetype:generate -DgroupId=spring.batch.hello.world -DartifactId=SpringBat
 &lt;/project&gt;
 </code></pre>
 </div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">context.xml</div><div class="panel-body">
+<pre><code>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+	xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+	xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+	&lt;bean id=&quot;jobRepository&quot; class=&quot;org.springframework.batch.core.repository.support.JobRepositoryFactoryBean&quot;&gt;
+		&lt;property name=&quot;dataSource&quot; ref=&quot;dataSourceBean&quot;/&gt;
+		&lt;property name=&quot;transactionManager&quot; ref=&quot;transactionManager&quot;/&gt;
+		&lt;property name=&quot;databaseType&quot; value=&quot;h2&quot;/&gt;
+	&lt;/bean&gt;
+	
+	&lt;bean id=&quot;jobLauncherBean&quot; class=&quot;org.springframework.batch.core.launch.support.SimpleJobLauncher&quot;&gt;
+		&lt;property name=&quot;jobRepository&quot; ref=&quot;jobRepository&quot;/&gt;
+	&lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">database.xml</div><div class="panel-body">
+<pre><code>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+	xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+	xmlns:jdbc=&quot;http://www.springframework.org/schema/jdbc&quot;
+	xsi:schemaLocation=&quot;http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+	&lt;bean id=&quot;dataSourceBean&quot; class=&quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;
+		&lt;property name=&quot;driverClassName&quot; value=&quot;org.h2.Driver&quot; /&gt;
+		&lt;property name=&quot;url&quot; value=&quot;jdbc:h2:file:E:\\Backup\\JavaPrep\\practiceProjects\\Spring\\SpringBatchProjects\\SpringBatchHelloWorld\\src\\main\\resources\\db\\springBatch;MV_STORE=FALSE&quot; /&gt;
+		&lt;property name=&quot;username&quot; value=&quot;root&quot; /&gt;
+		&lt;property name=&quot;password&quot; value=&quot;password&quot; /&gt;
+	&lt;/bean&gt;
+	
+	&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.batch.support.transaction.ResourcelessTransactionManager&quot;&gt;&lt;/bean&gt;
+	
+	&lt;jdbc:initialize-database data-source=&quot;dataSourceBean&quot;&gt;
+		&lt;jdbc:script location=&quot;org/springframework/batch/core/schema-drop-h2.sql&quot;/&gt;
+		&lt;jdbc:script location=&quot;org/springframework/batch/core/schema-h2.sql&quot;/&gt;
+	&lt;/jdbc:initialize-database&gt;
+&lt;/beans&gt;
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">file1.csv</div><div class="panel-body">
+<pre><code>
+1001,&quot;213,100&quot;,980,&quot;jack&quot;, 29/7/2013
+1002,&quot;320,200&quot;,1080,&quot;john&quot;, 30/7/2013
+1003,&quot;342,197&quot;,1200,&quot;jill&quot;, 31/7/2013
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">ReportFieldSetMapper.java</div><div class="panel-body">
+<pre><code>
+package com.spring.batch.mapper;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import org.springframework.batch.item.file.mapping.FieldSetMapper;
+import org.springframework.batch.item.file.transform.FieldSet;
+import org.springframework.validation.BindException;
+
+import com.spring.batch.model.Report;
+
+public class ReportFieldSetMapper implements FieldSetMapper&lt;Report&gt; {
+
+	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);
+
+	@Override
+	public Report mapFieldSet(FieldSet fieldSet) throws BindException {
+		Report report = new Report();
+		report.setId(fieldSet.readInt(0));
+		report.setSales(fieldSet.readLong(1));
+		report.setQty(fieldSet.readInt(2));
+		report.setStaffName(fieldSet.readString(3));
+
+		String date = fieldSet.readString(4);
+		try {
+			report.setDate(simpleDateFormat.parse(date));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return report;
+	}
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">CustomItemProcessor.java</div><div class="panel-body">
+<pre><code>
+package com.spring.batch.processor;
+
+import org.springframework.batch.item.ItemProcessor;
+
+import com.spring.batch.model.Report;
+
+public class CustomItemProcessor implements ItemProcessor&lt;Report, Report&gt; {
+
+	@Override
+	public Report process(Report item) throws Exception {
+		System.out.println(&quot;Processing: &quot; + item);
+		return item;
+	}
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Report.java</div><div class="panel-body">
+<pre><code>
+package com.spring.batch.model;
+
+import java.util.Date;
+
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = &quot;record&quot;)
+public class Report {
+
+	private int id;
+	private Long sales;
+	private int qty;
+	private String staffName;
+	private Date date;
+
+	@XmlAttribute(name = &quot;id&quot;)
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	@XmlAttribute(name = &quot;sales&quot;)
+	public Long getSales() {
+		return sales;
+	}
+
+	public void setSales(Long sales) {
+		this.sales = sales;
+	}
+
+	@XmlAttribute(name = &quot;qty&quot;)
+	public int getQty() {
+		return qty;
+	}
+
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+
+	@XmlAttribute(name = &quot;staff-name&quot;)
+	public String getStaffName() {
+		return staffName;
+	}
+
+	public void setStaffName(String staffName) {
+		this.staffName = staffName;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">job-hello-world.xml</div><div class="panel-body">
+<pre><code>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+	xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+	xmlns:batch=&quot;http://www.springframework.org/schema/batch&quot;
+	xsi:schemaLocation=&quot;http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+	&lt;import resource=&quot;../config/context.xml&quot;/&gt;
+	&lt;import resource=&quot;../config/database.xml&quot;/&gt;
+	
+	&lt;bean id=&quot;report&quot; class=&quot;com.spring.batch.model.Report&quot; scope=&quot;prototype&quot; /&gt;
+	&lt;bean id=&quot;itemProcessor&quot; class=&quot;com.spring.batch.processor.CustomItemProcessor&quot; /&gt;
+	
+	&lt;batch:job id=&quot;helloWorldJob&quot;&gt;
+		&lt;batch:step id=&quot;step1&quot;&gt;
+			&lt;batch:tasklet&gt;
+				&lt;batch:chunk reader=&quot;csvFileItemReader&quot; writer=&quot;xmlItemWriter&quot; processor=&quot;itemProcessor&quot; commit-interval=&quot;10&quot;/&gt;
+			&lt;/batch:tasklet&gt;
+		&lt;/batch:step&gt;
+	&lt;/batch:job&gt;
+	
+	&lt;bean id=&quot;csvFileItemReader&quot; class=&quot;org.springframework.batch.item.file.FlatFileItemReader&quot;&gt;
+		&lt;property name=&quot;resource&quot; value=&quot;classpath:csvs/file1.csv&quot;/&gt;
+		
+		&lt;property name=&quot;lineMapper&quot;&gt;
+			&lt;bean class=&quot;org.springframework.batch.item.file.mapping.DefaultLineMapper&quot;&gt;
+				&lt;property name=&quot;lineTokenizer&quot;&gt;
+					&lt;bean class=&quot;org.springframework.batch.item.file.transform.DelimitedLineTokenizer&quot;&gt;
+						&lt;property name=&quot;names&quot; value=&quot;id,salary,qty,staffName,date&quot;/&gt;
+					&lt;/bean&gt;
+				&lt;/property&gt;
+				&lt;property name=&quot;fieldSetMapper&quot;&gt;
+					&lt;bean class=&quot;com.spring.batch.mapper.ReportFieldSetMapper&quot;/&gt;
+				&lt;/property&gt;
+			&lt;/bean&gt;
+		&lt;/property&gt;
+	&lt;/bean&gt;
+	
+	&lt;bean id=&quot;xmlItemWriter&quot; class=&quot;org.springframework.batch.item.xml.StaxEventItemWriter&quot;&gt;
+		&lt;property name=&quot;resource&quot; value=&quot;file:xml/outputs/report.xml&quot;/&gt;
+		&lt;property name=&quot;marshaller&quot; ref=&quot;reportMarshaller&quot;/&gt;
+		&lt;property name=&quot;rootTagName&quot; value=&quot;report&quot;/&gt;
+	&lt;/bean&gt;
+	
+	&lt;bean id=&quot;reportMarshaller&quot; class=&quot;org.springframework.oxm.jaxb.Jaxb2Marshaller&quot;&gt;
+		&lt;property name=&quot;classesToBeBound&quot;&gt;
+			&lt;list&gt;
+				&lt;value&gt;com.spring.batch.model.Report&lt;/value&gt;
+			&lt;/list&gt;
+		&lt;/property&gt;
+	&lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">App.java</div><div class="panel-body">
+<pre><code>
+package spring.batch.test;
+
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class App {
+	public static void main(String[] args) {
+		String[] springConfig = { &quot;jobs\\job-hello-world.xml&quot; };
+
+		try (AbstractApplicationContext applicationContext = new ClassPathXmlApplicationContext(springConfig);) {
+			JobLauncher jobLauncher = (JobLauncher) applicationContext.getBean(&quot;jobLauncherBean&quot;);
+			Job job = (Job) applicationContext.getBean(&quot;helloWorldJob&quot;);
+			JobExecution jobExecution = jobLauncher.run(job, new JobParameters());
+			System.out.println(&quot;Exit Status: &quot; + jobExecution.getStatus());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Console Output</div><div class="panel-body">
+<pre><code>
+Jan 30, 2018 7:57:14 PM org.springframework.context.support.ClassPathXmlApplicationContext prepareRefresh
+INFO: Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@73f792cf: startup date [Tue Jan 30 19:57:14 IST 2018]; root of context hierarchy
+Jan 30, 2018 7:57:14 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [jobs/job-hello-world.xml]
+Jan 30, 2018 7:57:15 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [config/context.xml]
+Jan 30, 2018 7:57:15 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [config/database.xml]
+Jan 30, 2018 7:57:15 PM org.springframework.beans.factory.support.DefaultListableBeanFactory registerBeanDefinition
+INFO: Overriding bean definition for bean 'helloWorldJob': replacing [Generic bean: class [org.springframework.batch.core.configuration.xml.SimpleFlowFactoryBean]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null] with [Generic bean: class [org.springframework.batch.core.configuration.xml.JobParserJobFactoryBean]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null]
+Jan 30, 2018 7:57:16 PM org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@18078bef: defining beans [jobRepository,jobLauncherBean,dataSourceBean,transactionManager,org.springframework.jdbc.datasource.init.DataSourceInitializer#0,report,itemProcessor,org.springframework.batch.core.scope.internalStepScope,org.springframework.beans.factory.config.CustomEditorConfigurer,org.springframework.batch.core.configuration.xml.CoreNamespacePostProcessor,step1,helloWorldJob,csvFileItemReader,xmlItemWriter,reportMarshaller]; root of factory hierarchy
+Jan 30, 2018 7:57:16 PM org.springframework.jdbc.datasource.DriverManagerDataSource setDriverClassName
+INFO: Loaded JDBC driver: org.h2.Driver
+Jan 30, 2018 7:57:18 PM org.springframework.batch.core.launch.support.SimpleJobLauncher afterPropertiesSet
+INFO: No TaskExecutor has been set, defaulting to synchronous executor.
+Jan 30, 2018 7:57:22 PM org.springframework.jdbc.datasource.init.ResourceDatabasePopulator executeSqlScript
+INFO: Executing SQL script from class path resource [org/springframework/batch/core/schema-drop-h2.sql]
+Jan 30, 2018 7:57:22 PM org.springframework.jdbc.datasource.init.ResourceDatabasePopulator executeSqlScript
+INFO: Done executing SQL script from class path resource [org/springframework/batch/core/schema-drop-h2.sql] in 92 ms.
+Jan 30, 2018 7:57:22 PM org.springframework.jdbc.datasource.init.ResourceDatabasePopulator executeSqlScript
+INFO: Executing SQL script from class path resource [org/springframework/batch/core/schema-h2.sql]
+Jan 30, 2018 7:57:22 PM org.springframework.jdbc.datasource.init.ResourceDatabasePopulator executeSqlScript
+INFO: Done executing SQL script from class path resource [org/springframework/batch/core/schema-h2.sql] in 43 ms.
+Jan 30, 2018 7:57:22 PM org.springframework.oxm.jaxb.Jaxb2Marshaller createJaxbContextFromClasses
+INFO: Creating JAXBContext with classes to be bound [class com.spring.batch.model.Report]
+Jan 30, 2018 7:57:26 PM org.springframework.batch.core.launch.support.SimpleJobLauncher run
+INFO: Job: [FlowJob: [name=helloWorldJob]] launched with the following parameters: [{}]
+Jan 30, 2018 7:57:28 PM org.springframework.batch.core.job.SimpleStepHandler handleStep
+INFO: Executing step: [step1]
+<em>
+Processing: com.spring.batch.model.Report@721eb7df
+Processing: com.spring.batch.model.Report@1ea9f009
+Processing: com.spring.batch.model.Report@5d52e3ef</em>
+Jan 30, 2018 7:57:33 PM org.springframework.batch.core.launch.support.SimpleJobLauncher run
+INFO: Job: [FlowJob: [name=helloWorldJob]] completed with the following parameters: [{}] and the following status: [COMPLETED]
+<em>Exit Status: COMPLETED</em>
+Jan 30, 2018 7:57:33 PM org.springframework.context.support.ClassPathXmlApplicationContext doClose
+INFO: Closing org.springframework.context.support.ClassPathXmlApplicationContext@73f792cf: startup date [Tue Jan 30 19:57:14 IST 2018]; root of context hierarchy
+Jan 30, 2018 7:57:33 PM org.springframework.beans.factory.support.DefaultListableBeanFactory destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@18078bef: defining beans [jobRepository,jobLauncherBean,dataSourceBean,transactionManager,org.springframework.jdbc.datasource.init.DataSourceInitializer#0,report,itemProcessor,org.springframework.batch.core.scope.internalStepScope,org.springframework.beans.factory.config.CustomEditorConfigurer,org.springframework.batch.core.configuration.xml.CoreNamespacePostProcessor,step1,helloWorldJob,csvFileItemReader,xmlItemWriter,reportMarshaller]; root of factory hierarchy
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">report.xml created in xml/outputs</div><div class="panel-body">
+<img class="img-responsive" ng-src="images/spring/2-springBatchHelloWorld.jpg"/>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">report.xml</div><div class="panel-body">
+<pre><code>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;report&gt;&lt;record id=&quot;1001&quot; qty=&quot;980&quot; sales=&quot;213100&quot; staff-name=&quot;jack&quot;&gt;
+&lt;date&gt;2013-07-29T00:00:00+05:30&lt;/date&gt;&lt;/record&gt;
+&lt;record id=&quot;1002&quot; qty=&quot;1080&quot; sales=&quot;320200&quot; staff-name=&quot;john&quot;&gt;
+&lt;date&gt;2013-07-30T00:00:00+05:30&lt;/date&gt;&lt;/record&gt;
+&lt;record id=&quot;1003&quot; qty=&quot;1200&quot; sales=&quot;342197&quot; staff-name=&quot;jill&quot;&gt;
+&lt;date&gt;2013-07-31T00:00:00+05:30&lt;/date&gt;&lt;/record&gt;
+&lt;/report&gt;
+</code></pre>
+</div></div>
