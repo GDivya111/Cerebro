@@ -312,6 +312,7 @@ app.config(function($routeProvider){
 	// IBM MQ
 	.when("/ibmmq",{templateUrl : "ibmmq.html",controller : "cerebroController"})
 	.when("/ibmMqInstallation",{templateUrl : "ibmMqInstallation.html",controller : "cerebroController"})
+	.when("/ibmMqSendRecieveTextMessage",{templateUrl : "ibmMqSendRecieveTextMessage.html",controller : "cerebroController"})
 	
 	// Kafka
 	.when("/kafka",{templateUrl : "kafka.html",controller : "cerebroController"})
