@@ -1,0 +1,124 @@
+<div class="panel panel-primary"><div class="panel-heading">Naming Conventions</div><div class="panel-body">
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      	<td>JMS Server</td>
+      	<td>A JMS server acts as a management container for resources within JMS modules. Some of its responsibilities include the maintenance of persistence and state of messages and subscribers. A JMS server is required in order to create a JMS module</td>
+      </tr>
+      <tr>
+      	<td>JMS Module</td>
+      	<td>A JMS module is a definition which contains JMS resources such as queues and topics. A JMS module is required in order to create a JMS queue</td>
+      </tr>
+      <tr>
+      	<td>Subdeployment</td>
+      	<td>JMS modules are targeted to one or more WLS instances or a cluster. Resources within a JMS module, such as queues and topics are also targeted to a JMS server or WLS server instances. A subdeployment is a grouping of targets. It is also known as advanced targeting</td>
+      </tr>
+      <tr>
+      	<td>Connection Factory</td>
+      	<td>A connection factory is a resource that enables JMS clients to create connections to JMS destinations</td>
+      </tr>
+      <tr>
+      	<td>JMS Queue</td>
+      	<td>A JMS queue (as opposed to a JMS topic) is a point-to-point destination type. A message is written to a specific queue or received from a specific queue</td>
+      </tr>
+    </tbody>
+</table>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Create a JMS Server</div><div class="panel-body">
+<ul>
+	<li>Services &gt; Messaging &gt; JMS Servers</li>
+	<li><img class="img-responsive" ng-src="images/weblogic-queue/1-createWeblogicQueue.jpg"/></li>
+	<li>Select New</li>
+	<li>Name: TestJMSServer <br/> Persistent Store: (none) </li>
+	<li>Target: mydomain (or choose an available server)</li>
+	<li>Finish</li>
+	<li><img class="img-responsive" ng-src="images/weblogic-queue/2-createWeblogicQueue.jpg" /></li>
+</ul>
+
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Create a JMS Module</div><div class="panel-body">
+<pre><code>
+Services > Messaging > JMS Modules
+Select New
+Name: TestJMSModule
+Leave the other options empty
+Targets: soa_server1 (or choose the same one as the JMS server)
+PressNext
+Leave "Would you like to add resources to this JMS system
+module" unchecked and  pressFinish.
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Create a SubDeployment</div><div class="panel-body">
+<pre><code>
+A subdeployment is not necessary for the JMS queue to work, but it
+allows you to easily target subcomponents of the JMS module to a
+single target or group of targets. We will use the subdeployment in
+this example to target the following connection factory and JMS
+queue to the JMS server we created earlier.
+
+Services > Messaging > JMS Modules
+Select TestJMSModule
+Select the Subdeployments tab and New
+Subdeployment Name: TestSubdeployment
+Press Next
+Here you can select the target(s) for the subdeployment. You can
+choose either Servers (i.e. WebLogic managed servers, such as the
+soa_server1) or JMS Servers such as the JMS Server created
+earlier. As the purpose of our subdeployment in this example is to
+target a specific JMS server, we will choose the JMS Server option.
+Select theTestJMSServer created earlier
+Press Finish
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Create a Connection Factory</div><div class="panel-body">
+<pre><code>
+Services > Messaging > JMS Modules
+Select TestJMSModule and press New
+Select Connection Factory and Next
+Name: TestConnectionFactory
+JNDI Name: jms/TestConnectionFactory
+Leave the other values at default
+On the Targets page, select the Advanced Targeting button and select TestSubdeployment
+Press Finish
+The connection factory should be listed on the following page with
+TestSubdeployment and TestJMSServer as the target.
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Create a JMS Queue</div><div class="panel-body">
+<pre><code>
+Services > Messaging > JMS Modules
+Select TestJMSModule and press New
+Select Queue and Next
+Name: TestJMSQueue
+JNDI Name: jms/TestJMSQueue
+Template:None
+PressNext
+Subdeployments: TestSubdeployment
+Finish
+The TestJMSQueue should be listed on the following page with
+TestSubdeployment and TestJMSServer.
+
+Confirm the resources for the TestJMSModule. Using the Domain
+Structure tree, navigate to soa_domain > Services > Messaging
+> JMS Modules then select TestJMSModule
+</code></pre>
+<img class="img-responsive" ng-src="images/weblogic-queue/3-createWeblogicQueue.jpg" />
+<pre><code>
+The JMS queue is now complete and can be accessed using the JNDI
+names
+
+jms/TestConnectionFactory and
+jms/TestJMSQueue.
+</code></pre>
+</div></div>
