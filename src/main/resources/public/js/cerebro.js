@@ -322,6 +322,7 @@ app.config(function($routeProvider){
 	.when("/weblogicQueue",{templateUrl : "weblogicQueue.html",controller : "cerebroController"})
 	.when("/createWeblogicQueue",{templateUrl : "createWeblogicQueue.html",controller : "cerebroController"})
 	.when("/weblogicQSendReceiveMessage",{templateUrl : "weblogicQSendReceiveMessage.html",controller : "cerebroController"})
+	.when("/weblogicQMessageListener",{templateUrl : "weblogicQMessageListener.html",controller : "cerebroController"})
 	
 	// search
 	.when("/search",{templateUrl : "search.html",controller : "cerebroController"})
