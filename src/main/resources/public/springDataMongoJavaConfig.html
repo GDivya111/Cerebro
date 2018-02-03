@@ -1,0 +1,291 @@
+<div class="panel panel-primary"><div class="panel-heading">Create Java project using Maven from cmd</div><div class="panel-body">
+<pre><code>
+mvn archetype:generate -DgroupId=com.spring.data.mongo -DartifactId=SpringDataMongoPractice -Dversion=1.0 -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Project Structure</div><div class="panel-body">
+<img class="img-responsive" ng-src="images/spring/1-spring-data-mongo.jpg"/>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">pom.xml</div><div class="panel-body">
+<pre><code>
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+	xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+	&lt;groupId&gt;com.spring.data.mongo&lt;/groupId&gt;
+	&lt;artifactId&gt;SpringDataMongoPractice&lt;/artifactId&gt;
+	&lt;packaging&gt;jar&lt;/packaging&gt;
+	&lt;version&gt;1.0&lt;/version&gt;
+	&lt;name&gt;SpringDataMongoPractice&lt;/name&gt;
+	&lt;url&gt;http://maven.apache.org&lt;/url&gt;
+
+	&lt;parent&gt;
+		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+		&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+		&lt;version&gt;1.5.9.RELEASE&lt;/version&gt;
+	&lt;/parent&gt;
+
+	&lt;dependencies&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;junit&lt;/groupId&gt;
+			&lt;artifactId&gt;junit&lt;/artifactId&gt;
+			&lt;scope&gt;test&lt;/scope&gt;
+		&lt;/dependency&gt;
+
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-data-mongodb&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+	&lt;/dependencies&gt;
+
+	&lt;build&gt;
+		&lt;finalName&gt;${project.artifactId}&lt;/finalName&gt;
+		&lt;plugins&gt;
+			&lt;plugin&gt;
+				&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+				&lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+				&lt;configuration&gt;
+					&lt;source&gt;1.8&lt;/source&gt;
+					&lt;target&gt;1.8&lt;/target&gt;
+					&lt;showDeprecation&gt;true&lt;/showDeprecation&gt;
+					&lt;showWarnings&gt;true&lt;/showWarnings&gt;
+					&lt;verbose&gt;true&lt;/verbose&gt;
+					&lt;encoding&gt;UTF-8&lt;/encoding&gt;
+					&lt;compilerArgument&gt;-Xlint:all&lt;/compilerArgument&gt;
+					&lt;compilerArgument&gt;-parameters&lt;/compilerArgument&gt;
+				&lt;/configuration&gt;
+			&lt;/plugin&gt;
+		&lt;/plugins&gt;
+	&lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">User.java</div><div class="panel-body">
+<pre><code>
+package com.spring.data.mongo.model;
+
+public class User {
+
+	private Long id;
+	private String username;
+	private String password;
+
+	public User() {
+	}
+
+	public User(Long id, String username, String password) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return &quot;User [id=&quot; + id + &quot;, username=&quot; + username + &quot;, password=&quot; + password + &quot;]&quot;;
+	}
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">MongoConfig.java</div><div class="panel-body">
+<pre><code>
+package com.spring.data.mongo.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+
+import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
+
+@Configuration
+public class MongoConfig extends AbstractMongoConfiguration {
+
+	@Override
+	protected String getDatabaseName() {
+		return &quot;spring-data-mongodb&quot;;
+	}
+
+	@Override
+	public Mongo mongo() throws Exception {
+		return new MongoClient(&quot;localhost&quot;, 27017);
+	}
+
+	@Override
+	protected String getMappingBasePackage() {
+		return &quot;com.spring.data.mongo&quot;;
+	}
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">SpringDataMongoJavaConfigPractice.java</div><div class="panel-body">
+<pre><code>
+package com.spring.data.mongo.practice;
+
+import java.util.List;
+import java.util.Random;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.spring.data.mongo.config.MongoConfig;
+import com.spring.data.mongo.model.User;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = { MongoConfig.class })
+public class SpringDataMongoJavaConfigPractice {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(SpringDataMongoJavaConfigPractice.class);
+	@Autowired
+	private MongoTemplate mongoTemplate;
+
+	@Test
+	public void insert() {
+		User user = new User(new Random().nextLong(), &quot;username1&quot;, &quot;password1&quot;);
+		mongoTemplate.insert(user);
+	}
+
+	@Test
+	public void save() {
+		User user = new User(new Random().nextLong(), &quot;usernam2&quot;, &quot;password2&quot;);
+		mongoTemplate.save(user);
+	}
+
+	@Test
+	public void update() {
+		User user = new User(1L, &quot;usernam1&quot;, &quot;password1&quot;);
+		mongoTemplate.save(user);
+
+		User user2 = new User(1L, &quot;usernam3&quot;, &quot;password3&quot;);
+		mongoTemplate.save(user2);
+	}
+
+	@Test
+	public void updateFirst() {
+		for (long i = 0; i &lt; 2; i++) {
+			User user = new User(i, &quot;uname&quot;, &quot;password&quot; + i);
+			mongoTemplate.save(user);
+		}
+
+		<em>// update first</em>
+		Query query = new Query();
+		Criteria criteria = Criteria.where(&quot;username&quot;).is(&quot;uname&quot;);
+		query.addCriteria(criteria);
+		Update update = new Update();
+		update.set(&quot;username&quot;, &quot;uname-updated&quot;);
+		mongoTemplate.updateFirst(query, update, User.class);
+	}
+
+	@Test
+	public void updateMulti() {
+		for (long i = 0; i &lt; 2; i++) {
+			User user = new User(i, &quot;uname&quot;, &quot;password&quot; + i);
+			mongoTemplate.save(user);
+		}
+
+		<em>// update first</em>
+		Query query = new Query();
+		Criteria criteria = Criteria.where(&quot;username&quot;).is(&quot;uname&quot;);
+		query.addCriteria(criteria);
+		Update update = new Update();
+		update.set(&quot;username&quot;, &quot;uname-updatedMulti&quot;);
+		mongoTemplate.updateMulti(query, update, User.class);
+	}
+
+	@Test
+	public void findAndModify() {
+		Long id = new Random().nextLong();
+		User user = new User(id, &quot;username&quot; + id, &quot;password&quot; + id);
+		mongoTemplate.save(user);
+
+		Criteria criteria = Criteria.where(&quot;username&quot;).is(&quot;username&quot; + id);
+		Query query = new Query();
+		query.addCriteria(criteria);
+		Update update = new Update();
+		update.set(&quot;username&quot;, &quot;username-updated&quot;);
+		User user2 = mongoTemplate.findAndModify(query, update, User.class);
+		LOGGER.info(&quot;user2: {} &quot;, user2);
+	}
+
+	@Test
+	public void upsert() {
+		Long id = new Random().nextLong();
+		LOGGER.info(&quot;id: {}&quot;, id);
+		User user = new User(id, &quot;username&quot; + id, &quot;password&quot; + id);
+		mongoTemplate.save(user);
+
+		Criteria criteria = Criteria.where(&quot;username&quot;).is(&quot;username&quot; + id);
+		Query query = new Query();
+		query.addCriteria(criteria);
+
+		Update update = new Update();
+		update.set(&quot;username&quot;, &quot;username-updated&quot;);
+		mongoTemplate.upsert(query, update, User.class);
+	}
+
+	@Test
+	public void remove() {
+		<em>// save user document</em>
+		Long id = new Random().nextLong();
+		User user = new User(id, &quot;username&quot; + id, &quot;password&quot; + id);
+		mongoTemplate.save(user);
+
+		<em>// get user document</em>
+		Criteria criteria = Criteria.where(&quot;id&quot;).is(id);
+		Query query = new Query();
+		query.addCriteria(criteria);
+		List&lt;User&gt; users = mongoTemplate.find(query, User.class);
+		LOGGER.info(&quot;user: {}&quot;, users);
+
+		<em>// delete user document</em>
+		mongoTemplate.remove(users.get(0));
+	}
+}
+</code></pre>
+</div></div>
