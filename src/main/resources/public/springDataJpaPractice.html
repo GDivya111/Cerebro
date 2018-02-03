@@ -1,0 +1,1398 @@
+<div class="panel panel-primary"><div class="panel-heading">Create Java project using Maven from cmd</div><div class="panel-body">
+<pre ><code>
+mvn archetype:generate -DgroupId=spring.data -DartifactId=SpringDataPractice -Dversion=1.0.SNAPSHOT -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Project Structure</div><div class="panel-body">
+<img class="img-responsive" ng-src="images/spring/1-springDataJpaPractice.jpg"/>
+<em>sql folder</em>
+<img class="img-responsive" ng-src="images/spring/2-springDataJpaPractice.jpg"/>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">pom.xml</div><div class="panel-body">
+<pre><code>
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; 
+xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+	&lt;groupId&gt;spring.data&lt;/groupId&gt;
+	&lt;artifactId&gt;SpringDataPractice&lt;/artifactId&gt;
+	&lt;packaging&gt;jar&lt;/packaging&gt;
+	&lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+	&lt;name&gt;SpringDataPractice&lt;/name&gt;
+	&lt;url&gt;http://maven.apache.org&lt;/url&gt;
+	&lt;properties&gt;
+		&lt;spring.version&gt;4.3.4.RELEASE&lt;/spring.version&gt;
+	&lt;/properties&gt;
+
+	&lt;parent&gt;
+		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+		&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+		&lt;version&gt;1.3.1.RELEASE&lt;/version&gt;
+	&lt;/parent&gt;
+
+	&lt;dependencies&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;junit&lt;/groupId&gt;
+			&lt;artifactId&gt;junit&lt;/artifactId&gt;
+			&lt;scope&gt;test&lt;/scope&gt;
+		&lt;/dependency&gt;
+		
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+		
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+			&lt;scope&gt;test&lt;/scope&gt;
+		&lt;/dependency&gt;
+		
+		&lt;!-- Spring boot data jpa --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+		
+		&lt;!-- Spring boot data jpa with REST --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-data-rest&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+		
+		&lt;!-- H2 dependency --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;com.h2database&lt;/groupId&gt;
+			&lt;artifactId&gt;h2&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-configuration-processor&lt;/artifactId&gt;
+			&lt;optional&gt;true&lt;/optional&gt;
+		&lt;/dependency&gt;
+	&lt;/dependencies&gt;
+	&lt;build&gt;
+		&lt;pluginManagement&gt;
+			&lt;plugins&gt;
+				&lt;plugin&gt;
+					&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+					&lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+					&lt;version&gt;3.5.1&lt;/version&gt;
+					&lt;configuration&gt;
+						&lt;source&gt;1.8&lt;/source&gt;
+						&lt;target&gt;1.8&lt;/target&gt;
+						&lt;compilerArgument&gt;-parameters&lt;/compilerArgument&gt;
+						&lt;compilerArgument&gt;-Xlint:all&lt;/compilerArgument&gt;
+						&lt;showDeprecation&gt;true&lt;/showDeprecation&gt;
+						&lt;showWarnings&gt;true&lt;/showWarnings&gt;
+					&lt;/configuration&gt;
+				&lt;/plugin&gt;
+				
+				&lt;plugin&gt;
+					&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+					&lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;
+					&lt;configuration&gt;
+						&lt;archive&gt;
+							&lt;manifest&gt;
+								&lt;addClasspath&gt;true&lt;/addClasspath&gt;
+								&lt;mainClass&gt;springboot.data.jpa.DataJpaApp&lt;/mainClass&gt;
+								&lt;classpathPrefix&gt;dependency-jars&lt;/classpathPrefix&gt;
+							&lt;/manifest&gt;
+						&lt;/archive&gt;
+					&lt;/configuration&gt;
+				&lt;/plugin&gt;
+				
+				&lt;!-- Copy project dependency --&gt;
+			&lt;plugin&gt;
+				&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+				&lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;
+				&lt;version&gt;2.5.1&lt;/version&gt;
+				&lt;executions&gt;
+				  &lt;execution&gt;
+					&lt;id&gt;copy-dependencies&lt;/id&gt;
+					&lt;phase&gt;package&lt;/phase&gt;
+					&lt;goals&gt;
+						&lt;goal&gt;copy-dependencies&lt;/goal&gt;
+					&lt;/goals&gt;
+					&lt;configuration&gt;
+					  &lt;includeScope&gt;runtime&lt;/includeScope&gt;
+					  &lt;outputDirectory&gt;${project.build.directory}/dependency-jars/&lt;/outputDirectory&gt;
+					&lt;/configuration&gt;
+				  &lt;/execution&gt;
+				&lt;/executions&gt;
+			&lt;/plugin&gt;
+				
+			&lt;/plugins&gt;
+		&lt;/pluginManagement&gt;
+	&lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">DEPT Table</div><div class="panel-body">
+<pre><code>
+CREATE TABLE DEPT
+(
+ DEPTNO NUMBER(32)
+,DNAME VARCHAR2(50)
+,LOC VARCHAR2(50)
+,CONSTRAINT DEPTNO_PK PRIMARY KEY(DEPTNO)
+);
+
+INSERT INTO DEPT(DEPTNO, DNAME, LOC)
+VALUES(10,'ACCOUNTING','NEW YORK');
+
+INSERT INTO DEPT(DEPTNO, DNAME, LOC)
+VALUES(20,'RESEARCH','DALLAS');
+
+INSERT INTO DEPT(DEPTNO, DNAME, LOC)
+VALUES(30,'SALES','CHICAGO');
+
+INSERT INTO DEPT(DEPTNO, DNAME, LOC)
+VALUES(40,'OPERATIONS','BOSTON');
+ 
+COMMIT;
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">EMP Table</div><div class="panel-body">
+<pre><code>
+CREATE TABLE EMP
+(
+ EMPNO NUMBER(32)
+,ENAME VARCHAR2(50)
+,DEPTNO NUMBER(32) CONSTRAINT DEPTNO_FK REFERENCES DEPT(DEPTNO) ON DELETE CASCADE
+,JOB VARCHAR2(50)
+,SAL NUMBER(32)
+,COMM NUMBER(32)
+,MGR NUMBER(32) CONSTRAINT MGR_FK REFERENCES EMP(EMPNO)
+,HIREDATE DATE
+,ACTIVE BOOLEAN
+,CONSTRAINT EMPNO_PK PRIMARY KEY(EMPNO)
+);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7839,'KING','PRESIDENT',NULL,parsedatetime('17-11-1981', 'dd-MM-yyyy'),5000,NULL,10);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7698,'BLAKE','MANAGER',7839,parsedatetime('01-05-1981', 'dd-MM-yyyy'),2850,NULL,30);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7782,'CLARK','MANAGER',7839,parsedatetime('09-06-1981', 'dd-MM-yyyy'),2450,NULL,10);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7566,'JONES','MANAGER',7839,parsedatetime('02-04-1981', 'dd-MM-yyyy'),2975,NULL,20);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7654,'MARTIN','SALESMAN',7698,parsedatetime('28-09-1981', 'dd-MM-yyyy'),1250,1400,30);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7499,'ALLEN','SALESMAN',7698,parsedatetime('20-02-1981', 'dd-MM-yyyy'),1600,300,30);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7844,'TURNER','SALESMAN',7698,parsedatetime('08-09-1981', 'dd-MM-yyyy'),1500,0,30);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7900,'JAMES','CLERK',7698,parsedatetime('03-12-1981', 'dd-MM-yyyy'),950,NULL,30);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7521,'WARD','SALESMAN',7698,parsedatetime('22-02-1981', 'dd-MM-yyyy'),1250,500,30);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7902,'FORD','ANALYST',7566,parsedatetime('03-12-1981', 'dd-MM-yyyy'),3000,NULL,20);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7369,'SMITH','CLERK',7902,parsedatetime('17-12-1980', 'dd-MM-yyyy'),800,NULL,20);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7788,'SCOTT','ANALYST',7566,parsedatetime('09-12-1982', 'dd-MM-yyyy'),3000,NULL,20);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7876,'ADAMS','CLERK',7788,parsedatetime('12-01-1983', 'dd-MM-yyyy'),1100,NULL,20);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7934,'MILLER','CLERK',7782,parsedatetime('23-01-1982', 'dd-MM-yyyy'),1300,NULL,10);
+
+COMMIT;
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">SALGRADE Table</div><div class="panel-body">
+<pre><code>
+CREATE TABLE SALGRADE
+(
+ HISAL NUMBER(32)
+,LOSAL NUMBER(32)
+,GRADE NUMBER(32)
+);
+
+INSERT INTO SALGRADE (HISAL, LOSAL, GRADE)
+VALUES (1, 700, 1200);
+
+INSERT INTO SALGRADE (HISAL, LOSAL, GRADE)
+VALUES (2, 1201, 1400);
+
+INSERT INTO SALGRADE (HISAL, LOSAL, GRADE)
+VALUES (3, 1401, 2000);
+
+INSERT INTO SALGRADE (HISAL, LOSAL, GRADE)
+VALUES (4, 2001, 3000);
+
+INSERT INTO SALGRADE (HISAL, LOSAL, GRADE)
+VALUES (5, 3001, 9999);
+
+COMMIT;
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">application.properties</div><div class="panel-body">
+<pre><code>
+## logging properties
+logging.level.org.springframework.web=DEBUG
+
+## server properties
+server.port=8080
+
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2
+
+## primary data source
+spring.datasource.url=jdbc:h2:file:E:/Backup/JavaPrep/practiceProjects/Spring/SpringDataPractice/src/main/resources/springDataJpa;MV_STORE=FALSE
+spring.datasource.username=springDataJpa
+spring.datasource.password=springDataJpa
+spring.datasource.driver-class-name=org.h2.Driver
+
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+## JPA properties ----------------------------------------------
+spring.jpa.show-sql=true
+#This is actually a shortcut for the &quot;hibernate.hbm2ddl.auto&quot; property. 
+#Default to &quot;create-drop&quot; when using an embedded database, &quot;none&quot; otherwise.
+spring.jpa.hibernate.ddl-auto=none
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Department.java</div><div class="panel-body">
+<pre><code>
+package springboot.data.jpa.model;
+
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = &quot;DEPT&quot;)
+public class Department {
+
+    private Integer id;
+    private String deptName;
+    private String location;
+    private Set&lt;Employee&gt; employees;
+
+    public Department(Integer id, String deptName, String location, Set&lt;Employee&gt; employees) {
+	this.id = id;
+	this.deptName = deptName;
+	this.location = location;
+	this.employees = employees;
+    }
+
+    public Department() {
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = &quot;DEPTNO&quot;)
+    public Integer getId() {
+	return id;
+    }
+
+    public void setId(Integer id) {
+	this.id = id;
+    }
+
+    @Column(name = &quot;DNAME&quot;)
+    public String getDeptName() {
+	return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+	this.deptName = deptName;
+    }
+
+    @Column(name = &quot;LOC&quot;)
+    public String getLocation() {
+	return location;
+    }
+
+    public void setLocation(String location) {
+	this.location = location;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = &quot;DEPTNO&quot;, referencedColumnName = &quot;DEPTNO&quot;)
+    public Set&lt;Employee&gt; getEmployees() {
+	return employees;
+    }
+
+    public void setEmployees(Set&lt;Employee&gt; employees) {
+	this.employees = employees;
+    }
+
+    @Override
+    public String toString() {
+	return &quot;Department [id=&quot; + id + &quot;, deptName=&quot; + deptName + &quot;, location=&quot; + location + &quot;, employees=&quot; + employees + &quot;]&quot;;
+    }
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Employee.java</div><div class="panel-body">
+<pre><code>
+package springboot.data.jpa.model;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+/*Named Query: In Spring Data JPA for NamedQuery -&gt; name attribute should start with model name. 
+ * For example below name=Employee.&lt;anyUserDefinedName&gt;*/
+@NamedQuery(name = &quot;Employee.namedFindByDeptName&quot;, query = &quot;select e from Employee e where e.department.deptName = :inputDeptName&quot;)
+/*Native SQL Query Example*/
+@NamedNativeQuery(name = &quot;Employee.namedNativeFindByName&quot;, query = &quot;select * from emp where ename = :inputName&quot;)
+@Entity
+@Table(name = &quot;EMP&quot;)
+public class Employee {
+
+    private Integer id;
+    private String name;
+    private String job;
+    private Long salary;
+    private Long comm;
+    private Integer manager;
+    private Date hiredate;
+    private Boolean active;
+    private Department department;
+
+    public Employee() {
+    }
+
+    public Employee(Integer id, String name, String job, Long salary, Long comm, Integer manager, Date hiredate) {
+	super();
+	this.id = id;
+	this.name = name;
+	this.job = job;
+	this.salary = salary;
+	this.comm = comm;
+	this.manager = manager;
+	this.hiredate = hiredate;
+    }
+
+    @Id
+    //    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = &quot;EMPNO&quot;)
+    public Integer getId() {
+	return id;
+    }
+
+    public void setId(Integer id) {
+	this.id = id;
+    }
+
+    @Column(name = &quot;ENAME&quot;)
+    public String getName() {
+	return name;
+    }
+
+    public void setName(String name) {
+	this.name = name;
+    }
+
+    @Column(name = &quot;JOB&quot;)
+    public String getJob() {
+	return job;
+    }
+
+    public void setJob(String job) {
+	this.job = job;
+    }
+
+    @Column(name = &quot;SAL&quot;)
+    public Long getSalary() {
+	return salary;
+    }
+
+    public void setSalary(Long salary) {
+	this.salary = salary;
+    }
+
+    @Column(name = &quot;COMM&quot;)
+    public Long getComm() {
+	return comm;
+    }
+
+    public void setComm(Long comm) {
+	this.comm = comm;
+    }
+
+    @Column(name = &quot;MGR&quot;)
+    public Integer getManager() {
+	return manager;
+    }
+
+    public void setManager(Integer manager) {
+	this.manager = manager;
+    }
+
+    @Column(name = &quot;HIREDATE&quot;)
+    public Date getHiredate() {
+	return hiredate;
+    }
+
+    public void setHiredate(Date hiredate) {
+	this.hiredate = hiredate;
+    }
+
+    @Column(name = &quot;ACTIVE&quot;)
+    public Boolean getActive() {
+	return active;
+    }
+
+    public void setActive(Boolean active) {
+	this.active = active;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = &quot;DEPTNO&quot;, referencedColumnName = &quot;DEPTNO&quot;)
+    public Department getDepartment() {
+	return department;
+    }
+
+    public void setDepartment(Department department) {
+	this.department = department;
+    }
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">SalaryGrade.java</div><div class="panel-body">
+<pre><code>
+package springboot.data.jpa.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = &quot;SALGRADE&quot;)
+public class SalaryGrade {
+
+    private Long highSalary;
+    private Long lowSalary;
+    private Long grade;
+
+    public SalaryGrade(Long highSalary, Long lowSalary, Long grade) {
+	this.highSalary = highSalary;
+	this.lowSalary = lowSalary;
+	this.grade = grade;
+    }
+
+    public SalaryGrade() {
+    }
+
+    @Id
+    @Column(name = &quot;GRADE&quot;)
+    public Long getGrade() {
+	return grade;
+    }
+
+    public void setGrade(Long grade) {
+	this.grade = grade;
+    }
+
+    @Column(name = &quot;HISAL&quot;)
+    public Long getHighSalary() {
+	return highSalary;
+    }
+
+    public void setHighSalary(Long highSalary) {
+	this.highSalary = highSalary;
+    }
+
+    @Column(name = &quot;LOSAL&quot;)
+    public Long getLowSalary() {
+	return lowSalary;
+    }
+
+    public void setLowSalary(Long lowSalary) {
+	this.lowSalary = lowSalary;
+    }
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">EmployeeJpaRepository.java</div><div class="panel-body">
+<pre><code>
+package springboot.data.jpa.repository;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import springboot.data.jpa.model.Employee;
+
+@Repository(value = &quot;employeeJpaRepository&quot;)
+@Transactional
+public interface EmployeeJpaRepository extends JpaRepository&lt;Employee, Integer&gt;, EmployeeJpaRepositoryCustom {
+
+    public abstract List&lt;Employee&gt; findByName(String value);
+
+    public abstract List&lt;Employee&gt; findByNameIs(String value);
+
+    public abstract List&lt;Employee&gt; findByNameEquals(String value);
+
+    public abstract List&lt;Employee&gt; findByNameNot(String value);
+
+    // select * from emp where where name like 'test'
+    public abstract List&lt;Employee&gt; findByNameLike(String value);
+
+    public abstract List&lt;Employee&gt; findByNameNotLike(String value);
+
+    public abstract Long countByName(String value);
+
+    public abstract List&lt;Employee&gt; findByNameAndJob(String value1, String value2);
+
+    public abstract List&lt;Employee&gt; findByNameOrJob(String value1, String value2);
+
+    public abstract List&lt;Employee&gt; findByNameNotAndJob(String value1, String value2);
+
+    // where name like &quot;value%&quot;
+    public abstract List&lt;Employee&gt; findByNameStartingWith(String value);
+
+    //where name like &quot;%value&quot;
+    public abstract List&lt;Employee&gt; findByNameEndingWith(String value);
+
+    //where name like &quot;%value%&quot;
+    public abstract List&lt;Employee&gt; findByNameContaining(String value);
+
+    /*
+     * select employee0_.empno as empno1_0_, employee0_.comm as comm2_0_, employee0_.deptno as deptno3_0_, 
+     * employee0_.hiredate as hiredate4_0_, employee0_.job as job5_0_, employee0_.mgr as mgr6_0_, employee0_.ename as ename7_0_, 
+     * employee0_.sal as sal8_0_ from emp employee0_ where employee0_.sal&lt;?
+     */
+    public abstract List&lt;Employee&gt; findBySalaryLessThan(Long value);
+
+    /*
+     * select employee0_.empno as empno1_0_, employee0_.comm as comm2_0_, employee0_.deptno as deptno3_0_, 
+     * employee0_.hiredate as hiredate4_0_, employee0_.job as job5_0_, employee0_.mgr as mgr6_0_, employee0_.ename as ename7_0_, 
+     * employee0_.sal as sal8_0_ from emp employee0_ where employee0_.sal&lt;=?
+     */
+    public abstract List&lt;Employee&gt; findBySalaryLessThanEqual(Long value);
+
+    // where salary &gt; value
+    public abstract List&lt;Employee&gt; findBySalaryGreaterThan(Long value);
+
+    //where salary &gt;= value
+    public abstract List&lt;Employee&gt; findBySalaryGreaterThanEqual(Long value);
+
+    /*
+     * select employee0_.empno as empno1_0_, employee0_.comm as comm2_0_, employee0_.deptno as deptno3_0_, employee0_.hiredate as hiredate4_0_, 
+     * employee0_.job as job5_0_, employee0_.mgr as mgr6_0_, employee0_.ename as ename7_0_, employee0_.sal as sal8_0_ 
+     * from emp employee0_ where employee0_.sal&gt;? and employee0_.sal&lt;?
+     */
+    public abstract List&lt;Employee&gt; findBySalaryGreaterThanAndSalaryLessThan(Long value1, Long value2);
+
+    /*
+     * select employee0_.empno as empno1_0_, employee0_.comm as comm2_0_, employee0_.deptno as deptno3_0_, employee0_.hiredate as hiredate4_0_, 
+     * employee0_.job as job5_0_, employee0_.mgr as mgr6_0_, employee0_.ename as ename7_0_, employee0_.sal as sal8_0_ from emp employee0_ 
+     * where employee0_.hiredate&lt;?
+     */
+    public abstract List&lt;Employee&gt; findByHiredateBefore(Date value);
+
+    /*
+     * select employee0_.empno as empno1_0_, employee0_.comm as comm2_0_, employee0_.deptno as deptno3_0_, employee0_.hiredate as hiredate4_0_, 
+     * employee0_.job as job5_0_, employee0_.mgr as mgr6_0_, employee0_.ename as ename7_0_, employee0_.sal as sal8_0_ from emp employee0_ 
+     * where employee0_.hiredate&gt;?
+     */
+    public abstract List&lt;Employee&gt; findByHiredateAfter(Date value);
+
+    /*
+     * select employee0_.empno as empno1_0_, employee0_.comm as comm2_0_, employee0_.deptno as deptno3_0_, employee0_.hiredate as hiredate4_0_, 
+     * employee0_.job as job5_0_, employee0_.mgr as mgr6_0_, employee0_.ename as ename7_0_, employee0_.sal as sal8_0_ from emp employee0_ 
+     * where employee0_.hiredate between ? and ?
+     */
+    public abstract List&lt;Employee&gt; findByHiredateBetween(Date startDate, Date endDate);
+
+    /*
+     * select employee0_.empno as empno1_0_, employee0_.active as active2_0_, employee0_.comm as comm3_0_, employee0_.deptno as deptno4_0_, 
+     * employee0_.hiredate as hiredate5_0_, employee0_.job as job6_0_, employee0_.mgr as mgr7_0_, employee0_.ename as ename8_0_, 
+     * employee0_.sal as sal9_0_ from emp employee0_ where employee0_.active=1
+     */
+    public abstract List&lt;Employee&gt; findByActiveTrue();
+
+    /*
+     * select employee0_.empno as empno1_0_, employee0_.active as active2_0_, employee0_.comm as comm3_0_, employee0_.deptno as deptno4_0_, 
+     * employee0_.hiredate as hiredate5_0_, employee0_.job as job6_0_, employee0_.mgr as mgr7_0_, employee0_.ename as ename8_0_, 
+     * employee0_.sal as sal9_0_ from emp employee0_ where employee0_.active=0
+     */
+    public abstract List&lt;Employee&gt; findByActiveFalse();
+
+    /*
+     * select employee0_.empno as empno1_0_, employee0_.active as active2_0_, employee0_.comm as comm3_0_, employee0_.deptno as deptno4_0_, 
+     * employee0_.hiredate as hiredate5_0_, employee0_.job as job6_0_, employee0_.mgr as mgr7_0_, employee0_.ename as ename8_0_, 
+     * employee0_.sal as sal9_0_ from emp employee0_ where employee0_.mgr is null
+     */
+    public abstract List&lt;Employee&gt; findByManagerIsNull();
+
+    /*
+     * select employee0_.empno as empno1_0_, employee0_.active as active2_0_, employee0_.comm as comm3_0_, employee0_.deptno as deptno4_0_, 
+     * employee0_.hiredate as hiredate5_0_, employee0_.job as job6_0_, employee0_.mgr as mgr7_0_, employee0_.ename as ename8_0_, 
+     * employee0_.sal as sal9_0_ from emp employee0_ where employee0_.mgr is not null
+     */
+    public abstract List&lt;Employee&gt; findByManagerIsNotNull();
+
+    /*
+     * select employee0_.empno as empno1_0_, employee0_.active as active2_0_, employee0_.comm as comm3_0_, employee0_.deptno as deptno4_0_, 
+     * employee0_.hiredate as hiredate5_0_, employee0_.job as job6_0_, employee0_.mgr as mgr7_0_, employee0_.ename as ename8_0_, 
+     * employee0_.sal as sal9_0_ from emp employee0_ where employee0_.mgr is not null
+     */
+    public abstract List&lt;Employee&gt; findByManagerNotNull();
+
+    /*
+     * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
+     * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
+     * employee0_.sal as sal8_1_ 
+     * from emp employee0_ left outer join dept department1_ on employee0_.deptno=department1_.deptno 
+     * where department1_.dname in (?)
+     */
+    public abstract List&lt;Employee&gt; findByDepartmentDeptNameIn(List&lt;String&gt; departments);
+
+    /*
+     * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
+     * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
+     * employee0_.sal as sal8_1_ 
+     * from emp employee0_ left outer join dept department1_ on employee0_.deptno=department1_.deptno 
+     * where department1_.dname not in  (?)
+     */
+    public abstract List&lt;Employee&gt; findByDepartmentDeptNameNotIn(List&lt;String&gt; departments);
+
+    /*
+     * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
+     * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
+     * employee0_.sal as sal8_1_ from emp employee0_ where upper(employee0_.ename)=upper(?)
+     */
+    public abstract List&lt;Employee&gt; findByNameIgnoreCase(String name);
+
+    /*
+     * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
+     * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
+     * employee0_.sal as sal8_1_ from emp employee0_ where upper(employee0_.ename) like upper('name%')
+     */
+    public abstract List&lt;Employee&gt; findByNameStartingWithIgnoreCase(String value);
+
+    /*
+     * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
+     * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
+     * employee0_.sal as sal8_1_ from emp employee0_ where employee0_.job=? order by employee0_.sal asc
+     */
+    public abstract List&lt;Employee&gt; findByJobOrderBySalaryAsc(String value);
+
+    /*
+     * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
+     * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
+     * employee0_.sal as sal8_1_ from emp employee0_ where employee0_.job=? order by employee0_.sal desc
+     */
+    public abstract List&lt;Employee&gt; findByJobOrderBySalaryDesc(String value);
+
+    /*
+     * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
+     * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
+     * employee0_.sal as sal8_1_ from emp employee0_ where employee0_.ename like ? limit 1
+     */
+    public abstract Employee findFirstByNameLike(String value);
+
+    /*
+     * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
+     * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
+     * employee0_.sal as sal8_1_ from emp employee0_ where employee0_.ename like ? limit 5
+     */
+    public abstract List&lt;Employee&gt; findTop5ByNameLike(String value);
+
+    /*
+     * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
+     * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
+     * employee0_.sal as sal8_1_ from emp employee0_ where employee0_.ename=?
+     */
+    @Query(&quot;select e from Employee e where e.name = :inputName&quot;)
+    public abstract List&lt;Employee&gt; queryByName(@Param(&quot;inputName&quot;) String value);
+
+    /*
+     * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
+     * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
+     * employee0_.sal as sal8_1_ from emp employee0_ where employee0_.sal&gt;?
+     */
+    @Query(&quot;from Employee e where e.salary &gt; :sal&quot;)
+    public abstract List&lt;Employee&gt; queryBySalaryGreaterThan(@Param(&quot;sal&quot;) Long value);
+
+    /*
+     * select * from emp where ename = ?
+     */
+    @Query(value = &quot;select * from emp where ename = :inputName&quot;, nativeQuery = true)
+    public abstract List&lt;Employee&gt; queryBySQLName(@Param(&quot;inputName&quot;) String value);
+
+    /*
+     * update emp set ename=? where ename=?
+     */
+    @Modifying
+    @Query(&quot;update Employee e set e.name = :newName where e.name=:oldName&quot;)
+    public abstract int updateByName(@Param(&quot;oldName&quot;) String value1, @Param(&quot;newName&quot;) String value2);
+
+    /*
+     * Named Query example. Query is defined with NamedQuery annotation on Employee class
+     */
+    @Query(name = &quot;Employee.namedFindByDeptName&quot;)
+    public abstract List&lt;Employee&gt; namedQueryFindByDeptName(@Param(&quot;inputDeptName&quot;) String name);
+
+    /*
+     * Native SQL Query example. Query is defined with NamedNativeQuery annotation on Employee class
+     */
+    @Query(name = &quot;Employee.namedNativeFindByName&quot;)
+    public abstract List&lt;Employee&gt; namedNativeQueryByName(@Param(&quot;inputName&quot;) String name);
+
+    /*
+     * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
+     * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
+     * employee0_.sal as sal8_1_ from emp employee0_ where employee0_.sal&gt;? limit ?
+     */
+    @Query(&quot;from Employee e where e.salary &gt; :sal&quot;)
+    public abstract Page&lt;Employee&gt; queryBySalaryGreaterThanWithPageable(@Param(&quot;sal&quot;) Long value, Pageable pageable);
+
+    /*
+     * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
+     * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
+     * employee0_.sal as sal8_1_ from emp employee0_ where employee0_.sal&gt;? order by employee0_.ename asc limit ?
+     */
+    @Query(&quot;from Employee e where e.salary &gt; :sal&quot;)
+    public abstract Page&lt;Employee&gt; queryBySalaryGreaterThanWithPageableSort(@Param(&quot;sal&quot;) Long value, Pageable pageable);
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">EmployeeJpaRepositoryCustom.java</div><div class="panel-body">
+<pre><code>
+package springboot.data.jpa.repository;
+
+public interface EmployeeJpaRepositoryCustom {
+
+    public String cutomMethod();
+    
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">EmployeeJpaRepositoryImpl.java</div><div class="panel-body">
+<pre><code>
+package springboot.data.jpa.repository;
+
+public class EmployeeJpaRepositoryImpl implements EmployeeJpaRepositoryCustom {
+
+    @Override
+    public String cutomMethod() {
+	return &quot;Custom method&quot;;
+    }
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">DataJpaApp.java</div><div class="panel-body">
+<pre><code>
+package springboot.data.jpa;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@SpringBootApplication
+@ComponentScan(basePackages = { &quot;springboot.data.jpa&quot; })
+@EnableJpaRepositories(basePackages = { &quot;springboot.data.jpa&quot; })
+@EnableAutoConfiguration
+public class DataJpaApp {
+
+	public static void main(String[] args) {
+		SpringApplication.run(DataJpaApp.class, args);
+	}
+
+	// comment below method for multi tenant implementation
+	@Bean
+	@Qualifier(&quot;primaryDataSource&quot;)
+	@Primary
+	@ConfigurationProperties(prefix = &quot;spring.datasource&quot;)
+	public DataSource dataSource() {
+		return DataSourceBuilder.create().build();
+	}
+
+	@Bean
+	@Qualifier(&quot;objectMapper&quot;)
+	public ObjectMapper objectMapper() {
+		return new ObjectMapper();
+	}
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">GeneralController.java</div><div class="panel-body">
+<pre><code>
+package springboot.data.jpa.controller;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import springboot.data.jpa.repository.EmployeeJpaRepository;
+
+@RestController
+public class GeneralController {
+
+	@Autowired
+	@Qualifier(value = &quot;primaryDataSource&quot;)
+	private DataSource primaryDataSource;
+
+	@PersistenceContext
+	private EntityManager entityManager;
+
+	@Autowired
+	@Qualifier(&quot;objectMapper&quot;)
+	private ObjectMapper objectMapper;
+
+	@Autowired
+	@Qualifier(&quot;employeeJpaRepository&quot;)
+	private EmployeeJpaRepository employeeJpaRepository;
+
+	@RequestMapping(value = &quot;/hello&quot;, method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+	public @ResponseBody String hello() {
+		return &quot;Welcome to Spring Boot Data JPA&quot;;
+	}
+
+	@RequestMapping(value = &quot;/primaryDataSource&quot;, method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+	public @ResponseBody String dataSource() {
+		return &quot;dataSource: &quot; + primaryDataSource;
+	}
+
+	@RequestMapping(value = &quot;/entityManager&quot;, method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+	public @ResponseBody String entityManager() {
+		return &quot;entityManager: &quot; + entityManager;
+	}
+
+	@RequestMapping(value = &quot;/objectMapper&quot;, method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+	public @ResponseBody String objectMapper() {
+		return &quot;objectMapper: &quot; + objectMapper;
+	}
+
+	@RequestMapping(value = &quot;/employeeJpaRepository&quot;, method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+	public @ResponseBody String employeeJpaRepository() {
+		return &quot;employeeJpaRepository: &quot; + employeeJpaRepository;
+	}
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">GeneralController - request/responses</div><div class="panel-body">
+<em>http://localhost:8080/hello</em>
+<pre>
+Welcome to Spring Boot Data JPA
+</pre>
+<em>http://localhost:8080/primaryDataSource</em>
+<pre><code>
+dataSource: org.apache.tomcat.jdbc.pool.DataSource@5f0fd8{ConnectionPool[defaultAutoCommit=null; defaultReadOnly=null; defaultTransactionIsolation=-1; defaultCatalog=null; driverClassName=org.h2.Driver; maxActive=100; maxIdle=100; minIdle=10; initialSize=10; maxWait=30000; testOnBorrow=false; testOnReturn=false; timeBetweenEvictionRunsMillis=5000; numTestsPerEvictionRun=0; minEvictableIdleTimeMillis=60000; testWhileIdle=false; testOnConnect=false; password=********; url=jdbc:h2:file:E:/Backup/JavaPrep/practiceProjects/Spring/SpringDataPractice/src/main/resources/springDataJpa;MV_STORE=FALSE; username=springDataJpa; validationQuery=null; validationQueryTimeout=-1; validatorClassName=null; validationInterval=30000; accessToUnderlyingConnectionAllowed=true; removeAbandoned=false; removeAbandonedTimeout=60; logAbandoned=false; connectionProperties=null; initSQL=null; jdbcInterceptors=null; jmxEnabled=true; fairQueue=true; useEquals=true; abandonWhenPercentageFull=0; maxAge=0; useLock=false; dataSource=null; dataSourceJNDI=null; suspectTimeout=0; alternateUsernameAllowed=false; commitOnReturn=false; rollbackOnReturn=false; useDisposableConnectionFacade=true; logValidationErrors=false; propagateInterruptState=false; ignoreExceptionOnPreLoad=false; }
+</code></pre>
+<em>http://localhost:8080/entityManager</em>
+<pre><code>
+entityManager: Shared EntityManager proxy for target factory [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean@13a8db89]
+</code></pre>
+<em>http://localhost:8080/objectMapper</em>
+<pre><code>
+objectMapper: com.fasterxml.jackson.databind.ObjectMapper@3b229a33
+</code></pre>
+<em>http://localhost:8080/employeeJpaRepository</em>
+<pre><code>
+employeeJpaRepository: springboot.data.jpa.repository.EmployeeJpaRepositoryImpl@6eb81a70
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">EmployeeDataJpaSaveController.java</div><div class="panel-body">
+<pre><code>
+package springboot.data.jpa.controller;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import springboot.data.jpa.model.Employee;
+import springboot.data.jpa.repository.EmployeeJpaRepository;
+
+@RestController
+public class EmployeeDataJpaSaveController {
+
+    @Autowired
+    @Qualifier(&quot;employeeJpaRepository&quot;)
+    private EmployeeJpaRepository employeeJpaRepository;
+
+    @RequestMapping(value = &quot;/saveOne&quot;, method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+    public @ResponseBody String save() {
+	String status = &quot;success&quot;;
+	try {
+	    Employee employee = new Employee(1, &quot;testName1&quot;, &quot;testJob1&quot;, 65432L, null, null, new Date());
+	    employeeJpaRepository.save(employee);
+	} catch (Exception e) {
+	    status = &quot;failed&quot;;
+	    e.printStackTrace();
+	}
+	return status;
+    }
+
+    @RequestMapping(value = &quot;/save/{id}/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String save(@PathVariable(&quot;id&quot;) Integer id, @PathVariable(&quot;name&quot;) String name) {
+	String status = &quot;success&quot;;
+	try {
+	    Employee employee = new Employee(id, name, &quot;testJob2&quot;, 65432L, null, null, new Date());
+	    employeeJpaRepository.save(employee);
+	} catch (Exception e) {
+	    status = &quot;failed&quot;;
+	    e.printStackTrace();
+	}
+	return status;
+    }
+
+    // un-comment below method for multi tenant implementation
+    /*@RequestMapping(value = &quot;/multiTenant&quot;, method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+    public @ResponseBody String multiTenant(@RequestHeader(&quot;X-TenantID&quot;) String tenantName) {
+    TenantContext.setCurrentTenant(tenantName);
+
+    Employee employee = new Employee(1, &quot;testName1&quot;, &quot;testJob1&quot;, 65432L, null, null, new Date());
+    employee.setId(12);
+    employeeJpaRepository.save(employee);
+
+    return &quot;multi tenant success&quot;;
+    }*/
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">EmployeeDataJpaUpdateController.java</div><div class="panel-body">
+<pre><code>
+package springboot.data.jpa.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import springboot.data.jpa.model.Employee;
+import springboot.data.jpa.repository.EmployeeJpaRepository;
+
+@RestController
+public class EmployeeDataJpaUpdateController {
+
+    @Autowired
+    @Qualifier(&quot;employeeJpaRepository&quot;)
+    private EmployeeJpaRepository employeeJpaRepository;
+
+    @RequestMapping(value = &quot;/updateOne&quot;, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Employee updateEmployee(@RequestBody Employee employee) {
+	return employeeJpaRepository.saveAndFlush(employee);
+    }
+
+    @RequestMapping(value = &quot;/updateByName/{oldName}/{newName}&quot;, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public int updateByName(@PathVariable(&quot;oldName&quot;) String oldName, @PathVariable(&quot;newName&quot;) String newName) {
+	return employeeJpaRepository.updateByName(oldName, newName);
+    }
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">EmployeeDataJpaDeleteController.java</div><div class="panel-body">
+<pre><code>
+package springboot.data.jpa.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import springboot.data.jpa.model.Employee;
+import springboot.data.jpa.repository.EmployeeJpaRepository;
+
+@RestController
+public class EmployeeDataJpaDeleteController {
+
+    @Autowired
+    @Qualifier(&quot;employeeJpaRepository&quot;)
+    private EmployeeJpaRepository employeeJpaRepository;
+
+    @RequestMapping(value = &quot;/delete/{id}&quot;, method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+    public @ResponseBody String delete(@PathVariable(&quot;id&quot;) Integer id) {
+	String status = &quot;success&quot;;
+	try {
+	    Employee employee = employeeJpaRepository.findOne(id);
+	    employeeJpaRepository.delete(employee);
+	} catch (Exception e) {
+	    status = &quot;failed&quot;;
+	    e.printStackTrace();
+	}
+	return status;
+    }
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">EmployeeDataJpaSelectController.java</div><div class="panel-body">
+<pre><code>
+package springboot.data.jpa.controller;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import springboot.data.jpa.model.Employee;
+import springboot.data.jpa.repository.EmployeeJpaRepository;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@RestController
+public class EmployeeDataJpaSelectController {
+
+    @Autowired
+    @Qualifier(&quot;employeeJpaRepository&quot;)
+    private EmployeeJpaRepository employeeJpaRepository;
+
+    @Autowired
+    @Qualifier(&quot;objectMapper&quot;)
+    private ObjectMapper objectMapper;
+
+    @RequestMapping(value = &quot;/findOne&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String findOne() throws JsonProcessingException {
+	Employee employee = employeeJpaRepository.findOne(1);
+	return objectMapper.writeValueAsString(employee);
+    }
+
+    @RequestMapping(value = &quot;/findAll&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; findAll() {
+	List&lt;Employee&gt; employeeList = employeeJpaRepository.findAll();
+	return employeeList;
+    }
+
+    @RequestMapping(value = &quot;/findByName/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; find(@PathVariable(&quot;name&quot;) String name) {
+	return employeeJpaRepository.findByName(name);
+    }
+
+    @RequestMapping(value = &quot;/findByNameLike&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; findByNameLike(@RequestParam(&quot;name&quot;) String name) {
+	return employeeJpaRepository.findByNameLike(name + &quot;%&quot;);
+    }
+
+    @RequestMapping(value = &quot;/countByName/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String countByName(@PathVariable(&quot;name&quot;) String name) {
+	return &quot;No.of Records: &quot; + employeeJpaRepository.countByName(name);
+    }
+
+    @RequestMapping(value = &quot;/findByNameAndJob&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; findByNameAndJob(@RequestParam(&quot;name&quot;) String name, @RequestParam(&quot;job&quot;) String job) {
+	return employeeJpaRepository.findByNameAndJob(name, job);
+    }
+
+    @RequestMapping(value = &quot;/findByNameOrJob&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; findByNameOrJob(@RequestParam(&quot;name&quot;) String name, @RequestParam(&quot;job&quot;) String job) {
+	return employeeJpaRepository.findByNameOrJob(name, job);
+    }
+
+    @RequestMapping(value = &quot;/findByNameIs/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; findByNameIs(@PathVariable(&quot;name&quot;) String name) {
+	return employeeJpaRepository.findByNameIs(name);
+    }
+
+    @RequestMapping(value = &quot;/findByNameEquals/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; findByNameEquals(@PathVariable(&quot;name&quot;) String name) {
+	return employeeJpaRepository.findByNameEquals(name);
+    }
+
+    @RequestMapping(value = &quot;/findByNameNot/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; findByNameNot(@PathVariable(&quot;name&quot;) String name) {
+	return employeeJpaRepository.findByNameNot(name);
+    }
+
+    @RequestMapping(value = &quot;/findByNameNotAndJob&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; findByNameNotAndJob(@RequestParam(&quot;name&quot;) String name, @RequestParam(&quot;job&quot;) String job) {
+	return employeeJpaRepository.findByNameNotAndJob(name, job);
+    }
+
+    @RequestMapping(value = &quot;/findByNameNotLike/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; findByNameNotLike(@PathVariable(&quot;name&quot;) String name) {
+	return employeeJpaRepository.findByNameNotLike(name + &quot;%&quot;);
+    }
+
+    @RequestMapping(value = &quot;/findByNameStartingWith/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; findByNameStartingWith(@PathVariable(&quot;name&quot;) String name) {
+	return employeeJpaRepository.findByNameStartingWith(name);
+    }
+
+    @RequestMapping(value = &quot;/findByNameEndingWith/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; findByNameEndingWith(@PathVariable(&quot;name&quot;) String name) {
+	return employeeJpaRepository.findByNameEndingWith(name);
+    }
+
+    @RequestMapping(value = &quot;/findByNameContaining/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; findByNameContaining(@PathVariable(&quot;name&quot;) String name) {
+	return employeeJpaRepository.findByNameContaining(name);
+    }
+
+    @RequestMapping(value = &quot;/findBySalaryLessThan/{salary}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; findBySalaryLessThan(@PathVariable(&quot;salary&quot;) Long salary) {
+	return employeeJpaRepository.findBySalaryLessThan(salary);
+    }
+
+    @RequestMapping(value = &quot;/findBySalaryLessThanEqual/{salary}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; findBySalaryLessThanEqual(@PathVariable(&quot;salary&quot;) Long salary) {
+	return employeeJpaRepository.findBySalaryLessThanEqual(salary);
+    }
+
+    @RequestMapping(value = &quot;/findBySalaryGreaterThan/{salary}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; findBySalaryGreaterThan(@PathVariable(&quot;salary&quot;) Long salary) {
+	return employeeJpaRepository.findBySalaryGreaterThan(salary);
+    }
+
+    @RequestMapping(value = &quot;/findBySalaryGreaterThanEqual/{salary}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; findBySalaryGreaterThanEqual(@PathVariable(&quot;salary&quot;) Long salary) {
+	return employeeJpaRepository.findBySalaryGreaterThanEqual(salary);
+    }
+
+    @RequestMapping(value = &quot;/findBySalaryGreterThanAndSalaryLessThan/{salary1}/{salary2}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; findBySalaryGreterThanAndSalaryLessThan(@PathVariable(&quot;salary1&quot;) Long value1,
+	    @PathVariable(&quot;salary2&quot;) Long value2) {
+	return employeeJpaRepository.findBySalaryGreaterThanAndSalaryLessThan(value1, value2);
+    }
+
+    @RequestMapping(value = &quot;/findByHiredateBefore/{year}/{month}/{date}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List&lt;Employee&gt; findByHiredateBefore(@PathVariable(&quot;year&quot;) int year, @PathVariable(&quot;month&quot;) int month, @PathVariable(&quot;date&quot;) int dayOfMonth) {
+	Date date = Date.from(LocalDate.of(year, month, dayOfMonth).atStartOfDay(ZoneId.systemDefault()).toInstant());
+	return employeeJpaRepository.findByHiredateBefore(date);
+    }
+
+    @RequestMapping(value = &quot;/findByHiredateAfter/{year}/{month}/{date}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List&lt;Employee&gt; findByHiredateAfter(@PathVariable(&quot;year&quot;) int year, @PathVariable(&quot;month&quot;) int month, @PathVariable(&quot;date&quot;) int dayOfMonth) {
+	Date date = Date.from(LocalDate.of(year, month, dayOfMonth).atStartOfDay(ZoneId.systemDefault()).toInstant());
+	return employeeJpaRepository.findByHiredateAfter(date);
+    }
+
+    @RequestMapping(value = &quot;/findByHiredateBetween/{year}/{month}/{date}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List&lt;Employee&gt; findByHiredateBetween(@PathVariable(&quot;year&quot;) int year, @PathVariable(&quot;month&quot;) int month, @PathVariable(&quot;date&quot;) int dayOfMonth) {
+	Date startDate = Date.from(LocalDate.of(year, month, dayOfMonth).atStartOfDay(ZoneId.systemDefault()).toInstant());
+	Date endDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+	return employeeJpaRepository.findByHiredateBetween(startDate, endDate);
+    }
+
+    @RequestMapping(value = &quot;/findByActiveTrue&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List&lt;Employee&gt; findByActiveTrue() {
+	return employeeJpaRepository.findByActiveTrue();
+    }
+
+    @RequestMapping(value = &quot;/findByActiveFalse&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List&lt;Employee&gt; findByActiveFalse() {
+	return employeeJpaRepository.findByActiveFalse();
+    }
+
+    @RequestMapping(value = &quot;/findByManagerIsNull&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List&lt;Employee&gt; findByManagerIsNull() {
+	return employeeJpaRepository.findByManagerIsNull();
+    }
+
+    @RequestMapping(value = &quot;/findByManagerIsNotNull&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List&lt;Employee&gt; findByManagerIsNotNull() {
+	return employeeJpaRepository.findByManagerIsNotNull();
+    }
+
+    @RequestMapping(value = &quot;/findByManagerNotNull&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List&lt;Employee&gt; findByManagerNotNull() {
+	return employeeJpaRepository.findByManagerNotNull();
+    }
+
+    @RequestMapping(value = &quot;/findByDepartmentDeptNameIn/{deptName}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List&lt;Employee&gt; findByDepartmentDeptNameIn(@PathVariable(&quot;deptName&quot;) String deptName) {
+	return employeeJpaRepository.findByDepartmentDeptNameIn(Arrays.asList(deptName));
+    }
+
+    @RequestMapping(value = &quot;/findByDepartmentDeptNameNotIn/{deptName}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List&lt;Employee&gt; findByDepartmentDeptNameNotIn(@PathVariable(&quot;deptName&quot;) String deptName) {
+	return employeeJpaRepository.findByDepartmentDeptNameNotIn(Arrays.asList(deptName));
+    }
+
+    @RequestMapping(value = &quot;/findByNameIgnoreCase/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List&lt;Employee&gt; findByNameIgnoreCase(@PathVariable(&quot;name&quot;) String name) {
+	return employeeJpaRepository.findByNameIgnoreCase(name);
+    }
+
+    @RequestMapping(value = &quot;/findByNameStartingWithIgnoreCase/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List&lt;Employee&gt; findByNameStartingWithIgnoreCase(@PathVariable(&quot;name&quot;) String name) {
+	return employeeJpaRepository.findByNameStartingWithIgnoreCase(name);
+    }
+
+    @RequestMapping(value = &quot;/findByJobOrderBySalaryAsc/{job}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List&lt;Employee&gt; findByJobOrderBySalaryAsc(@PathVariable(&quot;job&quot;) String job) {
+	return employeeJpaRepository.findByJobOrderBySalaryAsc(job);
+    }
+
+    @RequestMapping(value = &quot;/findByJobOrderBySalaryDesc/{job}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List&lt;Employee&gt; findByJobOrderBySalaryDesc(@PathVariable(&quot;job&quot;) String job) {
+	return employeeJpaRepository.findByJobOrderBySalaryDesc(job);
+    }
+
+    @RequestMapping(value = &quot;/findFirstByNameLike/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Employee findFirstByNameLike(@PathVariable(&quot;name&quot;) String name) {
+	return employeeJpaRepository.findFirstByNameLike(name + &quot;%&quot;);
+    }
+
+    @RequestMapping(value = &quot;/findTop5ByNameLike/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; findTop5ByNameLike(@PathVariable(&quot;name&quot;) String name) {
+	return employeeJpaRepository.findTop5ByNameLike(name + &quot;%&quot;);
+    }
+
+    @RequestMapping(value = &quot;/queryByName/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; queryByName(@PathVariable(&quot;name&quot;) String name) {
+	return employeeJpaRepository.queryByName(name);
+    }
+
+    @RequestMapping(value = &quot;/queryBySalaryGreaterThan/{salary}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; queryBySalaryGreaterThan(@PathVariable(&quot;salary&quot;) Long salary) {
+	return employeeJpaRepository.queryBySalaryGreaterThan(salary);
+    }
+
+    @RequestMapping(value = &quot;/queryBySQLName/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; queryBySQLName(@PathVariable(&quot;name&quot;) String name) {
+	return employeeJpaRepository.queryBySQLName(name);
+    }
+
+    @RequestMapping(value = &quot;/namedQueryFindByDeptName/{deptName}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List&lt;Employee&gt; namedQueryFindByDeptName(@PathVariable(&quot;deptName&quot;) String deptName) {
+	return employeeJpaRepository.namedQueryFindByDeptName(deptName);
+    }
+
+    @RequestMapping(value = &quot;/namedNativeQueryByName/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List&lt;Employee&gt; namedNativeQueryByName(@PathVariable(&quot;name&quot;) String name) {
+	return employeeJpaRepository.namedNativeQueryByName(name);
+    }
+
+    @RequestMapping(value = &quot;/queryBySalaryGreaterThanWithPageable/{salary}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Page&lt;Employee&gt; queryBySalaryGreaterThanWithPageable(@PathVariable(&quot;salary&quot;) Long salary) {
+	Pageable pageable = new PageRequest(0, 3);
+	Page&lt;Employee&gt; employees = employeeJpaRepository.queryBySalaryGreaterThanWithPageable(salary, pageable);
+
+	System.out.println(&quot;EmployeeDataJpaSelectController.queryBySalaryGreaterThanWithPageable -&gt; employees.getTotalElements(): &quot;
+		+ employees.getTotalElements());
+	System.out.println(&quot;EmployeeDataJpaSelectController.queryBySalaryGreaterThanWithPageable -&gt; employees.getSize(): &quot; + employees.getSize());
+	System.out.println(&quot;EmployeeDataJpaSelectController.queryBySalaryGreaterThanWithPageable -&gt; employees.getTotalPages(): &quot;
+		+ employees.getTotalPages());
+
+	return employees;
+    }
+
+    @RequestMapping(value = &quot;/queryBySalaryGreaterThanWithPageableSort/{salary}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Page&lt;Employee&gt; queryBySalaryGreaterThanWithPageableSort(@PathVariable(&quot;salary&quot;) Long salary) {
+	Sort sort = new Sort(Sort.Direction.ASC, &quot;name&quot;);
+	/*Sort sort = new Sort(Sort.Direction.DESC, &quot;name&quot;);*/
+	Pageable pageable = new PageRequest(0, 3, sort);
+	Page&lt;Employee&gt; employees = employeeJpaRepository.queryBySalaryGreaterThanWithPageableSort(salary, pageable);
+	return employees;
+    }
+
+    @RequestMapping(value = &quot;/customMethod&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String cutomMethod() {
+	return employeeJpaRepository.cutomMethod();
+    }
+
+}
+</code></pre>
+</div></div>

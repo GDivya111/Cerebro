@@ -147,6 +147,9 @@ app.config(function($routeProvider){
 	// Spring Batch
 	.when("/springBatchHelloWorld",{templateUrl : "springBatchHelloWorld.html",controller : "cerebroController"})
 	
+	// Spring Data JPA
+	.when("/springDataJpaPractice",{templateUrl : "springDataJpaPractice.html",controller : "cerebroController"})
+	
 	// Spring Data Mongo
 	.when("/springDataMongoXml",{templateUrl : "springDataMongoXml.html",controller : "cerebroController"})
 	.when("/springDataMongoJavaConfig",{templateUrl : "springDataMongoJavaConfig.html",controller : "cerebroController"})
