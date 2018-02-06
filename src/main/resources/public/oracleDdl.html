@@ -42,6 +42,15 @@ CREATE TABLE Persons (
     Age int CHECK (Age&gt;=18)
 );
 </pre>
+<em>Check Constraint with IN clause along with column</em>
+<pre>
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+	Active number(1,0) CHECK (Active in (1,0))    
+);
+</pre>
 <em>Declare constraint separately</em>
 <pre>
 CREATE TABLE Persons (
