@@ -1,0 +1,668 @@
+<div class="panel panel-primary"><div class="panel-heading">Create Java project using Maven from cmd</div><div class="panel-body">
+<pre ><code>
+mvn archetype:generate -DgroupId=spring.data.rest -DartifactId=SpringDataRestPractice -Dversion=1.0 -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Project Structure</div><div class="panel-body">
+<img class="img-responsive" ng-src="images/spring/1-springDataRestHelloWorld.jpg"/>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">pom.xml</div><div class="panel-body">
+<pre><code>
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+	xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+	&lt;groupId&gt;spring.data.rest&lt;/groupId&gt;
+	&lt;artifactId&gt;SpringDataRestPractice&lt;/artifactId&gt;
+	&lt;packaging&gt;jar&lt;/packaging&gt;
+	&lt;version&gt;1.0&lt;/version&gt;
+	&lt;name&gt;SpringDataRestPractice&lt;/name&gt;
+	&lt;url&gt;http://maven.apache.org&lt;/url&gt;
+
+	&lt;parent&gt;
+		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+		&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+		&lt;version&gt;1.3.1.RELEASE&lt;/version&gt;
+	&lt;/parent&gt;
+	&lt;dependencies&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;junit&lt;/groupId&gt;
+			&lt;artifactId&gt;junit&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+
+		&lt;!-- Spring boot data jpa --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+
+		&lt;!-- Spring boot data jpa with REST --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-data-rest&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+
+		&lt;!-- H2 dependency --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;com.h2database&lt;/groupId&gt;
+			&lt;artifactId&gt;h2&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+		
+		&lt;!-- If we are not using spring boot and if application is spring mvc --&gt;
+		&lt;!-- &lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.data&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-data-rest-webmvc&lt;/artifactId&gt;
+			&lt;version&gt;2.3.0.RELEASE&lt;/version&gt;
+		&lt;/dependency&gt; --&gt;
+	&lt;/dependencies&gt;
+	&lt;build&gt;
+		&lt;finalName&gt;SpringDataRestPractice&lt;/finalName&gt;
+		&lt;plugins&gt;
+			&lt;plugin&gt;
+				&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+				&lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+				&lt;configuration&gt;
+					&lt;meminitial&gt;128m&lt;/meminitial&gt;
+					&lt;maxmem&gt;512m&lt;/maxmem&gt;
+					&lt;showDeprecation&gt;true&lt;/showDeprecation&gt;
+					&lt;showWarnings&gt;true&lt;/showWarnings&gt;
+					&lt;source&gt;1.8&lt;/source&gt;
+					&lt;target&gt;1.8&lt;/target&gt;
+					&lt;compilerArgument&gt;-Xlint:all&lt;/compilerArgument&gt;
+					&lt;compilerArgument&gt;-parameters&lt;/compilerArgument&gt;
+				&lt;/configuration&gt;
+			&lt;/plugin&gt;
+			&lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+		&lt;/plugins&gt;
+	&lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">schema.sql</div><div class="panel-body">
+<pre><code>
+DROP TABLE IF EXISTS DEPT;
+
+CREATE TABLE DEPT
+(
+ DEPTNO NUMBER(32)
+,DNAME VARCHAR2(50)
+,LOC VARCHAR2(50)
+,CONSTRAINT DEPTNO_PK PRIMARY KEY(DEPTNO)
+);
+
+DROP TABLE IF EXISTS EMP;
+
+CREATE TABLE EMP
+(
+ EMPNO NUMBER(32)
+,ENAME VARCHAR2(50)
+,DEPTNO NUMBER(32) CONSTRAINT DEPTNO_FK REFERENCES DEPT(DEPTNO) ON DELETE CASCADE
+,JOB VARCHAR2(50)
+,SAL NUMBER(32)
+,COMM NUMBER(32)
+,MGR NUMBER(32) CONSTRAINT MGR_FK REFERENCES EMP(EMPNO)
+,HIREDATE DATE
+,ACTIVE BOOLEAN
+,CONSTRAINT EMPNO_PK PRIMARY KEY(EMPNO)
+);
+
+DROP TABLE IF EXISTS SALGRADE;
+
+CREATE TABLE SALGRADE
+(
+ HISAL NUMBER(32)
+,LOSAL NUMBER(32)
+,GRADE NUMBER(32)
+);
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">data.sql</div><div class="panel-body">
+<pre><code>
+INSERT INTO DEPT(DEPTNO, DNAME, LOC)
+VALUES(10,'ACCOUNTING','NEW YORK');
+
+INSERT INTO DEPT(DEPTNO, DNAME, LOC)
+VALUES(20,'RESEARCH','DALLAS');
+
+INSERT INTO DEPT(DEPTNO, DNAME, LOC)
+VALUES(30,'SALES','CHICAGO');
+
+INSERT INTO DEPT(DEPTNO, DNAME, LOC)
+VALUES(40,'OPERATIONS','BOSTON');
+ 
+COMMIT;
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7839,'KING','PRESIDENT',NULL,parsedatetime('17-11-1981', 'dd-MM-yyyy'),5000,NULL,10);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7698,'BLAKE','MANAGER',7839,parsedatetime('01-05-1981', 'dd-MM-yyyy'),2850,NULL,30);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7782,'CLARK','MANAGER',7839,parsedatetime('09-06-1981', 'dd-MM-yyyy'),2450,NULL,10);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7566,'JONES','MANAGER',7839,parsedatetime('02-04-1981', 'dd-MM-yyyy'),2975,NULL,20);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7654,'MARTIN','SALESMAN',7698,parsedatetime('28-09-1981', 'dd-MM-yyyy'),1250,1400,30);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7499,'ALLEN','SALESMAN',7698,parsedatetime('20-02-1981', 'dd-MM-yyyy'),1600,300,30);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7844,'TURNER','SALESMAN',7698,parsedatetime('08-09-1981', 'dd-MM-yyyy'),1500,0,30);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7900,'JAMES','CLERK',7698,parsedatetime('03-12-1981', 'dd-MM-yyyy'),950,NULL,30);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7521,'WARD','SALESMAN',7698,parsedatetime('22-02-1981', 'dd-MM-yyyy'),1250,500,30);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7902,'FORD','ANALYST',7566,parsedatetime('03-12-1981', 'dd-MM-yyyy'),3000,NULL,20);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7369,'SMITH','CLERK',7902,parsedatetime('17-12-1980', 'dd-MM-yyyy'),800,NULL,20);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7788,'SCOTT','ANALYST',7566,parsedatetime('09-12-1982', 'dd-MM-yyyy'),3000,NULL,20);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7876,'ADAMS','CLERK',7788,parsedatetime('12-01-1983', 'dd-MM-yyyy'),1100,NULL,20);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+VALUES (7934,'MILLER','CLERK',7782,parsedatetime('23-01-1982', 'dd-MM-yyyy'),1300,NULL,10);
+
+COMMIT;
+
+INSERT INTO SALGRADE (HISAL, LOSAL, GRADE)
+VALUES (1, 700, 1200);
+
+INSERT INTO SALGRADE (HISAL, LOSAL, GRADE)
+VALUES (2, 1201, 1400);
+
+INSERT INTO SALGRADE (HISAL, LOSAL, GRADE)
+VALUES (3, 1401, 2000);
+
+INSERT INTO SALGRADE (HISAL, LOSAL, GRADE)
+VALUES (4, 2001, 3000);
+
+INSERT INTO SALGRADE (HISAL, LOSAL, GRADE)
+VALUES (5, 3001, 9999);
+
+COMMIT;
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">application.properties</div><div class="panel-body">
+<pre><code>
+#logging properties
+logging.level.org.springframework.web=DEBUG
+
+#server properties
+server.port=9091
+
+# h2 console properties
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2
+
+# primary data source properties
+spring.datasource.url=jdbc:h2:file:E:/Backup/JavaPrep/practiceProjects/Spring/SpringDataProjects/SpringDataRestPractice/src/main/resources/db;MV_STORE=FALSE
+spring.datasource.username=root
+spring.datasource.password=password
+spring.datasource.driver-class-name=org.h2.Driver
+
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+# JPA properties ----------------------------------------------
+spring.jpa.show-sql=true
+#This is actually a shortcut for the &quot;hibernate.hbm2ddl.auto&quot; property. 
+#Default to &quot;create-drop&quot; when using an embedded database, &quot;none&quot; otherwise.
+spring.jpa.hibernate.ddl-auto=none
+
+# to make base path of data rest services to http://localhost:9091/api 
+#spring.data.rest.base-path=/api
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">SalaryGrade.java</div><div class="panel-body">
+<pre><code>
+package spring.data.rest.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = &quot;SALGRADE&quot;)
+public class SalaryGrade {
+
+	private Long highSalary;
+	private Long lowSalary;
+	private Long grade;
+
+	public SalaryGrade(Long highSalary, Long lowSalary, Long grade) {
+		this.highSalary = highSalary;
+		this.lowSalary = lowSalary;
+		this.grade = grade;
+	}
+
+	public SalaryGrade() {
+	}
+
+	@Id
+	@Column(name = &quot;GRADE&quot;)
+	public Long getGrade() {
+		return grade;
+	}
+
+	public void setGrade(Long grade) {
+		this.grade = grade;
+	}
+
+	@Column(name = &quot;HISAL&quot;)
+	public Long getHighSalary() {
+		return highSalary;
+	}
+
+	public void setHighSalary(Long highSalary) {
+		this.highSalary = highSalary;
+	}
+
+	@Column(name = &quot;LOSAL&quot;)
+	public Long getLowSalary() {
+		return lowSalary;
+	}
+
+	public void setLowSalary(Long lowSalary) {
+		this.lowSalary = lowSalary;
+	}
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Department.java</div><div class="panel-body">
+<pre><code>
+package spring.data.rest.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = &quot;DEPT&quot;)
+public class Department {
+
+	private Integer id;
+	private String deptName;
+	private String location;
+
+	public Department(Integer id, String deptName, String location) {
+		this.id = id;
+		this.deptName = deptName;
+		this.location = location;
+	}
+
+	public Department() {
+	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = &quot;DEPTNO&quot;)
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@Column(name = &quot;DNAME&quot;)
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	@Column(name = &quot;LOC&quot;)
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	@Override
+	public String toString() {
+		return &quot;Department [id=&quot; + id + &quot;, deptName=&quot; + deptName + &quot;, location=&quot; + location + &quot;]&quot;;
+	}
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Employee.java</div><div class="panel-body">
+<pre><code>
+package spring.data.rest.model;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = &quot;EMP&quot;)
+public class Employee {
+
+	private Integer id;
+	private String name;
+	private String job;
+	private Long salary;
+	private Long comm;
+	private Integer manager;
+	private Date hiredate;
+	private Boolean active;
+	private Department department;
+
+	public Employee() {
+	}
+
+	public Employee(Integer id, String name, String job, Long salary, Long comm, Integer manager, Date hiredate) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.job = job;
+		this.salary = salary;
+		this.comm = comm;
+		this.manager = manager;
+		this.hiredate = hiredate;
+	}
+
+	@Id
+	@Column(name = &quot;EMPNO&quot;)
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@Column(name = &quot;ENAME&quot;)
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Column(name = &quot;JOB&quot;)
+	public String getJob() {
+		return job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
+	}
+
+	@Column(name = &quot;SAL&quot;)
+	public Long getSalary() {
+		return salary;
+	}
+
+	public void setSalary(Long salary) {
+		this.salary = salary;
+	}
+
+	@Column(name = &quot;COMM&quot;)
+	public Long getComm() {
+		return comm;
+	}
+
+	public void setComm(Long comm) {
+		this.comm = comm;
+	}
+
+	@Column(name = &quot;MGR&quot;)
+	public Integer getManager() {
+		return manager;
+	}
+
+	public void setManager(Integer manager) {
+		this.manager = manager;
+	}
+
+	@Column(name = &quot;HIREDATE&quot;)
+	public Date getHiredate() {
+		return hiredate;
+	}
+
+	public void setHiredate(Date hiredate) {
+		this.hiredate = hiredate;
+	}
+
+	@Column(name = &quot;ACTIVE&quot;)
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = &quot;DEPTNO&quot;, referencedColumnName = &quot;DEPTNO&quot;)
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">SalaryGradeRepository.java</div><div class="panel-body">
+<pre><code>
+package spring.data.rest.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
+
+import spring.data.rest.model.SalaryGrade;
+
+@Repository(&quot;salGradeRepository&quot;)
+<em>/*
+ * @RepositoryRestResource is not required for a repository to be exported. 
+ * It is only used to change the export details, such as using /salGrads instead of the default value of /salaryGrades
+ */</em>
+@RepositoryRestResource(collectionResourceRel = &quot;salaryGradesList&quot;, path = &quot;salGrads&quot;)
+public interface SalaryGradeRepository extends JpaRepository&lt;SalaryGrade, Long&gt; {
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">DepartmentRepository.java</div><div class="panel-body">
+<pre><code>
+package spring.data.rest.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import spring.data.rest.model.Department;
+
+@Repository(&quot;deptRepository&quot;)
+<em>// For not exposing this repository as a service
+// @RepositoryRestResource(exported = false)</em>
+public interface DepartmentRepository extends JpaRepository&lt;Department, Integer&gt; {
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">EmployeeRepository.java</div><div class="panel-body">
+<pre><code>
+package spring.data.rest.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
+
+import spring.data.rest.model.Employee;
+import spring.data.rest.model.projections.EmployeeDetailVirtualProjection;
+
+<em>/*For this repository by default Spring Data Rest will provide below URL:
+ * http://localhost:9091/employees
+ * 
+ * To customize that to below URL: http://localhost:9091/emps
+ * 
+ * we need to use:
+ * @RepositoryRestResource(collectionResourceRel = &quot;emps&quot;, path = &quot;emps&quot;)
+ */</em>
+@RepositoryRestResource(collectionResourceRel = &quot;emps&quot;, path = &quot;emps&quot;, excerptProjection = EmployeeDetailVirtualProjection.class)
+@Repository(&quot;employeeRepository&quot;)
+public interface EmployeeRepository extends JpaRepository&lt;Employee, Integer&gt; {
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">EmployeeDetail.java</div><div class="panel-body">
+<pre><code>
+package spring.data.rest.model.projections;
+
+import org.springframework.data.rest.core.config.Projection;
+
+import spring.data.rest.model.Department;
+import spring.data.rest.model.Employee;
+
+/**
+ * URL: http://localhost:9091/employees/7839?projection=employeeDetail
+ * @author Avinash Babu Donthu
+ *
+ */
+@Projection(name = &quot;employeeDetail&quot;, types = { Employee.class })
+public interface EmployeeDetail {
+
+	public abstract String getName();
+
+	public abstract String getJob();
+
+	public abstract Long getSalary();
+
+	public abstract Department getDepartment();
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">EmployeeDetailVirtualProjection.java</div><div class="panel-body">
+<pre><code>
+package spring.data.rest.model.projections;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.rest.core.config.Projection;
+
+import spring.data.rest.model.Employee;
+
+/**
+ * URL: http://localhost:9091/employees/7839?projection=employeeDetailView
+ * @author Avinash Babu Donthu
+ *
+ */
+@Projection(name = &quot;employeeDetailView&quot;, types = { Employee.class })
+public interface EmployeeDetailVirtualProjection {
+
+	/*
+	 * target refers to Employee entity model class
+	 * name refers to name property on the Employee entity model class
+	 */
+	@Value(&quot;#{target.name}&quot;)
+	public abstract String getEmployeeName();
+
+	@Value(&quot;#{target.name} #{target.job}&quot;)
+	public abstract String getEmployeeNameAndJob();
+
+	public abstract String getJob();
+
+	public abstract Long getSalary();
+
+	@Value(&quot;#{target.department.deptName}&quot;)
+	public abstract String getDepartmentName();
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">MyController.java</div><div class="panel-body">
+<pre><code>
+package spring.data.rest.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import spring.data.rest.repository.SalaryGradeRepository;
+
+@RestController
+public class MyController {
+
+	@Autowired
+	@Qualifier(&quot;salGradeRepository&quot;)
+	private SalaryGradeRepository salGradeRepository;
+
+	@RequestMapping(value = &quot;/hello&quot;, method = RequestMethod.GET)
+	public String hello() {
+		System.out.println(&quot;salGradeRepository: &quot; + salGradeRepository);
+		return &quot;Hello Spring Data Rest&quot;;
+	}
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">MyApp.java</div><div class="panel-body">
+<pre><code>
+package spring.data.rest;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+@SpringBootApplication
+@EnableJpaRepositories(basePackages = &quot;spring.data.rest&quot;)
+@EnableAutoConfiguration
+public class MyApp {
+	public static void main(String[] args) {
+		SpringApplication.run(MyApp.class, args);
+	}
+}
+</code></pre>
+</div></div>

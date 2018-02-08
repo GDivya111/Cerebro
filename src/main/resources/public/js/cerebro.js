@@ -150,6 +150,9 @@ app.config(function($routeProvider){
 	// Spring Data JPA
 	.when("/springDataJpaPractice",{templateUrl : "springDataJpaPractice.html",controller : "cerebroController"})
 	
+	// Spring Data REST
+	.when("/springDataRestHelloWorld",{templateUrl : "springDataRestHelloWorld.html",controller : "cerebroController"})
+	
 	// Spring Data Mongo
 	.when("/springDataMongoXml",{templateUrl : "springDataMongoXml.html",controller : "cerebroController"})
 	.when("/springDataMongoJavaConfig",{templateUrl : "springDataMongoJavaConfig.html",controller : "cerebroController"})
