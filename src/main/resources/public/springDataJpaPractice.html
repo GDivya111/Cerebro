@@ -371,10 +371,10 @@ import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-/*Named Query: In Spring Data JPA for NamedQuery -&gt; name attribute should start with model name. 
- * For example below name=Employee.&lt;anyUserDefinedName&gt;*/
+<em>/*Named Query: In Spring Data JPA for NamedQuery -&gt; name attribute should start with model name. 
+ * For example below name=Employee.&lt;anyUserDefinedName&gt;*/</em>
 @NamedQuery(name = &quot;Employee.namedFindByDeptName&quot;, query = &quot;select e from Employee e where e.department.deptName = :inputDeptName&quot;)
-/*Native SQL Query Example*/
+<em>/*Native SQL Query Example*/</em>
 @NamedNativeQuery(name = &quot;Employee.namedNativeFindByName&quot;, query = &quot;select * from emp where ename = :inputName&quot;)
 @Entity
 @Table(name = &quot;EMP&quot;)
@@ -594,212 +594,212 @@ public interface EmployeeJpaRepository extends JpaRepository&lt;Employee, Intege
 
     public abstract List&lt;Employee&gt; findByNameNotAndJob(String value1, String value2);
 
-    // where name like &quot;value%&quot;
+    <em>// where name like &quot;value%&quot;</em>
     public abstract List&lt;Employee&gt; findByNameStartingWith(String value);
 
-    //where name like &quot;%value&quot;
+    <em>//where name like &quot;%value&quot;</em>
     public abstract List&lt;Employee&gt; findByNameEndingWith(String value);
 
-    //where name like &quot;%value%&quot;
+    <em>//where name like &quot;%value%&quot;</em>
     public abstract List&lt;Employee&gt; findByNameContaining(String value);
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_0_, employee0_.comm as comm2_0_, employee0_.deptno as deptno3_0_, 
      * employee0_.hiredate as hiredate4_0_, employee0_.job as job5_0_, employee0_.mgr as mgr6_0_, employee0_.ename as ename7_0_, 
      * employee0_.sal as sal8_0_ from emp employee0_ where employee0_.sal&lt;?
-     */
+     */</em>
     public abstract List&lt;Employee&gt; findBySalaryLessThan(Long value);
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_0_, employee0_.comm as comm2_0_, employee0_.deptno as deptno3_0_, 
      * employee0_.hiredate as hiredate4_0_, employee0_.job as job5_0_, employee0_.mgr as mgr6_0_, employee0_.ename as ename7_0_, 
      * employee0_.sal as sal8_0_ from emp employee0_ where employee0_.sal&lt;=?
-     */
+     */</em>
     public abstract List&lt;Employee&gt; findBySalaryLessThanEqual(Long value);
 
-    // where salary &gt; value
+    <em>// where salary &gt; value</em>
     public abstract List&lt;Employee&gt; findBySalaryGreaterThan(Long value);
 
-    //where salary &gt;= value
+    <em>//where salary &gt;= value</em>
     public abstract List&lt;Employee&gt; findBySalaryGreaterThanEqual(Long value);
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_0_, employee0_.comm as comm2_0_, employee0_.deptno as deptno3_0_, employee0_.hiredate as hiredate4_0_, 
      * employee0_.job as job5_0_, employee0_.mgr as mgr6_0_, employee0_.ename as ename7_0_, employee0_.sal as sal8_0_ 
      * from emp employee0_ where employee0_.sal&gt;? and employee0_.sal&lt;?
-     */
+     */</em>
     public abstract List&lt;Employee&gt; findBySalaryGreaterThanAndSalaryLessThan(Long value1, Long value2);
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_0_, employee0_.comm as comm2_0_, employee0_.deptno as deptno3_0_, employee0_.hiredate as hiredate4_0_, 
      * employee0_.job as job5_0_, employee0_.mgr as mgr6_0_, employee0_.ename as ename7_0_, employee0_.sal as sal8_0_ from emp employee0_ 
      * where employee0_.hiredate&lt;?
-     */
+     */</em>
     public abstract List&lt;Employee&gt; findByHiredateBefore(Date value);
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_0_, employee0_.comm as comm2_0_, employee0_.deptno as deptno3_0_, employee0_.hiredate as hiredate4_0_, 
      * employee0_.job as job5_0_, employee0_.mgr as mgr6_0_, employee0_.ename as ename7_0_, employee0_.sal as sal8_0_ from emp employee0_ 
      * where employee0_.hiredate&gt;?
-     */
+     */</em>
     public abstract List&lt;Employee&gt; findByHiredateAfter(Date value);
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_0_, employee0_.comm as comm2_0_, employee0_.deptno as deptno3_0_, employee0_.hiredate as hiredate4_0_, 
      * employee0_.job as job5_0_, employee0_.mgr as mgr6_0_, employee0_.ename as ename7_0_, employee0_.sal as sal8_0_ from emp employee0_ 
      * where employee0_.hiredate between ? and ?
-     */
+     */</em>
     public abstract List&lt;Employee&gt; findByHiredateBetween(Date startDate, Date endDate);
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_0_, employee0_.active as active2_0_, employee0_.comm as comm3_0_, employee0_.deptno as deptno4_0_, 
      * employee0_.hiredate as hiredate5_0_, employee0_.job as job6_0_, employee0_.mgr as mgr7_0_, employee0_.ename as ename8_0_, 
      * employee0_.sal as sal9_0_ from emp employee0_ where employee0_.active=1
-     */
+     */</em>
     public abstract List&lt;Employee&gt; findByActiveTrue();
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_0_, employee0_.active as active2_0_, employee0_.comm as comm3_0_, employee0_.deptno as deptno4_0_, 
      * employee0_.hiredate as hiredate5_0_, employee0_.job as job6_0_, employee0_.mgr as mgr7_0_, employee0_.ename as ename8_0_, 
      * employee0_.sal as sal9_0_ from emp employee0_ where employee0_.active=0
-     */
+     */</em>
     public abstract List&lt;Employee&gt; findByActiveFalse();
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_0_, employee0_.active as active2_0_, employee0_.comm as comm3_0_, employee0_.deptno as deptno4_0_, 
      * employee0_.hiredate as hiredate5_0_, employee0_.job as job6_0_, employee0_.mgr as mgr7_0_, employee0_.ename as ename8_0_, 
      * employee0_.sal as sal9_0_ from emp employee0_ where employee0_.mgr is null
-     */
+     */</em>
     public abstract List&lt;Employee&gt; findByManagerIsNull();
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_0_, employee0_.active as active2_0_, employee0_.comm as comm3_0_, employee0_.deptno as deptno4_0_, 
      * employee0_.hiredate as hiredate5_0_, employee0_.job as job6_0_, employee0_.mgr as mgr7_0_, employee0_.ename as ename8_0_, 
      * employee0_.sal as sal9_0_ from emp employee0_ where employee0_.mgr is not null
-     */
+     */</em>
     public abstract List&lt;Employee&gt; findByManagerIsNotNull();
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_0_, employee0_.active as active2_0_, employee0_.comm as comm3_0_, employee0_.deptno as deptno4_0_, 
      * employee0_.hiredate as hiredate5_0_, employee0_.job as job6_0_, employee0_.mgr as mgr7_0_, employee0_.ename as ename8_0_, 
      * employee0_.sal as sal9_0_ from emp employee0_ where employee0_.mgr is not null
-     */
+     */</em>
     public abstract List&lt;Employee&gt; findByManagerNotNull();
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
      * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
      * employee0_.sal as sal8_1_ 
      * from emp employee0_ left outer join dept department1_ on employee0_.deptno=department1_.deptno 
      * where department1_.dname in (?)
-     */
+     */</em>
     public abstract List&lt;Employee&gt; findByDepartmentDeptNameIn(List&lt;String&gt; departments);
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
      * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
      * employee0_.sal as sal8_1_ 
      * from emp employee0_ left outer join dept department1_ on employee0_.deptno=department1_.deptno 
      * where department1_.dname not in  (?)
-     */
+     */</em>
     public abstract List&lt;Employee&gt; findByDepartmentDeptNameNotIn(List&lt;String&gt; departments);
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
      * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
      * employee0_.sal as sal8_1_ from emp employee0_ where upper(employee0_.ename)=upper(?)
-     */
+     */</em>
     public abstract List&lt;Employee&gt; findByNameIgnoreCase(String name);
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
      * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
      * employee0_.sal as sal8_1_ from emp employee0_ where upper(employee0_.ename) like upper('name%')
-     */
+     */</em>
     public abstract List&lt;Employee&gt; findByNameStartingWithIgnoreCase(String value);
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
      * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
      * employee0_.sal as sal8_1_ from emp employee0_ where employee0_.job=? order by employee0_.sal asc
-     */
+     */</em>
     public abstract List&lt;Employee&gt; findByJobOrderBySalaryAsc(String value);
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
      * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
      * employee0_.sal as sal8_1_ from emp employee0_ where employee0_.job=? order by employee0_.sal desc
-     */
+     */</em>
     public abstract List&lt;Employee&gt; findByJobOrderBySalaryDesc(String value);
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
      * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
      * employee0_.sal as sal8_1_ from emp employee0_ where employee0_.ename like ? limit 1
-     */
+     */</em>
     public abstract Employee findFirstByNameLike(String value);
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
      * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
      * employee0_.sal as sal8_1_ from emp employee0_ where employee0_.ename like ? limit 5
-     */
+     */</em>
     public abstract List&lt;Employee&gt; findTop5ByNameLike(String value);
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
      * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
      * employee0_.sal as sal8_1_ from emp employee0_ where employee0_.ename=?
-     */
+     */</em>
     @Query(&quot;select e from Employee e where e.name = :inputName&quot;)
     public abstract List&lt;Employee&gt; queryByName(@Param(&quot;inputName&quot;) String value);
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
      * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
      * employee0_.sal as sal8_1_ from emp employee0_ where employee0_.sal&gt;?
-     */
+     */</em>
     @Query(&quot;from Employee e where e.salary &gt; :sal&quot;)
     public abstract List&lt;Employee&gt; queryBySalaryGreaterThan(@Param(&quot;sal&quot;) Long value);
 
-    /*
+    <em>/*
      * select * from emp where ename = ?
-     */
+     */</em>
     @Query(value = &quot;select * from emp where ename = :inputName&quot;, nativeQuery = true)
     public abstract List&lt;Employee&gt; queryBySQLName(@Param(&quot;inputName&quot;) String value);
 
-    /*
+    <em>/*
      * update emp set ename=? where ename=?
-     */
+     */</em>
     @Modifying
     @Query(&quot;update Employee e set e.name = :newName where e.name=:oldName&quot;)
     public abstract int updateByName(@Param(&quot;oldName&quot;) String value1, @Param(&quot;newName&quot;) String value2);
 
-    /*
+    <em>/*
      * Named Query example. Query is defined with NamedQuery annotation on Employee class
-     */
+     */</em>
     @Query(name = &quot;Employee.namedFindByDeptName&quot;)
     public abstract List&lt;Employee&gt; namedQueryFindByDeptName(@Param(&quot;inputDeptName&quot;) String name);
 
-    /*
+    <em>/*
      * Native SQL Query example. Query is defined with NamedNativeQuery annotation on Employee class
-     */
+     */</em>
     @Query(name = &quot;Employee.namedNativeFindByName&quot;)
     public abstract List&lt;Employee&gt; namedNativeQueryByName(@Param(&quot;inputName&quot;) String name);
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
      * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
      * employee0_.sal as sal8_1_ from emp employee0_ where employee0_.sal&gt;? limit ?
-     */
+     */</em>
     @Query(&quot;from Employee e where e.salary &gt; :sal&quot;)
     public abstract Page&lt;Employee&gt; queryBySalaryGreaterThanWithPageable(@Param(&quot;sal&quot;) Long value, Pageable pageable);
 
-    /*
+    <em>/*
      * select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, 
      * employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, 
      * employee0_.sal as sal8_1_ from emp employee0_ where employee0_.sal&gt;? order by employee0_.ename asc limit ?
-     */
+     */</em>
     @Query(&quot;from Employee e where e.salary &gt; :sal&quot;)
     public abstract Page&lt;Employee&gt; queryBySalaryGreaterThanWithPageableSort(@Param(&quot;sal&quot;) Long value, Pageable pageable);
 }
@@ -862,7 +862,6 @@ public class DataJpaApp {
 		SpringApplication.run(DataJpaApp.class, args);
 	}
 
-	// comment below method for multi tenant implementation
 	@Bean
 	@Qualifier(&quot;primaryDataSource&quot;)
 	@Primary
@@ -995,43 +994,70 @@ public class EmployeeDataJpaSaveController {
     @Qualifier(&quot;employeeJpaRepository&quot;)
     private EmployeeJpaRepository employeeJpaRepository;
 
-    @RequestMapping(value = &quot;/saveOne&quot;, method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
-    public @ResponseBody String save() {
-	String status = &quot;success&quot;;
-	try {
-	    Employee employee = new Employee(1, &quot;testName1&quot;, &quot;testJob1&quot;, 65432L, null, null, new Date());
-	    employeeJpaRepository.save(employee);
-	} catch (Exception e) {
-	    status = &quot;failed&quot;;
-	    e.printStackTrace();
+    @RequestMapping(value = &quot;/saveOne&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Employee save() {
+		Employee employee = null;
+		try {
+			employee = new Employee(1, &quot;testName1&quot;, &quot;testJob1&quot;, 65432L, null, null, new Date());
+			return employeeJpaRepository.save(employee);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return employee;
 	}
-	return status;
-    }
 
-    @RequestMapping(value = &quot;/save/{id}/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody String save(@PathVariable(&quot;id&quot;) Integer id, @PathVariable(&quot;name&quot;) String name) {
-	String status = &quot;success&quot;;
-	try {
-	    Employee employee = new Employee(id, name, &quot;testJob2&quot;, 65432L, null, null, new Date());
-	    employeeJpaRepository.save(employee);
-	} catch (Exception e) {
-	    status = &quot;failed&quot;;
-	    e.printStackTrace();
+	@RequestMapping(value = &quot;/save/{id}/{name}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Employee save(@PathVariable(&quot;id&quot;) Integer id, @PathVariable(&quot;name&quot;) String name) {
+		Employee employee = null;
+		try {
+			employee = new Employee(id, name, &quot;testJob2&quot;, 65432L, null, null, new Date());
+			employeeJpaRepository.save(employee);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return employee;
 	}
-	return status;
-    }
+}
+</code></pre>
+</div></div>
 
-    // un-comment below method for multi tenant implementation
-    /*@RequestMapping(value = &quot;/multiTenant&quot;, method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
-    public @ResponseBody String multiTenant(@RequestHeader(&quot;X-TenantID&quot;) String tenantName) {
-    TenantContext.setCurrentTenant(tenantName);
-
-    Employee employee = new Employee(1, &quot;testName1&quot;, &quot;testJob1&quot;, 65432L, null, null, new Date());
-    employee.setId(12);
-    employeeJpaRepository.save(employee);
-
-    return &quot;multi tenant success&quot;;
-    }*/
+<div class="panel panel-primary"><div class="panel-heading">EmployeeDataJpaSaveController - request/responses</div><div class="panel-body">
+<em>http://localhost:8080/saveOne</em>
+<br/> <em>Queries:</em>
+<pre><code>
+Hibernate: select employee0_.empno as empno1_1_0_, employee0_.active as active2_1_0_, employee0_.comm as comm3_1_0_, employee0_.deptno as deptno9_1_0_, employee0_.hiredate as hiredate4_1_0_, employee0_.job as job5_1_0_, employee0_.mgr as mgr6_1_0_, employee0_.ename as ename7_1_0_, employee0_.sal as sal8_1_0_ from emp employee0_ where employee0_.empno=?
+Hibernate: insert into emp (active, comm, deptno, hiredate, job, mgr, ename, sal, empno) values (?, ?, ?, ?, ?, ?, ?, ?, ?)
+</code></pre>
+<br /><em>Response:</em>
+<pre>
+{
+    &quot;name&quot;: &quot;testName1&quot;,
+    &quot;job&quot;: &quot;testJob1&quot;,
+    &quot;salary&quot;: 65432,
+    &quot;comm&quot;: null,
+    &quot;manager&quot;: null,
+    &quot;hiredate&quot;: &quot;2018-02-08T04:24:59.119+0000&quot;,
+    &quot;active&quot;: null,
+    &quot;department&quot;: null
+}
+</pre>
+<em>http://localhost:8080/save/2/John</em>
+<br/> <em>Queries:</em>
+<pre><code>
+Hibernate: select employee0_.empno as empno1_1_0_, employee0_.active as active2_1_0_, employee0_.comm as comm3_1_0_, employee0_.deptno as deptno9_1_0_, employee0_.hiredate as hiredate4_1_0_, employee0_.job as job5_1_0_, employee0_.mgr as mgr6_1_0_, employee0_.ename as ename7_1_0_, employee0_.sal as sal8_1_0_ from emp employee0_ where employee0_.empno=?
+Hibernate: insert into emp (active, comm, deptno, hiredate, job, mgr, ename, sal, empno) values (?, ?, ?, ?, ?, ?, ?, ?, ?)
+</code></pre>
+<br /><em>Response</em>
+<pre><code>
+{
+    &quot;name&quot;: &quot;John&quot;,
+    &quot;job&quot;: &quot;testJob2&quot;,
+    &quot;salary&quot;: 65432,
+    &quot;comm&quot;: null,
+    &quot;manager&quot;: null,
+    &quot;hiredate&quot;: &quot;2018-02-08T04:29:17.207+0000&quot;,
+    &quot;active&quot;: null,
+    &quot;department&quot;: null
 }
 </code></pre>
 </div></div>
@@ -1073,6 +1099,46 @@ public class EmployeeDataJpaUpdateController {
 </code></pre>
 </div></div>
 
+<div class="panel panel-primary"><div class="panel-heading">EmployeeDataJpaUpdateController - request/responses</div><div class="panel-body">
+POST - <em>http://localhost:8080/updateOne</em>
+<br/> <em>Request Body</em>
+<pre><code>
+{
+	&quot;id&quot;: 1,
+    &quot;name&quot;: &quot;testName1 Updated&quot;,
+    &quot;job&quot;: &quot;testJob1 Updated&quot;
+}
+</code></pre>
+<br/><em>Queries</em>
+<pre><code>
+Hibernate: select employee0_.empno as empno1_1_0_, employee0_.active as active2_1_0_, employee0_.comm as comm3_1_0_, employee0_.deptno as deptno9_1_0_, employee0_.hiredate as hiredate4_1_0_, employee0_.job as job5_1_0_, employee0_.mgr as mgr6_1_0_, employee0_.ename as ename7_1_0_, employee0_.sal as sal8_1_0_ from emp employee0_ where employee0_.empno=?
+Hibernate: update emp set active=?, comm=?, deptno=?, hiredate=?, job=?, mgr=?, ename=?, sal=? where empno=?
+</code></pre>
+<br/><em>Response</em>
+<pre><code>
+{
+    &quot;name&quot;: &quot;testName1 Updated&quot;,
+    &quot;job&quot;: &quot;testJob1 Updated&quot;,
+    &quot;salary&quot;: null,
+    &quot;comm&quot;: null,
+    &quot;manager&quot;: null,
+    &quot;hiredate&quot;: null,
+    &quot;active&quot;: null,
+    &quot;department&quot;: null
+}
+</code></pre>
+POST - <em>http://localhost:8080/updateByName/testName1 Updated/testNameNew</em>
+<br/> <em>No Request Body</em>
+<br/><em>Queries</em>
+<pre><code>
+Hibernate: update emp set ename=? where ename=?
+</code></pre>
+<br/><em>Response</em>
+<pre><code>
+1
+</code></pre>
+</div></div>
+
 <div class="panel panel-primary"><div class="panel-heading">EmployeeDataJpaDeleteController.java</div><div class="panel-body">
 <pre><code>
 package springboot.data.jpa.controller;
@@ -1109,6 +1175,14 @@ public class EmployeeDataJpaDeleteController {
 	return status;
     }
 }
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">EmployeeDataJpaDeleteController - request/responses</div><div class="panel-body">
+GET - <em>http://localhost:8080/delete/1</em>
+<br/> <em>Response</em>
+<pre><code>
+success
 </code></pre>
 </div></div>
 
@@ -1394,5 +1468,67 @@ public class EmployeeDataJpaSelectController {
     }
 
 }
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">EmployeeDataJpaSelectController - request/responses</div><div class="panel-body">
+<em>http://localhost:8080/findOne</em>
+<pre>
+{
+    &quot;name&quot;: &quot;KING&quot;,
+    &quot;job&quot;: &quot;PRESIDENT&quot;,
+    &quot;salary&quot;: 5000,
+    &quot;comm&quot;: null,
+    &quot;manager&quot;: null,
+    &quot;hiredate&quot;: &quot;1981-11-16T18:30:00.000+0000&quot;,
+    &quot;active&quot;: null,
+    &quot;department&quot;: {
+        &quot;deptName&quot;: &quot;ACCOUNTING&quot;,
+        &quot;location&quot;: &quot;NEW YORK&quot;
+    }
+}
+</pre>
+<pre><code>
+Hibernate: select employee0_.empno as empno1_1_0_, employee0_.active as active2_1_0_, employee0_.comm as comm3_1_0_, employee0_.deptno as deptno9_1_0_, employee0_.hiredate as hiredate4_1_0_, employee0_.job as job5_1_0_, employee0_.mgr as mgr6_1_0_, employee0_.ename as ename7_1_0_, employee0_.sal as sal8_1_0_, department1_.deptno as deptno1_0_1_, department1_.dname as dname2_0_1_, department1_.loc as loc3_0_1_ from emp employee0_ left outer join dept department1_ on employee0_.deptno=department1_.deptno where employee0_.empno=?
+</code></pre>
+<em>http://localhost:8080/findAll</em>
+<pre>
+[
+    {
+        &quot;name&quot;: &quot;KING&quot;,
+        &quot;job&quot;: &quot;PRESIDENT&quot;,
+        &quot;salary&quot;: 5000,
+        &quot;comm&quot;: null,
+        &quot;manager&quot;: null,
+        &quot;hiredate&quot;: &quot;1981-11-16T18:30:00.000+0000&quot;,
+        &quot;active&quot;: null,
+        &quot;department&quot;: {
+            &quot;deptName&quot;: &quot;ACCOUNTING&quot;,
+            &quot;location&quot;: &quot;NEW YORK&quot;
+        }
+    },
+    {
+        &quot;name&quot;: &quot;BLAKE&quot;,
+        &quot;job&quot;: &quot;MANAGER&quot;,
+        &quot;salary&quot;: 2850,
+        &quot;comm&quot;: null,
+        &quot;manager&quot;: 7839,
+        &quot;hiredate&quot;: &quot;1981-04-30T18:30:00.000+0000&quot;,
+        &quot;active&quot;: null,
+        &quot;department&quot;: {
+            &quot;deptName&quot;: &quot;SALES&quot;,
+            &quot;location&quot;: &quot;CHICAGO&quot;
+        }
+    }
+]
+</pre>
+<pre><code>
+Hibernate: select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, employee0_.sal as sal8_1_ from emp employee0_
+
+Hibernate: select department0_.deptno as deptno1_0_0_, department0_.dname as dname2_0_0_, department0_.loc as loc3_0_0_ from dept department0_ where department0_.deptno=?
+
+Hibernate: select department0_.deptno as deptno1_0_0_, department0_.dname as dname2_0_0_, department0_.loc as loc3_0_0_ from dept department0_ where department0_.deptno=?
+
+Hibernate: select department0_.deptno as deptno1_0_0_, department0_.dname as dname2_0_0_, department0_.loc as loc3_0_0_ from dept department0_ where department0_.deptno=?
 </code></pre>
 </div></div>
