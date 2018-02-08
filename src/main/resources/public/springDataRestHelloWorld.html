@@ -821,3 +821,46 @@ Hibernate: select employee0_.empno as empno1_1_0_, employee0_.active as active2_
 }
 </code></pre>
 </div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">http://localhost:9091/departments</div><div class="panel-body">
+<em>Queries</em>
+<pre><code>
+Hibernate: select count(department0_.deptno) as col_0_0_ from dept department0_
+Hibernate: select department0_.deptno as deptno1_0_, department0_.dname as dname2_0_, department0_.loc as loc3_0_ from dept department0_ limit ?
+</code></pre>
+<em>Response</em>
+<pre><code>
+{
+    &quot;_embedded&quot;: {
+        &quot;departments&quot;: [
+            {
+                &quot;deptName&quot;: &quot;ACCOUNTING&quot;,
+                &quot;location&quot;: &quot;NEW YORK&quot;,
+                &quot;_links&quot;: {
+                    &quot;self&quot;: {
+                        &quot;href&quot;: &quot;http://localhost:9091/departments/10&quot;
+                    },
+                    &quot;department&quot;: {
+                        &quot;href&quot;: &quot;http://localhost:9091/departments/10&quot;
+                    }
+                }
+            }
+        ]
+    },
+    &quot;_links&quot;: {
+        &quot;self&quot;: {
+            &quot;href&quot;: &quot;http://localhost:9091/departments&quot;
+        },
+        &quot;profile&quot;: {
+            &quot;href&quot;: &quot;http://localhost:9091/profile/departments&quot;
+        }
+    },
+    &quot;page&quot;: {
+        &quot;size&quot;: 20,
+        &quot;totalElements&quot;: 4,
+        &quot;totalPages&quot;: 1,
+        &quot;number&quot;: 0
+    }
+}
+</code></pre>
+</div></div>
