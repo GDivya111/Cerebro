@@ -666,3 +666,158 @@ public class MyApp {
 }
 </code></pre>
 </div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">http://localhost:9091/emps</div><div class="panel-body">
+<em>Queries</em>
+<pre><code>
+Hibernate: select count(employee0_.empno) as col_0_0_ from emp employee0_
+Hibernate: select employee0_.empno as empno1_1_, employee0_.active as active2_1_, employee0_.comm as comm3_1_, employee0_.deptno as deptno9_1_, employee0_.hiredate as hiredate4_1_, employee0_.job as job5_1_, employee0_.mgr as mgr6_1_, employee0_.ename as ename7_1_, employee0_.sal as sal8_1_ from emp employee0_ limit ?
+Hibernate: select department0_.deptno as deptno1_0_0_, department0_.dname as dname2_0_0_, department0_.loc as loc3_0_0_ from dept department0_ where department0_.deptno=?
+Hibernate: select department0_.deptno as deptno1_0_0_, department0_.dname as dname2_0_0_, department0_.loc as loc3_0_0_ from dept department0_ where department0_.deptno=?
+Hibernate: select department0_.deptno as deptno1_0_0_, department0_.dname as dname2_0_0_, department0_.loc as loc3_0_0_ from dept department0_ where department0_.deptno=?
+</code></pre>
+<em>Response</em>
+<pre><code>
+{
+    &quot;_embedded&quot;: {
+        &quot;emps&quot;: [
+            {
+                &quot;employeeName&quot;: &quot;KING&quot;,
+                &quot;job&quot;: &quot;PRESIDENT&quot;,
+                &quot;salary&quot;: 5000,
+                &quot;employeeNameAndJob&quot;: &quot;KING PRESIDENT&quot;,
+                &quot;departmentName&quot;: &quot;ACCOUNTING&quot;,
+                &quot;_links&quot;: {
+                    &quot;self&quot;: {
+                        &quot;href&quot;: &quot;http://localhost:9091/emps/7839&quot;
+                    },
+                    &quot;employee&quot;: {
+                        &quot;href&quot;: &quot;http://localhost:9091/emps/7839{?projection}&quot;,
+                        &quot;templated&quot;: true
+                    },
+                    &quot;department&quot;: {
+                        &quot;href&quot;: &quot;http://localhost:9091/emps/7839/department&quot;
+                    }
+                }
+            }
+        ]
+    },
+    &quot;_links&quot;: {
+        &quot;self&quot;: {
+            &quot;href&quot;: &quot;http://localhost:9091/emps&quot;
+        },
+        &quot;profile&quot;: {
+            &quot;href&quot;: &quot;http://localhost:9091/profile/emps&quot;
+        }
+    },
+    &quot;page&quot;: {
+        &quot;size&quot;: 20,
+        &quot;totalElements&quot;: 14,
+        &quot;totalPages&quot;: 1,
+        &quot;number&quot;: 0
+    }
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">http://localhost:9091/emps/7839?projection=employeeDetail</div><div class="panel-body">
+<em>Queries</em>
+<pre><code>
+Hibernate: select employee0_.empno as empno1_1_0_, employee0_.active as active2_1_0_, employee0_.comm as comm3_1_0_, employee0_.deptno as deptno9_1_0_, employee0_.hiredate as hiredate4_1_0_, employee0_.job as job5_1_0_, employee0_.mgr as mgr6_1_0_, employee0_.ename as ename7_1_0_, employee0_.sal as sal8_1_0_, department1_.deptno as deptno1_0_1_, department1_.dname as dname2_0_1_, department1_.loc as loc3_0_1_ from emp employee0_ left outer join dept department1_ on employee0_.deptno=department1_.deptno where employee0_.empno=?
+</code></pre>
+<em>Response</em>
+<pre><code>
+{
+    &quot;name&quot;: &quot;KING&quot;,
+    &quot;department&quot;: {
+        &quot;deptName&quot;: &quot;ACCOUNTING&quot;,
+        &quot;location&quot;: &quot;NEW YORK&quot;
+    },
+    &quot;job&quot;: &quot;PRESIDENT&quot;,
+    &quot;salary&quot;: 5000,
+    &quot;_links&quot;: {
+        &quot;self&quot;: {
+            &quot;href&quot;: &quot;http://localhost:9091/emps/7839&quot;
+        },
+        &quot;employee&quot;: {
+            &quot;href&quot;: &quot;http://localhost:9091/emps/7839{?projection}&quot;,
+            &quot;templated&quot;: true
+        },
+        &quot;department&quot;: {
+            &quot;href&quot;: &quot;http://localhost:9091/emps/7839/department&quot;
+        }
+    }
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">http://localhost:9091/salGrads</div><div class="panel-body">
+<em>Queries</em>
+<pre><code>
+Hibernate: select employee0_.empno as empno1_1_0_, employee0_.active as active2_1_0_, employee0_.comm as comm3_1_0_, employee0_.deptno as deptno9_1_0_, employee0_.hiredate as hiredate4_1_0_, employee0_.job as job5_1_0_, employee0_.mgr as mgr6_1_0_, employee0_.ename as ename7_1_0_, employee0_.sal as sal8_1_0_, department1_.deptno as deptno1_0_1_, department1_.dname as dname2_0_1_, department1_.loc as loc3_0_1_ from emp employee0_ left outer join dept department1_ on employee0_.deptno=department1_.deptno where employee0_.empno=?
+</code></pre>
+<em>Response</em>
+<pre><code>
+{
+    &quot;_embedded&quot;: {
+        &quot;salaryGradesList&quot;: [
+            {
+                &quot;highSalary&quot;: 1,
+                &quot;lowSalary&quot;: 700,
+                &quot;_links&quot;: {
+                    &quot;self&quot;: {
+                        &quot;href&quot;: &quot;http://localhost:9091/salGrads/1200&quot;
+                    },
+                    &quot;salaryGrade&quot;: {
+                        &quot;href&quot;: &quot;http://localhost:9091/salGrads/1200&quot;
+                    }
+                }
+            }
+        ]
+    },
+    &quot;_links&quot;: {
+        &quot;self&quot;: {
+            &quot;href&quot;: &quot;http://localhost:9091/salGrads&quot;
+        },
+        &quot;profile&quot;: {
+            &quot;href&quot;: &quot;http://localhost:9091/profile/salGrads&quot;
+        }
+    },
+    &quot;page&quot;: {
+        &quot;size&quot;: 20,
+        &quot;totalElements&quot;: 5,
+        &quot;totalPages&quot;: 1,
+        &quot;number&quot;: 0
+    }
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">http://localhost:9091/emps/7839?projection=employeeDetailView</div><div class="panel-body">
+<em>Queries</em>
+<pre><code>
+Hibernate: select employee0_.empno as empno1_1_0_, employee0_.active as active2_1_0_, employee0_.comm as comm3_1_0_, employee0_.deptno as deptno9_1_0_, employee0_.hiredate as hiredate4_1_0_, employee0_.job as job5_1_0_, employee0_.mgr as mgr6_1_0_, employee0_.ename as ename7_1_0_, employee0_.sal as sal8_1_0_, department1_.deptno as deptno1_0_1_, department1_.dname as dname2_0_1_, department1_.loc as loc3_0_1_ from emp employee0_ left outer join dept department1_ on employee0_.deptno=department1_.deptno where employee0_.empno=?
+</code></pre>
+<em>Response</em>
+<pre><code>
+{
+    &quot;employeeName&quot;: &quot;KING&quot;,
+    &quot;job&quot;: &quot;PRESIDENT&quot;,
+    &quot;salary&quot;: 5000,
+    &quot;employeeNameAndJob&quot;: &quot;KING PRESIDENT&quot;,
+    &quot;departmentName&quot;: &quot;ACCOUNTING&quot;,
+    &quot;_links&quot;: {
+        &quot;self&quot;: {
+            &quot;href&quot;: &quot;http://localhost:9091/emps/7839&quot;
+        },
+        &quot;employee&quot;: {
+            &quot;href&quot;: &quot;http://localhost:9091/emps/7839{?projection}&quot;,
+            &quot;templated&quot;: true
+        },
+        &quot;department&quot;: {
+            &quot;href&quot;: &quot;http://localhost:9091/emps/7839/department&quot;
+        }
+    }
+}
+</code></pre>
+</div></div>
