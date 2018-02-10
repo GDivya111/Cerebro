@@ -33,6 +33,11 @@
 	<li><a ng-click="navigate(29)">Number of days in a month</a></li>
 	<li><a ng-click="navigate(30)">Get Dates of all mondays of specific month</a></li>
 	<li><a ng-click="navigate(33)">Convert 12 hours date time format to 24 hours date time format</a></li>
+	<li><a ng-click="navigate(34)">Format date based on Locale</a></li>
+	<li><a ng-click="navigate(35)">Format Time based on Locale</a></li>
+	<li><a ng-click="navigate(36)">Format Date Time based on Locale</a></li>
+	<li><a ng-click="navigate(37)">Format day using DateFormatSymbols</a></li>
+	<li><a ng-click="navigate(38)">Get Full/Short month name by month number</a></li>
 </ol>
 </div></div>
 
@@ -1193,5 +1198,43 @@ public void formatDaysUsingDateFormatSymbols() {
 	String date = simpleDateFormat.format(new Date());
 	System.out.println(date); <em>// 1-sunday januar 2018</em>
 }
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="38"><div class="panel-heading">Get Full/Short month name by month number</div><div class="panel-body">
+<pre><code>
+public void getMonthFullShortNameByMonthNumber() {
+		<em>// method 1</em>
+		String januaryName = new DateFormatSymbols().getMonths()[0];
+		System.out.println(&quot;januaryName: &quot; + januaryName);
+
+		<em>// method 2 - from JDK 8</em>
+		String julyName = Month.of(7).name();
+		System.out.println(&quot;julyName: &quot; + julyName);
+
+		<em>/*
+		 * method 3 - from JDK 8 using CHINESE Locale
+		 * To see Chinese in console
+		 * Right click - Debug Configurations - common tab - Encoding - Other - UTF-8
+		 */</em>
+		String mayName = Month.of(5).getDisplayName(TextStyle.SHORT, Locale.CHINESE);
+		System.out.println(&quot;mayName: &quot; + mayName);
+
+		<em>// FRENCH Locale</em>
+		String septemberName = Month.of(9).getDisplayName(TextStyle.FULL, Locale.FRENCH);
+		System.out.println(&quot;septemberName: &quot; + septemberName);
+
+		<em>// English Locale</em>
+		String decemberName = Month.of(12).getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+		System.out.println(&quot;DecemberName: &quot; + decemberName);
+	}
+</code></pre>
+<em>Console Output</em>
+<pre><code>
+januaryName: January
+julyName: JULY
+mayName: ??
+septemberName: septembre
+DecemberName: December
 </code></pre>
 </div></div>
