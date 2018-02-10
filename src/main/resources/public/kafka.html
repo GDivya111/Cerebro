@@ -12,7 +12,29 @@
 
 <div class="panel panel-primary" id="1"><div class="panel-heading">Examples</div><div class="panel-body">
 <ul>
-	<li>Setup Kafka in windows - refer C:\codebases\images\kafka\setup-kafka-in-windows-10.docx</li>
 	<li><a ng-href="#kafkaSetupInWindows10" ng-click="buildBreadCrumbs('Kafka Setup in Windows10', '#kafkaSetupInWindows10')">Kafka Setup in Windows 10</a></li>
 </ul>
+</div></div>
+
+<script src="js/imageSlider.js"></script>
+<link rel="stylesheet" href="css/imageSlider.css">
+
+<div class="panel panel-primary" id="1"><div class="panel-heading">Kafka Images</div><div class="panel-body">
+<!-- Images used to open the lightbox -->
+<div class="row">
+	<div class="column thumbnail-cursor">
+    	<img src="images/coreJava/1_singleton_issue.jpg" onclick="openModal();currentSlide(1)" class="hover-shadow img-thumbnail">
+  	</div>
+</div>
+
+<!-- The Modal/Lightbox -->
+<div id="myModal" class="modal">
+	<span class="close cursor" onclick="closeModal()">&times;</span>
+	<div class="modal-content">
+		<div class="mySlides">
+      		<img src="images/kafka/1-architecture-with-kafka.jpg" style="width:100%">
+    	</div>
+	</div>
+</div>
+
 </div></div>
