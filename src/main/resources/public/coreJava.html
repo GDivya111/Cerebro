@@ -51,7 +51,6 @@
   		<li><a ng-href="#exceptionHandling" ng-click="buildBreadCrumbs('Exception Handling', '#exceptionHandling')">Exception Handling</a></li>
   		<li><a ng-href="#generics" ng-click="buildBreadCrumbs('Generics', '#generics')">Generics</a></li>
   		<li><a ng-href="#environmentVariables" ng-click="buildBreadCrumbs('Environment Variables', '#environmentVariables')">Environment variables</a></li>
-  		<li><a ng-href="#coreJavaImages" ng-click="buildBreadCrumbs('Core Java Images', '#coreJavaImages')">Core Java Images</a></li>
   		<li><a ng-href="#javaInternationalization" ng-click="buildBreadCrumbs('Java Internationalization', '#javaInternationalization')">Java Internationalization</a></li>
 </ul>
 </div></div>
@@ -147,4 +146,229 @@
 	</ul>	
 	</li>
 </ul>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Images</div><div class="panel-body">
+<script src="js/imageSlider.js"></script>
+<link rel="stylesheet" href="css/imageSlider.css">
+
+<!-- Images used to open the lightbox -->
+<div class="row">
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/1_singleton_issue.jpg" onclick="openModal();currentSlide(1)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/2_singleton_solution.jpg" onclick="openModal();currentSlide(2)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/3_accessing_arrays_reflection.jpg" onclick="openModal();currentSlide(3)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/5_collections_general_implementations.jpg" onclick="openModal();currentSlide(4)" class="hover-shadow img-thumbnail">
+  </div>
+  
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/6_constructor_reference.jpg" onclick="openModal();currentSlide(5)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/7_core_collection_fw.jpg" onclick="openModal();currentSlide(6)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/8_creating_object_dynamically_using_reflection_api.jpg" onclick="openModal();currentSlide(7)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/9_deque_methods.jpg" onclick="openModal();currentSlide(8)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/a_dynamic_proxies.jpg" onclick="openModal();currentSlide(9)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/b_exception_classes_hierarchy.jpg" onclick="openModal();currentSlide(10)" class="hover-shadow img-thumbnail">
+  </div>
+  
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/c_executor_service_implementation.jpg" onclick="openModal();currentSlide(11)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/d_generic_field_types_reflection.jpg" onclick="openModal();currentSlide(12)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/e_generic_method_parameter_types_reflection.jpg" onclick="openModal();currentSlide(13)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/f_generic_method_return_types_reflection.jpg" onclick="openModal();currentSlide(14)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/g_getting_setting_field_values.jpg" onclick="openModal();currentSlide(15)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/h_getting_setting_static_field_values.jpg" onclick="openModal();currentSlide(16)" class="hover-shadow img-thumbnail">
+  </div>
+  
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/i_JIT_compiler.jpg" onclick="openModal();currentSlide(17)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/j_JVM-architecture.jpg" onclick="openModal();currentSlide(18)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/k_List_methods.jpg" onclick="openModal();currentSlide(19)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/l_Method_reference.jpg" onclick="openModal();currentSlide(20)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/m_object_ordering.jpg" onclick="openModal();currentSlide(21)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/n_Parsing XML using JDom.jpg" onclick="openModal();currentSlide(22)" class="hover-shadow img-thumbnail">
+  </div>
+  
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/o_queue_methods.jpg" onclick="openModal();currentSlide(23)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/p_reflection_methods.jpg" onclick="openModal();currentSlide(24)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/q_enum_with_public_constructor.jpg" onclick="openModal();currentSlide(25)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/r_enum_with_main_method.jpg" onclick="openModal();currentSlide(26)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/s_enum_with_method.jpg" onclick="openModal();currentSlide(27)" class="hover-shadow img-thumbnail">
+  </div>
+  <div class="column thumbnail-cursor">
+    <img src="images/coreJava/t_collection_stream_reduce.jpg" onclick="openModal();currentSlide(28)" class="hover-shadow img-thumbnail">
+  </div>
+</div>
+
+<!-- The Modal/Lightbox -->
+<div id="myModal" class="modal">
+  <span class="close cursor" onclick="closeModal()">&times;</span>
+  <div class="modal-content">
+
+    <div class="mySlides">
+      <img src="images/coreJava/1_singleton_issue.jpg" style="width:100%">
+    </div>
+
+    <div class="mySlides">
+      <img src="images/coreJava/2_singleton_solution.jpg" style="width:100%">
+    </div>
+
+    <div class="mySlides">
+      <img src="images/coreJava/3_accessing_arrays_reflection.jpg" style="width:100%">
+    </div>
+
+    <div class="mySlides">
+      <img src="images/coreJava/5_collections_general_implementations.jpg" style="width:100%">
+    </div>
+    
+    <div class="mySlides">
+      <img src="images/coreJava/6_constructor_reference.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/7_core_collection_fw.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/8_creating_object_dynamically_using_reflection_api.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/9_deque_methods.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/a_dynamic_proxies.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/b_exception_classes_hierarchy.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/c_executor_service_implementation.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/d_generic_field_types_reflection.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/e_generic_method_parameter_types_reflection.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/f_generic_method_return_types_reflection.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/g_getting_setting_field_values.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/h_getting_setting_static_field_values.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/i_JIT_compiler.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/j_JVM-architecture.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/k_List_methods.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/l_Method_reference.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/m_object_ordering.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/n_Parsing XML using JDom.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/o_queue_methods.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/p_reflection_methods.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/q_enum_with_public_constructor.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/r_enum_with_main_method.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/s_enum_with_method.jpg" style="width:100%">
+  </div>
+  
+  <div class="mySlides">
+      <img src="images/coreJava/t_collection_stream_reduce.jpg" style="width:100%">
+  </div>
+
+  <!-- Next/previous controls -->
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+  <!-- Thumbnail image controls -->
+   <!-- <div class="column" style="width: 100px; height: 100px;">
+    <img class="demo" src="images/coreJava/1_singleton_issue.jpg" onclick="currentSlide(1)" alt="Singleton Issue">
+  </div> -->
+ </div>
+</div>
 </div></div>
