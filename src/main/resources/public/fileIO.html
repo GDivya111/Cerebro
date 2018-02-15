@@ -22,6 +22,7 @@
 	<li><a ng-click="navigate(14)">Print file with line numbers</a></li>
 	<li><a ng-click="navigate(15)">Line Separator</a></li>
 	<li><a ng-click="navigate(16)">Create Directory and sub-directories</a></li>
+	<li><a ng-click="navigate(17)">Read File by wild card</a></li>
 </ol>
 </div></div>
 
@@ -652,7 +653,7 @@ lineSeperator2: \
 </div></div>
 
 <div class="panel panel-primary" id="16"><div class="panel-heading">Create Directory and sub-directories</div><div class="panel-body">
-<pre>
+<pre><code>
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -676,7 +677,7 @@ public void createDirectory() {
 			e.printStackTrace();
 		}
 	}
-</pre>
+</code></pre>
 <em>Output</em>
 <pre>Check the folders for creation</pre>
 <pre>
@@ -687,4 +688,27 @@ Files.exists(path) : true
 </pre>
 </div></div>
 
-<!-- </div> -->
+<div class="panel panel-primary" id="17"><div class="panel-heading">Read File by wild card</div><div class="panel-body">
+<pre><code>
+public void readFileByWildCard() {
+	<em>// JDK 7</em>
+	try (DirectoryStream&lt;Path&gt; dirStream = Files.newDirectoryStream(
+			Paths.get(&quot;E:\\Backup\\JavaPrep\\practiceProjects\\CoreJavaPractice\\src\\main\\resources&quot;),
+			&quot;file1*.txt&quot;)) {
+		System.out.println(Files.exists(Paths
+				.get(&quot;E:\\Backup\\JavaPrep\\practiceProjects\\CoreJavaPractice\\src\\main\\resources&quot;)));
+		dirStream.forEach(path -&gt; System.out.println(path));
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+}
+</code></pre>
+<em>Output</em>
+<pre><code>
+true
+E:\Backup\JavaPrep\practiceProjects\CoreJavaPractice\src\main\resources\file1-copy1.txt
+E:\Backup\JavaPrep\practiceProjects\CoreJavaPractice\src\main\resources\file1-copy2.txt
+E:\Backup\JavaPrep\practiceProjects\CoreJavaPractice\src\main\resources\file1-copy3.txt
+E:\Backup\JavaPrep\practiceProjects\CoreJavaPractice\src\main\resources\file1.txt
+</code></pre>
+</div></div>

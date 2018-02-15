@@ -11,6 +11,8 @@
 	<li><a ng-click="navigate(9)">Convert the case of String</a></li>
 	<li><a ng-click="navigate(10)">Find the substring in a String</a></li>
 	<li><a ng-click="navigate(11)">Sort words in Sentence by length</a></li>
+	<li><a ng-click="navigate(12)">Replace All</a></li>
+	<li><a ng-click="navigate(13)">Remove spaces in a String</a></li>
 </ol>
 </div></div>
 
@@ -265,7 +267,7 @@ public void printAllSubStringsOfSpecifiedLength() {
 </div></div>
 
 <div class="panel panel-primary" id="11"><div class="panel-heading">Sort words in Sentence by length</div><div class="panel-body">
-<pre >
+<pre ><code>
 import java.util.List;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -290,7 +292,7 @@ public void sortStringsInSentnceByLength() {
 		Collections.sort(strList, lengthComparator);
 		System.out.println(&quot;sort by length: &quot; + strList);
 	}
-</pre>
+</code></pre>
 <em>Output</em>
 <pre>
 strList: [Welcome, to, hacker, rank, test]
@@ -298,4 +300,42 @@ sort by length: [to, rank, test, hacker, Welcome]
 </pre>
 </div></div>
 
-<!-- </div> -->
+<div class="panel panel-primary" id="12"><div class="panel-heading">Replace All</div><div class="panel-body">
+<pre><code>
+public void replaceAll() {
+		String filePathWithName = &quot;C:\\output-&quot; + LocalDateTime.now().toString().replaceAll(&quot;:&quot;, &quot;-&quot;) + &quot;.txt&quot;;
+
+		System.out.println(filePathWithName);
+	}
+</code></pre>
+<em>Output</em>
+<pre><code>
+C:\output-2018-02-15T16-20-19.002.txt
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary" id="13"><div class="panel-heading">Remove spaces in a String</div><div class="panel-body">
+<pre><code>
+public void removeSpacesInString() {
+	String str = &quot;Hello  welcome to  java   String practice  examples.   Have Fun&quot;;
+
+	<em>// using for each</em>
+	String[] words = str.split(&quot; &quot;);
+	StringBuffer sentence = new StringBuffer();
+	Stream.of(words).forEach(word -&gt; {
+		if (!word.trim().isEmpty())
+			sentence.append(word).append(&quot; &quot;);
+	});
+	System.out.println(sentence);
+
+	<em>// using JDK 8</em>
+	String sentence2 = Stream.of(words).filter(word -&gt; !word.trim().isEmpty()).collect(Collectors.joining(&quot; &quot;));
+	System.out.println(sentence2);
+}
+</code></pre>
+<em>Output</em>
+<pre><code>
+Hello welcome to java String practice examples. Have Fun 
+Hello welcome to java String practice examples. Have Fun
+</code></pre>
+</div></div>
