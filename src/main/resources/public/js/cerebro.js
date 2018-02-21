@@ -323,6 +323,9 @@ app.config(function($routeProvider){
 	.when("/ibmmq",{templateUrl : "ibmmq.html",controller : "cerebroController"})
 	.when("/ibmMqInstallation",{templateUrl : "ibmMqInstallation.html",controller : "cerebroController"})
 	.when("/ibmMqSendRecieveTextMessage",{templateUrl : "ibmMqSendRecieveTextMessage.html",controller : "cerebroController"})
+	.when("/ibmMqSendAndReceiveByListener",{templateUrl : "ibmMqSendAndReceiveByListener.html",controller : "cerebroController"})
+	.when("/ibmMqKeepListenerUpAndRunningByMain",{templateUrl : "ibmMqKeepListenerUpAndRunningByMain.html",controller : "cerebroController"})
+	.when("/ibmMqKeepListenerUpAndRunningWithAnotherThread",{templateUrl : "ibmMqKeepListenerUpAndRunningWithAnotherThread.html",controller : "cerebroController"})
 	
 	// Kafka
 	.when("/kafka",{templateUrl : "kafka.html",controller : "cerebroController"})

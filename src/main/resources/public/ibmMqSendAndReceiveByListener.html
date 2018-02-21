@@ -66,12 +66,41 @@ mvn archetype:generate -DgroupId=ibm.mq.practice -DartifactId=IBMMQPractice -Dve
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary"><div class="panel-heading">Send and Receive methods</div><div class="panel-body">
+<div class="panel panel-primary"><div class="panel-heading">MQMessageListener.java</div><div class="panel-body">
 <pre><code>
-package ibm.mq.send.receive;
+package ibm.mq.listener;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.TextMessage;
+
+public class MQMessageListener implements MessageListener {
+
+	@Override
+	public void onMessage(Message message) {
+		try {
+			System.out.println();
+
+			if (message instanceof TextMessage) {
+				TextMessage textMessage = (TextMessage) message;
+				System.out
+						.println(MQMessageListener.class.getName() + &quot;onMessage(): &quot; + textMessage.getText());
+			}
+		} catch (JMSException e) {
+			e.printStackTrace();
+		}
+	}
+
+}
+</code></pre>
+</div></div>
+
+<div class="panel panel-primary"><div class="panel-heading">Test Method</div><div class="panel-body">
+<pre><code>
+package ibm.mq.listener.practice;
+
+import javax.jms.JMSException;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
@@ -84,10 +113,12 @@ import com.ibm.mq.jms.MQQueueReceiver;
 import com.ibm.mq.jms.MQQueueSender;
 import com.ibm.mq.jms.MQQueueSession;
 
-public class SendRecieveTextMessage {
+import ibm.mq.listener.MQMessageListener;
+
+public class SendAndReceiveByListener {
 
 	@Test
-	public void send() {
+	public void sendAndReceiveByListener() {
 		try {
 			MQQueueConnectionFactory cf = new MQQueueConnectionFactory();
 			cf.setHostName(&quot;localhost&quot;);
@@ -99,17 +130,24 @@ public class SendRecieveTextMessage {
 			MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection();
 			// MQQueueConnection connection = cf.createConnection(&quot;userID&quot;, &quot;password&quot;);
 
+			// create sender
 			MQQueueSession session = (MQQueueSession) connection.createQueueSession(false,
 					Session.AUTO_ACKNOWLEDGE);
 			MQQueue queue = (MQQueue) session.createQueue(&quot;queue:///QL1&quot;);
 			MQQueueSender sender = (MQQueueSender) session.createSender(queue);
 
-			TextMessage message = (TextMessage) session.createTextMessage(&quot;Welcome to IBM Mq&quot;);
+			// create receiver
+			MQQueueSession session2 = (MQQueueSession) connection.createQueueSession(false,
+					Session.AUTO_ACKNOWLEDGE);
+			MQQueue mqQueue = (MQQueue) session2.createQueue(&quot;queue:///QL1&quot;);
+			MQQueueReceiver receiver = (MQQueueReceiver) session2.createReceiver(mqQueue);
+			receiver.setMessageListener(new MQMessageListener());
 
 			// start the connection
 			connection.start();
-			sender.send(message);
 
+			TextMessage message = (TextMessage) session.createTextMessage(&quot;Welcome to IBM Mq&quot;);
+			sender.send(message);
 			System.out.println(&quot;Sent message to queue: &quot; + message.getText());
 
 			sender.close();
@@ -120,39 +158,14 @@ public class SendRecieveTextMessage {
 		}
 	}
 
-	@Test
-	public void receive() throws JMSException {
-		MQQueueConnectionFactory cf = new MQQueueConnectionFactory();
-		cf.setHostName(&quot;localhost&quot;);
-		cf.setPort(1414);
-		cf.setQueueManager(&quot;qm_demo2&quot;);
-		cf.setChannel(&quot;SYSTEM.ADMIN.SVRCONN&quot;);
-
-		MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection();
-		MQQueueSession session = (MQQueueSession) connection.createQueueSession(false,
-				Session.AUTO_ACKNOWLEDGE);
-		MQQueue mqQueue = (MQQueue) session.createQueue(&quot;queue:///QL1&quot;);
-		MQQueueReceiver receiver = (MQQueueReceiver) session.createReceiver(mqQueue);
-
-		// start the connection
-		connection.start();
-
-		Message message = receiver.receive();
-		System.out.println(
-				SendRecieveTextMessage.class.getName() + &quot;.receive(): &quot; + message.getBody(String.class));
-	}
 }
 </code></pre>
 </div></div>
 
-<div class="panel panel-primary"><div class="panel-heading">Send method output</div><div class="panel-body">
+<div class="panel panel-primary"><div class="panel-heading">Output</div><div class="panel-body">
 <pre><code>
 Sent message to queue: Welcome to IBM Mq
-</code></pre>
-</div></div>
 
-<div class="panel panel-primary"><div class="panel-heading">Receive method output</div><div class="panel-body">
-<pre><code>
-ibm.mq.send.receive.SendRecieveTextMessage.receive(): Welcome to IBM Mq
+ibm.mq.listener.MQMessageListeneronMessage(): Welcome to IBM Mq
 </code></pre>
 </div></div>
