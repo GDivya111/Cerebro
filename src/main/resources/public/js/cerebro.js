@@ -66,10 +66,6 @@ app.config(function($routeProvider){
 	.when("/eclipselink",{templateUrl : "eclipselink.html",controller : "cerebroController"})
 	.when("/eclipselinkGenerateMetaModel",{templateUrl : "eclipselinkGenerateMetaModel.html",controller : "cerebroController"})
 	
-	// JPA Practice
-	.when("/jpa",{templateUrl : "jpa.html",controller : "cerebroController"})
-	.when("/jpaHelloWorld",{templateUrl : "jpaHelloWorld.html",controller : "cerebroController"})
-	
 	// maven start
 	.when("/maven",{templateUrl : "maven.html",controller : "cerebroController"})
 	.when("/installMaven",{templateUrl : "installMaven.html",controller : "cerebroController"})
@@ -158,7 +154,6 @@ app.config(function($routeProvider){
 	.when("/springDataMongoRepository",{templateUrl : "springDataMongoRepository.html",controller : "cerebroController"})
 	
 	// tools start
-	.when("/tools",{templateUrl : "tools.html",controller : "cerebroController"})
 	.when("/jacksonReadJson",{templateUrl : "readJson.html",controller : "cerebroController"})
 	.when("/openCSV",{templateUrl : "openCSV.html",controller : "cerebroController"})
 	.when("/sonarSetup",{templateUrl : "sonarSetup.html",controller : "cerebroController"})
